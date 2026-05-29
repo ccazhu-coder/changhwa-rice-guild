@@ -14,7 +14,6 @@ body .section#news {
   overflow: hidden !important;
 }
 
-/* 手機版採用桌機版視覺縮排轉一欄，不另做混亂版型。 */
 @media (max-width: 900px) {
   html,
   body {
@@ -30,34 +29,35 @@ body .section#news {
   .container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 24px !important;
-    padding-right: 24px !important;
+    padding-left: 22px !important;
+    padding-right: 22px !important;
   }
 
   .site-header {
     position: sticky !important;
     top: 0 !important;
     z-index: 1000 !important;
-    background: rgba(255,255,255,.97) !important;
+    background: rgba(255,255,255,.98) !important;
     backdrop-filter: blur(18px) !important;
     border-bottom: 1px solid rgba(20,63,33,.10) !important;
   }
 
   .header-inner {
     height: auto !important;
-    min-height: 76px !important;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
+    min-height: auto !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
+    justify-content: flex-start !important;
     gap: 12px !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
   }
 
   .brand {
+    width: 100% !important;
     min-width: 0 !important;
-    flex: 1 1 auto !important;
+    flex: 1 1 100% !important;
     margin: 0 !important;
     display: flex !important;
     align-items: center !important;
@@ -65,76 +65,65 @@ body .section#news {
   }
 
   .brand-logo {
-    width: 58px !important;
-    height: 58px !important;
-    flex: 0 0 58px !important;
+    width: 56px !important;
+    height: 56px !important;
+    flex: 0 0 56px !important;
     object-fit: contain !important;
   }
 
   .brand-name {
     white-space: normal !important;
     line-height: 1.25 !important;
-    font-size: 19px !important;
+    font-size: 20px !important;
     letter-spacing: .02em !important;
   }
 
   .nav-toggle {
-    display: inline-flex !important;
-    width: 48px !important;
-    height: 48px !important;
-    border-radius: 16px !important;
-    border: 1px solid rgba(20,63,33,.18) !important;
-    align-items: center !important;
-    justify-content: center !important;
-    flex-direction: column !important;
-    gap: 5px !important;
-    background: #fff !important;
-    box-shadow: 0 10px 24px rgba(20,45,24,.08) !important;
-  }
-
-  .nav-toggle span {
-    display: block !important;
-    width: 22px !important;
-    height: 2px !important;
-    background: #183f21 !important;
-    border-radius: 99px !important;
+    display: none !important;
   }
 
   .main-nav {
-    position: fixed !important;
-    left: 18px !important;
-    right: 18px !important;
-    top: 88px !important;
-    display: none !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    width: auto !important;
-    max-height: calc(100vh - 118px) !important;
-    overflow: auto !important;
-    padding: 16px !important;
+    position: static !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    width: 100% !important;
+    max-height: none !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 4px 0 4px !important;
     gap: 10px !important;
-    background: rgba(255,255,255,.98) !important;
-    border: 1px solid rgba(20,63,33,.14) !important;
-    border-radius: 26px !important;
-    box-shadow: 0 24px 56px rgba(20,45,24,.20) !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    scrollbar-width: none !important;
   }
 
-  .main-nav.open {
-    display: flex !important;
+  .main-nav::-webkit-scrollbar {
+    display: none !important;
   }
 
   .main-nav a {
-    display: flex !important;
+    flex: 0 0 auto !important;
+    display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-height: 48px !important;
-    padding: 13px 14px !important;
-    border-radius: 16px !important;
+    min-height: 46px !important;
+    padding: 12px 17px !important;
+    border-radius: 999px !important;
     background: #f6f0e3 !important;
     color: #183f21 !important;
-    font-size: 17px !important;
+    font-size: 16px !important;
     font-weight: 900 !important;
     letter-spacing: .04em !important;
+    white-space: nowrap !important;
+    text-decoration: none !important;
   }
 
   .main-nav .nav-cta {
@@ -144,14 +133,13 @@ body .section#news {
   }
 
   .hero {
-    padding: 56px 0 64px !important;
+    padding: 54px 0 60px !important;
   }
 
   .hero-grid,
   .about-grid,
   .brand-grid,
-  .contact-grid,
-  .footer-grid {
+  .contact-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
     gap: 24px !important;
@@ -159,7 +147,7 @@ body .section#news {
 
   .hero h1,
   .page-hero h1 {
-    font-size: clamp(44px, 13vw, 68px) !important;
+    font-size: clamp(42px, 12.5vw, 64px) !important;
     line-height: 1.08 !important;
     letter-spacing: .02em !important;
     word-break: keep-all !important;
@@ -167,7 +155,7 @@ body .section#news {
 
   .hero-lead,
   .hero-text {
-    font-size: 21px !important;
+    font-size: 20px !important;
     line-height: 1.75 !important;
   }
 
@@ -189,7 +177,7 @@ body .section#news {
   }
 
   .section {
-    padding: 64px 0 !important;
+    padding: 60px 0 !important;
   }
 
   .section-title-block h2,
@@ -230,11 +218,69 @@ body .section#news {
   }
 
   .site-footer {
-    padding-top: 54px !important;
+    padding: 34px 0 18px !important;
   }
 
   .footer-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
     text-align: left !important;
+  }
+
+  .footer-grid > div {
+    padding: 18px !important;
+    border: 1px solid rgba(255,255,255,.10) !important;
+    border-radius: 22px !important;
+    background: rgba(255,255,255,.035) !important;
+  }
+
+  .footer-brand {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .footer-brand img {
+    width: 58px !important;
+    height: 58px !important;
+    object-fit: contain !important;
+  }
+
+  .footer-brand strong {
+    font-size: 20px !important;
+    line-height: 1.35 !important;
+  }
+
+  .footer-grid p {
+    font-size: 16px !important;
+    line-height: 1.8 !important;
+    margin: 0 !important;
+    color: rgba(255,255,255,.78) !important;
+  }
+
+  .footer-grid h3 {
+    font-size: 19px !important;
+    margin: 0 0 12px !important;
+  }
+
+  .footer-grid a {
+    display: inline-flex !important;
+    margin: 0 8px 10px 0 !important;
+    padding: 8px 12px !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,.06) !important;
+    color: rgba(255,255,255,.78) !important;
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+  }
+
+  .footer-bottom {
+    margin-top: 14px !important;
+    padding-top: 14px !important;
+    font-size: 14px !important;
+    text-align: center !important;
   }
 }
 
@@ -245,9 +291,9 @@ body .section#news {
   }
 
   .brand-logo {
-    width: 54px !important;
-    height: 54px !important;
-    flex-basis: 54px !important;
+    width: 52px !important;
+    height: 52px !important;
+    flex-basis: 52px !important;
   }
 
   .brand-name {
@@ -255,11 +301,17 @@ body .section#news {
   }
 
   .hero {
-    padding-top: 48px !important;
+    padding-top: 46px !important;
   }
 
   .hero h1,
   .page-hero h1 {
-    font-size: clamp(42px, 13vw, 60px) !important;
+    font-size: clamp(40px, 12.5vw, 58px) !important;
+  }
+
+  .main-nav a {
+    min-height: 44px !important;
+    padding: 11px 15px !important;
+    font-size: 15px !important;
   }
 }
