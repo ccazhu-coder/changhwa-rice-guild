@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ccazhu-coder.github.io/changhwa-rice-guild/sitemap.xml
