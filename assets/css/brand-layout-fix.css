@@ -1,0 +1,58 @@
+/* 彰榖米｜品牌頁 Hero 版型硬修正：左文右卡完全分欄 */
+.brand-page .cg-hero .container{
+  max-width:1280px!important;
+  margin:0 auto!important;
+  padding:88px 56px 86px!important;
+  display:grid!important;
+  grid-template-columns:minmax(360px,500px) minmax(440px,560px)!important;
+  grid-template-areas:
+    "eyebrow card"
+    "title card"
+    "lead card"
+    "actions card"!important;
+  column-gap:118px!important;
+  row-gap:0!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.brand-page .cg-hero .cg-eyebrow{grid-area:eyebrow!important;align-self:end!important;margin-bottom:22px!important;position:relative!important;z-index:3!important;content:none!important}
+.brand-page .cg-hero .cg-eyebrow:before{content:"榖"!important;font-size:15px!important;margin-right:8px!important;color:#d6b95a!important}
+.brand-page .cg-hero h1{grid-area:title!important;position:relative!important;z-index:3!important;max-width:500px!important;margin:0 0 26px!important}
+.brand-page .cg-hero .lead{grid-area:lead!important;position:relative!important;z-index:3!important;max-width:500px!important;width:500px!important;margin:0!important;line-height:2.08!important}
+.brand-page .cg-hero-actions{grid-area:actions!important;position:relative!important;z-index:3!important;margin-top:44px!important}
+.brand-page .cg-hero-card{
+  grid-area:card!important;
+  position:relative!important;
+  z-index:2!important;
+  width:100%!important;
+  max-width:560px!important;
+  margin:0!important;
+  align-self:center!important;
+  transform:none!important;
+}
+.brand-page .cg-hero-card b{word-break:keep-all!important}
+.brand-page .cg-hero-card b:before{background:url('../images/logo-official.jpg') center/contain no-repeat!important}
+.brand-page .cg-hero-card:after{content:"在地生產　｜　安心品質　｜　文化傳承"!important}
+.brand-page .cg-hero-actions .btn-secondary{display:none!important}
+.brand-page .cg-position-row .cg-icon{font-size:0!important}
+.brand-page .cg-position-row .cg-icon:before{font-size:25px!important;font-weight:900!important}
+.brand-page .cg-position-row .cg-position-item:nth-child(1) .cg-icon:before{content:"榖"!important}
+.brand-page .cg-position-row .cg-position-item:nth-child(2) .cg-icon:before{content:"合"!important}
+.brand-page .cg-position-row .cg-position-item:nth-child(3) .cg-icon:before{content:"米"!important}
+@media(max-width:1120px){
+  .brand-page .cg-hero .container{
+    grid-template-columns:1fr!important;
+    grid-template-areas:"eyebrow" "title" "lead" "actions" "card"!important;
+    row-gap:0!important;
+    padding:72px 28px 72px!important;
+    justify-content:stretch!important;
+  }
+  .brand-page .cg-hero h1,.brand-page .cg-hero .lead{max-width:760px!important;width:auto!important}
+  .brand-page .cg-hero-card{max-width:760px!important;margin-top:36px!important}
+}
+@media(max-width:620px){
+  .brand-page .cg-hero .container{padding:58px 22px 64px!important}
+  .brand-page .cg-hero h1{font-size:38px!important;max-width:100%!important}
+  .brand-page .cg-hero .lead{max-width:100%!important;width:auto!important}
+  .brand-page .cg-hero-card{padding:26px!important;border-radius:24px!important}
+}
