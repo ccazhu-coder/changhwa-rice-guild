@@ -1,6 +1,5 @@
 @import url('./premium-site.css?v=20260529-premium-real');
 
-/* 首頁最新消息區塊已從 HTML 刪除；此處保留全站保險，避免舊快取殘留。 */
 body #news,
 body section#news,
 body .section#news {
@@ -29,29 +28,31 @@ body .section#news {
   .container {
     width: 100% !important;
     max-width: 100% !important;
-    padding-left: 22px !important;
-    padding-right: 22px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
   }
 
   .site-header {
     position: sticky !important;
     top: 0 !important;
     z-index: 1000 !important;
-    background: rgba(255,255,255,.98) !important;
+    background: #fff !important;
     backdrop-filter: blur(18px) !important;
     border-bottom: 1px solid rgba(20,63,33,.10) !important;
+    box-shadow: 0 8px 24px rgba(20,45,24,.08) !important;
   }
 
   .header-inner {
     height: auto !important;
     min-height: auto !important;
-    padding-top: 12px !important;
+    padding-top: 10px !important;
     padding-bottom: 12px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: flex-start !important;
-    gap: 12px !important;
+    gap: 10px !important;
     flex-wrap: wrap !important;
+    background: #fff !important;
   }
 
   .brand {
@@ -65,16 +66,16 @@ body .section#news {
   }
 
   .brand-logo {
-    width: 56px !important;
-    height: 56px !important;
-    flex: 0 0 56px !important;
+    width: 50px !important;
+    height: 50px !important;
+    flex: 0 0 50px !important;
     object-fit: contain !important;
   }
 
   .brand-name {
     white-space: normal !important;
     line-height: 1.25 !important;
-    font-size: 20px !important;
+    font-size: 19px !important;
     letter-spacing: .02em !important;
   }
 
@@ -83,7 +84,7 @@ body .section#news {
   }
 
   .main-nav {
-    position: static !important;
+    position: relative !important;
     left: auto !important;
     right: auto !important;
     top: auto !important;
@@ -96,13 +97,14 @@ body .section#news {
     overflow-x: auto !important;
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch !important;
-    padding: 4px 0 4px !important;
-    gap: 10px !important;
-    background: transparent !important;
+    padding: 6px 0 6px !important;
+    gap: 9px !important;
+    background: #fff !important;
     border: 0 !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     scrollbar-width: none !important;
+    z-index: 2 !important;
   }
 
   .main-nav::-webkit-scrollbar {
@@ -114,14 +116,14 @@ body .section#news {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
-    min-height: 46px !important;
-    padding: 12px 17px !important;
+    min-height: 42px !important;
+    padding: 10px 15px !important;
     border-radius: 999px !important;
     background: #f6f0e3 !important;
     color: #183f21 !important;
-    font-size: 16px !important;
+    font-size: 15px !important;
     font-weight: 900 !important;
-    letter-spacing: .04em !important;
+    letter-spacing: .03em !important;
     white-space: nowrap !important;
     text-decoration: none !important;
   }
@@ -133,7 +135,12 @@ body .section#news {
   }
 
   .hero {
-    padding: 54px 0 60px !important;
+    padding: 34px 0 40px !important;
+    min-height: auto !important;
+  }
+
+  .hero .eyebrow {
+    display: none !important;
   }
 
   .hero-grid,
@@ -142,28 +149,46 @@ body .section#news {
   .contact-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 24px !important;
+    gap: 18px !important;
   }
 
   .hero h1,
   .page-hero h1 {
-    font-size: clamp(42px, 12.5vw, 64px) !important;
-    line-height: 1.08 !important;
+    font-size: clamp(38px, 11vw, 50px) !important;
+    line-height: 1.15 !important;
     letter-spacing: .02em !important;
     word-break: keep-all !important;
+    margin-top: 0 !important;
+    margin-bottom: 18px !important;
   }
 
-  .hero-lead,
+  .hero-lead {
+    font-size: 19px !important;
+    line-height: 1.55 !important;
+    margin-bottom: 14px !important;
+  }
+
   .hero-text {
-    font-size: 20px !important;
-    line-height: 1.75 !important;
+    font-size: 17px !important;
+    line-height: 1.7 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-card {
+    display: none !important;
   }
 
   .hero-actions,
   .home-section-actions {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 14px !important;
+    gap: 12px !important;
+    margin-top: 22px !important;
+  }
+
+  .hero-actions a[href*="news"],
+  .hero-actions a[href="#news"] {
+    display: none !important;
   }
 
   .btn,
@@ -171,13 +196,13 @@ body .section#news {
   .home-section-actions .btn {
     width: 100% !important;
     justify-content: center !important;
-    min-height: 56px !important;
-    font-size: 18px !important;
-    border-radius: 18px !important;
+    min-height: 50px !important;
+    font-size: 17px !important;
+    border-radius: 16px !important;
   }
 
   .section {
-    padding: 60px 0 !important;
+    padding: 58px 0 !important;
   }
 
   .section-title-block h2,
@@ -200,7 +225,6 @@ body .section#news {
   .service-card,
   .history-card,
   .card,
-  .hero-card,
   .member-panel,
   .training-note,
   .brand-card,
@@ -291,27 +315,36 @@ body .section#news {
   }
 
   .brand-logo {
-    width: 52px !important;
-    height: 52px !important;
-    flex-basis: 52px !important;
+    width: 48px !important;
+    height: 48px !important;
+    flex-basis: 48px !important;
   }
 
   .brand-name {
     font-size: 18px !important;
   }
 
+  .main-nav a {
+    min-height: 40px !important;
+    padding: 9px 13px !important;
+    font-size: 14px !important;
+  }
+
   .hero {
-    padding-top: 46px !important;
+    padding-top: 28px !important;
+    padding-bottom: 34px !important;
   }
 
   .hero h1,
   .page-hero h1 {
-    font-size: clamp(40px, 12.5vw, 58px) !important;
+    font-size: clamp(36px, 10.5vw, 46px) !important;
   }
 
-  .main-nav a {
-    min-height: 44px !important;
-    padding: 11px 15px !important;
-    font-size: 15px !important;
+  .hero-lead {
+    font-size: 18px !important;
+  }
+
+  .hero-text {
+    font-size: 16.5px !important;
   }
 }
