@@ -3,19 +3,28 @@ document.addEventListener('DOMContentLoaded',function(){
   var root=document.getElementById('boardRoster');
   if(root){root.innerHTML=data.map(function(x,i){return '<article class="service-card '+(i===0?'board-main':'')+'"><h3>'+x[0]+'｜'+x[1]+'</h3><p><strong>'+x[2]+'</strong><br><span class="board-address">'+x[3]+'</span></p></article>';}).join('');}
 
+  var history=document.getElementById('history');
+  var board=document.getElementById('board');
+  if(history&&board&&history.nextElementSibling!==board){history.parentNode.insertBefore(board,history.nextElementSibling);}
+
   var nav=document.getElementById('mainNav');
   if(nav&&!nav.querySelector('a[href="#members"]')){
     var a=document.createElement('a');a.href='#members';a.textContent='會員介紹';
     var before=nav.querySelector('a[href="#brand"]')||nav.querySelector('a[href="#board"]');
     nav.insertBefore(a,before);
   }
+  if(nav){
+    var order=['#home','#about','#history','#board','#members','#news','#services','#training','#activities','#brand','#contact'];
+    order.forEach(function(href){var item=nav.querySelector('a[href="'+href+'"]');if(item)nav.appendChild(item);});
+    var cta=nav.querySelector('.nav-cta');if(cta)nav.appendChild(cta);
+  }
 
   var training=document.getElementById('training');
-  if(training&&!document.getElementById('members')){
+  if(!document.getElementById('members')){
     var section=document.createElement('section');
     section.className='section white';section.id='members';
     section.innerHTML='<div class="member-hero"><div class="container"><h2>會員介紹</h2><p>甲級 110 家　乙級 237 家　共計 347 家會員廠商</p></div></div><div class="container"><div class="member-toolbar"><input id="memberSearch" type="search" placeholder="搜尋公司名稱、負責人、地區、業態、會員編號…"><select id="memberLevel"><option value="">全部</option><option value="甲級">甲級</option><option value="乙級">乙級</option></select><select id="memberRegion"><option value="">全部</option></select><span id="memberCount" class="member-count">共 347 筆</span></div><div id="memberGrid" class="member-grid"><div class="member-empty">會員資料載入中</div></div></div>';
-    training.parentNode.insertBefore(section,training);
+    if(board&&board.parentNode){board.parentNode.insertBefore(section,board.nextElementSibling);}else if(training&&training.parentNode){training.parentNode.insertBefore(section,training);}
   }
 
   function loadCss(href){if(!document.querySelector('link[href="'+href+'"]')){var l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);}}
