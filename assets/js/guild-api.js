@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  var API_URL='https://script.google.com/macros/s/AKfycbwL98hwI_mXCXWB6-36mfU9zkKy6hegQJw4kD6XJ4tC9WZX_WjaCKJLXUXWygch3B-L/exec';
+  var API_URL='https://script.google.com/macros/s/AKfycbxRNBUMIhLehiHSWftGhqWbptX9EmCzOvHqXEuNF4CTJIm98FcwX4A2hWR9EIhLwVpl/exec';
   var ROOT_ALBUM_URL='https://drive.google.com/drive/folders/1SS6P3pbiw3e1V9uN50AT1HPHAhm3nZz1?usp=sharing';
   var TRAINING_ALBUM_URL='https://drive.google.com/drive/folders/1_WG6OUeyx0-5ib8AuWi5IoiYrwTeMkEl';
 
