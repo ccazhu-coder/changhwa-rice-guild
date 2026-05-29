@@ -10,46 +10,39 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════
-     TOP BAR
-════════════════════════════════════════════════════ -->
+<!-- TOP BAR -->
 <div id="topbar">
   <div class="container">
-    <span>🏢 彰化縣米穀商業同業公會 官方網站｜統一編號：58812408</span>
+    <span>彰化縣米穀商業同業公會 官方網站｜統一編號：58812408</span>
     <span class="topbar-right">
-      📞 04-7222528　|　傳真：04-7225229　|　辦公時間：週一至週五 09:00–17:00
+      04-7222528　|　傳真：04-7225229　|　辦公時間：週一至週五 09:00–17:00
     </span>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════
-     HEADER
-════════════════════════════════════════════════════ -->
+<!-- HEADER -->
 <header>
   <div class="container">
     <div class="header-inner">
-      <!-- Logo -->
       <div class="logo-area">
         <img
           class="logo-img"
           src="./assets/images/logo-official.jpg"
-          alt="彰化縣米穀商業同業公會"
+          alt="彰化縣米穀商業同業公會標誌"
           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
         />
         <div class="logo-fallback">🌾</div>
         <div class="logo-text">
           <h1>彰化縣米穀商業同業公會</h1>
+          <span class="logo-sub">CHANGHUA RICE MERCHANTS ASSOCIATION</span>
         </div>
       </div>
 
-      <!-- 漢堡按鈕（手機版） -->
       <button id="nav-toggle" aria-label="開啟選單" aria-expanded="false">☰</button>
 
-      <!-- 導覽列 -->
       <div class="nav-wrap">
         <nav aria-label="主導覽">
           <ul>
-            <li><a href="#hero">首頁</a></li>
             <li><a href="#about">關於公會</a></li>
             <li><a href="#history">歷屆沿革</a></li>
             <li><a href="#news">最新公告</a></li>
@@ -67,33 +60,61 @@
   </div>
 </header>
 
-<!-- ═══════════════════════════════════════════════════
-     HERO
-════════════════════════════════════════════════════ -->
+<!-- HERO -->
 <section id="hero">
   <div class="container">
-    <div class="hero-tag">成立於中華民國39年12月05日　｜　第29屆　服務彰化米穀業者</div>
-    <h2 class="hero-title">彰化縣米穀商業同業公會</h2>
-    <p class="hero-sub">服務米穀業者・促進產業交流・維護會員權益・推動人才培訓</p>
-    <p class="hero-motto">
-      本會以服務會員、協調同業關係、促進產業健全發展為宗旨，<br>
-      持續推動會員服務、教育訓練、產業交流與公益參與。
-    </p>
-    <div class="hero-btns">
-      <a href="#news" class="btn btn-gold">📢 最新公告</a>
-      <a href="#ttqs" class="btn btn-outline">📚 教育訓練</a>
-      <a href="#services" class="btn btn-outline">🤝 會員服務</a>
+    <div class="hero-layout">
+      <!-- 左側：主文字 -->
+      <div class="hero-content">
+        <div class="hero-tag">成立於中華民國39年12月05日　·　第29屆　·　服務彰化米穀業者</div>
+        <h2 class="hero-title">
+          彰化縣米穀商業<br/>
+          <span>同業公會</span>
+        </h2>
+        <p class="hero-sub">
+          以服務會員、協調同業關係、促進產業健全發展為宗旨，持續推動會員服務、教育訓練、產業交流與公益參與。
+        </p>
+        <div class="hero-btns">
+          <a href="#news" class="btn btn-gold">最新公告</a>
+          <a href="#ttqs" class="btn btn-outline">教育訓練</a>
+          <a href="#services" class="btn btn-outline">會員服務</a>
+        </div>
+      </div>
+
+      <!-- 右側：統計卡 -->
+      <div class="hero-stats-card">
+        <div class="hero-stat-main">
+          <div class="hero-stat-num-lg">347<span>人</span></div>
+          <div class="hero-stat-desc">
+            <strong>全體會員數</strong>涵蓋彰化縣各地米穀商業者
+          </div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat-row">
+          <div class="hero-stat-item">
+            <div class="hero-stat-num-sm">110</div>
+            <div class="hero-stat-label"><strong>正會員</strong>（甲級）</div>
+          </div>
+          <div style="width:1px;background:rgba(198,164,55,.18);align-self:stretch;"></div>
+          <div class="hero-stat-item">
+            <div class="hero-stat-num-sm">237</div>
+            <div class="hero-stat-label"><strong>贊助會員</strong>（乙級）</div>
+          </div>
+        </div>
+        <div class="hero-stat-divider"></div>
+        <div class="hero-stat-privacy">※ 個人會員資料依個資法保護，不公開揭露</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     關於公會
-════════════════════════════════════════════════════ -->
+<!-- 關於公會 -->
 <section id="about">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">About Us</span>
       <h2 class="section-title">關於公會</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">彰化縣米穀商業同業公會簡介</p>
     </div>
     <div class="about-grid">
@@ -121,25 +142,22 @@
         <div class="about-stats">
           <div class="stat-card">
             <div class="stat-num">347</div>
-            <div class="stat-label">會員總數（名）</div>
+            <div class="stat-label">全體會員數（名）</div>
           </div>
           <div class="stat-card">
             <div class="stat-num">110</div>
-            <div class="stat-label">甲級會員（名）</div>
+            <div class="stat-label">正會員（名）</div>
           </div>
           <div class="stat-card">
             <div class="stat-num">237</div>
-            <div class="stat-label">乙級會員（名）</div>
+            <div class="stat-label">贊助會員（名）</div>
           </div>
         </div>
-        <!-- 會員隱私說明 -->
-        <div style="margin-top:20px;background:var(--rice);border-radius:10px;border:1px solid var(--rice-dark);padding:18px 22px;display:flex;gap:12px;align-items:flex-start;">
-          <span style="font-size:1.3rem;flex-shrink:0;margin-top:2px;">🔒</span>
+        <div class="privacy-notice">
+          <div class="privacy-notice-icon">🔒</div>
           <div>
-            <div style="font-weight:800;color:var(--green-dark);font-size:.88rem;margin-bottom:6px;">會員資料保護說明</div>
-            <p style="font-size:.82rem;color:var(--text-mid);line-height:1.75;">
-              本會會員資料依個人資料保護及公會內部管理原則辦理，公開網站僅揭露會員類別與總數統計；完整會員名冊屬內部管理資料，不於公開網站揭露。如需查詢會員相關資訊，請洽公會辦公室。
-            </p>
+            <div class="privacy-notice-title">會員資料保護說明</div>
+            <p>本會會員資料依個人資料保護及公會內部管理原則辦理，公開網站僅揭露會員類別與總數統計；完整會員名冊屬內部管理資料，不於公開網站揭露。如需查詢會員相關資訊，請洽公會辦公室。</p>
           </div>
         </div>
       </div>
@@ -147,13 +165,13 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     歷屆沿革
-════════════════════════════════════════════════════ -->
+<!-- 歷屆沿革 -->
 <section id="history">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">History</span>
       <h2 class="section-title">歷屆沿革</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">自民國 39 年成立至今，歷屆理事長帶領本會持續發展</p>
     </div>
     <div class="history-grid">
@@ -183,109 +201,122 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     最新公告
-════════════════════════════════════════════════════ -->
+<!-- 最新公告 -->
 <section id="news">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">Announcements</span>
       <h2 class="section-title">最新公告</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">公會最新公告與活動通知</p>
     </div>
-    <div>
+    <div class="news-list">
       <div class="news-item">
-        <div class="news-date">114.05.06</div>
-        <div>
-          <span class="news-badge">會員大會</span>
-          <div class="news-title">第29屆第2次會員大會 暨 理監事聯席會議議程通知</div>
-        </div>
+        <span class="news-date">114.05.06</span>
+        <span class="news-badge badge-notice">會員大會</span>
+        <span class="news-title">第29屆第2次會員大會 暨 理監事聯席會議議程通知</span>
+        <span class="news-arrow">›</span>
       </div>
       <div class="news-item">
-        <div class="news-date">114.04.15</div>
-        <div>
-          <span class="news-badge">教育訓練</span>
-          <div class="news-title">113年度第3期職業訓練課程招生公告</div>
-        </div>
+        <span class="news-date">114.04.15</span>
+        <span class="news-badge badge-train">教育訓練</span>
+        <span class="news-title">113年度第3期職業訓練課程招生公告</span>
+        <span class="news-arrow">›</span>
       </div>
       <div class="news-item">
-        <div class="news-date">114.03.20</div>
-        <div>
-          <span class="news-badge">公益活動</span>
-          <div class="news-title">花蓮強震賑災物資捐贈活動圓滿完成，感謝會員踴躍參與</div>
-        </div>
+        <span class="news-date">114.03.20</span>
+        <span class="news-badge badge-event">公益活動</span>
+        <span class="news-title">花蓮強震賑災物資捐贈活動圓滿完成，感謝會員踴躍參與</span>
+        <span class="news-arrow">›</span>
       </div>
       <div class="news-item">
-        <div class="news-date">114.02.01</div>
-        <div>
-          <span class="news-badge">政策通知</span>
-          <div class="news-title">農業部糧食署113年度稻穀收購相關規定說明</div>
-        </div>
+        <span class="news-date">114.02.01</span>
+        <span class="news-badge badge-policy">政策通知</span>
+        <span class="news-title">農業部糧食署113年度稻穀收購相關規定說明</span>
+        <span class="news-arrow">›</span>
       </div>
       <div class="news-item">
-        <div class="news-date">113.12.10</div>
-        <div>
-          <span class="news-badge">理監事會</span>
-          <div class="news-title">第29屆第1次理監事聯席會議決議事項公告</div>
-        </div>
+        <span class="news-date">113.12.10</span>
+        <span class="news-badge badge-notice">理監事會</span>
+        <span class="news-title">第29屆第1次理監事聯席會議決議事項公告</span>
+        <span class="news-arrow">›</span>
       </div>
     </div>
-    <div style="margin-top:24px;text-align:center;">
-      <p style="font-size:.85rem;color:var(--text-light);">如需查詢更多歷史公告，請洽本會辦公室。</p>
+    <div class="news-more">
+      <a href="#contact">如需查詢更多歷史公告，請洽本會辦公室 ›</a>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     會員服務
-════════════════════════════════════════════════════ -->
+<!-- 會員服務 -->
 <section id="services">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">Member Services</span>
       <h2 class="section-title">會員服務</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">彰化縣米穀商業同業公會提供多元服務，維護會員權益</p>
     </div>
     <div class="services-grid">
       <div class="svc-card">
-        <div class="svc-icon">📋</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
         <div class="svc-title">申請入會</div>
-        <div class="svc-desc">符合資格之米穀相關業者，歡迎申請加入本會，享受完整會員服務。<br><strong>申請入會請洽公會辦公室索取相關資料。</strong></div>
+        <div class="svc-desc">符合資格之米穀相關業者，歡迎申請加入本會，享受完整會員服務。申請入會請洽公會辦公室索取相關資料。</div>
+        <span class="svc-link">洽詢辦公室 ›</span>
       </div>
       <div class="svc-card">
-        <div class="svc-icon">📰</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
         <div class="svc-title">公告通知</div>
         <div class="svc-desc">定期發布政府政策、法規修訂、業界動態等相關公告，協助會員掌握第一手資訊。</div>
+        <a href="#news" class="svc-link">查看公告 ›</a>
       </div>
       <div class="svc-card">
-        <div class="svc-icon">🎓</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
         <div class="svc-title">教育訓練</div>
-        <div class="svc-desc">持續規劃並辦理會員教育訓練課程，提升從業人員專業技能。</div>
+        <div class="svc-desc">持續規劃並辦理會員教育訓練課程，提升從業人員專業技能與管理能力。</div>
+        <a href="#ttqs" class="svc-link">查看課程 ›</a>
       </div>
       <div class="svc-card">
-        <div class="svc-icon">🤝</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5z"/><path d="M21 2H3C1.9 2 1 2.9 1 4v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H3V9h18v11z"/></svg>
+        </div>
         <div class="svc-title">協調服務</div>
-        <div class="svc-desc">協調同業關係，處理業者糾紛，代表業者向相關機關反映意見，維護產業秩序。</div>
+        <div class="svc-desc">協調同業關係，代表業者向相關機關反映意見，維護產業秩序與會員合法權益。</div>
+        <a href="#contact" class="svc-link">聯絡公會 ›</a>
       </div>
       <div class="svc-card">
-        <div class="svc-icon">📊</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </div>
         <div class="svc-title">產業交流</div>
         <div class="svc-desc">定期舉辦理監事會議、會員大會，促進業界交流，凝聚產業共識，共謀發展。</div>
+        <a href="#activities" class="svc-link">查看活動 ›</a>
       </div>
       <div class="svc-card">
-        <div class="svc-icon">🌾</div>
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
         <div class="svc-title">政策配合</div>
-        <div class="svc-desc">配合農業部糧食署各項稻穀收購、儲糧政策，協助會員瞭解並遵循相關規定。</div>
+        <div class="svc-desc">配合農業部糧食署各項稻穀收購、儲糧政策，協助會員了解並遵循相關規定。</div>
+        <a href="#news" class="svc-link">查看政策公告 ›</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     教育訓練 TTQS
-════════════════════════════════════════════════════ -->
+<!-- 教育訓練 -->
 <section id="ttqs">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">Education &amp; Training</span>
       <h2 class="section-title">教育訓練</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">持續規劃會員教育訓練與人才培育課程</p>
     </div>
     <div class="ttqs-intro">
@@ -331,242 +362,300 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     活動紀錄
-════════════════════════════════════════════════════ -->
+<!-- 活動紀錄（照片牆版面）-->
 <section id="activities">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">Activities</span>
       <h2 class="section-title">活動紀錄</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">本會持續參與公益活動與業界交流，凝聚產業向心力</p>
     </div>
-    <div class="activities-grid">
-      <div class="activity-card">
-        <img src="./assets/images/training-001.jpg" alt="活動照片" loading="lazy" />
-        <div class="activity-card-body">
-          <div class="activity-tag">教育訓練</div>
-          <div class="activity-title">教育訓練課程紀錄</div>
-          <div class="activity-desc"><span class="pending">【待補資料】</span></div>
+    <div class="activities-wall">
+      <!-- 左大圖：花蓮賑災（確認資料）-->
+      <div class="aw-photo aw-large">
+        <img src="./assets/images/disaster-001.jpg" alt="花蓮地震賑災捐贈活動" loading="lazy" />
+        <div class="aw-overlay">
+          <span class="aw-tag">公益活動</span>
+          <div class="aw-title">114年花蓮地震賑災捐贈</div>
+          <div class="aw-date">本會響應花蓮強震賑災，會員踴躍捐贈物資，展現同業互助精神</div>
         </div>
       </div>
-      <div class="activity-card">
-        <img src="./assets/images/training-002.jpg" alt="活動照片" loading="lazy" />
-        <div class="activity-card-body">
-          <div class="activity-tag">教育訓練</div>
-          <div class="activity-title">教育訓練課程紀錄</div>
-          <div class="activity-desc"><span class="pending">【待補資料】</span></div>
+      <!-- 右上：賑災照片2 -->
+      <div class="aw-photo aw-small">
+        <img src="./assets/images/disaster-002.jpg" alt="花蓮賑災物資集運照片" loading="lazy" />
+        <div class="aw-overlay">
+          <span class="aw-tag">公益活動</span>
+          <div class="aw-title">物資集運與捐贈現場</div>
+          <div class="aw-date">協助災後重建</div>
         </div>
       </div>
-      <div class="activity-card">
-        <img src="./assets/images/disaster-001.jpg" alt="花蓮賑災活動照片" loading="lazy" />
-        <div class="activity-card-body">
-          <div class="activity-tag">公益活動</div>
-          <div class="activity-title">114年花蓮地震賑災捐贈</div>
-          <div class="activity-desc">本會響應花蓮強震賑災，會員踴躍捐贈物資，展現同業互助精神。</div>
+      <!-- 右上2：訓練照片 -->
+      <div class="aw-photo aw-small">
+        <img src="./assets/images/training-001.jpg" alt="教育訓練課程" loading="lazy" />
+        <div class="aw-overlay">
+          <span class="aw-tag">教育訓練</span>
+          <div class="aw-title">職業訓練課程紀錄</div>
+          <div class="aw-date">提升從業人員專業能力</div>
         </div>
       </div>
-      <div class="activity-card">
-        <img src="./assets/images/disaster-002.jpg" alt="花蓮賑災活動照片" loading="lazy" />
-        <div class="activity-card-body">
-          <div class="activity-tag">公益活動</div>
-          <div class="activity-title">物資集運與捐贈現場</div>
-          <div class="activity-desc">集結會員捐贈物資，統一配送花蓮災區，協助災後重建。</div>
+      <!-- 右下1 -->
+      <div class="aw-photo aw-small">
+        <img src="./assets/images/training-002.jpg" alt="教育訓練課程照片" loading="lazy" />
+        <div class="aw-overlay">
+          <span class="aw-tag">教育訓練</span>
+          <div class="aw-title">教育訓練課程紀錄</div>
+          <div class="aw-date"><span class="pending" style="font-size:10px;">【待補資料】</span></div>
         </div>
       </div>
-      <div class="activity-card">
-        <img src="./assets/images/training-003.jpg" alt="活動照片" loading="lazy" />
-        <div class="activity-card-body">
-          <div class="activity-tag">產業交流</div>
-          <div class="activity-title">公會活動紀錄</div>
-          <div class="activity-desc"><span class="pending">【待補資料】</span></div>
-        </div>
-      </div>
-      <div class="activity-card">
-        <img src="./assets/images/training-004.jpg" alt="活動照片" loading="lazy" />
-        <div class="activity-card-body">
-          <div class="activity-tag">教育訓練</div>
-          <div class="activity-title">教育訓練課程紀錄</div>
-          <div class="activity-desc"><span class="pending">【待補資料】</span></div>
+      <!-- 右下2 -->
+      <div class="aw-photo aw-small">
+        <img src="./assets/images/training-003.jpg" alt="公會活動照片" loading="lazy" />
+        <div class="aw-overlay">
+          <span class="aw-tag">產業交流</span>
+          <div class="aw-title">公會活動紀錄</div>
+          <div class="aw-date"><span class="pending" style="font-size:10px;">【待補資料】</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     彰榖米品牌推動計畫
-     未來可拆出為獨立 /brand.html 或 /zhanggu-rice.html
-════════════════════════════════════════════════════ -->
+<!-- 彰榖米品牌推動計畫 -->
 <section id="brand">
   <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">彰榖米品牌推動計畫</h2>
-      <p class="section-subtitle">以彰化米穀產業為基礎，推動在地米食文化、產業品牌與市場能見度</p>
-    </div>
-
-    <div class="brand-notice">
-      <div class="brand-badge">【品牌內容建置中】</div>
-      <p>
-        <strong>「彰榖米」</strong>為本會後續推動之品牌發展方向，將結合會員資源、在地米穀產業、教育推廣、食農文化與通路合作，逐步建立彰化米穀產業的品牌識別與推廣平台。本品牌計畫以公會產業推廣為目標，強調在地特色與文化傳承，不涉及電子商務或直接銷售。
-      </p>
-    </div>
-
-    <div class="brand-grid">
-      <div class="brand-card">
-        <div class="brand-card-icon">🌱</div>
-        <div class="brand-card-title">品牌理念</div>
-        <div class="brand-card-desc"><span class="pending">【待補資料】</span><br>彰榖米品牌理念與核心價值規劃中。</div>
+    <div class="brand-inner">
+      <div>
+        <div class="brand-badge-label">CHANGGU RICE BRAND</div>
+        <h2 class="brand-title">彰榖米<br/>品牌推動計畫</h2>
+        <p class="brand-desc">
+          本公會積極推動彰化在地優質米穀品牌，串聯產地、碾米業者與通路，建立彰榖米品牌形象，提升消費者對在地米穀的信任與認同，以產業推廣為目標，強調在地特色與文化傳承。
+        </p>
+        <div class="brand-features">
+          <div class="brand-feature">
+            <div class="brand-feature-dot"></div>
+            <div class="brand-feature-text">
+              <strong>品牌推動</strong>整合彰化在地米穀資源，打造具識別度的彰榖米品牌形象
+            </div>
+          </div>
+          <div class="brand-feature">
+            <div class="brand-feature-dot"></div>
+            <div class="brand-feature-text">
+              <strong>米食文化推廣</strong>結合食農教育，推廣在地米食文化與料理文化
+            </div>
+          </div>
+          <div class="brand-feature">
+            <div class="brand-feature-dot"></div>
+            <div class="brand-feature-text">
+              <strong>會員品牌合作</strong>【待補資料】品牌授權與合作機制規劃中
+            </div>
+          </div>
+          <div class="brand-feature">
+            <div class="brand-feature-dot"></div>
+            <div class="brand-feature-text">
+              <strong>未來通路合作</strong>【待補資料】展覽合作與市場能見度規劃中
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="brand-card">
-        <div class="brand-card-icon">🌾</div>
-        <div class="brand-card-title">彰化米穀特色</div>
-        <div class="brand-card-desc"><span class="pending">【待補資料】</span><br>彰化在地米穀品種、產地特色與品質說明。</div>
-      </div>
-      <div class="brand-card">
-        <div class="brand-card-icon">🍚</div>
-        <div class="brand-card-title">米食文化推廣</div>
-        <div class="brand-card-desc"><span class="pending">【待補資料】</span><br>在地米食文化、食農教育與料理推廣計畫。</div>
-      </div>
-      <div class="brand-card">
-        <div class="brand-card-icon">🤝</div>
-        <div class="brand-card-title">會員品牌合作</div>
-        <div class="brand-card-desc"><span class="pending">【待補資料】</span><br>會員業者品牌授權與合作機制規劃中。</div>
-      </div>
-      <div class="brand-card">
-        <div class="brand-card-icon">🎓</div>
-        <div class="brand-card-title">教育推廣與活動</div>
-        <div class="brand-card-desc">結合本會<a href="#ttqs" style="color:var(--green-dark);font-weight:700;">教育訓練</a>與<a href="#activities" style="color:var(--green-dark);font-weight:700;">活動紀錄</a>，推動食農教育與米食文化活動。</div>
-      </div>
-      <div class="brand-card">
-        <div class="brand-card-icon">🚀</div>
-        <div class="brand-card-title">未來通路合作</div>
-        <div class="brand-card-desc"><span class="pending">【待補資料】</span><br>產品推廣通路、展覽合作與市場能見度規劃中。</div>
+      <div class="brand-right">
+        <div class="brand-visual-box">
+          <div class="brand-logo-circle">
+            彰榖米<br/>品牌標章<br/><span style="font-size:9px;opacity:.6;">（待補圖片）</span>
+          </div>
+          <div class="brand-img-placeholder">
+            品牌視覺圖片　·　【待補資料】
+          </div>
+          <p class="brand-pending-note">
+            ※ 品牌視覺素材待公會提供後更新<br/>
+            本品牌計畫不涉及電子商務或直接銷售
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     組織架構
-════════════════════════════════════════════════════ -->
+<!-- 組織架構 -->
 <section id="board">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">Organization</span>
       <h2 class="section-title">組織架構</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">彰化縣米穀商業同業公會第29屆組織成員</p>
     </div>
-    <div class="board-intro">
-      <p><strong>理事長：</strong>蘇建彰</p>
-      <p style="margin-top:12px;font-size:.85rem;color:var(--text-light);">
-        本屆理監事名單依公會章程規定辦理。如需查詢詳細組織成員資料，請洽公會辦公室，或參閱本會理監事名單公告文件。
-      </p>
-      <p style="margin-top:8px;">
-        <span class="pending">【詳細組織圖待補】</span>
-      </p>
+    <div class="board-wrap">
+      <div class="board-highlight">
+        <div class="board-highlight-en">CHAIRPERSON</div>
+        <div class="board-highlight-title">現任理事長</div>
+        <div class="board-highlight-name">蘇建彰</div>
+        <p style="font-size:12px;color:rgba(248,243,232,.45);margin-top:10px;line-height:1.7;">
+          第29屆理事長<br/>任期：民國113–116年
+        </p>
+      </div>
+      <div>
+        <div class="board-counts">
+          <div class="board-count-card">
+            <div class="board-count-num">—</div>
+            <div class="board-count-label">理事</div>
+          </div>
+          <div class="board-count-card">
+            <div class="board-count-num">—</div>
+            <div class="board-count-label">常務理事</div>
+          </div>
+          <div class="board-count-card">
+            <div class="board-count-num">—</div>
+            <div class="board-count-label">監事</div>
+          </div>
+        </div>
+        <div style="height:14px;"></div>
+        <div class="board-pending-notice">
+          ※ 組織架構圖與理監事名單待公會提供後更新<br/>
+          <span style="font-size:12px;color:var(--text-light);">如需查詢詳細成員資料，請洽公會辦公室</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     聯絡我們
-════════════════════════════════════════════════════ -->
+<!-- 聯絡我們 -->
 <section id="contact">
   <div class="container">
     <div class="section-header">
+      <span class="section-en">Contact Us</span>
       <h2 class="section-title">聯絡我們</h2>
+      <div class="section-rule"></div>
       <p class="section-subtitle">歡迎來電洽詢或親洽辦公室</p>
     </div>
-
-    <div class="contact-grid">
-      <!-- 左側：聯絡資訊 -->
-      <div class="contact-card">
-        <div class="contact-card-head">📋 聯絡資訊</div>
-        <div class="contact-card-body">
-          <div class="contact-row">
-            <span class="contact-label">公會名稱</span>
-            <span class="contact-value">彰化縣米穀商業同業公會</span>
+    <div class="contact-layout">
+      <!-- 左側：聯絡資訊圖標列 -->
+      <div class="contact-info-list">
+        <div class="ci-row">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           </div>
-          <div class="contact-row">
-            <span class="contact-label">地址</span>
-            <span class="contact-value">500021 彰化市長壽街 194 號</span>
+          <div>
+            <div class="ci-label">Address 地址</div>
+            <div class="ci-value">500021 彰化市長壽街 194 號</div>
           </div>
-          <div class="contact-row">
-            <span class="contact-label">電話</span>
-            <span class="contact-value"><a href="tel:0472225288">04-7222528</a></span>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
           </div>
-          <div class="contact-row">
-            <span class="contact-label">傳真</span>
-            <span class="contact-value">04-7225229</span>
+          <div>
+            <div class="ci-label">Tel 電話</div>
+            <div class="ci-value"><a href="tel:0472225288">04-7222528</a>　|　傳真：04-7225229</div>
           </div>
-          <div class="contact-row">
-            <span class="contact-label">Email</span>
-            <span class="contact-value"><span class="pending">【待補資料】</span></span>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-          <div class="contact-row">
-            <span class="contact-label">統一編號</span>
-            <span class="contact-value">58812408</span>
+          <div>
+            <div class="ci-label">Email 電子郵件</div>
+            <div class="ci-value"><a href="mailto:riceass01@gmail.com">riceass01@gmail.com</a></div>
           </div>
-          <div class="contact-row">
-            <span class="contact-label">辦公時間</span>
-            <span class="contact-value">週一至週五 09:00–17:00</span>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">Hours 辦公時間</div>
+            <div class="ci-value">週一至週五　09:00 – 17:00<br/>例假日休息</div>
+          </div>
+        </div>
+        <div class="ci-row">
+          <div class="ci-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div>
+            <div class="ci-label">ID 統一編號</div>
+            <div class="ci-value">58812408</div>
           </div>
         </div>
       </div>
 
-      <!-- 右側：LINE QR Code -->
-      <div class="line-card">
-        <div class="line-card-head">📱 LINE 官方帳號</div>
-        <div class="line-card-body">
-          <img
-            class="line-qr-img"
-            src="./assets/images/line-qrcode.png"
-            alt="彰化縣米穀商業同業公會 LINE QR Code"
-          />
-          <div class="line-placeholder" style="display:none;">
-            LINE QR Code
+      <!-- 右側：地圖 + LINE QR -->
+      <div class="contact-right">
+        <div class="map-placeholder">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Google 地圖嵌入待補</span>
+          <span style="font-size:11px;color:#ccc;">500021 彰化市長壽街 194 號</span>
+        </div>
+        <div class="line-row">
+          <div class="line-qr-box">
+            <img
+              src="./assets/images/line-qrcode.png"
+              alt="彰化縣米穀商業同業公會 LINE 官方帳號 QR Code"
+              onerror="this.parentElement.innerHTML='<div style=\'padding:10px;font-size:10px;color:#aaa;text-align:center;\'>QR Code</div>'"
+            />
           </div>
-          <p class="line-qr-text">掃描加入<br>彰化縣米穀商業同業公會<br>LINE 官方帳號</p>
+          <div>
+            <div class="line-info-label">LINE Official Account</div>
+            <div class="line-info-main">加入 LINE 官方帳號</div>
+            <div class="line-info-sub">掃描 QR Code 加入好友<br/>即時接收最新公告與通知</div>
+          </div>
         </div>
       </div>
-    </div>
-
-    <!-- 地圖預留 -->
-    <div style="margin-top:28px;background:var(--rice);border-radius:10px;border:1px solid var(--rice-dark);padding:32px;text-align:center;">
-      <p style="color:var(--text-light);font-size:.88rem;">📍 500021 彰化市長壽街 194 號</p>
-      <p style="margin-top:8px;"><span class="pending">【Google Maps 嵌入待補】</span></p>
     </div>
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════════════ -->
+<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-inner">
-      <div class="footer-logo-area">
-        <img
-          class="footer-logo"
-          src="./assets/images/logo-official.jpg"
-          alt="彰化縣米穀商業同業公會"
-          onerror="this.style.display='none'"
-        />
-        <div class="footer-name">彰化縣米穀商業同業公會</div>
+      <div class="footer-brand">
+        <div class="footer-logo-area">
+          <img
+            class="footer-logo"
+            src="./assets/images/logo-official.jpg"
+            alt="彰化縣米穀商業同業公會"
+            onerror="this.style.display='none'"
+          />
+          <div class="footer-name">彰化縣米穀商業同業公會</div>
+        </div>
+        <div class="footer-tagline">CHANGHUA RICE MERCHANTS ASSOCIATION</div>
+        <div class="footer-contact-mini">
+          500021 彰化市長壽街 194 號<br/>
+          04-7222528　|　傳真：04-7225229<br/>
+          riceass01@gmail.com
+        </div>
       </div>
-      <div class="footer-info">
-        <p>📍 500021 彰化市長壽街 194 號</p>
-        <p>📞 04-7222528　|　傳真：04-7225229</p>
-        <p>🕐 辦公時間：週一至週五 09:00–17:00</p>
-        <p>統一編號：58812408</p>
+      <div>
+        <div class="footer-col-title">關於公會</div>
+        <div class="footer-col-links">
+          <a href="#about">公會簡介</a>
+          <a href="#history">歷屆沿革</a>
+          <a href="#board">組織架構</a>
+        </div>
       </div>
-      <div class="footer-info">
-        <p><a href="#hero" style="color:rgba(255,255,255,.7);">首頁</a>　<a href="#about" style="color:rgba(255,255,255,.7);">關於公會</a>　<a href="#news" style="color:rgba(255,255,255,.7);">最新公告</a></p>
-        <p><a href="#services" style="color:rgba(255,255,255,.7);">會員服務</a>　<a href="#ttqs" style="color:rgba(255,255,255,.7);">教育訓練</a>　<a href="#contact" style="color:rgba(255,255,255,.7);">聯絡我們</a></p>
-        <p style="margin-top:8px;"><a href="#contact" style="color:var(--gold);">申請入會 →</a></p>
+      <div>
+        <div class="footer-col-title">服務項目</div>
+        <div class="footer-col-links">
+          <a href="#services">會員服務</a>
+          <a href="#ttqs">教育訓練</a>
+          <a href="#activities">活動紀錄</a>
+          <a href="#brand">彰榖米品牌</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">公告聯絡</div>
+        <div class="footer-col-links">
+          <a href="#news">最新公告</a>
+          <a href="#contact">聯絡我們</a>
+          <a href="#contact">申請入會</a>
+        </div>
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; <span id="current-year"></span> 彰化縣米穀商業同業公會　All Rights Reserved．
+      <span class="footer-copyright">
+        &copy; <span id="current-year"></span> 彰化縣米穀商業同業公會　版權所有
+      </span>
+      <span class="footer-gov">依法立案公會　·　彰化縣政府立案</span>
     </div>
   </div>
 </footer>
