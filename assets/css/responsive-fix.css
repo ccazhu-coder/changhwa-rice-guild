@@ -1,52 +1,95 @@
 @import url('./premium-site.css?v=20260529-premium-real');
 
-/* 手機版正式修正版：導覽不再攤開覆蓋主視覺，首頁最新消息區塊隱藏。 */
+/* 首頁最新消息區塊已從 HTML 刪除；此處保留全站保險，避免舊快取殘留。 */
+body #news,
+body section#news,
+body .section#news {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  max-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+/* 手機版採用桌機版視覺縮排轉一欄，不另做混亂版型。 */
 @media (max-width: 900px) {
+  html,
+  body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  .topbar {
+    display: none !important;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+
   .site-header {
     position: sticky !important;
     top: 0 !important;
     z-index: 1000 !important;
+    background: rgba(255,255,255,.97) !important;
+    backdrop-filter: blur(18px) !important;
+    border-bottom: 1px solid rgba(20,63,33,.10) !important;
   }
 
   .header-inner {
     height: auto !important;
-    min-height: 72px !important;
-    flex-wrap: nowrap !important;
+    min-height: 76px !important;
     padding-top: 10px !important;
     padding-bottom: 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
     gap: 12px !important;
+    flex-wrap: nowrap !important;
   }
 
   .brand {
     min-width: 0 !important;
     flex: 1 1 auto !important;
-    margin-right: 0 !important;
+    margin: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
   }
 
   .brand-logo {
     width: 58px !important;
     height: 58px !important;
     flex: 0 0 58px !important;
+    object-fit: contain !important;
   }
 
   .brand-name {
     white-space: normal !important;
-    line-height: 1.2 !important;
-    font-size: 18px !important;
-    letter-spacing: .03em !important;
+    line-height: 1.25 !important;
+    font-size: 19px !important;
+    letter-spacing: .02em !important;
   }
 
   .nav-toggle {
     display: inline-flex !important;
-    width: 46px !important;
-    height: 46px !important;
-    border-radius: 14px !important;
-    border: 1px solid rgba(20,63,33,.22) !important;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 16px !important;
+    border: 1px solid rgba(20,63,33,.18) !important;
     align-items: center !important;
     justify-content: center !important;
     flex-direction: column !important;
     gap: 5px !important;
     background: #fff !important;
+    box-shadow: 0 10px 24px rgba(20,45,24,.08) !important;
   }
 
   .nav-toggle span {
@@ -59,21 +102,21 @@
 
   .main-nav {
     position: fixed !important;
-    left: 16px !important;
-    right: 16px !important;
+    left: 18px !important;
+    right: 18px !important;
     top: 88px !important;
     display: none !important;
     flex-direction: column !important;
     align-items: stretch !important;
     width: auto !important;
-    max-height: calc(100vh - 120px) !important;
+    max-height: calc(100vh - 118px) !important;
     overflow: auto !important;
     padding: 16px !important;
-    gap: 8px !important;
+    gap: 10px !important;
     background: rgba(255,255,255,.98) !important;
-    border: 1px solid rgba(20,63,33,.16) !important;
-    border-radius: 24px !important;
-    box-shadow: 0 24px 56px rgba(20,45,24,.18) !important;
+    border: 1px solid rgba(20,63,33,.14) !important;
+    border-radius: 26px !important;
+    box-shadow: 0 24px 56px rgba(20,45,24,.20) !important;
   }
 
   .main-nav.open {
@@ -82,43 +125,141 @@
 
   .main-nav a {
     display: flex !important;
+    align-items: center !important;
     justify-content: center !important;
+    min-height: 48px !important;
     padding: 13px 14px !important;
-    border-radius: 14px !important;
+    border-radius: 16px !important;
     background: #f6f0e3 !important;
-    font-size: 16px !important;
+    color: #183f21 !important;
+    font-size: 17px !important;
     font-weight: 900 !important;
+    letter-spacing: .04em !important;
   }
 
   .main-nav .nav-cta {
     margin: 0 !important;
-    background: var(--gold) !important;
+    background: var(--gold, #c6a437) !important;
     color: #fff !important;
   }
 
   .hero {
-    padding-top: 54px !important;
+    padding: 56px 0 64px !important;
   }
 
-  #news {
-    display: none !important;
-  }
-}
-
-@media (max-width: 620px) {
-  .brand-name {
-    font-size: 17px !important;
+  .hero-grid,
+  .about-grid,
+  .brand-grid,
+  .contact-grid,
+  .footer-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
   }
 
   .hero h1,
   .page-hero h1 {
-    font-size: clamp(44px, 14vw, 68px) !important;
+    font-size: clamp(44px, 13vw, 68px) !important;
     line-height: 1.08 !important;
+    letter-spacing: .02em !important;
+    word-break: keep-all !important;
   }
 
   .hero-lead,
   .hero-text {
     font-size: 21px !important;
     line-height: 1.75 !important;
+  }
+
+  .hero-actions,
+  .home-section-actions {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+
+  .btn,
+  .hero-actions .btn,
+  .home-section-actions .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    min-height: 56px !important;
+    font-size: 18px !important;
+    border-radius: 18px !important;
+  }
+
+  .section {
+    padding: 64px 0 !important;
+  }
+
+  .section-title-block h2,
+  .section-head h2 {
+    font-size: clamp(34px, 10vw, 48px) !important;
+    line-height: 1.18 !important;
+  }
+
+  .service-grid,
+  .history-grid,
+  .stat-grid,
+  .gallery-grid,
+  .photo-grid,
+  .photo-grid-five {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+  }
+
+  .service-card,
+  .history-card,
+  .card,
+  .hero-card,
+  .member-panel,
+  .training-note,
+  .brand-card,
+  .contact-card,
+  .line-card,
+  .activity-card {
+    border-radius: 24px !important;
+  }
+
+  .photo-grid figure,
+  .photo-grid-five figure,
+  .activity-card figure {
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+
+  .site-footer {
+    padding-top: 54px !important;
+  }
+
+  .footer-grid {
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .container {
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .brand-logo {
+    width: 54px !important;
+    height: 54px !important;
+    flex-basis: 54px !important;
+  }
+
+  .brand-name {
+    font-size: 18px !important;
+  }
+
+  .hero {
+    padding-top: 48px !important;
+  }
+
+  .hero h1,
+  .page-hero h1 {
+    font-size: clamp(42px, 13vw, 60px) !important;
   }
 }
