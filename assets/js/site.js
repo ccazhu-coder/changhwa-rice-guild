@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded',function(){
   var driveDownloadUrl='https://drive.google.com/drive/folders/1gFGAe7XzWiInrsvZU98515skZGYOtVNj?usp=sharing';
 
+  var hideHomeNews=document.createElement('style');
+  hideHomeNews.id='remove-home-news-style';
+  hideHomeNews.textContent='body #news{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;max-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}';
+  document.head.appendChild(hideHomeNews);
+
+  var homeNews=document.getElementById('news');
+  if(homeNews){homeNews.remove();}
+
   if(!document.querySelector('link[href="./assets/css/premium-site.css"]')){
     var premium=document.createElement('link');
     premium.rel='stylesheet';
@@ -37,7 +45,7 @@ document.addEventListener('DOMContentLoaded',function(){
 
   if(!window.GuildApi&&!document.querySelector('script[src*="guild-api.js"]')){
     var api=document.createElement('script');
-    api.src='./assets/js/guild-api.js?v=20260529-forcehome';
+    api.src='./assets/js/guild-api.js?v=20260529-no-home-news';
     api.defer=true;
     document.body.appendChild(api);
   }
