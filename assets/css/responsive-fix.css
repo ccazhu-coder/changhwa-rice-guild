@@ -1,3 +1,5 @@
+@import url('./premium-site.css?v=20260529-premium-real');
+
 /* Mobile navigation fallback for the formal guild website. */
 @media (max-width: 900px) {
   .header-inner {
