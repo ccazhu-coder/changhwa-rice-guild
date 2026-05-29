@@ -8,72 +8,44 @@
   <link rel="icon" type="image/jpeg" href="./assets/images/logo-official.jpg">
   <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/formal.css">
-  <link rel="stylesheet" href="./assets/css/brand-redesign.css">
-  <link rel="stylesheet" href="./assets/css/rice-photo.css">
-  <link rel="stylesheet" href="./assets/css/brand-polish.css">
-  <link rel="stylesheet" href="./assets/css/brand-layout-fix.css?v=20260529-hardfix">
+  <style>
+    :root{--brand-green:#0b2a14;--brand-green-2:#143b20;--brand-gold:#c6a437;--brand-gold-2:#d6b95a;--brand-ivory:#fbf8ef;--brand-line:#e6ddc9;--brand-serif:'Noto Serif TC','Noto Sans TC','Microsoft JhengHei',serif;--brand-sans:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif}
+    body.brand-page{background:var(--brand-ivory);color:#203425;font-family:var(--brand-sans)}.topbar{display:none!important}.brand-page .site-header{background:rgba(255,255,255,.96);backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(20,45,24,.06);border-bottom:1px solid var(--brand-line)}.brand-page .main-nav a.active{background:#eef6ef;color:var(--brand-green-2)}
+    .cg-hero{background:linear-gradient(115deg,#071f10 0%,#0f2f18 54%,#24452b 100%);color:#fff;position:relative;overflow:hidden}.cg-hero:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 86% 18%,rgba(214,185,90,.18),transparent 26%),radial-gradient(circle at 8% 86%,rgba(255,255,255,.06),transparent 22%);pointer-events:none}.cg-hero-inner{max-width:1180px;margin:0 auto;padding:92px 32px 88px;display:grid;grid-template-columns:minmax(0,520px) minmax(420px,520px);gap:120px;align-items:center;position:relative;z-index:1}.cg-hero-copy{min-width:0}.cg-eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid rgba(214,185,90,.56);background:rgba(214,185,90,.12);color:#f4d983;border-radius:999px;padding:8px 18px;font-weight:900;letter-spacing:.16em;font-size:13px;margin-bottom:28px}.cg-eyebrow:before{content:"榖"}.cg-hero h1{font-family:var(--brand-serif);font-size:66px;line-height:1.1;letter-spacing:.12em;color:#f8f3e7;margin:0 0 24px;text-shadow:0 12px 30px rgba(0,0,0,.25)}.cg-hero h1:after{content:"";display:block;width:220px;height:1px;background:linear-gradient(90deg,var(--brand-gold-2),transparent);margin-top:20px}.cg-hero .lead{font-size:18px;line-height:2.05;color:rgba(255,255,255,.86);font-weight:650;margin:0;max-width:520px}.cg-hero-actions{margin-top:46px}.cg-hero-actions .btn{min-height:56px;border-radius:12px;padding:0 30px;font-weight:900}.cg-hero-panel{width:100%;border-radius:30px;border:1px solid rgba(255,255,255,.24);background:rgba(255,255,255,.1);backdrop-filter:blur(16px);box-shadow:0 30px 80px rgba(0,0,0,.24);padding:42px 46px;overflow:hidden;position:relative}.cg-hero-panel:before{content:"";position:absolute;right:-64px;top:-76px;width:190px;height:190px;border-radius:50%;background:rgba(214,185,90,.12)}.cg-panel-title{display:grid;grid-template-columns:68px 1fr;gap:20px;align-items:center;margin-bottom:22px;position:relative;z-index:1}.cg-panel-title img{width:68px;height:68px;border-radius:50%;object-fit:contain;box-shadow:0 10px 30px rgba(0,0,0,.2);background:#fff}.cg-panel-title h2{font-family:var(--brand-serif);font-size:30px;line-height:1.45;color:#f4d983;letter-spacing:.04em;margin:0}.cg-hero-panel p{position:relative;z-index:1;color:rgba(255,255,255,.86);line-height:2;font-size:16px;margin:0}.cg-value-row{position:relative;z-index:1;margin-top:26px;padding-top:20px;border-top:1px solid rgba(255,255,255,.18);display:flex;gap:20px;flex-wrap:wrap;color:#f4d983;font-size:14px;font-weight:800;letter-spacing:.06em}
+    .cg-platform{background:var(--brand-ivory);position:relative;padding:78px 0 88px}.cg-platform:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(198,164,55,.13),transparent 32%),repeating-linear-gradient(135deg,rgba(198,164,55,.035) 0 1px,transparent 1px 15px);pointer-events:none}.cg-platform .container{position:relative;max-width:1180px;margin:auto;padding:0 26px}.cg-platform-head{text-align:center;max-width:880px;margin:0 auto 32px}.cg-platform-head .ornament{display:inline-block;color:var(--brand-gold);font-weight:900;letter-spacing:.18em;font-size:13px;margin-bottom:10px}.cg-platform-head h2{font-family:var(--brand-serif);font-size:42px;color:#183f21;letter-spacing:.12em;margin-bottom:8px}.cg-platform-head p{color:#5f685f;line-height:1.9}.cg-field-photo{height:292px;border-radius:28px;border:1px solid var(--brand-line);box-shadow:0 24px 62px rgba(20,45,24,.13);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02)),url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1800&q=82') center 58%/cover no-repeat}.cg-position-row{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:-26px;position:relative;z-index:2}.cg-position-item{display:grid;grid-template-columns:78px 1fr;gap:20px;align-items:center;background:rgba(255,255,255,.96);border:1px solid var(--brand-line);border-radius:22px;padding:26px 28px;box-shadow:0 18px 44px rgba(20,45,24,.09)}.cg-icon{width:62px;height:62px;border-radius:50%;background:#12381b;color:#f4d983;display:flex;align-items:center;justify-content:center;font-size:25px;font-weight:900}.cg-position-item:nth-child(2) .cg-icon{background:var(--brand-gold);color:#fff}.cg-position-item b{display:block;color:#183f21;font-size:23px;font-family:var(--brand-serif);letter-spacing:.06em;margin-bottom:4px}.cg-position-item p{color:#666;line-height:1.85;margin:0}.cg-section{padding:82px 0}.cg-white{background:#fff}.cg-rice{background:#f7f1e3}.cg-section .container{max-width:1180px;margin:auto;padding:0 26px}.cg-intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:26px}.cg-story,.cg-position-box .cg-position-item,.cg-goal,.cg-strategy{background:#fff;border:1px solid var(--brand-line);border-radius:24px;box-shadow:0 16px 42px rgba(20,45,24,.07)}.cg-story{padding:34px}.cg-story h2,.cg-head h2,.cg-promise h2,.cg-cta h2{font-family:var(--brand-serif);color:#183f21}.cg-story p{color:#555;line-height:2}.cg-position-box{display:grid;gap:16px}.cg-position-box .cg-position-item{display:block;padding:24px}.cg-promise,.cg-cta{background:linear-gradient(135deg,#183f21,#0f2f18);color:#fff;border-radius:28px;padding:42px;display:grid;grid-template-columns:.85fr 1.15fr;gap:28px;align-items:center;box-shadow:0 26px 70px rgba(20,45,24,.16)}.cg-promise h2,.cg-cta h2{color:#fff}.cg-promise-label,.cg-head span{color:var(--brand-gold);font-weight:900;letter-spacing:.16em;font-size:13px}.cg-promise p,.cg-cta p{color:rgba(255,255,255,.82);line-height:2}.cg-head{max-width:790px;margin-bottom:34px}.cg-head h2{font-size:36px;letter-spacing:.06em}.cg-goal-grid,.cg-strategy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}.cg-strategy-grid{grid-template-columns:repeat(2,1fr)}.cg-goal,.cg-strategy{padding:28px}.cg-goal h3,.cg-strategy h3{font-family:var(--brand-serif);color:#183f21}.cg-strategy ul{padding-left:20px;color:#555;line-height:1.9}.cg-muted-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:flex-end}.cg-muted-actions .btn-secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+    @media(max-width:1120px){.cg-hero-inner{grid-template-columns:1fr;gap:36px}.cg-hero .lead{max-width:760px}.cg-hero-panel{max-width:760px}.cg-position-row,.cg-goal-grid{grid-template-columns:1fr}.cg-intro-grid,.cg-promise,.cg-cta,.cg-strategy-grid{grid-template-columns:1fr}.cg-position-row{margin-top:24px}}
+    @media(max-width:620px){.cg-hero-inner{padding:60px 22px 66px}.cg-hero h1{font-size:40px}.cg-hero-panel{padding:26px}.cg-panel-title{grid-template-columns:1fr}.cg-platform-head h2{font-size:30px}.cg-field-photo{height:230px}.cg-position-item{grid-template-columns:1fr}.cg-promise,.cg-cta{padding:26px}.cg-muted-actions{justify-content:flex-start}}
+  </style>
 </head>
 <body class="brand-page">
   <div class="topbar"><div class="container topbar-inner"><span>彰化縣米穀商業同業公會 官方網站</span><span>電話：04-7222528｜辦公時間：週一至週五 09:00-17:00</span></div></div>
   <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img class="brand-logo" src="./assets/images/logo-official.jpg" alt="公會標誌"><div class="brand-name">彰化縣米穀商業同業公會</div></a><button class="nav-toggle" id="navToggle" type="button"><span></span><span></span><span></span></button><nav class="main-nav" id="mainNav"><a href="index.html">首頁</a><a href="about.html">關於公會</a><a href="board.html">理監事團隊</a><a href="members.html">會員介紹</a><a href="news.html">最新消息</a><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="brand.html" class="active">彰榖米</a><a href="downloads.html">下載專區</a><a class="nav-cta" href="contact.html">聯絡公會</a></nav></div></header>
   <main>
     <section class="cg-hero">
-      <div class="container">
-        <div class="cg-eyebrow">CHANGHUA RICE BRAND</div>
-        <h1>彰榖米</h1>
-        <p class="lead">讓彰化好米，被更多人看見。彰榖米，是彰化縣米穀商業同業公會推動的共同品牌，串連彰化在地米穀業者、碾米廠、米商、農會、通路與餐飲應用單位，整合資源、共創價值，讓彰化好米走向更寬廣的市場與未來。</p>
-        <div class="cg-hero-actions"><a class="btn btn-primary" href="contact.html">聯絡公會洽詢合作</a></div>
-        <div class="cg-hero-card"><b>一粒好米，種出彰化的風土好味道</b><p>以彰化米穀產業為根基，串連會員、品牌、教育與米食文化，讓彰化好米被更多人看見，也看見土地與用心。</p></div>
+      <div class="cg-hero-inner">
+        <div class="cg-hero-copy">
+          <div class="cg-eyebrow">CHANGHUA RICE BRAND</div>
+          <h1>彰榖米</h1>
+          <p class="lead">讓彰化好米，被更多人看見。彰榖米，是彰化縣米穀商業同業公會推動的共同品牌，串連彰化在地米穀業者、碾米廠、米商、農會、通路與餐飲應用單位，整合資源、共創價值，讓彰化好米走向更寬廣的市場與未來。</p>
+          <div class="cg-hero-actions"><a class="btn btn-primary" href="contact.html">聯絡公會洽詢合作</a></div>
+        </div>
+        <aside class="cg-hero-panel">
+          <div class="cg-panel-title"><img src="./assets/images/logo-official.jpg" alt="彰化縣米穀商業同業公會標誌"><h2>一粒好米，種出彰化的風土好味道</h2></div>
+          <p>以彰化米穀產業為根基，串連會員、品牌、教育與米食文化，讓彰化好米被更多人看見，也看見土地與用心。</p>
+          <div class="cg-value-row"><span>在地生產</span><span>安心品質</span><span>文化傳承</span></div>
+        </aside>
       </div>
     </section>
 
     <section class="cg-platform">
-      <div class="container">
-        <div class="cg-platform-head">
-          <div class="ornament">BRAND PLATFORM</div>
-          <h2>彰化米穀產業的共同品牌平台</h2>
-          <p>整合產業資源・強化品牌價值・推廣米食文化・共創永續未來</p>
-        </div>
-        <div class="cg-field-photo" aria-label="彰化稻田與濁水溪品牌形象"></div>
-        <div class="cg-position-row">
-          <article class="cg-position-item"><div class="cg-icon">榖</div><div><b>地方產業品牌</b><p>以彰化在地米穀產業為核心，建立具信賴感與辨識度的共同品牌。</p></div></article>
-          <article class="cg-position-item"><div class="cg-icon">合</div><div><b>會員共創平台</b><p>串連業者、農會與相關夥伴，共享資源與知識，促進合作媒合。</p></div></article>
-          <article class="cg-position-item"><div class="cg-icon">米</div><div><b>米食文化推廣</b><p>結合活動與教育訓練，讓更多人認識米、喜愛米，延續在地飲食文化。</p></div></article>
-        </div>
-      </div>
+      <div class="container"><div class="cg-platform-head"><div class="ornament">BRAND PLATFORM</div><h2>彰化米穀產業的共同品牌平台</h2><p>整合產業資源・強化品牌價值・推廣米食文化・共創永續未來</p></div><div class="cg-field-photo" aria-label="彰化稻田與濁水溪品牌形象"></div><div class="cg-position-row"><article class="cg-position-item"><div class="cg-icon">榖</div><div><b>地方產業品牌</b><p>以彰化在地米穀產業為核心，建立具信賴感與辨識度的共同品牌。</p></div></article><article class="cg-position-item"><div class="cg-icon">合</div><div><b>會員共創平台</b><p>串連業者、農會與相關夥伴，共享資源與知識，促進合作媒合。</p></div></article><article class="cg-position-item"><div class="cg-icon">米</div><div><b>米食文化推廣</b><p>結合活動與教育訓練，讓更多人認識米、喜愛米，延續在地飲食文化。</p></div></article></div></div>
     </section>
 
-    <section class="cg-section cg-white">
-      <div class="container cg-intro-grid">
-        <article class="cg-story">
-          <h2>彰化米穀產業的品牌行動</h2>
-          <p>彰榖米代表的不只是一包米，而是彰化米穀產業共同向前的品牌行動。</p>
-          <p>我們希望透過公會的產業整合力量，讓米從日常主食延伸為地方文化、產業價值與生活美學的代表，協助會員提升品牌形象，也讓更多消費者重新認識彰化米穀產業的特色與價值。</p>
-          <p>彰榖米以「地方米穀品牌推廣」為核心，結合公會會員、教育訓練、米食文化、食農教育與行銷活動，逐步建立彰化米的品牌辨識度與市場信任感。</p>
-        </article>
-        <div class="cg-position-box">
-          <article class="cg-position-item"><b>地方產業品牌</b><p>展現彰化米穀產業的在地特色與產業能量。</p></article>
-          <article class="cg-position-item"><b>會員共創平台</b><p>串連會員業者共同參與品牌推廣與市場曝光。</p></article>
-          <article class="cg-position-item"><b>米食文化推廣</b><p>透過活動、課程與內容行銷，讓更多人重新認識米的價值。</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="cg-section cg-rice">
-      <div class="container"><div class="cg-promise"><div><div class="cg-promise-label">BRAND PROMISE</div><h2>一粒米，串起土地、產業與生活</h2></div><p>彰榖米希望重新定義消費者對「米」的想像。米不只是日常主食，也是地方產業、家庭餐桌、飲食文化與農業價值的連結。透過彰榖米推動，公會將持續協助會員提升品牌形象，讓彰化米穀產業能從傳統供應走向品牌經營、從產品銷售走向文化推廣。</p></div></div>
-    </section>
-
-    <section class="cg-section cg-white">
-      <div class="container"><div class="cg-head"><span>BRAND GOALS</span><h2>品牌推動目標</h2><p>以品牌化、教育化與生活化方式，提升彰化米穀產業的市場能見度。</p></div><div class="cg-goal-grid"><article class="cg-goal" data-no="01"><h3>提升彰化米的市場能見度</h3><p>透過品牌包裝、活動曝光、社群宣傳與教育訓練，讓更多消費者、通路與合作單位認識彰化米穀產業。</p></article><article class="cg-goal" data-no="02"><h3>串連會員產業資源</h3><p>整合公會會員力量，促進米商、碾米廠、農會、通路與餐飲應用單位之間的合作，創造更多產業合作機會。</p></article><article class="cg-goal" data-no="03"><h3>推廣米食文化與食農教育</h3><p>透過米食 DIY、食農教育、社區共學、親子活動與地方推廣，讓米食文化走進日常生活。</p></article><article class="cg-goal" data-no="04"><h3>協助會員提升品牌經營能力</h3><p>結合教育訓練與品牌輔導，協助會員強化產品定位、通路經營、數位行銷與服務品質。</p></article></div></div>
-    </section>
-
-    <section class="cg-section cg-rice">
-      <div class="container"><div class="cg-head"><span>BRAND STRATEGY</span><h2>品牌推廣策略</h2><p>建立彰榖米一致性的品牌識別、品牌故事與對外溝通語言，讓公會在辦理活動、教育訓練、展售推廣與對外合作時，能夠有一致且清楚的品牌形象。</p></div><div class="cg-strategy-grid"><article class="cg-strategy"><h3>一、品牌形象建立</h3><ul><li>品牌識別應用：LOGO、主視覺、活動背板、DM、社群圖片。</li><li>品牌故事整理：彰化米穀產業特色、會員故事、米食文化。</li><li>官網品牌頁：建立彰榖米品牌介紹與合作入口。</li><li>社群內容推廣：透過圖文、短影音、活動紀錄提升曝光。</li></ul></article><article class="cg-strategy"><h3>二、會員共同參與</h3><ul><li>會員品牌露出：於官網、活動、社群中介紹會員特色。</li><li>聯合推廣活動：結合公會活動、展售、課程進行品牌曝光。</li><li>產業交流合作：促進會員之間資源共享與異業合作。</li><li>品牌素材共用：提供會員可使用的品牌介紹、活動文宣與推廣素材。</li></ul></article><article class="cg-strategy"><h3>三、教育訓練結合品牌推廣</h3><ul><li>米穀產業經營：稅務、法規、勞動管理、食品安全。</li><li>品牌行銷課程：社群經營、短影音、品牌故事、通路曝光。</li><li>米食產品應用：米食 DIY、米烘焙、地方特色米食。</li><li>會員品牌輔導：協助會員建立品牌介紹與推廣素材。</li></ul></article><article class="cg-strategy"><h3>四、通路與合作拓展</h3><ul><li>學校與社區：食農教育、米食體驗、社區課程。</li><li>餐飲與烘焙業者：米食應用、菜單合作、米點心開發。</li><li>地方活動單位：展售、市集、節慶活動合作。</li><li>政府與公部門：產業推廣、教育訓練、地方品牌計畫。</li></ul></article></div></div>
-    </section>
-
-    <section class="cg-section cg-white">
-      <div class="container"><div class="cg-cta"><div><h2>歡迎加入彰榖米推廣行列</h2><p>如果您是公會會員、米穀相關業者、餐飲品牌、學校、社區或對米食文化推廣有興趣的合作單位，歡迎與本會聯繫。公會將持續推動彰化米穀產業的品牌化、教育化與生活化，讓更多人看見彰化米的價值。</p></div><div class="cg-muted-actions"><a class="btn btn-primary" href="contact.html">聯絡公會洽詢合作</a><a class="btn btn-secondary" href="downloads.html">下載會員入會申請書</a><a class="btn btn-secondary" href="training.html">查看教育訓練資訊</a></div></div></div>
-    </section>
+    <section class="cg-section cg-white"><div class="container cg-intro-grid"><article class="cg-story"><h2>彰化米穀產業的品牌行動</h2><p>彰榖米代表的不只是一包米，而是彰化米穀產業共同向前的品牌行動。</p><p>我們希望透過公會的產業整合力量，讓米從日常主食延伸為地方文化、產業價值與生活美學的代表，協助會員提升品牌形象，也讓更多消費者重新認識彰化米穀產業的特色與價值。</p><p>彰榖米以「地方米穀品牌推廣」為核心，結合公會會員、教育訓練、米食文化、食農教育與行銷活動，逐步建立彰化米的品牌辨識度與市場信任感。</p></article><div class="cg-position-box"><article class="cg-position-item"><b>地方產業品牌</b><p>展現彰化米穀產業的在地特色與產業能量。</p></article><article class="cg-position-item"><b>會員共創平台</b><p>串連會員業者共同參與品牌推廣與市場曝光。</p></article><article class="cg-position-item"><b>米食文化推廣</b><p>透過活動、課程與內容行銷，讓更多人重新認識米的價值。</p></article></div></div></section>
+    <section class="cg-section cg-rice"><div class="container"><div class="cg-promise"><div><div class="cg-promise-label">BRAND PROMISE</div><h2>一粒米，串起土地、產業與生活</h2></div><p>彰榖米希望重新定義消費者對「米」的想像。米不只是日常主食，也是地方產業、家庭餐桌、飲食文化與農業價值的連結。透過彰榖米推動，公會將持續協助會員提升品牌形象，讓彰化米穀產業能從傳統供應走向品牌經營、從產品銷售走向文化推廣。</p></div></div></section>
+    <section class="cg-section cg-white"><div class="container"><div class="cg-head"><span>BRAND GOALS</span><h2>品牌推動目標</h2><p>以品牌化、教育化與生活化方式，提升彰化米穀產業的市場能見度。</p></div><div class="cg-goal-grid"><article class="cg-goal" data-no="01"><h3>提升彰化米的市場能見度</h3><p>透過品牌包裝、活動曝光、社群宣傳與教育訓練，讓更多消費者、通路與合作單位認識彰化米穀產業。</p></article><article class="cg-goal" data-no="02"><h3>串連會員產業資源</h3><p>整合公會會員力量，促進米商、碾米廠、農會、通路與餐飲應用單位之間的合作，創造更多產業合作機會。</p></article><article class="cg-goal" data-no="03"><h3>推廣米食文化與食農教育</h3><p>透過米食 DIY、食農教育、社區共學、親子活動與地方推廣，讓米食文化走進日常生活。</p></article><article class="cg-goal" data-no="04"><h3>協助會員提升品牌經營能力</h3><p>結合教育訓練與品牌輔導，協助會員強化產品定位、通路經營、數位行銷與服務品質。</p></article></div></div></section>
+    <section class="cg-section cg-rice"><div class="container"><div class="cg-head"><span>BRAND STRATEGY</span><h2>品牌推廣策略</h2><p>建立彰榖米一致性的品牌識別、品牌故事與對外溝通語言，讓公會在辦理活動、教育訓練、展售推廣與對外合作時，能夠有一致且清楚的品牌形象。</p></div><div class="cg-strategy-grid"><article class="cg-strategy"><h3>一、品牌形象建立</h3><ul><li>品牌識別應用：LOGO、主視覺、活動背板、DM、社群圖片。</li><li>品牌故事整理：彰化米穀產業特色、會員故事、米食文化。</li><li>官網品牌頁：建立彰榖米介紹與合作入口。</li><li>社群內容推廣：透過圖文、短影音、活動紀錄提升曝光。</li></ul></article><article class="cg-strategy"><h3>二、會員共同參與</h3><ul><li>會員品牌露出：於官網、活動、社群中介紹會員特色。</li><li>聯合推廣活動：結合公會活動、展售、課程進行品牌曝光。</li><li>產業交流合作：促進會員之間資源共享與異業合作。</li><li>品牌素材共用：提供會員可使用的品牌介紹、活動文宣與推廣素材。</li></ul></article><article class="cg-strategy"><h3>三、教育訓練結合品牌推廣</h3><ul><li>米穀產業經營：稅務、法規、勞動管理、食品安全。</li><li>品牌行銷課程：社群經營、短影音、品牌故事、通路曝光。</li><li>米食產品應用：米食 DIY、米烘焙、地方特色米食。</li><li>會員品牌輔導：協助會員建立品牌介紹與推廣素材。</li></ul></article><article class="cg-strategy"><h3>四、通路與合作拓展</h3><ul><li>學校與社區：食農教育、米食體驗、社區課程。</li><li>餐飲與烘焙業者：米食應用、菜單合作、米點心開發。</li><li>地方活動單位：展售、市集、節慶活動合作。</li><li>政府與公部門：產業推廣、教育訓練、地方品牌計畫。</li></ul></article></div></div></section>
+    <section class="cg-section cg-white"><div class="container"><div class="cg-cta"><div><h2>歡迎加入彰榖米推廣行列</h2><p>如果您是公會會員、米穀相關業者、餐飲品牌、學校、社區或對米食文化推廣有興趣的合作單位，歡迎與本會聯繫。公會將持續推動彰化米穀產業的品牌化、教育化與生活化，讓更多人看見彰化米的價值。</p></div><div class="cg-muted-actions"><a class="btn btn-primary" href="contact.html">聯絡公會洽詢合作</a></div></div></div></section>
   </main>
   <footer class="site-footer"><div class="footer-bottom"><div class="container">© 2026 彰化縣米穀商業同業公會　版權所有</div></div></footer>
   <script src="./assets/js/site.js"></script>
