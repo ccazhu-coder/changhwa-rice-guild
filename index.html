@@ -1,665 +1,331 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant-TW">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>彰化縣米穀商業同業公會</title>
-  <meta name="description" content="彰化縣米穀商業同業公會官方網站。統一編號：58812408。地址：500021彰化市長壽街194號。電話：04-7222528。" />
-  <link rel="icon" type="image/jpg" href="./assets/images/logo-official.jpg" />
+  <meta name="description" content="彰化縣米穀商業同業公會官方網站，提供會員服務、教育訓練、活動紀錄、彰榖米品牌推動與聯絡資訊。" />
+  <link rel="icon" type="image/jpeg" href="./assets/images/logo-official.jpg" />
   <link rel="stylesheet" href="./assets/css/style.css" />
 </head>
 <body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
 
-<!-- TOP BAR -->
-<div id="topbar">
-  <div class="container">
-    <span>彰化縣米穀商業同業公會 官方網站｜統一編號：58812408</span>
-    <span class="topbar-right">
-      04-7222528　|　傳真：04-7225229　|　辦公時間：週一至週五 09:00–17:00
-    </span>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <span>彰化縣米穀商業同業公會 官方網站</span>
+      <span>統一編號：58812408｜電話：04-7222528｜傳真：04-7225229｜辦公時間：週一至週五 09:00-17:00</span>
+    </div>
   </div>
-</div>
 
-<!-- HEADER -->
-<header>
-  <div class="container">
-    <div class="header-inner">
-      <div class="logo-area">
-        <img
-          class="logo-img"
-          src="./assets/images/logo-official.jpg"
-          alt="彰化縣米穀商業同業公會標誌"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
-        />
-        <div class="logo-fallback">🌾</div>
-        <div class="logo-text">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#home" aria-label="回到首頁">
+        <img class="brand-logo" src="./assets/images/logo-official.jpg" alt="彰化縣米穀商業同業公會標誌" />
+        <div class="brand-name">彰化縣米穀商業同業公會</div>
+      </a>
+
+      <button class="nav-toggle" id="navToggle" type="button" aria-label="開啟選單" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav" aria-label="主選單">
+        <a href="#home">首頁</a>
+        <a href="#about">關於公會</a>
+        <a href="#history">歷屆沿革</a>
+        <a href="#news">最新公告</a>
+        <a href="#services">會員服務</a>
+        <a href="#training">教育訓練</a>
+        <a href="#activities">活動紀錄</a>
+        <a href="#brand">彰榖米品牌</a>
+        <a href="#board">組織架構</a>
+        <a href="#contact">聯絡我們</a>
+        <a class="nav-cta" href="#contact">申請入會</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <p class="eyebrow">成立於中華民國39年12月05日｜服務彰化米穀業者</p>
           <h1>彰化縣米穀商業同業公會</h1>
-          <span class="logo-sub">CHANGHUA RICE MERCHANTS ASSOCIATION</span>
+          <p class="hero-lead">服務米穀業者・促進產業交流・維護會員權益・推動人才培訓</p>
+          <p class="hero-text">本會以服務會員、協調同業關係、促進產業健全發展為宗旨，持續推動會員服務、教育訓練、產業交流與公益參與。</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#news">最新公告</a>
+            <a class="btn btn-secondary" href="#training">教育訓練</a>
+            <a class="btn btn-secondary" href="#services">會員服務</a>
+          </div>
+        </div>
+
+        <div class="hero-card" aria-label="會員統計">
+          <div class="hero-card-title">會員統計</div>
+          <div class="hero-number">347<span>名</span></div>
+          <p>目前公開網站僅揭露會員類別與總數統計。</p>
+          <div class="hero-stat-row">
+            <div><strong>110</strong><span>甲級會員</span></div>
+            <div><strong>237</strong><span>乙級會員</span></div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <button id="nav-toggle" aria-label="開啟選單" aria-expanded="false">☰</button>
+    <section class="section white" id="about">
+      <div class="container">
+        <div class="section-title-block">
+          <span>公會簡介</span>
+          <h2>關於公會</h2>
+          <p>依法設立之商業同業公會，協助米穀業者凝聚共識、維護權益、促進交流。</p>
+        </div>
 
-      <div class="nav-wrap">
-        <nav aria-label="主導覽">
+        <div class="about-grid">
+          <div class="card about-card">
+            <p>彰化縣米穀商業同業公會成立於中華民國39年12月5日，為依法設立之商業同業公會，以服務轄區內米穀相關業者為宗旨，協調同業關係，促進產業健全發展。</p>
+            <p>本會持續辦理會員服務、教育訓練、產業交流與公益參與，協助會員掌握相關資訊，提升產業連結與服務品質。</p>
+            <dl class="info-list">
+              <div><dt>公會名稱</dt><dd>彰化縣米穀商業同業公會</dd></div>
+              <div><dt>成立日期</dt><dd>中華民國39年12月5日</dd></div>
+              <div><dt>統一編號</dt><dd>58812408</dd></div>
+              <div><dt>地址</dt><dd>500021 彰化市長壽街194號</dd></div>
+              <div><dt>電話</dt><dd>04-7222528</dd></div>
+              <div><dt>傳真</dt><dd>04-7225229</dd></div>
+            </dl>
+          </div>
+
+          <div class="member-panel">
+            <div class="stat-grid">
+              <div class="stat-card"><strong>347</strong><span>會員總數</span></div>
+              <div class="stat-card"><strong>110</strong><span>甲級會員</span></div>
+              <div class="stat-card"><strong>237</strong><span>乙級會員</span></div>
+            </div>
+            <div class="privacy-box">
+              <h3>會員資料公開安全說明</h3>
+              <p>本會會員資料依個人資料保護及公會內部管理原則辦理，公開網站僅揭露會員類別與總數統計；完整會員名冊屬內部管理資料，不於公開網站揭露。如需查詢會員相關資訊，請洽公會辦公室。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rice" id="history">
+      <div class="container">
+        <div class="section-title-block">
+          <span>歷史沿革</span>
+          <h2>歷屆沿革</h2>
+          <p>自民國39年成立至今，歷屆理事長持續帶領本會穩健發展。</p>
+        </div>
+
+        <div class="history-grid">
+          <div class="history-card"><span>第1屆</span><strong>陳反</strong><p>民國39–41年</p></div>
+          <div class="history-card"><span>第2屆</span><strong>李俊富</strong><p>民國41–43年</p></div>
+          <div class="history-card"><span>第3–4屆</span><strong>洪金發</strong><p>民國43–47年</p></div>
+          <div class="history-card"><span>第5–6屆</span><strong>陳煥章</strong><p>民國47–51年</p></div>
+          <div class="history-card"><span>第7屆</span><strong>邱思仁</strong><p>民國51–53年</p></div>
+          <div class="history-card"><span>第8屆</span><strong>洪江林</strong><p>民國53–55年</p></div>
+          <div class="history-card"><span>第9–10屆</span><strong>許志錕</strong><p>民國55–59年</p></div>
+          <div class="history-card"><span>第11–12屆</span><strong>陳祥雲</strong><p>民國59–65年</p></div>
+          <div class="history-card"><span>第13–14屆</span><strong>陳俊雄</strong><p>民國65–71年</p></div>
+          <div class="history-card"><span>第15–16屆</span><strong>許志錕</strong><p>民國71–77年</p></div>
+          <div class="history-card"><span>第17–18屆</span><strong>鄭懋樵</strong><p>民國77–83年</p></div>
+          <div class="history-card"><span>第19–20屆</span><strong>陳德風</strong><p>民國83–89年</p></div>
+          <div class="history-card"><span>第21–22屆</span><strong>柯騰雄</strong><p>民國89–95年</p></div>
+          <div class="history-card"><span>第23–24屆</span><strong>巫有凱</strong><p>民國95–101年</p></div>
+          <div class="history-card"><span>第25–26屆</span><strong>陳樹林</strong><p>民國101–107年</p></div>
+          <div class="history-card"><span>第27–28屆</span><strong>沈踴志</strong><p>民國107–113年</p></div>
+          <div class="history-card current"><span>第29屆</span><strong>蘇建彰</strong><p>民國113–116年｜現任理事長</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="news">
+      <div class="container">
+        <div class="section-title-block">
+          <span>公會公告</span>
+          <h2>最新公告</h2>
+          <p>公告內容以公會正式發布資料為準；未確認資料不於公開網站揭露。</p>
+        </div>
+
+        <div class="news-list">
+          <article class="news-item">
+            <time>114.05.06</time>
+            <span>會員大會</span>
+            <h3>第29屆第2次會員大會暨理監事聯席會議</h3>
+          </article>
+          <article class="news-item">
+            <time>115.05.19</time>
+            <span>教育訓練</span>
+            <h3>115年度會員教育訓練：農產品業稅務實務與相關法規</h3>
+          </article>
+          <article class="news-item">
+            <time>114年度</time>
+            <span>公益活動</span>
+            <h3>花蓮賑災白米援助行動</h3>
+          </article>
+          <article class="news-item muted">
+            <time>待補</time>
+            <span>公告資料</span>
+            <h3>更多歷史公告內容【待補資料】</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rice" id="services">
+      <div class="container">
+        <div class="section-title-block">
+          <span>會員服務</span>
+          <h2>服務項目</h2>
+          <p>協助會員掌握政策資訊、參與教育訓練、凝聚產業交流與維護同業權益。</p>
+        </div>
+
+        <div class="service-grid">
+          <article class="service-card"><h3>申請入會</h3><p>符合資格之米穀相關業者，歡迎洽詢公會辦公室索取入會相關資料。</p></article>
+          <article class="service-card"><h3>公告通知</h3><p>發布公會公告、政策資訊、會議通知與活動訊息，協助會員掌握重要資訊。</p></article>
+          <article class="service-card"><h3>教育訓練</h3><p>規劃會員教育訓練與人才培育課程，提升產業從業人員專業能力。</p></article>
+          <article class="service-card"><h3>協調服務</h3><p>協調同業關係，反映會員意見，維護產業秩序與會員合法權益。</p></article>
+          <article class="service-card"><h3>產業交流</h3><p>透過會員大會、理監事會議與活動交流，凝聚業界共識與合作機會。</p></article>
+          <article class="service-card"><h3>公益參與</h3><p>結合會員力量參與公益行動，展現公會對地方社會的關懷與責任。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="training">
+      <div class="container">
+        <div class="section-title-block">
+          <span>教育訓練</span>
+          <h2>會員教育與人才培訓</h2>
+          <p>本會依訓練品質管理精神，持續規劃會員教育訓練與人才培育課程。</p>
+        </div>
+
+        <div class="training-note">
+          <strong>115年度會員教育訓練</strong>
+          <p>農產品業稅務實務與相關法規。課程詳細資料依公會正式公告為準。</p>
+        </div>
+
+        <div class="photo-grid photo-grid-five">
+          <figure><img src="./assets/images/training-001.jpg" alt="115年度會員教育訓練活動照片1" loading="lazy" /><figcaption>教育訓練活動紀錄</figcaption></figure>
+          <figure><img src="./assets/images/training-002.jpg" alt="115年度會員教育訓練活動照片2" loading="lazy" /><figcaption>課程現場</figcaption></figure>
+          <figure><img src="./assets/images/training-003.jpg" alt="115年度會員教育訓練活動照片3" loading="lazy" /><figcaption>會員參與</figcaption></figure>
+          <figure><img src="./assets/images/training-004.jpg" alt="115年度會員教育訓練活動照片4" loading="lazy" /><figcaption>課程交流</figcaption></figure>
+          <figure><img src="./assets/images/training-005.jpg" alt="115年度會員教育訓練活動照片5" loading="lazy" /><figcaption>活動花絮</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rice" id="activities">
+      <div class="container">
+        <div class="section-title-block">
+          <span>活動紀錄</span>
+          <h2>活動與公益參與</h2>
+          <p>記錄本會教育訓練、會員交流與公益參與成果。</p>
+        </div>
+
+        <div class="activity-feature">
+          <div>
+            <span class="tag">公益活動</span>
+            <h3>114年花蓮賑災白米援助行動</h3>
+            <p>本會響應花蓮賑災行動，結合會員力量提供白米援助，展現同業互助與地方關懷。</p>
+          </div>
+          <div class="photo-grid two">
+            <figure><img src="./assets/images/disaster-001.jpg" alt="花蓮賑災白米援助活動照片1" loading="lazy" /></figure>
+            <figure><img src="./assets/images/disaster-002.jpg" alt="花蓮賑災白米援助活動照片2" loading="lazy" /></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section brand-section" id="brand">
+      <div class="container brand-grid">
+        <div>
+          <div class="section-title-block light">
+            <span>品牌預留專區</span>
+            <h2>彰榖米品牌推動計畫</h2>
+            <p>以彰化米穀產業為基礎，推動在地米食文化、產業品牌與市場能見度。</p>
+          </div>
+          <p class="brand-text">「彰榖米」為本會後續推動之品牌發展方向，將結合會員資源、在地米穀產業、教育推廣、食農文化與通路合作，逐步建立彰化米穀產業的品牌識別與推廣平台。</p>
+          <p class="brand-status">【品牌內容建置中】</p>
+        </div>
+        <div class="brand-card">
+          <h3>未來預留模組</h3>
           <ul>
-            <li><a href="#about">關於公會</a></li>
-            <li><a href="#history">歷屆沿革</a></li>
-            <li><a href="#news">最新公告</a></li>
-            <li><a href="#services">會員服務</a></li>
-            <li><a href="#ttqs">教育訓練</a></li>
-            <li><a href="#activities">活動紀錄</a></li>
-            <li><a href="#brand">彰榖米品牌</a></li>
-            <li><a href="#board">組織架構</a></li>
-            <li><a href="#contact">聯絡我們</a></li>
-            <li><a href="#contact" class="nav-cta">申請入會</a></li>
+            <li>品牌理念：【待補資料】</li>
+            <li>彰化米穀特色：【待補資料】</li>
+            <li>米食文化推廣：【待補資料】</li>
+            <li>會員品牌合作：【待補資料】</li>
+            <li>未來通路合作：【待補資料】</li>
           </ul>
-        </nav>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- HERO -->
-<section id="hero">
-  <div class="container">
-    <div class="hero-layout">
-      <!-- 左側：主文字 -->
-      <div class="hero-content">
-        <div class="hero-tag">成立於中華民國39年12月05日　·　第29屆　·　服務彰化米穀業者</div>
-        <h2 class="hero-title">
-          彰化縣米穀商業<br/>
-          <span>同業公會</span>
-        </h2>
-        <p class="hero-sub">
-          以服務會員、協調同業關係、促進產業健全發展為宗旨，持續推動會員服務、教育訓練、產業交流與公益參與。
-        </p>
-        <div class="hero-btns">
-          <a href="#news" class="btn btn-gold">最新公告</a>
-          <a href="#ttqs" class="btn btn-outline">教育訓練</a>
-          <a href="#services" class="btn btn-outline">會員服務</a>
         </div>
       </div>
+    </section>
 
-      <!-- 右側：統計卡 -->
-      <div class="hero-stats-card">
-        <div class="hero-stat-main">
-          <div class="hero-stat-num-lg">347<span>人</span></div>
-          <div class="hero-stat-desc">
-            <strong>全體會員數</strong>涵蓋彰化縣各地米穀商業者
+    <section class="section white" id="board">
+      <div class="container">
+        <div class="section-title-block">
+          <span>組織架構</span>
+          <h2>第29屆組織資訊</h2>
+          <p>組織架構圖與完整理監事名單依公會正式資料更新。</p>
+        </div>
+
+        <div class="board-grid">
+          <div class="chair-card"><span>現任理事長</span><strong>蘇建彰</strong><p>第29屆｜任期：民國113–116年</p></div>
+          <div class="board-note">理事、常務理事、監事等完整名單【待補資料】。如需查詢詳細成員資料，請洽公會辦公室。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rice" id="contact">
+      <div class="container">
+        <div class="section-title-block">
+          <span>聯絡資訊</span>
+          <h2>聯絡我們</h2>
+          <p>歡迎來電洽詢或親洽公會辦公室。</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>彰化縣米穀商業同業公會</h3>
+            <dl class="contact-list">
+              <div><dt>地址</dt><dd>500021 彰化市長壽街194號</dd></div>
+              <div><dt>電話</dt><dd><a href="tel:047222528">04-7222528</a></dd></div>
+              <div><dt>傳真</dt><dd>04-7225229</dd></div>
+              <div><dt>Email</dt><dd><a href="mailto:riceass01@gmail.com">riceass01@gmail.com</a></dd></div>
+              <div><dt>統一編號</dt><dd>58812408</dd></div>
+              <div><dt>辦公時間</dt><dd>週一至週五 09:00-17:00</dd></div>
+            </dl>
+            <p class="contact-note">申請入會請洽公會辦公室索取相關資料。</p>
+          </div>
+
+          <div class="line-card">
+            <img class="line-qr-img" src="./assets/images/line-qrcode.png" alt="彰化縣米穀商業同業公會 LINE 官方帳號 QR Code" />
+            <div class="line-placeholder" aria-hidden="true">LINE QR Code【待補圖片】</div>
+            <h3>加入 LINE 官方帳號</h3>
+            <p>掃描加入彰化縣米穀商業同業公會 LINE 官方帳號，即時接收最新公告與通知。</p>
           </div>
         </div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat-row">
-          <div class="hero-stat-item">
-            <div class="hero-stat-num-sm">110</div>
-            <div class="hero-stat-label"><strong>正會員</strong>（甲級）</div>
-          </div>
-          <div style="width:1px;background:rgba(198,164,55,.18);align-self:stretch;"></div>
-          <div class="hero-stat-item">
-            <div class="hero-stat-num-sm">237</div>
-            <div class="hero-stat-label"><strong>贊助會員</strong>（乙級）</div>
-          </div>
-        </div>
-        <div class="hero-stat-divider"></div>
-        <div class="hero-stat-privacy">※ 個人會員資料依個資法保護，不公開揭露</div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
 
-<!-- 關於公會 -->
-<section id="about">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">About Us</span>
-      <h2 class="section-title">關於公會</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">彰化縣米穀商業同業公會簡介</p>
-    </div>
-    <div class="about-grid">
-      <div class="about-info">
-        <p>
-          彰化縣米穀商業同業公會成立於中華民國 39 年 12 月 5 日，為依法設立之商業同業公會，以服務轄區內米穀相關業者為宗旨，協調同業關係，促進產業健全發展。
-        </p>
-        <p>
-          本會積極參與政府政策推動、辦理會員教育訓練與人才培育，並定期舉辦會員大會、理監事會議，凝聚業界共識，維護會員合法權益。
-        </p>
-        <p>
-          現任理事長為第 29 屆理事長蘇建彰，任期民國 113 年至 116 年，持續帶領本會向前邁進。
-        </p>
-        <div class="about-meta">
-          <p><strong>公會名稱：</strong>彰化縣米穀商業同業公會</p>
-          <p><strong>成立日期：</strong>中華民國 39 年 12 月 5 日</p>
-          <p><strong>統一編號：</strong>58812408</p>
-          <p><strong>地　　址：</strong>500021 彰化市長壽街 194 號</p>
-          <p><strong>電　　話：</strong>04-7222528</p>
-          <p><strong>傳　　真：</strong>04-7225229</p>
-          <p><strong>辦公時間：</strong>週一至週五 09:00–17:00</p>
-        </div>
-      </div>
+  <footer class="site-footer">
+    <div class="container footer-grid">
       <div>
-        <div class="about-stats">
-          <div class="stat-card">
-            <div class="stat-num">347</div>
-            <div class="stat-label">全體會員數（名）</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">110</div>
-            <div class="stat-label">正會員（名）</div>
-          </div>
-          <div class="stat-card">
-            <div class="stat-num">237</div>
-            <div class="stat-label">贊助會員（名）</div>
-          </div>
+        <div class="footer-brand">
+          <img src="./assets/images/logo-official.jpg" alt="彰化縣米穀商業同業公會標誌" />
+          <strong>彰化縣米穀商業同業公會</strong>
         </div>
-        <div class="privacy-notice">
-          <div class="privacy-notice-icon">🔒</div>
-          <div>
-            <div class="privacy-notice-title">會員資料保護說明</div>
-            <p>本會會員資料依個人資料保護及公會內部管理原則辦理，公開網站僅揭露會員類別與總數統計；完整會員名冊屬內部管理資料，不於公開網站揭露。如需查詢會員相關資訊，請洽公會辦公室。</p>
-          </div>
-        </div>
+        <p>500021 彰化市長壽街194號<br />04-7222528｜傳真：04-7225229<br />riceass01@gmail.com</p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 歷屆沿革 -->
-<section id="history">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">History</span>
-      <h2 class="section-title">歷屆沿革</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">自民國 39 年成立至今，歷屆理事長帶領本會持續發展</p>
-    </div>
-    <div class="history-grid">
-      <div class="hcard"><div class="hcard-badge">第1屆</div><div class="hcard-name">陳反</div><div class="hcard-period">民國 39–41 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第2屆</div><div class="hcard-name">李俊富</div><div class="hcard-period">民國 41–43 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第3–4屆</div><div class="hcard-name">洪金發</div><div class="hcard-period">民國 43–47 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第5–6屆</div><div class="hcard-name">陳煥章</div><div class="hcard-period">民國 47–51 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第7屆</div><div class="hcard-name">邱思仁</div><div class="hcard-period">民國 51–53 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第8屆</div><div class="hcard-name">洪江林</div><div class="hcard-period">民國 53–55 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第9–10屆</div><div class="hcard-name">許志錕</div><div class="hcard-period">民國 55–59 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第11–12屆</div><div class="hcard-name">陳祥雲</div><div class="hcard-period">民國 59–65 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第13–14屆</div><div class="hcard-name">陳俊雄</div><div class="hcard-period">民國 65–71 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第15–16屆</div><div class="hcard-name">許志錕</div><div class="hcard-period">民國 71–77 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第17–18屆</div><div class="hcard-name">鄭懋樵</div><div class="hcard-period">民國 77–83 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第19–20屆</div><div class="hcard-name">陳德風</div><div class="hcard-period">民國 83–89 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第21–22屆</div><div class="hcard-name">柯騰雄</div><div class="hcard-period">民國 89–95 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第23–24屆</div><div class="hcard-name">巫有凱</div><div class="hcard-period">民國 95–101 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第25–26屆</div><div class="hcard-name">陳樹林</div><div class="hcard-period">民國 101–107 年</div></div>
-      <div class="hcard"><div class="hcard-badge">第27–28屆</div><div class="hcard-name">沈踴志</div><div class="hcard-period">民國 107–113 年</div></div>
-      <div class="hcard current">
-        <div class="hcard-badge">第29屆</div>
-        <div class="hcard-name">蘇建彰</div>
-        <div class="hcard-period">民國 113–116 年</div>
-        <div class="hcard-tag">現任理事長</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 最新公告 -->
-<section id="news">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">Announcements</span>
-      <h2 class="section-title">最新公告</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">公會最新公告與活動通知</p>
-    </div>
-    <div class="news-list">
-      <div class="news-item">
-        <span class="news-date">114.05.06</span>
-        <span class="news-badge badge-notice">會員大會</span>
-        <span class="news-title">第29屆第2次會員大會 暨 理監事聯席會議議程通知</span>
-        <span class="news-arrow">›</span>
-      </div>
-      <div class="news-item">
-        <span class="news-date">114.04.15</span>
-        <span class="news-badge badge-train">教育訓練</span>
-        <span class="news-title">113年度第3期職業訓練課程招生公告</span>
-        <span class="news-arrow">›</span>
-      </div>
-      <div class="news-item">
-        <span class="news-date">114.03.20</span>
-        <span class="news-badge badge-event">公益活動</span>
-        <span class="news-title">花蓮強震賑災物資捐贈活動圓滿完成，感謝會員踴躍參與</span>
-        <span class="news-arrow">›</span>
-      </div>
-      <div class="news-item">
-        <span class="news-date">114.02.01</span>
-        <span class="news-badge badge-policy">政策通知</span>
-        <span class="news-title">農業部糧食署113年度稻穀收購相關規定說明</span>
-        <span class="news-arrow">›</span>
-      </div>
-      <div class="news-item">
-        <span class="news-date">113.12.10</span>
-        <span class="news-badge badge-notice">理監事會</span>
-        <span class="news-title">第29屆第1次理監事聯席會議決議事項公告</span>
-        <span class="news-arrow">›</span>
-      </div>
-    </div>
-    <div class="news-more">
-      <a href="#contact">如需查詢更多歷史公告，請洽本會辦公室 ›</a>
-    </div>
-  </div>
-</section>
-
-<!-- 會員服務 -->
-<section id="services">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">Member Services</span>
-      <h2 class="section-title">會員服務</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">彰化縣米穀商業同業公會提供多元服務，維護會員權益</p>
-    </div>
-    <div class="services-grid">
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        </div>
-        <div class="svc-title">申請入會</div>
-        <div class="svc-desc">符合資格之米穀相關業者，歡迎申請加入本會，享受完整會員服務。申請入會請洽公會辦公室索取相關資料。</div>
-        <span class="svc-link">洽詢辦公室 ›</span>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
-        </div>
-        <div class="svc-title">公告通知</div>
-        <div class="svc-desc">定期發布政府政策、法規修訂、業界動態等相關公告，協助會員掌握第一手資訊。</div>
-        <a href="#news" class="svc-link">查看公告 ›</a>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        </div>
-        <div class="svc-title">教育訓練</div>
-        <div class="svc-desc">持續規劃並辦理會員教育訓練課程，提升從業人員專業技能與管理能力。</div>
-        <a href="#ttqs" class="svc-link">查看課程 ›</a>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5z"/><path d="M21 2H3C1.9 2 1 2.9 1 4v16c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H3V9h18v11z"/></svg>
-        </div>
-        <div class="svc-title">協調服務</div>
-        <div class="svc-desc">協調同業關係，代表業者向相關機關反映意見，維護產業秩序與會員合法權益。</div>
-        <a href="#contact" class="svc-link">聯絡公會 ›</a>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-        </div>
-        <div class="svc-title">產業交流</div>
-        <div class="svc-desc">定期舉辦理監事會議、會員大會，促進業界交流，凝聚產業共識，共謀發展。</div>
-        <a href="#activities" class="svc-link">查看活動 ›</a>
-      </div>
-      <div class="svc-card">
-        <div class="svc-icon">
-          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        </div>
-        <div class="svc-title">政策配合</div>
-        <div class="svc-desc">配合農業部糧食署各項稻穀收購、儲糧政策，協助會員了解並遵循相關規定。</div>
-        <a href="#news" class="svc-link">查看政策公告 ›</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 教育訓練 -->
-<section id="ttqs">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">Education &amp; Training</span>
-      <h2 class="section-title">教育訓練</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">持續規劃會員教育訓練與人才培育課程</p>
-    </div>
-    <div class="ttqs-intro">
-      <strong>教育訓練</strong>：本會依訓練品質管理精神，持續規劃會員教育訓練與人才培育課程，辦理相關職業訓練，持續提升從業人員專業能力。
-    </div>
-    <div class="training-grid">
-      <div class="training-card">
-        <img src="./assets/images/training-001.jpg" alt="教育訓練課程照片 1" loading="lazy" />
-        <div class="training-card-body">
-          <div class="training-card-title">職業訓練課程</div>
-          <div class="training-card-desc">提升從業人員專業知識與技能</div>
-        </div>
-      </div>
-      <div class="training-card">
-        <img src="./assets/images/training-002.jpg" alt="教育訓練課程照片 2" loading="lazy" />
-        <div class="training-card-body">
-          <div class="training-card-title">教育訓練課程</div>
-          <div class="training-card-desc"><span class="pending">【待補資料】</span></div>
-        </div>
-      </div>
-      <div class="training-card">
-        <img src="./assets/images/training-003.jpg" alt="教育訓練課程照片 3" loading="lazy" />
-        <div class="training-card-body">
-          <div class="training-card-title">教育訓練課程</div>
-          <div class="training-card-desc"><span class="pending">【待補資料】</span></div>
-        </div>
-      </div>
-      <div class="training-card">
-        <img src="./assets/images/training-004.jpg" alt="教育訓練課程照片 4" loading="lazy" />
-        <div class="training-card-body">
-          <div class="training-card-title">教育訓練課程</div>
-          <div class="training-card-desc"><span class="pending">【待補資料】</span></div>
-        </div>
-      </div>
-      <div class="training-card">
-        <img src="./assets/images/training-005.jpg" alt="教育訓練課程照片 5" loading="lazy" />
-        <div class="training-card-body">
-          <div class="training-card-title">教育訓練課程</div>
-          <div class="training-card-desc"><span class="pending">【待補資料】</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 活動紀錄（照片牆版面）-->
-<section id="activities">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">Activities</span>
-      <h2 class="section-title">活動紀錄</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">本會持續參與公益活動與業界交流，凝聚產業向心力</p>
-    </div>
-    <div class="activities-wall">
-      <!-- 左大圖：花蓮賑災（確認資料）-->
-      <div class="aw-photo aw-large">
-        <img src="./assets/images/disaster-001.jpg" alt="花蓮地震賑災捐贈活動" loading="lazy" />
-        <div class="aw-overlay">
-          <span class="aw-tag">公益活動</span>
-          <div class="aw-title">114年花蓮地震賑災捐贈</div>
-          <div class="aw-date">本會響應花蓮強震賑災，會員踴躍捐贈物資，展現同業互助精神</div>
-        </div>
-      </div>
-      <!-- 右上：賑災照片2 -->
-      <div class="aw-photo aw-small">
-        <img src="./assets/images/disaster-002.jpg" alt="花蓮賑災物資集運照片" loading="lazy" />
-        <div class="aw-overlay">
-          <span class="aw-tag">公益活動</span>
-          <div class="aw-title">物資集運與捐贈現場</div>
-          <div class="aw-date">協助災後重建</div>
-        </div>
-      </div>
-      <!-- 右上2：訓練照片 -->
-      <div class="aw-photo aw-small">
-        <img src="./assets/images/training-001.jpg" alt="教育訓練課程" loading="lazy" />
-        <div class="aw-overlay">
-          <span class="aw-tag">教育訓練</span>
-          <div class="aw-title">職業訓練課程紀錄</div>
-          <div class="aw-date">提升從業人員專業能力</div>
-        </div>
-      </div>
-      <!-- 右下1 -->
-      <div class="aw-photo aw-small">
-        <img src="./assets/images/training-002.jpg" alt="教育訓練課程照片" loading="lazy" />
-        <div class="aw-overlay">
-          <span class="aw-tag">教育訓練</span>
-          <div class="aw-title">教育訓練課程紀錄</div>
-          <div class="aw-date"><span class="pending" style="font-size:10px;">【待補資料】</span></div>
-        </div>
-      </div>
-      <!-- 右下2 -->
-      <div class="aw-photo aw-small">
-        <img src="./assets/images/training-003.jpg" alt="公會活動照片" loading="lazy" />
-        <div class="aw-overlay">
-          <span class="aw-tag">產業交流</span>
-          <div class="aw-title">公會活動紀錄</div>
-          <div class="aw-date"><span class="pending" style="font-size:10px;">【待補資料】</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 彰榖米品牌推動計畫 -->
-<section id="brand">
-  <div class="container">
-    <div class="brand-inner">
-      <div>
-        <div class="brand-badge-label">CHANGGU RICE BRAND</div>
-        <h2 class="brand-title">彰榖米<br/>品牌推動計畫</h2>
-        <p class="brand-desc">
-          本公會積極推動彰化在地優質米穀品牌，串聯產地、碾米業者與通路，建立彰榖米品牌形象，提升消費者對在地米穀的信任與認同，以產業推廣為目標，強調在地特色與文化傳承。
-        </p>
-        <div class="brand-features">
-          <div class="brand-feature">
-            <div class="brand-feature-dot"></div>
-            <div class="brand-feature-text">
-              <strong>品牌推動</strong>整合彰化在地米穀資源，打造具識別度的彰榖米品牌形象
-            </div>
-          </div>
-          <div class="brand-feature">
-            <div class="brand-feature-dot"></div>
-            <div class="brand-feature-text">
-              <strong>米食文化推廣</strong>結合食農教育，推廣在地米食文化與料理文化
-            </div>
-          </div>
-          <div class="brand-feature">
-            <div class="brand-feature-dot"></div>
-            <div class="brand-feature-text">
-              <strong>會員品牌合作</strong>【待補資料】品牌授權與合作機制規劃中
-            </div>
-          </div>
-          <div class="brand-feature">
-            <div class="brand-feature-dot"></div>
-            <div class="brand-feature-text">
-              <strong>未來通路合作</strong>【待補資料】展覽合作與市場能見度規劃中
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="brand-right">
-        <div class="brand-visual-box">
-          <div class="brand-logo-circle">
-            彰榖米<br/>品牌標章<br/><span style="font-size:9px;opacity:.6;">（待補圖片）</span>
-          </div>
-          <div class="brand-img-placeholder">
-            品牌視覺圖片　·　【待補資料】
-          </div>
-          <p class="brand-pending-note">
-            ※ 品牌視覺素材待公會提供後更新<br/>
-            本品牌計畫不涉及電子商務或直接銷售
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 組織架構 -->
-<section id="board">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">Organization</span>
-      <h2 class="section-title">組織架構</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">彰化縣米穀商業同業公會第29屆組織成員</p>
-    </div>
-    <div class="board-wrap">
-      <div class="board-highlight">
-        <div class="board-highlight-en">CHAIRPERSON</div>
-        <div class="board-highlight-title">現任理事長</div>
-        <div class="board-highlight-name">蘇建彰</div>
-        <p style="font-size:12px;color:rgba(248,243,232,.45);margin-top:10px;line-height:1.7;">
-          第29屆理事長<br/>任期：民國113–116年
-        </p>
-      </div>
-      <div>
-        <div class="board-counts">
-          <div class="board-count-card">
-            <div class="board-count-num">—</div>
-            <div class="board-count-label">理事</div>
-          </div>
-          <div class="board-count-card">
-            <div class="board-count-num">—</div>
-            <div class="board-count-label">常務理事</div>
-          </div>
-          <div class="board-count-card">
-            <div class="board-count-num">—</div>
-            <div class="board-count-label">監事</div>
-          </div>
-        </div>
-        <div style="height:14px;"></div>
-        <div class="board-pending-notice">
-          ※ 組織架構圖與理監事名單待公會提供後更新<br/>
-          <span style="font-size:12px;color:var(--text-light);">如需查詢詳細成員資料，請洽公會辦公室</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 聯絡我們 -->
-<section id="contact">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-en">Contact Us</span>
-      <h2 class="section-title">聯絡我們</h2>
-      <div class="section-rule"></div>
-      <p class="section-subtitle">歡迎來電洽詢或親洽辦公室</p>
-    </div>
-    <div class="contact-layout">
-      <!-- 左側：聯絡資訊圖標列 -->
-      <div class="contact-info-list">
-        <div class="ci-row">
-          <div class="ci-icon">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <div class="ci-label">Address 地址</div>
-            <div class="ci-value">500021 彰化市長壽街 194 號</div>
-          </div>
-        </div>
-        <div class="ci-row">
-          <div class="ci-icon">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          </div>
-          <div>
-            <div class="ci-label">Tel 電話</div>
-            <div class="ci-value"><a href="tel:0472225288">04-7222528</a>　|　傳真：04-7225229</div>
-          </div>
-        </div>
-        <div class="ci-row">
-          <div class="ci-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          </div>
-          <div>
-            <div class="ci-label">Email 電子郵件</div>
-            <div class="ci-value"><a href="mailto:riceass01@gmail.com">riceass01@gmail.com</a></div>
-          </div>
-        </div>
-        <div class="ci-row">
-          <div class="ci-icon">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <div>
-            <div class="ci-label">Hours 辦公時間</div>
-            <div class="ci-value">週一至週五　09:00 – 17:00<br/>例假日休息</div>
-          </div>
-        </div>
-        <div class="ci-row">
-          <div class="ci-icon">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <div>
-            <div class="ci-label">ID 統一編號</div>
-            <div class="ci-value">58812408</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 右側：地圖 + LINE QR -->
-      <div class="contact-right">
-        <div class="map-placeholder">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bbb" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>Google 地圖嵌入待補</span>
-          <span style="font-size:11px;color:#ccc;">500021 彰化市長壽街 194 號</span>
-        </div>
-        <div class="line-row">
-          <div class="line-qr-box">
-            <img
-              src="./assets/images/line-qrcode.png"
-              alt="彰化縣米穀商業同業公會 LINE 官方帳號 QR Code"
-              onerror="this.parentElement.innerHTML='<div style=\'padding:10px;font-size:10px;color:#aaa;text-align:center;\'>QR Code</div>'"
-            />
-          </div>
-          <div>
-            <div class="line-info-label">LINE Official Account</div>
-            <div class="line-info-main">加入 LINE 官方帳號</div>
-            <div class="line-info-sub">掃描 QR Code 加入好友<br/>即時接收最新公告與通知</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <div class="footer-logo-area">
-          <img
-            class="footer-logo"
-            src="./assets/images/logo-official.jpg"
-            alt="彰化縣米穀商業同業公會"
-            onerror="this.style.display='none'"
-          />
-          <div class="footer-name">彰化縣米穀商業同業公會</div>
-        </div>
-        <div class="footer-tagline">CHANGHUA RICE MERCHANTS ASSOCIATION</div>
-        <div class="footer-contact-mini">
-          500021 彰化市長壽街 194 號<br/>
-          04-7222528　|　傳真：04-7225229<br/>
-          riceass01@gmail.com
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title">關於公會</div>
-        <div class="footer-col-links">
-          <a href="#about">公會簡介</a>
-          <a href="#history">歷屆沿革</a>
-          <a href="#board">組織架構</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title">服務項目</div>
-        <div class="footer-col-links">
-          <a href="#services">會員服務</a>
-          <a href="#ttqs">教育訓練</a>
-          <a href="#activities">活動紀錄</a>
-          <a href="#brand">彰榖米品牌</a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title">公告聯絡</div>
-        <div class="footer-col-links">
-          <a href="#news">最新公告</a>
-          <a href="#contact">聯絡我們</a>
-          <a href="#contact">申請入會</a>
-        </div>
-      </div>
+      <div><h3>關於公會</h3><a href="#about">公會簡介</a><a href="#history">歷屆沿革</a><a href="#board">組織架構</a></div>
+      <div><h3>服務項目</h3><a href="#services">會員服務</a><a href="#training">教育訓練</a><a href="#activities">活動紀錄</a><a href="#brand">彰榖米品牌</a></div>
+      <div><h3>公告聯絡</h3><a href="#news">最新公告</a><a href="#contact">聯絡我們</a><a href="#contact">申請入會</a></div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copyright">
-        &copy; <span id="current-year"></span> 彰化縣米穀商業同業公會　版權所有
-      </span>
-      <span class="footer-gov">依法立案公會　·　彰化縣政府立案</span>
+      <div class="container">© <span id="currentYear"></span> 彰化縣米穀商業同業公會　版權所有</div>
     </div>
-  </div>
-</footer>
+  </footer>
 
-<script src="./assets/js/main.js"></script>
+  <script src="./assets/js/main.js"></script>
 </body>
 </html>
