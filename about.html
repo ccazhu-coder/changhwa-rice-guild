@@ -1,53 +1,266 @@
-<!DOCTYPE html>
-<html lang="zh-Hant-TW">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>關於公會｜彰化縣米穀商業同業公會</title>
-  <meta name="description" content="彰化縣米穀商業同業公會關於公會、公會宗旨、沿革與章程任務。">
-  <link rel="stylesheet" href="./assets/css/style.css">
-  <link rel="stylesheet" href="./assets/css/formal.css">
-  <style>
-    .org-elegant{max-width:1060px;margin:0 auto}
-    .org-node-line{display:grid;gap:14px;text-align:center}
-    .org-node{background:#fff;border:1px solid #e6ddc9;border-radius:18px;padding:18px 20px;color:#183f21;font-weight:900;box-shadow:0 14px 36px rgba(20,45,24,.07)}
-    .org-node.primary{background:linear-gradient(135deg,#183f21,#24592f);color:#fff;border:none;font-size:20px}
-    .org-node.gold{background:#fff8e5;border-color:#d6b95a;color:#765c11}
-    .org-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .org-five{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
-    .committee-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
-    .committee-card{background:#fff;border:1px solid #e6ddc9;border-radius:24px;padding:24px;box-shadow:0 14px 36px rgba(20,45,24,.07);position:relative;overflow:hidden}
-    .committee-card:before{content:'';position:absolute;right:-38px;top:-38px;width:112px;height:112px;border-radius:50%;background:rgba(198,164,55,.13)}
-    .committee-card .tag{display:inline-flex;background:#f7f1e3;color:#7d6316;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:900;margin-bottom:12px}
-    .committee-card h3{font-family:var(--serif);font-size:22px;color:#183f21;margin-bottom:14px;line-height:1.35;position:relative;z-index:1}
-    .committee-people{display:grid;gap:6px;margin-bottom:12px;color:#444;position:relative;z-index:1}
-    .committee-people b{color:#183f21}
-    .committee-card p{color:#666;line-height:1.8;font-size:14px;margin:0;position:relative;z-index:1}
-    @media(max-width:1180px){.committee-grid,.org-five{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:980px){.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:620px){.committee-grid,.org-five,.org-two{grid-template-columns:1fr}}
-  </style>
+<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>關於公會｜彰化縣米穀商業同業公會</title><link rel="stylesheet" href="./assets/css/style.css"><link rel="stylesheet" href="./assets/css/formal.css">
+<style>
+:root{
+  --green:#183f21;--green-2:#24592f;--green-3:#1d4a3b;
+  --gold:#c6a437;--gold-2:#d6b95a;--gold-3:#e0c783;
+  --rice:#f7f1e3;--rice-2:#fbf8ef;
+  --white:#fff;--ink:#202020;--muted:#61716b;--line:#e6ddc9;
+  --shadow:0 18px 40px rgba(20,45,24,.09);
+  --font:'Noto Sans TC','Microsoft JhengHei','PingFang TC',Arial,sans-serif;
+  --serif:'Noto Serif TC','Noto Sans TC','Microsoft JhengHei',serif;
+  --max:1240px;
+}
+/* PAGE HERO */
+.page-hero{background:linear-gradient(120deg,var(--green) 0%,var(--green-3) 100%);padding:64px 0 52px;color:#fff;position:relative;overflow:hidden}
+.page-hero::after{content:'';position:absolute;right:-120px;top:-120px;width:480px;height:480px;border-radius:50%;background:rgba(198,164,55,.08);pointer-events:none}
+.page-hero-eyebrow{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-3);margin-bottom:12px}
+.page-hero h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:900;margin-bottom:14px;line-height:1.15}
+.page-hero p{font-size:1rem;opacity:.8;max-width:620px;line-height:1.8}
+/* SECTIONS */
+.section{padding:64px 0}
+.section-alt{background:var(--white)}
+.section-rice{background:var(--rice)}
+.sec-head{margin-bottom:40px}
+.sec-label{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-head h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--green);line-height:1.15;margin-bottom:10px}
+.sec-head p{font-size:1rem;color:var(--muted);max-width:680px;line-height:1.8}
+.sec-divider{width:48px;height:3px;background:var(--gold);border-radius:2px;margin-top:14px}
+/* INTRO 2-COL */
+.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.intro-img{border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.intro-img img{width:100%;height:auto;display:block}
+.intro-copy p{font-size:.98rem;color:var(--muted);line-height:1.85;margin-bottom:16px}
+/* STAT ROW */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:var(--white);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.stat-box{text-align:center;padding:32px 16px;position:relative}
+.stat-box+.stat-box::before{content:'';position:absolute;left:0;top:20%;height:60%;border-left:1px solid var(--line)}
+.stat-n{font-family:var(--serif);font-size:2.4rem;font-weight:900;color:var(--green)}
+.stat-l{font-size:.78rem;color:var(--muted);margin-top:6px}
+.stat-sub{font-size:.7rem;color:var(--gold);font-weight:700;margin-top:3px}
+/* PURPOSE CARDS */
+.purpose-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.purpose-card{background:var(--white);border:1px solid var(--line);border-radius:20px;padding:28px 24px;box-shadow:0 4px 16px rgba(20,45,24,.06)}
+.purpose-icon{width:52px;height:52px;background:var(--green);border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:1.2rem;font-weight:900;color:var(--gold);margin-bottom:18px}
+.purpose-card h3{font-size:1rem;font-weight:800;color:var(--green);margin-bottom:8px;font-family:var(--serif)}
+.purpose-card p{font-size:.84rem;color:var(--muted);line-height:1.65}
+/* TIMELINE */
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--line)}
+.tl-item{position:relative;margin-bottom:36px}
+.tl-dot{position:absolute;left:-27px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--white);box-shadow:0 0 0 2px var(--gold)}
+.tl-year{font-size:.72rem;font-weight:800;color:var(--gold);letter-spacing:.08em;margin-bottom:4px}
+.tl-item h3{font-size:.98rem;font-weight:800;color:var(--green);margin-bottom:4px}
+.tl-item p{font-size:.84rem;color:var(--muted);line-height:1.65}
+/* CTA BAND */
+.cta-band{background:linear-gradient(120deg,var(--green) 0%,var(--green-3) 100%);border-radius:28px;padding:56px 48px;display:flex;align-items:center;justify-content:space-between;gap:32px;box-shadow:var(--shadow);color:#fff;overflow:hidden;position:relative}
+.cta-band::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:rgba(198,164,55,.12);pointer-events:none}
+.cta-band h2{font-family:var(--serif);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:900;margin-bottom:10px}
+.cta-band p{font-size:.95rem;opacity:.8;max-width:520px}
+.cta-btns{display:flex;gap:12px;flex-shrink:0;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 28px;border-radius:999px;font-weight:800;font-size:.92rem;border:2px solid transparent;transition:all .2s;white-space:nowrap}
+.btn-gold{background:var(--gold);color:var(--green)}
+.btn-gold:hover{background:var(--gold-2);transform:translateY(-2px)}
+.btn-outline-white{border-color:rgba(255,255,255,.5);color:#fff}
+.btn-outline-white:hover{background:rgba(255,255,255,.1)}
+/* RWD */
+@media(max-width:900px){
+  .intro-grid{grid-template-columns:1fr;gap:32px}
+  .stat-row{grid-template-columns:repeat(2,1fr)}
+  .stat-box:nth-child(3)::before{display:none}
+  .purpose-grid{grid-template-columns:1fr 1fr}
+  .cta-band{flex-direction:column;padding:40px 32px;text-align:center}
+}
+@media(max-width:580px){
+  .section{padding:44px 0}
+  .purpose-grid{grid-template-columns:1fr}
+  .cta-band{padding:32px 24px;border-radius:20px}
+  .cta-btns{width:100%}.btn{width:100%;justify-content:center}
+}
+</style>
 </head>
 <body>
-  <div class="topbar"><div class="container topbar-inner"><span>彰化縣米穀商業同業公會 官方網站</span><span>電話：04-7222528｜辦公時間：週一至週五 09:00-17:00</span></div></div>
-  <header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img class="brand-logo" src="./assets/images/logo-official.jpg" alt="公會標誌"><div class="brand-name">彰化縣米穀商業同業公會</div></a><button class="nav-toggle" id="navToggle" type="button"><span></span><span></span><span></span></button><nav class="main-nav" id="mainNav"><a href="index.html">首頁</a><a href="about.html" class="active">關於公會</a><a href="board.html">理監事團隊</a><a href="members.html">會員介紹</a><a href="news.html">最新消息</a><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="brand.html">彰榖米</a><a href="downloads.html">下載專區</a><a class="nav-cta" href="contact.html">聯絡公會</a></nav></div></header>
-  <main>
-    <section class="page-hero"><div class="container"><div class="breadcrumb">首頁 / 關於公會</div><h1>關於公會</h1><p>依法設立之商業同業公會，協助米穀業者凝聚共識、維護權益、促進交流，並持續推動會員服務。</p></div></section>
+<div class="topbar"><div class="container topbar-inner"><span>彰化縣米穀商業同業公會 官方網站</span><span>電話：04-7222528｜辦公時間：週一至週五 09:00-17:00</span></div></div><header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img class="brand-logo" src="./assets/images/logo-official.jpg" alt="公會標誌"><div class="brand-name">彰化縣米穀商業同業公會</div></a><button class="nav-toggle" id="navToggle" type="button"><span></span><span></span><span></span></button><nav class="main-nav" id="mainNav"><a href="index.html">首頁</a><a href="about.html" class="active">關於公會</a><a href="board.html">理監事團隊</a><a href="members.html">會員介紹</a><a href="news.html">最新消息</a><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="brand.html">彰榖米</a><a href="downloads.html">下載專區</a><a class="nav-cta" href="contact.html">聯絡公會</a></nav></div></header>
+<main>
 
-    <section class="section white"><div class="container grid-2"><div class="card"><h3>公會簡介</h3><p>彰化縣米穀商業同業公會成立於中華民國39年12月5日，為依法設立之商業同業公會，以服務轄區內米穀相關業者為宗旨，協調同業關係，促進產業健全發展。</p><p>本會持續辦理會員服務、產業交流與公益參與，協助會員掌握相關資訊，提升產業連結與服務品質。</p></div><div class="card"><h3>基本資料</h3><dl class="info-list"><div><dt>公會名稱</dt><dd>彰化縣米穀商業同業公會</dd></div><div><dt>成立日期</dt><dd>中華民國39年12月5日</dd></div><div><dt>統一編號</dt><dd>58812408</dd></div><div><dt>地址</dt><dd>500021 彰化市長壽街194號</dd></div><div><dt>電話</dt><dd>04-7222528</dd></div><div><dt>傳真</dt><dd>04-7222529</dd></div></dl></div></div></section>
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <div class="page-hero-eyebrow">ABOUT US &nbsp;·&nbsp; 關於公會</div>
+    <h1>彰化縣米穀商業同業公會</h1>
+    <p>成立逾七十五年，守護彰化在地米穀產業，整合縣內優質業者，推動農糧產業健全發展。</p>
+  </div>
+</section>
 
-    <section class="section rice"><div class="container"><div class="section-head"><span>PURPOSE</span><h2>公會宗旨</h2><p>本會以推廣國內外貿易，促進經濟發展，協調同業關係，增進共同利益，協助政府推行政令為宗旨。</p></div><div class="grid-3"><div class="stat-card"><strong>347</strong><span>會員總數</span></div><div class="stat-card"><strong>110</strong><span>甲級會員</span></div><div class="stat-card"><strong>237</strong><span>乙級會員</span></div></div></div></section>
+<!-- 公會簡介 -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="intro-grid">
+      <div class="intro-img">
+        <img src="圖庫/彰榖米-圖片.png" alt="彰榖米品牌—濁水溪稻田景觀">
+      </div>
+      <div class="intro-copy">
+        <div class="sec-head">
+          <div class="sec-label">INTRODUCTION</div>
+          <h2>公會簡介</h2>
+          <div class="sec-divider"></div>
+        </div>
+        <p>彰化縣米穀商業同業公會創立於民國 39 年，係依據商業團體法組織而成的法定工商團體，以服務縣內米穀業者、維護同業合法權益、推動產業健全發展為宗旨。</p>
+        <p>公會下轄甲級會員（碾米業者）110 家、乙級會員（米穀販售業者）237 家，合計 347 家，是彰化縣農糧產業中規模最完整的行業公會之一。</p>
+        <p>近年來積極推動「彰榖米」自有品牌，整合在地優質米穀資源，並跨足米穀粉烘焙教育推廣，為在地稻米產業開創多元發展空間。現為第 29 屆，持續致力於服務會員、促進業界合作、提升彰化米穀的品牌能見度。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="section white"><div class="container"><div class="section-head"><span>CHARTER TASKS</span><h2>公會章程任務</h2><p>依公會章程第五條，本會任務涵蓋米穀商業調查研究、國際貿易推廣、政府法令協助、同業糾紛調處、技能訓練、會員服務、公益參與及會員合法權益維護等事項。</p></div><ol class="task-list"><li>國內外米穀商業之調查、統計及研究發展事項。</li><li>國際貿易之聯繫、介紹、推廣事業。</li><li>政府經濟政策與商業法令之協助推行與研究、建議事項。</li><li>同業糾紛之調處事項。</li><li>同業員工技能訓練及業務講習之舉辦事項。</li><li>會員商品之廣告展覽事項。</li><li>會員委託證照之申請、變更、換領及其他服務事項。</li><li>會員公益事業之辦理事項。</li><li>會員合法權益之維護事項。</li><li>接受機關、團體之委託服務事項。</li><li>社會運動之參加事項。</li><li>依其他法令規定辦理事項。</li></ol></div></section>
-  
-  <section class="section white"><div class="container"><div class="section-head"><span>ORGANIZATION</span><h2>組織架構</h2></div><div class="org-elegant"><div class="org-node-line"><div class="org-node primary">會員大會</div><div class="org-two"><div class="org-node gold">理事會</div><div class="org-node gold">監事會</div></div><div class="org-node">理事長</div><div class="org-node">總幹事</div><div class="org-five"><div class="org-node">人才培訓委員</div><div class="org-node">專案計畫委員會</div><div class="org-node">會員福利委員會</div><div class="org-node">公共關係委員會</div><div class="org-node">會員發展委員會</div></div></div></div></div></section>
+<!-- 數字一覽 -->
+<section class="section section-rice">
+  <div class="container">
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-n">347</div>
+        <div class="stat-l">會員總數</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n">110</div>
+        <div class="stat-l">甲級會員（碾米業）</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n">237</div>
+        <div class="stat-l">乙級會員（販售業）</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-n">75+</div>
+        <div class="stat-l">服務年資</div>
+        <div class="stat-sub">成立於民國 39 年</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    
-  <section class="section rice"><div class="container"><div class="section-head"><span>COMMITTEES</span><h2>各委員會主委與工作執掌</h2><p>依會務推動需求設置各委員會，分工推動教育訓練、專案計畫、公共關係、會員福利與會員發展。</p></div><div class="committee-grid"><article class="committee-card"><div class="tag">人才培訓委員</div><h3>教育訓練與 TTQS 推動</h3><div class="committee-people"><span><b>主委：</b>陳宗佑</span><span><b>副主委：</b>張維允</span></div><p>負責規劃及辦理教育訓練課程、推動 TTQS 制度、培育講師及提升會員專業能力。</p></article><article class="committee-card"><div class="tag">專案計畫委員會</div><h3>政府專案與資源整合</h3><div class="committee-people"><span><b>主委：</b>張維允</span><span><b>副主委：</b>沈秉逸</span></div><p>負責規劃、撰寫及執行政府與相關專案，並整合資源推動業務發展。</p></article><article class="committee-card"><div class="tag">公共關係委員會</div><h3>品牌形象與對外聯繫</h3><div class="committee-people"><span><b>主委：</b>陳建達</span><span><b>副主委：</b>連姿瑄</span></div><p>負責對外聯繫、品牌形象及行銷宣傳。</p></article><article class="committee-card"><div class="tag">會員福利委員會</div><h3>會員關懷與福利服務</h3><div class="committee-people"><span><b>主委：</b>黃哲偉</span><span><b>副主委：</b>周明哲</span></div><p>負責規劃會員福利措施及關懷服務，提升會員滿意度與凝聚力。</p></article><article class="committee-card"><div class="tag">會員發展委員會</div><h3>會員招募與組織發展</h3><div class="committee-people"><span><b>主委：</b>蘇建彰</span><span><b>副主委：</b>沈昇翰</span></div><p>負責會員招募、聯繫與經營，強化會員參與及組織發展。</p></article></div></div></section>
+<!-- 組織宗旨 -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-label">MISSION &amp; PURPOSE</div>
+      <h2>組織宗旨</h2>
+      <p>本公會依法組織，以服務會員、推動產業健全發展、維護同業合法權益為核心使命。</p>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="purpose-grid">
+      <div class="purpose-card">
+        <div class="purpose-icon">維</div>
+        <h3>維護同業權益</h3>
+        <p>代表縣內米穀業者與政府機關溝通協調，傳達政策資訊，維護業者合法經營權益，確保同業在公平環境下競爭發展。</p>
+      </div>
+      <div class="purpose-card">
+        <div class="purpose-icon">推</div>
+        <h3>推動產業發展</h3>
+        <p>整合縣內米穀資源，推動品質認證與標準化管理，以「彰榖米」品牌對外行銷，提升彰化在地稻米的市場競爭力。</p>
+      </div>
+      <div class="purpose-card">
+        <div class="purpose-icon">訓</div>
+        <h3>教育訓練提升</h3>
+        <p>持續規劃稅務、管理、食安等各類專業訓練課程，協助會員強化經營能力，跟上產業趨勢與法規要求。</p>
+      </div>
+      <div class="purpose-card">
+        <div class="purpose-icon">品</div>
+        <h3>品牌推廣行銷</h3>
+        <p>積極推廣「彰榖米」自有品牌，舉辦食農教育活動、米穀粉烘焙推廣，讓在地好米走向更多消費市場。</p>
+      </div>
+      <div class="purpose-card">
+        <div class="purpose-icon">聯</div>
+        <h3>業界交流合作</h3>
+        <p>促進縣內米穀業者間的交流合作，凝聚產業共識，共同應對市場挑戰，推動彰化農糧產業永續發展。</p>
+      </div>
+      <div class="purpose-card">
+        <div class="purpose-icon">服</div>
+        <h3>會員綜合服務</h3>
+        <p>提供入會協助、公告通知、議決事項傳達等行政服務，確保每位會員都能及時獲得公會資訊與資源支援。</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    
-  </main>
-  <footer class="site-footer"><div class="container footer-grid"><div><div class="footer-brand"><img src="./assets/images/logo-transparent.png" alt="彰化縣米穀商業同業公會標誌"><strong>彰化縣米穀商業同業公會</strong></div><p>📍 500021 彰化市長壽街194號<br>📞 04-7222528　｜　📠 04-7222529<br>📧 riceass01@gmail.com</p></div><div><h3>關於公會</h3><a href="about.html">公會簡介</a><a href="board.html">理監事團隊</a></div><div><h3>服務項目</h3><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="news.html">活動花絮</a><a href="brand.html">彰榖米</a></div><div><h3>公告聯絡</h3><a href="news.html">最新消息</a><a href="contact.html">聯絡我們</a><a href="contact.html">申請入會</a></div></div><div class="footer-bottom"><div class="container">© 2026 彰化縣米穀商業同業公會　版權所有</div></div></footer>
-  <script src="./assets/js/site.js"></script>
+<!-- 成立沿革 -->
+<section class="section section-rice">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start">
+      <div>
+        <div class="sec-head">
+          <div class="sec-label">HISTORY</div>
+          <h2>成立沿革</h2>
+          <p>從戰後重建到現代化農糧產業，彰化縣米穀商業同業公會走過七十五年歲月。</p>
+          <div class="sec-divider"></div>
+        </div>
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">民國 39 年（1950）</div>
+            <h3>公會成立</h3>
+            <p>依據商業團體法正式成立，整合彰化縣內米穀業者，建立同業組織基礎。</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">民國 70～80 年代</div>
+            <h3>穩健成長期</h3>
+            <p>隨台灣經濟起飛，縣內碾米業者逐步擴大，公會會員數持續增加，服務功能日趨完善。</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">民國 90 年代</div>
+            <h3>組織深化與教育推廣</h3>
+            <p>開始規劃系統性教育訓練課程，協助業者強化專業知能，並積極參與政府農業政策推廣。</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">民國 110 年後</div>
+            <h3>彰榖米品牌啟動</h3>
+            <p>推動「彰榖米」自有品牌，結合食農教育、米穀粉烘焙推廣，開創在地稻米多元應用新局。</p>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-year">民國 114～115 年（現任第29屆）</div>
+            <h3>積極推動 TTQS 與業界培訓</h3>
+            <p>引進 TTQS 訓練品質管理系統，提升公會教育訓練品質，並舉辦農產品業稅務實務等專業課程。</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <img src="圖庫/圖-10.png" alt="彰化稻田產地景觀" style="border-radius:22px;box-shadow:var(--shadow);width:100%">
+        <div style="margin-top:24px;background:var(--white);border-radius:16px;padding:24px;border:1px solid var(--line)">
+          <div style="font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">基本資料</div>
+          <table style="width:100%;border-collapse:collapse;font-size:.88rem">
+            <tr><td style="padding:8px 0;color:var(--muted);border-bottom:1px solid var(--line);width:40%">全名</td><td style="padding:8px 0;border-bottom:1px solid var(--line);font-weight:600">彰化縣米穀商業同業公會</td></tr>
+            <tr><td style="padding:8px 0;color:var(--muted);border-bottom:1px solid var(--line)">統一編號</td><td style="padding:8px 0;border-bottom:1px solid var(--line);font-weight:600">58812408</td></tr>
+            <tr><td style="padding:8px 0;color:var(--muted);border-bottom:1px solid var(--line)">現任屆別</td><td style="padding:8px 0;border-bottom:1px solid var(--line);font-weight:600">第 29 屆</td></tr>
+            <tr><td style="padding:8px 0;color:var(--muted);border-bottom:1px solid var(--line)">成立年份</td><td style="padding:8px 0;border-bottom:1px solid var(--line);font-weight:600">民國 39 年（1950 年）</td></tr>
+            <tr><td style="padding:8px 0;color:var(--muted);border-bottom:1px solid var(--line)">會員總數</td><td style="padding:8px 0;border-bottom:1px solid var(--line);font-weight:600">347 家</td></tr>
+            <tr><td style="padding:8px 0;color:var(--muted)">聯絡地址</td><td style="padding:8px 0;font-weight:600">500021 彰化市長壽街 194 號</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="cta-band">
+      <div>
+        <h2>想進一步認識公會？</h2>
+        <p>歡迎下載公會章程、聯絡秘書處，或查閱理監事團隊與會員服務資訊。</p>
+      </div>
+      <div class="cta-btns">
+        <a class="btn btn-gold" href="contact.html">聯絡公會</a>
+        <a class="btn btn-outline-white" href="downloads.html">下載章程</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer class="site-footer"><div class="container footer-grid"><div><div class="footer-brand"><img src="./assets/images/logo-transparent.png" alt="彰化縣米穀商業同業公會標誌"><strong>彰化縣米穀商業同業公會</strong></div><p>📍 500021 彰化市長壽街194號<br>📞 04-7222528　｜　📠 04-7222529<br>📧 riceass01@gmail.com</p></div><div><h3>關於公會</h3><a href="about.html">公會簡介</a><a href="board.html">理監事團隊</a></div><div><h3>服務項目</h3><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="news.html">活動花絮</a><a href="brand.html">彰榖米</a></div><div><h3>公告聯絡</h3><a href="news.html">最新消息</a><a href="contact.html">聯絡我們</a><a href="contact.html">申請入會</a></div></div><div class="footer-bottom"><div class="container">© 2026 彰化縣米穀商業同業公會　版權所有</div></div></footer>
+<script src="./assets/js/site.js"></script>
 </body>
 </html>
