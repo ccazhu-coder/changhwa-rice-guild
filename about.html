@@ -76,6 +76,35 @@
   .cta-band{padding:32px 24px;border-radius:20px}
   .cta-btns{width:100%}.btn{width:100%;justify-content:center}
 }
+
+/* ORG CHART */
+.org-elegant{max-width:1060px;margin:0 auto}
+.org-node-line{display:grid;gap:14px;text-align:center}
+.org-node{background:#fff;border:1px solid #e6ddc9;border-radius:18px;padding:18px 20px;color:#183f21;font-weight:900;box-shadow:0 14px 36px rgba(20,45,24,.07)}
+.org-node.primary{background:linear-gradient(135deg,#183f21,#24592f);color:#fff;border:none;font-size:20px}
+.org-node.gold{background:#fff8e5;border-color:#d6b95a;color:#765c11}
+.org-two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.org-five{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+/* COMMITTEES */
+.committee-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px}
+.committee-card{background:#fff;border:1px solid #e6ddc9;border-radius:24px;padding:24px;box-shadow:0 14px 36px rgba(20,45,24,.07);position:relative;overflow:hidden}
+.committee-card:before{content:'';position:absolute;right:-38px;top:-38px;width:112px;height:112px;border-radius:50%;background:rgba(198,164,55,.13)}
+.committee-card .tag{display:inline-flex;background:#f7f1e3;color:#7d6316;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:900;margin-bottom:12px}
+.committee-card h3{font-family:var(--serif);font-size:22px;color:#183f21;margin-bottom:14px;line-height:1.35;position:relative;z-index:1}
+.committee-people{display:grid;gap:6px;margin-bottom:12px;color:#444;position:relative;z-index:1}
+.committee-people b{color:#183f21}
+.committee-card p{color:#666;line-height:1.8;font-size:14px;margin:0;position:relative;z-index:1}
+/* ORG/COMMITTEE RWD */
+.section-org{padding:64px 0;background:#fff}
+.section-com{padding:64px 0;background:var(--rice,#f7f1e3)}
+.org-sec-head{margin-bottom:32px}
+.org-sec-head h2{font-family:var(--serif,'Noto Serif TC',serif);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:#183f21;line-height:1.15;margin-bottom:10px}
+.org-sec-label{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#c6a437;margin-bottom:10px}
+.org-sec-desc{font-size:1rem;color:#61716b;max-width:680px;line-height:1.8}
+.org-sec-divider{width:48px;height:3px;background:#c6a437;border-radius:2px;margin-top:14px}
+@media(max-width:1180px){.committee-grid,.org-five{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.committee-grid,.org-five,.org-two{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -239,6 +268,79 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- 組織架構 -->
+<section class="section-org">
+  <div class="container">
+    <div class="org-sec-head">
+      <div class="org-sec-label">ORGANIZATION</div>
+      <h2>組織架構</h2>
+      <div class="org-sec-divider"></div>
+    </div>
+    <div class="org-elegant">
+      <div class="org-node-line">
+        <div class="org-node primary">會員大會</div>
+        <div class="org-two">
+          <div class="org-node gold">理事會</div>
+          <div class="org-node gold">監事會</div>
+        </div>
+        <div class="org-node">理事長</div>
+        <div class="org-node">總幹事</div>
+        <div class="org-five">
+          <div class="org-node">人才培訓委員</div>
+          <div class="org-node">專案計畫委員會</div>
+          <div class="org-node">會員福利委員會</div>
+          <div class="org-node">公共關係委員會</div>
+          <div class="org-node">會員發展委員會</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 各委員會 -->
+<section class="section-com">
+  <div class="container">
+    <div class="org-sec-head">
+      <div class="org-sec-label">COMMITTEES</div>
+      <h2>各委員會主委與工作執掌</h2>
+      <p class="org-sec-desc">依會務推動需求設置各委員會，分工推動教育訓練、專案計畫、公共關係、會員福利與會員發展。</p>
+      <div class="org-sec-divider"></div>
+    </div>
+    <div class="committee-grid">
+      <article class="committee-card">
+        <div class="tag">人才培訓委員</div>
+        <h3>教育訓練與 TTQS 推動</h3>
+        <div class="committee-people"><span><b>主委：</b>陳宗佑</span><span><b>副主委：</b>張維允</span></div>
+        <p>負責規劃及辦理教育訓練課程、推動 TTQS 制度、培育講師及提升會員專業能力。</p>
+      </article>
+      <article class="committee-card">
+        <div class="tag">專案計畫委員會</div>
+        <h3>政府專案與資源整合</h3>
+        <div class="committee-people"><span><b>主委：</b>張維允</span><span><b>副主委：</b>沈秉逸</span></div>
+        <p>負責規劃、撰寫及執行政府與相關專案，並整合資源推動業務發展。</p>
+      </article>
+      <article class="committee-card">
+        <div class="tag">公共關係委員會</div>
+        <h3>品牌形象與對外聯繫</h3>
+        <div class="committee-people"><span><b>主委：</b>陳建達</span><span><b>副主委：</b>連姿瑄</span></div>
+        <p>負責對外聯繫、品牌形象及行銷宣傳。</p>
+      </article>
+      <article class="committee-card">
+        <div class="tag">會員福利委員會</div>
+        <h3>會員關懷與福利服務</h3>
+        <div class="committee-people"><span><b>主委：</b>黃哲偉</span><span><b>副主委：</b>周明哲</span></div>
+        <p>負責規劃會員福利措施及關懷服務，提升會員滿意度與凝聚力。</p>
+      </article>
+      <article class="committee-card">
+        <div class="tag">會員發展委員會</div>
+        <h3>會員招募與組織發展</h3>
+        <div class="committee-people"><span><b>主委：</b>蘇建彰</span><span><b>副主委：</b>沈昇翰</span></div>
+        <p>負責會員招募、聯繫與經營，強化會員參與及組織發展。</p>
+      </article>
     </div>
   </div>
 </section>
