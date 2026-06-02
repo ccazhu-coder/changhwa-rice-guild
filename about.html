@@ -105,6 +105,26 @@
 @media(max-width:1180px){.committee-grid,.org-five{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:900px){.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:620px){.committee-grid,.org-five,.org-two{grid-template-columns:1fr}}
+
+/* CHAIRMAN LIST */
+.chair-section{padding:64px 0;background:#fff}
+.chair-table-wrap{border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(20,45,24,.08);border:1px solid #e6ddc9}
+.chair-table{width:100%;border-collapse:collapse;font-size:.9rem}
+.chair-table thead th{background:linear-gradient(135deg,#183f21,#24592f);color:#fff;padding:14px 20px;text-align:left;font-size:.76rem;font-weight:700;letter-spacing:.08em}
+.chair-table tbody tr{border-bottom:1px solid #e6ddc9;transition:background .15s}
+.chair-table tbody tr:last-child{border-bottom:none}
+.chair-table tbody tr:hover{background:#fbf8ef}
+.chair-table tbody tr.current-row{background:linear-gradient(90deg,rgba(198,164,55,.12),transparent)}
+.chair-table td{padding:12px 20px;color:#202020;vertical-align:middle}
+.chair-table td:first-child{font-weight:800;color:#183f21;white-space:nowrap}
+.chair-table td:nth-child(2){color:#61716b;font-size:.84rem;white-space:nowrap}
+.chair-table td:nth-child(3){font-weight:700;color:#183f21}
+.chair-table td:nth-child(4){font-size:.82rem;color:#61716b}
+.chair-badge{display:inline-block;background:#c6a437;color:#183f21;font-size:.62rem;font-weight:900;padding:2px 8px;border-radius:20px;margin-left:8px;letter-spacing:.04em;vertical-align:middle}
+@media(max-width:680px){
+  .chair-table td:nth-child(4){display:none}
+  .chair-table th:nth-child(4){display:none}
+}
 </style>
 </head>
 <body>
@@ -268,6 +288,50 @@
           </table>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- 歷屆理事長 -->
+<section class="chair-section">
+  <div class="container">
+    <div class="org-sec-head">
+      <div class="org-sec-label">PAST CHAIRPERSONS</div>
+      <h2>歷屆理事長名單</h2>
+      <p class="org-sec-desc">彰化縣米穀商業同業公會自民國39年成立至今，共歷29屆理事長，帶領公會持續服務縣內米穀業者。</p>
+      <div class="org-sec-divider"></div>
+    </div>
+    <div class="chair-table-wrap">
+      <table class="chair-table">
+        <thead>
+          <tr>
+            <th>屆別</th>
+            <th>任期</th>
+            <th>理事長</th>
+            <th>所屬業者</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>第1屆</td><td>民國39～41年</td><td>陳反</td><td></td></tr>
+          <tr><td>第2屆</td><td>民國41～43年</td><td>李俊富</td><td></td></tr>
+          <tr><td>第3、4屆</td><td>民國43～47年</td><td>洪金發</td><td></td></tr>
+          <tr><td>第5、6屆</td><td>民國47～51年</td><td>陳煥章</td><td></td></tr>
+          <tr><td>第7屆</td><td>民國51～53年</td><td>邱思仁</td><td></td></tr>
+          <tr><td>第8屆</td><td>民國53～55年</td><td>洪江林</td><td></td></tr>
+          <tr><td>第9、10屆</td><td>民國55～59年</td><td>許志錕</td><td></td></tr>
+          <tr><td>第11、12屆</td><td>民國59～65年</td><td>陳祥雲</td><td></td></tr>
+          <tr><td>第13、14屆</td><td>民國65～71年</td><td>陳俊雄</td><td>壽米屋企業有限公司</td></tr>
+          <tr><td>第15、16屆</td><td>民國71～77年</td><td>許志錕</td><td></td></tr>
+          <tr><td>第17、18屆</td><td>民國77～83年</td><td>鄭懋樵</td><td></td></tr>
+          <tr><td>第19、20屆</td><td>民國83～89年</td><td>陳德風</td><td>陸和碾米工廠</td></tr>
+          <tr><td>第21、22屆</td><td>民國89～95年</td><td>柯騰雄</td><td>順發產業工廠</td></tr>
+          <tr><td>第23、24屆</td><td>民國95～101年</td><td>巫有凱</td><td>億興碾米工廠</td></tr>
+          <tr><td>第25、26屆</td><td>民國101～107年</td><td>陳樹林</td><td>宏達裕碾米工廠</td></tr>
+          <tr><td>第27、28屆</td><td>民國107～113年</td><td>沈踴志</td><td>金墩糧坊（股）公司</td></tr>
+          <tr class="current-row"><td>第29屆 <span class="chair-badge">現任</span></td><td>民國113～116年</td><td>蘇建彰</td><td>大義碾米工廠</td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
