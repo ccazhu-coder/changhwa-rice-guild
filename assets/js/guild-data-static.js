@@ -35,6 +35,23 @@ window.GUILD_STATIC_DATA = {
       "createdAt": "2026-05-29",
       "updatedAt": "2026-05-29",
       "note": ""
+    },
+    {
+      "id": "NEWS-0003",
+      "date": "2025-04-01",
+      "rocDate": "114年",
+      "category": "公益活動",
+      "title": "花蓮震災白米援助行動",
+      "summary": "本公會號召縣內會員共同響應花蓮震災援助行動，捐贈大量白米支援受災民眾，展現米穀業者守望相助的精神與社會責任。",
+      "location": "",
+      "registerUrl": "",
+      "status": "活動結束",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 3,
+      "createdAt": "2026-06-02",
+      "updatedAt": "2026-06-02",
+      "note": ""
     }
   ],
   "gallery": [
