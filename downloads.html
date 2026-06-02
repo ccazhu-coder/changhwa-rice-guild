@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>下載專區｜彰化縣米穀商業同業公會</title><link rel="stylesheet" href="./assets/css/style.css"><link rel="stylesheet" href="./assets/css/formal.css"><style>
+<!DOCTYPE html><html lang="zh-Hant-TW"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>下載專區｜彰化縣米穀商業同業公會</title>
+<style>
 :root{
   --green:#183f21;--green-2:#24592f;--green-3:#1d4a3b;
   --gold:#c6a437;--gold-2:#d6b95a;--gold-3:#e0c783;
@@ -13,40 +14,97 @@ body{font-family:var(--font);color:var(--ink);background:var(--rice-2);line-heig
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 .container{width:min(var(--max),calc(100% - 48px));margin:0 auto}
-/* PAGE HERO */
-.page-hero{background:linear-gradient(120deg,var(--green) 0%,var(--green-3) 100%);padding:64px 0 52px;color:#fff;position:relative;overflow:hidden}
-.page-hero::after{content:'';position:absolute;right:-120px;top:-120px;width:480px;height:480px;border-radius:50%;background:rgba(198,164,55,.08);pointer-events:none}
-.breadcrumb{font-size:.78rem;color:rgba(255,255,255,.6);margin-bottom:12px}
-.page-hero h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:900;margin-bottom:14px;line-height:1.15}
-.page-hero p{font-size:1rem;opacity:.8;max-width:620px;line-height:1.8}
-/* SECTIONS */
 .section{padding:64px 0}
-.section.white{background:var(--white)}
-.section.rice{background:var(--rice)}
-.section-head{margin-bottom:32px}
-.section-head span{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
-.section-head h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:900;color:var(--green);line-height:1.15}
-/* DOWNLOAD LIST */
-.download-list{display:grid;gap:16px}
-.download-item{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:20px;box-shadow:0 4px 14px rgba(20,45,24,.05);transition:box-shadow .18s,transform .18s}
-.download-item:hover{box-shadow:0 8px 28px rgba(20,45,24,.1);transform:translateY(-2px)}
-.download-item div h3{font-size:.98rem;font-weight:700;color:var(--green);margin-bottom:4px}
-.download-item div p{font-size:.82rem;color:var(--muted);line-height:1.6}
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 22px;border-radius:999px;font-weight:800;font-size:.86rem;border:2px solid transparent;transition:all .2s;white-space:nowrap;text-decoration:none;flex-shrink:0}
-.btn-primary{background:var(--gold);color:var(--green)}
-.btn-primary:hover{background:var(--gold-2);transform:translateY(-2px)}
-.btn-outline{border-color:var(--green);color:var(--green)}
-.btn-outline:hover{background:var(--green);color:#fff}
-/* CTA BAND */
-.cta-band{background:linear-gradient(120deg,var(--green) 0%,var(--green-3) 100%);border-radius:28px;padding:48px 40px;display:flex;align-items:center;justify-content:space-between;gap:32px;box-shadow:var(--shadow);color:#fff;overflow:hidden;position:relative}
-.cta-band::before{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;border-radius:50%;background:rgba(198,164,55,.12);pointer-events:none}
-.cta-band h2{font-family:var(--serif);font-size:clamp(1.4rem,2.5vw,1.9rem);font-weight:900;margin-bottom:8px}
-.cta-band p{font-size:.92rem;opacity:.8}
-@media(max-width:768px){
-  .download-item{flex-wrap:wrap}
-  .btn{width:100%;justify-content:center}
-  .cta-band{flex-direction:column;padding:36px 28px;text-align:center}
-}
+.section-alt{background:var(--white)}
+.section-rice{background:var(--rice)}
+.sec-head{margin-bottom:40px}
+.sec-label{font-size:.72rem;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.sec-head h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:900;color:var(--green);line-height:1.15;margin-bottom:10px}
+.sec-divider{width:48px;height:3px;background:var(--gold);border-radius:2px;margin-top:14px}
+.dl-category{margin-bottom:48px}
+.dl-cat-title{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.dl-cat-icon{width:40px;height:40px;background:var(--green);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:.95rem;font-weight:900;color:var(--gold);flex-shrink:0}
+.dl-cat-title h3{font-family:var(--serif);font-size:1.1rem;font-weight:900;color:var(--green)}
+.dl-list{display:grid;gap:12px}
+.dl-item{background:var(--white);border:1px solid var(--line);border-radius:14px;padding:16px 20px;display:flex;align-items:center;gap:16px;transition:box-shadow .18s,transform .18s;text-decoration:none}
+.dl-item:hover{box-shadow:0 8px 28px rgba(20,45,24,.1);transform:translateY(-2px)}
+.dl-file-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:900;letter-spacing:.04em;flex-shrink:0}
+.dl-file-icon.pdf{background:#fef0f0;color:#c0392b}
+.dl-file-icon.word{background:#eef3ff;color:#2b579a}
+.dl-item-info{flex:1;min-width:0}
+.dl-item-name{font-size:.95rem;font-weight:700;color:var(--green);margin-bottom:2px}
+.dl-item-desc{font-size:.78rem;color:var(--muted)}
+.dl-btn{display:inline-flex;align-items:center;gap:6px;background:var(--green);color:#fff;padding:8px 16px;border-radius:999px;font-size:.78rem;font-weight:700;flex-shrink:0;transition:background .18s}
+.dl-item:hover .dl-btn{background:var(--green-2)}
+.dl-btn-gold{background:var(--gold);color:var(--green)}
+.dl-item:hover .dl-btn-gold{background:var(--gold-2)}
+.notice-box{background:rgba(198,164,55,.1);border:1px solid rgba(198,164,55,.3);border-radius:14px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;margin-top:32px}
+.notice-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.notice-box p{font-size:.84rem;color:var(--ink);line-height:1.7}
+.notice-box strong{color:var(--green)}
+@media(max-width:900px){.dl-item{flex-wrap:wrap}.dl-btn{width:100%;justify-content:center}}
 </style>
-</head><body><div class="topbar"><div class="container topbar-inner"><span>彰化縣米穀商業同業公會 官方網站</span><span>電話：04-7222528｜辦公時間：週一至週五 09:00-17:00</span></div></div><header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img class="brand-logo" src="./assets/images/logo-transparent.png" alt="公會標誌"><div class="brand-name">彰化縣米穀商業同業公會</div></a><button class="nav-toggle" id="navToggle" type="button"><span></span><span></span><span></span></button><nav class="main-nav" id="mainNav"><a href="index.html">首頁</a><a href="about.html">關於公會</a><a href="board.html">理監事團隊</a><a href="members.html">會員介紹</a><a href="news.html">最新消息</a><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="brand.html">彰榖米品牌</a><a href="downloads.html" class="active">下載專區</a><a class="nav-cta" href="contact.html">聯絡公會</a></nav></div></header><main><section class="page-hero"><div class="container"><div class="breadcrumb">首頁 / 下載專區</div><h1>下載專區</h1><p>公會相關文件集中於此，包含入會申請書、公會章程、理監事名單與會員名冊，歡迎直接下載。</p></div></section><section class="section white"><div class="container"><div class="section-head"><span>FORMS</span><h2>申請書表</h2></div><div class="download-list"><article class="download-item"><div><h3>會員入會申請書</h3><p>供欲申請加入公會之米穀相關業者下載填寫，填妥後送交秘書處審查。</p></div><a class="btn btn-primary" href="./files/會員入會申請書.docx" download>下載（WORD）</a></article></div></div></section><section class="section rice"><div class="container"><div class="section-head"><span>CHARTER</span><h2>規章文件</h2></div><div class="download-list"><article class="download-item"><div><h3>彰化縣米穀商業同業公會章程</h3><p>公會組織章程全文，規範組織架構、會員資格與選舉規定等事項。</p></div><a class="btn btn-outline" href="./files/彰化縣米穀商業同業公會章程.docx" download>下載（WORD）</a></article></div></div></section><section class="section rice"><div class="container"><div class="cta-band"><div><h2>找不到您需要的文件？</h2><p>請聯繫公會辦公室，秘書處將協助提供所需資料。</p></div><a class="btn btn-primary" href="contact.html">聯絡公會</a></div></div></section></main><footer class="site-footer"><div class="container footer-grid"><div><div class="footer-brand"><img src="./assets/images/logo-transparent.png" alt="彰化縣米穀商業同業公會標誌"><strong>彰化縣米穀商業同業公會</strong></div><p>📍 500021 彰化市長壽街194號<br>📞 04-7222528　｜　📠 04-7222529<br>📧 riceass01@gmail.com</p></div><div><h3>關於公會</h3><a href="about.html">公會簡介</a><a href="board.html">理監事團隊</a></div><div><h3>服務項目</h3><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="news.html">活動花絮</a><a href="brand.html">彰榖米</a></div><div><h3>公告聯絡</h3><a href="news.html">最新消息</a><a href="contact.html">聯絡我們</a><a href="contact.html">申請入會</a></div></div><div class="footer-bottom"><div class="container">© 2026 彰化縣米穀商業同業公會　版權所有</div></div></footer><script src="./assets/js/site.js"></script></body></html>
+<link rel="stylesheet" href="./assets/css/style.css"><link rel="stylesheet" href="./assets/css/formal.css">
+</head>
+<body>
+<div class="topbar"><div class="container topbar-inner"><span>彰化縣米穀商業同業公會 官方網站</span><span>電話：04-7222528｜辦公時間：週一至週五 09:00-17:00</span></div></div><header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img class="brand-logo" src="./assets/images/logo-transparent.png" alt="公會標誌"><div class="brand-name">彰化縣米穀商業同業公會</div></a><button class="nav-toggle" id="navToggle" type="button"><span></span><span></span><span></span></button><nav class="main-nav" id="mainNav"><a href="index.html">首頁</a><a href="about.html">關於公會</a><a href="board.html">理監事團隊</a><a href="members.html">會員介紹</a><a href="news.html">最新消息</a><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="brand.html">彰榖米</a><a href="downloads.html" class="active">下載專區</a><a class="nav-cta" href="contact.html">聯絡公會</a></nav></div></header>
+<main>
+<div style="width:100%;overflow:hidden;line-height:0"><img src="圖庫/下載專區頁面-橫幅圖片.png" alt="下載專區—彰化縣米穀商業同業公會" style="width:100%;height:auto;display:block"></div>
+
+<section class="section section-alt">
+  <div class="container">
+
+    <div class="dl-category">
+      <div class="dl-cat-title">
+        <div class="dl-cat-icon">規</div>
+        <h3>公會規章文件</h3>
+      </div>
+      <div class="dl-list">
+        <a class="dl-item" href="./files/彰化縣米穀商業同業公會章程.docx" download>
+          <div class="dl-file-icon word">WORD</div>
+          <div class="dl-item-info">
+            <div class="dl-item-name">彰化縣米穀商業同業公會章程</div>
+            <div class="dl-item-desc">公會組織章程全文，規範公會組織、會員資格、選舉規定等事項</div>
+          </div>
+          <div class="dl-btn dl-btn-gold">下載</div>
+        </a>
+        <a class="dl-item" href="./files/公會簡介.docx" download>
+          <div class="dl-file-icon word">WORD</div>
+          <div class="dl-item-info">
+            <div class="dl-item-name">公會簡介</div>
+            <div class="dl-item-desc">彰化縣米穀商業同業公會簡介文件，適合對外介紹使用</div>
+          </div>
+          <div class="dl-btn">下載</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="dl-category">
+      <div class="dl-cat-title">
+        <div class="dl-cat-icon">申</div>
+        <h3>申請書表</h3>
+      </div>
+      <div class="dl-list">
+        <a class="dl-item" href="./files/會員入會申請書.docx" download>
+          <div class="dl-file-icon word">WORD</div>
+          <div class="dl-item-info">
+            <div class="dl-item-name">會員入會申請書</div>
+            <div class="dl-item-desc">申請加入公會甲級或乙級會員的標準申請書，填妥後送交秘書處審查</div>
+          </div>
+          <div class="dl-btn dl-btn-gold">下載</div>
+        </a>
+      </div>
+    </div>
+
+    <div class="notice-box">
+      <div class="notice-icon">📋</div>
+      <p><strong>注意事項：</strong>以上文件為公會最新版本，如發現文件版本與實際不符，請聯絡秘書處取得最新版本。入會申請書填妥後請親送或郵寄至公會地址：<strong>500021 彰化市長壽街 194 號</strong>，或 Email 至 riceass01@gmail.com。</p>
+    </div>
+
+  </div>
+</section>
+</main>
+<footer class="site-footer"><div class="container footer-grid"><div><div class="footer-brand"><img src="./assets/images/logo-transparent.png" alt="彰化縣米穀商業同業公會標誌"><strong>彰化縣米穀商業同業公會</strong></div><p>📍 500021 彰化市長壽街194號<br>📞 04-7222528　｜　📠 04-7222529<br>📧 riceass01@gmail.com</p></div><div><h3>關於公會</h3><a href="about.html">公會簡介</a><a href="board.html">理監事團隊</a></div><div><h3>服務項目</h3><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="news.html">活動花絮</a><a href="brand.html">彰榖米</a></div><div><h3>公告聯絡</h3><a href="news.html">最新消息</a><a href="contact.html">聯絡我們</a><a href="contact.html">申請入會</a></div></div><div class="footer-bottom"><div class="container">© 2026 彰化縣米穀商業同業公會　版權所有</div></div></footer>
+<script src="./assets/js/site.js"></script>
+</body>
+</html>
