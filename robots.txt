@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /admin.html
 
-Sitemap: https://ccazhu-coder.github.io/changhwa-rice-guild/sitemap.xml
+Sitemap: https://rice.net.tw/sitemap.xml
