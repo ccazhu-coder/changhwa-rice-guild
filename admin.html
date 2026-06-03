@@ -250,9 +250,9 @@ a{color:inherit;text-decoration:none}
 
       <!-- ── 活動花絮 ── -->
       <div class="tab-panel" id="tab-gallery">
-        <div class="panel-title">🖼️ 活動花絮管理 <small>新增活動相簿（使用 Google Drive 資料夾）</small></div>
+        <div class="panel-title">🖼️ 活動花絮管理 <small>上傳照片直接存入網站，快速載入不依賴 Drive</small></div>
         <div class="card">
-          <h3>➕ 新增活動相簿</h3>
+          <h3>➕ 新增活動相簿（直接上傳照片）</h3>
           <div class="field-row">
             <div class="field">
               <label>活動日期（民國）</label>
@@ -278,20 +278,28 @@ a{color:inherit;text-decoration:none}
             <textarea id="gal-summary" placeholder="活動簡短說明"></textarea>
           </div>
           <div class="field">
-            <label>Google Drive 相簿資料夾網址</label>
-            <input type="url" id="gal-folder" placeholder="https://drive.google.com/drive/folders/xxxxx?usp=sharing">
-            <div class="field-hint">把 Google Drive 資料夾設為「任何人都可以檢視」，再貼入連結</div>
-          </div>
-          <div class="field">
-            <label>封面圖片網址（Google Drive 分享連結）</label>
-            <input type="url" id="gal-cover" placeholder="https://drive.google.com/file/d/xxxxx/view?usp=sharing">
-            <div class="field-hint">從 Drive 選一張代表照片，右鍵 → 取得連結 → 貼入此處</div>
-          </div>
-          <div class="field">
             <label>活動成果說明（選填）</label>
             <input type="text" id="gal-result" placeholder="例：學員參與踴躍，活動圓滿完成">
           </div>
-          <button class="btn btn-primary" onclick="addGallery()">✅ 新增活動相簿</button>
+          <div class="field">
+            <label>📸 上傳活動照片（可多選，最多 20 張，第一張為封面）</label>
+            <div class="upload-area" id="gal-drop" onclick="document.getElementById('gal-photos').click()">
+              <div style="font-size:2rem">🖼️</div>
+              <p>點擊選擇多張照片<br><small>JPG / PNG，建議每張 2MB 以內</small></p>
+              <input type="file" id="gal-photos" accept="image/*" multiple onchange="previewGalleryPhotos(this)">
+            </div>
+            <div id="gal-photo-preview" style="display:none;margin-top:10px">
+              <div id="gal-photo-thumbs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px"></div>
+              <div id="gal-photo-count" style="font-size:.8rem;color:var(--green);font-weight:700"></div>
+            </div>
+          </div>
+          <div id="gal-upload-progress" style="display:none;margin-bottom:12px">
+            <div style="background:#f0f0f0;border-radius:8px;height:8px;overflow:hidden">
+              <div id="gal-progress-bar" style="background:var(--green);height:100%;width:0;transition:width .3s"></div>
+            </div>
+            <div id="gal-progress-text" style="font-size:.78rem;color:var(--muted);margin-top:4px">準備上傳...</div>
+          </div>
+          <button class="btn btn-primary" onclick="addGallery()">📤 上傳照片 &amp; 建立相簿</button>
         </div>
         <div class="card">
           <h3>📋 現有活動相簿</h3>
@@ -535,70 +543,136 @@ async function addAnnounce() {
 }
 
 // ══ GALLERY ══
-function driveFileId(url) {
-  const m = url.match(/\/d\/([^/?#]+)/);
-  return m ? m[1] : '';
+let pendingGalleryPhotos = [];
+
+function previewGalleryPhotos(input) {
+  const files = Array.from(input.files).slice(0, 20);
+  pendingGalleryPhotos = files;
+  const thumbs = document.getElementById('gal-photo-thumbs');
+  thumbs.innerHTML = '';
+  files.forEach((f, i) => {
+    const url = URL.createObjectURL(f);
+    const div = document.createElement('div');
+    div.style.cssText = 'position:relative;width:72px;height:72px;border-radius:8px;overflow:hidden;border:2px solid ' + (i===0?'var(--green)':'var(--border)');
+    div.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover">${i===0?'<div style="position:absolute;bottom:0;left:0;right:0;background:var(--green);color:#fff;font-size:.58rem;text-align:center;padding:2px;font-weight:700">封面</div>':''}`;
+    thumbs.appendChild(div);
+  });
+  document.getElementById('gal-photo-preview').style.display = 'block';
+  document.getElementById('gal-photo-count').textContent = `已選 ${files.length} 張（第一張為封面）`;
 }
-function driveFolderId(url) {
-  const m = url.match(/\/folders\/([^/?#]+)/);
-  return m ? m[1] : '';
+
+function sanitizeFolderName(name) {
+  return name.replace(/[\/\\:*?"<>|]/g, '-').replace(/\s+/g, '_').substring(0, 40);
 }
 
 async function addGallery() {
-  const date = document.getElementById('gal-date').value.trim();
-  const cat  = document.getElementById('gal-cat').value;
-  const title= document.getElementById('gal-title').value.trim();
+  const date    = document.getElementById('gal-date').value.trim();
+  const cat     = document.getElementById('gal-cat').value;
+  const title   = document.getElementById('gal-title').value.trim();
   const summary = document.getElementById('gal-summary').value.trim();
-  const folderUrl = document.getElementById('gal-folder').value.trim();
-  const coverUrl  = document.getElementById('gal-cover').value.trim();
-  const result    = document.getElementById('gal-result').value.trim();
+  const result  = document.getElementById('gal-result').value.trim();
   if (!date || !title) { showStatus('日期與活動名稱為必填', true); return; }
+  if (!pendingGalleryPhotos.length) { showStatus('請選擇至少一張照片', true); return; }
 
-  const folderId = driveFolderId(folderUrl);
-  const coverId  = driveFileId(coverUrl);
+  const folderName = sanitizeFolderName(date + '_' + title);
+  const repoFolder = `圖庫/activities/${folderName}`;
+  const photos = [];
 
+  // Show progress bar
+  const progressWrap = document.getElementById('gal-upload-progress');
+  const progressBar  = document.getElementById('gal-progress-bar');
+  const progressText = document.getElementById('gal-progress-text');
+  progressWrap.style.display = 'block';
+
+  for (let i = 0; i < pendingGalleryPhotos.length; i++) {
+    const file = pendingGalleryPhotos[i];
+    const ext = file.name.split('.').pop().toLowerCase();
+    const repoName = `photo_${String(i+1).padStart(2,'0')}.${ext}`;
+    const repoPath = `${repoFolder}/${repoName}`;
+
+    progressText.textContent = `上傳第 ${i+1}/${pendingGalleryPhotos.length} 張：${file.name}`;
+    progressBar.style.width = `${Math.round((i/pendingGalleryPhotos.length)*100)}%`;
+
+    try {
+      await githubUploadFile(file, repoPath, `add: activity photo ${folderName}/${repoName}`);
+      photos.push({
+        photoId: repoPath,
+        activityId: '',
+        activityTitle: title,
+        url: `圖庫/activities/${folderName}/${repoName}`,
+        rawUrl: `圖庫/activities/${folderName}/${repoName}`,
+        caption: i === 0 ? '封面' : `照片 ${i+1}`,
+        isCover: i === 0,
+        isFeatured: i < 6,
+        sort: i + 1,
+        createdAt: new Date().toISOString().slice(0,10),
+        note: 'admin_uploaded'
+      });
+      progressBar.style.width = `${Math.round(((i+1)/pendingGalleryPhotos.length)*100)}%`;
+    } catch(e) {
+      showStatus(`第 ${i+1} 張上傳失敗：${e.message}`, true);
+      progressWrap.style.display = 'none';
+      return;
+    }
+  }
+
+  progressText.textContent = '照片上傳完成，儲存資料中...';
+  progressBar.style.width = '100%';
+
+  const coverPhoto = photos[0];
   const item = {
     id: nextId('ALB', staticData.gallery),
     date: date.replace(/\./g,'-'), rocDate: date, category: cat, title, summary, result,
     participantCount: '',
-    coverImage: coverId ? `https://drive.google.com/file/d/${coverId}/view?usp=sharing` : '',
-    albumUrl: folderUrl, albumFolderId: folderId, albumFolderName: title, albumFolderUrl: folderUrl,
-    isHome: true, isPinned: false, sort: (staticData.gallery.length+1),
+    coverImage: coverPhoto ? coverPhoto.url : '',
+    albumUrl: '', albumFolderId: '', albumFolderName: title, albumFolderUrl: '',
+    isHome: true, isPinned: false, sort: (staticData.gallery.length + 1),
     createdAt: new Date().toISOString().slice(0,10),
-    updatedAt: new Date().toISOString().slice(0,10), note: '', photos: []
+    updatedAt: new Date().toISOString().slice(0,10),
+    note: `uploaded to ${repoFolder}`,
+    photos
   };
-  if (coverId) {
-    item.photos = [{ photoId: coverId, activityId:'', activityTitle: title,
-      url: `https://drive.google.com/thumbnail?id=${coverId}&sz=w1200`,
-      rawUrl: `https://drive.google.com/file/d/${coverId}/view`, caption:'封面',
-      isCover: true, isFeatured: true, sort: 1, createdAt:'', note:'admin_added' }];
-  }
 
   staticData.gallery = [item, ...(staticData.gallery || [])];
   try {
     await saveData('content: add gallery - ' + title);
     renderGalleryList();
-    ['gal-date','gal-title','gal-summary','gal-folder','gal-cover','gal-result'].forEach(id => document.getElementById(id).value = '');
-  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+    ['gal-date','gal-title','gal-summary','gal-result'].forEach(id => document.getElementById(id).value = '');
+    pendingGalleryPhotos = [];
+    document.getElementById('gal-photos').value = '';
+    document.getElementById('gal-photo-preview').style.display = 'none';
+    progressWrap.style.display = 'none';
+    showStatus(`✅ 相簿「${title}」建立成功！共上傳 ${photos.length} 張照片。`);
+  } catch(e) {
+    showStatus('儲存資料失敗：' + e.message, true);
+    progressWrap.style.display = 'none';
+  }
 }
 
 function renderGalleryList() {
   const el = document.getElementById('gal-list');
   const list = staticData.gallery || [];
   if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無活動相簿</div>'; return; }
-  el.innerHTML = list.map((item, i) => `
-    <div class="item-card">
-      ${item.coverImage ? `<img src="https://drive.google.com/thumbnail?id=${driveFileId(item.coverImage)}&sz=w200" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">` : ''}
+  el.innerHTML = list.map((item, i) => {
+    // Cover: local repo path or Drive
+    const cover = item.coverImage || '';
+    const isLocal = cover && !cover.startsWith('http');
+    const coverSrc = isLocal
+      ? `https://ccazhu-coder.github.io/changhwa-rice-guild/${cover}`
+      : (cover.includes('drive.google') ? `https://drive.google.com/thumbnail?id=${(cover.match(/\/d\/([^/?#]+)/)||[])[1]}&sz=w200` : cover);
+    const photoCount = (item.photos||[]).length;
+    return `<div class="item-card">
+      ${cover ? `<img src="${coverSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">` : ''}
       <div class="item-card-body">
         <div class="item-title"><span class="badge">${item.category}</span>${item.title}</div>
-        <div class="item-meta">${item.rocDate} ${item.albumFolderId ? '📁 已綁定 Drive 資料夾' : ''}</div>
+        <div class="item-meta">${item.rocDate} &nbsp;·&nbsp; ${photoCount > 0 ? `📸 ${photoCount} 張` : ''}${isLocal?'&nbsp;<span style="background:#e8f4e8;color:var(--green);border-radius:4px;padding:1px 5px;font-size:.65rem">本地儲存</span>':''}</div>
         ${item.summary ? `<div class="item-desc">${item.summary}</div>` : ''}
       </div>
       <div class="item-card-actions">
-        ${item.albumFolderUrl ? `<a href="${item.albumFolderUrl}" target="_blank" class="btn btn-outline btn-sm">檢視</a>` : ''}
         <button class="btn btn-red btn-sm" onclick="deleteGallery(${i})">刪除</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
 }
 
 async function deleteGallery(i) {
