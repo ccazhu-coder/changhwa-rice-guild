@@ -279,21 +279,28 @@ a{color:inherit;text-decoration:none}
             <input type="text" id="gal-result" placeholder="例：學員參與踴躍，活動圓滿完成">
           </div>
           <div class="field">
-            <label>📸 活動照片（可分批選取、無張數限制，第一張為封面）</label>
-            <div style="display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap">
-              <button type="button" class="btn btn-outline" onclick="document.getElementById('gal-photos').click()">
-                ➕ 選取照片（可多選）
-              </button>
-              <button type="button" class="btn btn-outline" style="color:var(--red);border-color:var(--red)" onclick="clearAllPhotos()">
-                🗑️ 清除全部
-              </button>
-              <span id="gal-photo-count" style="line-height:36px;font-size:.84rem;color:var(--muted)">尚未選取照片</span>
+            <label>📸 活動照片（無張數限制，第一張為封面）</label>
+            <!-- Drop zone -->
+            <div id="gal-dropzone" style="border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;margin-bottom:10px;background:#fafafa"
+              onclick="document.getElementById('gal-photos').click()"
+              ondragover="event.preventDefault();this.style.borderColor='var(--green)';this.style.background='#f0f7f0'"
+              ondragleave="this.style.borderColor='var(--border)';this.style.background='#fafafa'"
+              ondrop="handlePhotoDrop(event)">
+              <div style="font-size:2rem;margin-bottom:6px">🖼️</div>
+              <div style="font-weight:700;color:var(--green);font-size:.95rem">點擊選取照片 或 拖曳照片到此處</div>
+              <div style="font-size:.78rem;color:var(--muted);margin-top:4px">
+                Windows：按住 <kbd style="background:#eee;padding:1px 5px;border-radius:3px;font-size:.72rem">Ctrl</kbd> 可多選 ／ Mac：按住 <kbd style="background:#eee;padding:1px 5px;border-radius:3px;font-size:.72rem">⌘ Cmd</kbd> 可多選<br>
+                也可直接從資料夾拖曳多張照片進來
+              </div>
             </div>
             <input type="file" id="gal-photos" accept="image/*" multiple style="display:none" onchange="addGalleryPhotos(this)">
-            <div id="gal-photo-thumbs" style="display:flex;flex-wrap:wrap;gap:8px;min-height:0"></div>
-            <div id="gal-photo-preview" style="margin-top:8px;font-size:.76rem;color:var(--muted)">
-              第一張照片會自動設為封面。可再次點「選取照片」追加更多。
+            <!-- Controls -->
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap">
+              <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('gal-photos').click()">➕ 追加更多照片</button>
+              <button type="button" class="btn btn-sm" style="background:transparent;border:1.5px solid var(--red);color:var(--red)" onclick="clearAllPhotos()">🗑️ 清除全部</button>
+              <span id="gal-photo-count" style="font-size:.84rem;color:var(--muted)">尚未選取照片</span>
             </div>
+            <div id="gal-photo-thumbs" style="display:flex;flex-wrap:wrap;gap:8px;min-height:0"></div>
           </div>
           <div id="gal-upload-progress" style="display:none;margin-bottom:12px">
             <div style="background:#f0f0f0;border-radius:8px;height:8px;overflow:hidden">
@@ -561,10 +568,24 @@ let pendingGalleryPhotos = [];  // Array of {file, objectUrl}
 
 function addGalleryPhotos(input) {
   const newFiles = Array.from(input.files);
-  newFiles.forEach(f => {
+  appendPhotos(newFiles);
+  input.value = ''; // Allow re-selecting same files
+}
+
+function handlePhotoDrop(event) {
+  event.preventDefault();
+  const dz = document.getElementById('gal-dropzone');
+  dz.style.borderColor = 'var(--border)';
+  dz.style.background = '#fafafa';
+  const files = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+  if (!files.length) { showStatus('請拖入圖片檔案（JPG / PNG）', true); return; }
+  appendPhotos(files);
+}
+
+function appendPhotos(files) {
+  files.forEach(f => {
     pendingGalleryPhotos.push({ file: f, objectUrl: URL.createObjectURL(f) });
   });
-  input.value = ''; // Allow re-selecting same files
   refreshPhotoThumbs();
 }
 
