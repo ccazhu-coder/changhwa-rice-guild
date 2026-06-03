@@ -279,15 +279,20 @@ a{color:inherit;text-decoration:none}
             <input type="text" id="gal-result" placeholder="例：學員參與踴躍，活動圓滿完成">
           </div>
           <div class="field">
-            <label>📸 上傳活動照片（可多選，最多 20 張，第一張為封面）</label>
-            <div class="upload-area" id="gal-drop" onclick="document.getElementById('gal-photos').click()">
-              <div style="font-size:2rem">🖼️</div>
-              <p>點擊選擇多張照片<br><small>JPG / PNG，建議每張 2MB 以內</small></p>
-              <input type="file" id="gal-photos" accept="image/*" multiple onchange="previewGalleryPhotos(this)">
+            <label>📸 活動照片（可分批選取、無張數限制，第一張為封面）</label>
+            <div style="display:flex;gap:10px;margin-bottom:10px;flex-wrap:wrap">
+              <button type="button" class="btn btn-outline" onclick="document.getElementById('gal-photos').click()">
+                ➕ 選取照片（可多選）
+              </button>
+              <button type="button" class="btn btn-outline" style="color:var(--red);border-color:var(--red)" onclick="clearAllPhotos()">
+                🗑️ 清除全部
+              </button>
+              <span id="gal-photo-count" style="line-height:36px;font-size:.84rem;color:var(--muted)">尚未選取照片</span>
             </div>
-            <div id="gal-photo-preview" style="display:none;margin-top:10px">
-              <div id="gal-photo-thumbs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px"></div>
-              <div id="gal-photo-count" style="font-size:.8rem;color:var(--green);font-weight:700"></div>
+            <input type="file" id="gal-photos" accept="image/*" multiple style="display:none" onchange="addGalleryPhotos(this)">
+            <div id="gal-photo-thumbs" style="display:flex;flex-wrap:wrap;gap:8px;min-height:0"></div>
+            <div id="gal-photo-preview" style="margin-top:8px;font-size:.76rem;color:var(--muted)">
+              第一張照片會自動設為封面。可再次點「選取照片」追加更多。
             </div>
           </div>
           <div id="gal-upload-progress" style="display:none;margin-bottom:12px">
@@ -552,22 +557,45 @@ async function addAnnounce() {
 }
 
 // ══ GALLERY ══
-let pendingGalleryPhotos = [];
+let pendingGalleryPhotos = [];  // Array of {file, objectUrl}
 
-function previewGalleryPhotos(input) {
-  const files = Array.from(input.files).slice(0, 20);
-  pendingGalleryPhotos = files;
+function addGalleryPhotos(input) {
+  const newFiles = Array.from(input.files);
+  newFiles.forEach(f => {
+    pendingGalleryPhotos.push({ file: f, objectUrl: URL.createObjectURL(f) });
+  });
+  input.value = ''; // Allow re-selecting same files
+  refreshPhotoThumbs();
+}
+
+function removePhoto(index) {
+  URL.revokeObjectURL(pendingGalleryPhotos[index].objectUrl);
+  pendingGalleryPhotos.splice(index, 1);
+  refreshPhotoThumbs();
+}
+
+function clearAllPhotos() {
+  pendingGalleryPhotos.forEach(p => URL.revokeObjectURL(p.objectUrl));
+  pendingGalleryPhotos = [];
+  refreshPhotoThumbs();
+}
+
+function refreshPhotoThumbs() {
   const thumbs = document.getElementById('gal-photo-thumbs');
+  const count  = document.getElementById('gal-photo-count');
   thumbs.innerHTML = '';
-  files.forEach((f, i) => {
-    const url = URL.createObjectURL(f);
+  pendingGalleryPhotos.forEach((p, i) => {
     const div = document.createElement('div');
-    div.style.cssText = 'position:relative;width:72px;height:72px;border-radius:8px;overflow:hidden;border:2px solid ' + (i===0?'var(--green)':'var(--border)');
-    div.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover">${i===0?'<div style="position:absolute;bottom:0;left:0;right:0;background:var(--green);color:#fff;font-size:.58rem;text-align:center;padding:2px;font-weight:700">封面</div>':''}`;
+    div.style.cssText = 'position:relative;width:80px;height:80px;border-radius:8px;overflow:hidden;border:2px solid ' + (i===0?'var(--green)':'var(--border)') + ';flex-shrink:0';
+    div.innerHTML = `
+      <img src="${p.objectUrl}" style="width:100%;height:100%;object-fit:cover">
+      ${i===0?'<div style="position:absolute;bottom:0;left:0;right:0;background:var(--green);color:#fff;font-size:.56rem;text-align:center;padding:2px;font-weight:700">封面</div>':''}
+      <button onclick="removePhoto(${i})" style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;border:none;background:rgba(192,57,43,.85);color:#fff;font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">✕</button>`;
     thumbs.appendChild(div);
   });
-  document.getElementById('gal-photo-preview').style.display = 'block';
-  document.getElementById('gal-photo-count').textContent = `已選 ${files.length} 張（第一張為封面）`;
+  count.textContent = pendingGalleryPhotos.length > 0
+    ? `已選 ${pendingGalleryPhotos.length} 張（第一張為封面）`
+    : '尚未選取照片';
 }
 
 function sanitizeFolderName(name) {
@@ -586,6 +614,7 @@ async function addGallery() {
   const folderName = sanitizeFolderName(date + '_' + title);
   const repoFolder = `圖庫/activities/${folderName}`;
   const photos = [];
+  const total = pendingGalleryPhotos.length;
 
   // Show progress bar
   const progressWrap = document.getElementById('gal-upload-progress');
@@ -593,17 +622,17 @@ async function addGallery() {
   const progressText = document.getElementById('gal-progress-text');
   progressWrap.style.display = 'block';
 
-  for (let i = 0; i < pendingGalleryPhotos.length; i++) {
-    const file = pendingGalleryPhotos[i];
+  for (let i = 0; i < total; i++) {
+    const { file } = pendingGalleryPhotos[i];
     const ext = file.name.split('.').pop().toLowerCase();
     const repoName = `photo_${String(i+1).padStart(2,'0')}.${ext}`;
     const repoPath = `${repoFolder}/${repoName}`;
 
-    progressText.textContent = `上傳第 ${i+1}/${pendingGalleryPhotos.length} 張：${file.name}`;
-    progressBar.style.width = `${Math.round((i/pendingGalleryPhotos.length)*100)}%`;
+    progressText.textContent = `上傳第 ${i+1}／${total} 張：${file.name}`;
+    progressBar.style.width = `${Math.round((i/total)*100)}%`;
 
     try {
-      await githubUploadFile(file, repoPath, `add: activity photo ${folderName}/${repoName}`);
+      await githubUploadFile(file, repoPath, `add: photo ${folderName}/${repoName}`);
       photos.push({
         photoId: repoPath,
         activityId: '',
@@ -612,14 +641,14 @@ async function addGallery() {
         rawUrl: `圖庫/activities/${folderName}/${repoName}`,
         caption: i === 0 ? '封面' : `照片 ${i+1}`,
         isCover: i === 0,
-        isFeatured: i < 6,
+        isFeatured: i < 8,
         sort: i + 1,
         createdAt: new Date().toISOString().slice(0,10),
         note: 'admin_uploaded'
       });
-      progressBar.style.width = `${Math.round(((i+1)/pendingGalleryPhotos.length)*100)}%`;
+      progressBar.style.width = `${Math.round(((i+1)/total)*100)}%`;
     } catch(e) {
-      showStatus(`第 ${i+1} 張上傳失敗：${e.message}`, true);
+      showStatus(`第 ${i+1} 張上傳失敗：${e.message}，已完成 ${photos.length} 張`, true);
       progressWrap.style.display = 'none';
       return;
     }
@@ -647,9 +676,7 @@ async function addGallery() {
     await saveData('content: add gallery - ' + title);
     renderGalleryList();
     ['gal-date','gal-title','gal-summary','gal-result'].forEach(id => document.getElementById(id).value = '');
-    pendingGalleryPhotos = [];
-    document.getElementById('gal-photos').value = '';
-    document.getElementById('gal-photo-preview').style.display = 'none';
+    clearAllPhotos();
     progressWrap.style.display = 'none';
     showStatus(`✅ 相簿「${title}」建立成功！共上傳 ${photos.length} 張照片。`);
   } catch(e) {
