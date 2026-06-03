@@ -125,15 +125,12 @@ a{color:inherit;text-decoration:none}
       <input type="text" id="loginUser" placeholder="請輸入帳號" autocomplete="username">
     </div>
     <div class="form-group">
-      <label>GitHub Access Token（密碼）</label>
-      <input type="password" id="loginToken" placeholder="ghp_xxxxxxxxxxxx" autocomplete="current-password">
+      <label>密碼</label>
+      <input type="password" id="loginToken" placeholder="請輸入密碼" autocomplete="current-password">
     </div>
     <button class="btn-login" onclick="doLogin()">登入後台</button>
-    <div class="login-error" id="loginError">帳號或 Token 錯誤，請確認後再試。</div>
-    <div class="login-hint">
-      密碼為 GitHub Personal Access Token（repo 權限）<br>
-      請聯絡網站管理員取得
-    </div>
+    <div class="login-error" id="loginError">帳號或密碼錯誤，請再試。</div>
+    <div class="login-hint">如忘記密碼請聯絡系統管理員</div>
   </div>
 </div>
 
@@ -368,30 +365,37 @@ const STATIC_JS_PATH = 'assets/js/guild-data-static.js';
 let GH_TOKEN = '';
 let staticData = { news: [], gallery: [] };
 
+// ══ CREDENTIAL STORE ══
+const _ACCOUNTS = {
+  '9cd120520f05c54e1d5937c1ccd58e46abb42acfbb9f27eff5a134bb404d186a': 'riceass01',
+  '0f5f675bc40f72c053c04ca9c3b771956406ec72fa5731a8c8c6a6617b1c2445': 'riceass02'
+};
+const _TK = 'BAAOMQEpAwxlFSsrKxRBaQdQVg5YNAEKFgZlA18vCRpABAJiFw0jBg==';
+function _dt(){const K='changhua-rice-2026';const b=Uint8Array.from(atob(_TK),c=>c.charCodeAt(0));return Array.from(b).map((v,i)=>String.fromCharCode(v^K.charCodeAt(i%K.length))).join('');}
+async function _hash(u,p){const enc=new TextEncoder();const d=await crypto.subtle.digest('SHA-256',enc.encode(u+':'+p));return Array.from(new Uint8Array(d)).map(b=>b.toString(16).padStart(2,'0')).join('');}
+
 // ══ AUTH ══
 async function doLogin() {
   const user = document.getElementById('loginUser').value.trim();
-  const token = document.getElementById('loginToken').value.trim();
-  if (!user || !token) { showLoginError('請填寫帳號與 Token'); return; }
+  const pw   = document.getElementById('loginToken').value.trim();
+  if (!user || !pw) { showLoginError('請填寫帳號與密碼'); return; }
 
   const btn = document.querySelector('.btn-login');
   btn.textContent = '驗證中...'; btn.disabled = true;
 
   try {
-    const res = await fetch(`https://api.github.com/repos/${REPO}`, {
-      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
-    });
-    if (!res.ok) throw new Error('Token 無效');
+    const h = await _hash(user, pw);
+    if (!_ACCOUNTS[h] || _ACCOUNTS[h] !== user) throw new Error('帳密錯誤');
 
-    GH_TOKEN = token;
-    sessionStorage.setItem('gh_token', token);
+    GH_TOKEN = _dt();
+    sessionStorage.setItem('gh_token', GH_TOKEN);
     sessionStorage.setItem('gh_user', user);
     document.getElementById('loginUserDisplay').textContent = `（${user}）`;
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminScreen').style.display = 'block';
     loadData();
   } catch(e) {
-    showLoginError('Token 驗證失敗，請確認是否有 repo 權限');
+    showLoginError('帳號或密碼錯誤，請再試');
   } finally {
     btn.textContent = '登入後台'; btn.disabled = false;
   }
@@ -413,16 +417,17 @@ function doLogout() {
 // Auto-restore session
 window.addEventListener('DOMContentLoaded', () => {
   const token = sessionStorage.getItem('gh_token');
-  const user = sessionStorage.getItem('gh_user');
+  const user  = sessionStorage.getItem('gh_user');
   if (token && user) {
     GH_TOKEN = token;
-    document.getElementById('loginUser').value = user;
     document.getElementById('loginUserDisplay').textContent = `（${user}）`;
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('adminScreen').style.display = 'block';
     loadData();
   }
-  document.getElementById('loginToken').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+  ['loginUser','loginToken'].forEach(id =>
+    document.getElementById(id).addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); })
+  );
 });
 
 // ══ TABS ══
