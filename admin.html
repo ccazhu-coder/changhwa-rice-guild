@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>後台管理 — 彰化縣米穀商業同業公會</title>
+<style>
+:root{
+  --green:#183f21;--green-2:#24592f;--gold:#c6a437;--gold-2:#d6b95a;
+  --red:#c0392b;--blue:#2980b9;
+  --bg:#f5f5f5;--white:#fff;--border:#e0e0e0;--text:#333;--muted:#888;
+  --font:'Noto Sans TC','Microsoft JhengHei',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+/* ── LOGIN ── */
+#loginScreen{display:flex;align-items:center;justify-content:center;min-height:100vh;background:linear-gradient(135deg,var(--green),var(--green-2))}
+.login-box{background:var(--white);border-radius:20px;padding:40px 48px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-logo img{width:64px;height:64px;border-radius:50%;object-fit:contain;margin-bottom:10px}
+.login-logo h1{font-size:1.1rem;font-weight:900;color:var(--green)}
+.login-logo p{font-size:.8rem;color:var(--muted);margin-top:4px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.82rem;font-weight:700;color:var(--green);margin-bottom:6px}
+.form-group input{width:100%;padding:10px 14px;border:2px solid var(--border);border-radius:10px;font-size:.9rem;outline:none;transition:border .2s}
+.form-group input:focus{border-color:var(--green)}
+.btn-login{width:100%;padding:12px;background:var(--green);color:#fff;border:none;border-radius:10px;font-size:.95rem;font-weight:800;cursor:pointer;margin-top:8px;transition:background .2s}
+.btn-login:hover{background:var(--green-2)}
+.login-hint{font-size:.76rem;color:var(--muted);margin-top:14px;text-align:center;line-height:1.6}
+.login-error{color:var(--red);font-size:.82rem;margin-top:8px;text-align:center;display:none}
+
+/* ── ADMIN LAYOUT ── */
+#adminScreen{display:none;min-height:100vh}
+.admin-header{background:var(--green);color:#fff;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.admin-header h1{font-size:.95rem;font-weight:800;display:flex;align-items:center;gap:10px}
+.admin-header h1 span{font-size:.7rem;opacity:.7;font-weight:400}
+.btn-logout{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);padding:6px 14px;border-radius:8px;font-size:.8rem;cursor:pointer;transition:background .2s}
+.btn-logout:hover{background:rgba(255,255,255,.25)}
+
+.admin-body{display:grid;grid-template-columns:200px 1fr;min-height:calc(100vh - 56px)}
+.sidebar{background:var(--white);border-right:1px solid var(--border);padding:16px 0}
+.sidebar-item{display:flex;align-items:center;gap:10px;padding:12px 20px;cursor:pointer;font-size:.88rem;font-weight:600;color:var(--text);border-left:3px solid transparent;transition:all .15s}
+.sidebar-item:hover{background:#f0f7f0;color:var(--green)}
+.sidebar-item.active{background:#e8f4e8;color:var(--green);border-left-color:var(--green);font-weight:800}
+.sidebar-item .icon{font-size:1.1rem;width:24px;text-align:center}
+
+.main-content{padding:28px 32px;overflow-y:auto}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ── CARDS ── */
+.panel-title{font-size:1.2rem;font-weight:900;color:var(--green);margin-bottom:20px;display:flex;align-items:center;gap:10px}
+.panel-title small{font-size:.75rem;font-weight:400;color:var(--muted)}
+.card{background:var(--white);border:1px solid var(--border);border-radius:14px;padding:24px;margin-bottom:16px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.card h3{font-size:.95rem;font-weight:800;color:var(--green);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+
+/* ── FORM ── */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.8rem;font-weight:700;color:var(--text);margin-bottom:5px}
+.field input,.field textarea,.field select{width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:8px;font-size:.88rem;outline:none;font-family:var(--font);transition:border .2s}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--green)}
+.field textarea{min-height:80px;resize:vertical}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field-hint{font-size:.74rem;color:var(--muted);margin-top:4px}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:8px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;transition:all .2s}
+.btn-primary{background:var(--green);color:#fff}
+.btn-primary:hover{background:var(--green-2)}
+.btn-gold{background:var(--gold);color:var(--green)}
+.btn-gold:hover{background:var(--gold-2)}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:#a93226}
+.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text)}
+.btn-outline:hover{border-color:var(--green);color:var(--green)}
+.btn-sm{padding:5px 12px;font-size:.78rem}
+
+/* ── LIST ── */
+.item-list{display:grid;gap:10px}
+.item-card{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:14px 16px;display:flex;align-items:flex-start;gap:14px}
+.item-card-body{flex:1;min-width:0}
+.item-card-body .item-title{font-weight:800;color:var(--green);font-size:.92rem;margin-bottom:3px}
+.item-card-body .item-meta{font-size:.76rem;color:var(--muted)}
+.item-card-body .item-desc{font-size:.82rem;color:var(--text);margin-top:4px}
+.item-card-actions{display:flex;gap:6px;flex-shrink:0}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:.66rem;font-weight:700;background:#e8f4e8;color:var(--green);margin-right:6px}
+.badge.gold{background:#fff8e0;color:#7a5800}
+.badge.red{background:#fdecea;color:var(--red)}
+
+/* ── STATUS ── */
+.status-bar{background:#e8f4e8;border:1px solid #b8ddb8;border-radius:8px;padding:10px 14px;font-size:.82rem;color:var(--green);margin-bottom:16px;display:none}
+.status-bar.error{background:#fdecea;border-color:#f5b7b1;color:var(--red)}
+.status-bar.show{display:block}
+.loading{opacity:.5;pointer-events:none}
+
+/* ── FILE UPLOAD ── */
+.upload-area{border:2px dashed var(--border);border-radius:10px;padding:28px;text-align:center;cursor:pointer;transition:all .2s}
+.upload-area:hover,.upload-area.drag{border-color:var(--green);background:#f0f7f0}
+.upload-area p{font-size:.85rem;color:var(--muted);margin-top:8px}
+.upload-area input{display:none}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .admin-body{grid-template-columns:1fr}
+  .sidebar{display:flex;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border);padding:0}
+  .sidebar-item{flex-shrink:0;border-left:none;border-bottom:3px solid transparent}
+  .sidebar-item.active{border-left:none;border-bottom-color:var(--green)}
+  .field-row{grid-template-columns:1fr}
+  .main-content{padding:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ══ -->
+<div id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">
+      <img src="./assets/images/logo-transparent.png" alt="logo" onerror="this.style.display='none'">
+      <h1>後台管理系統</h1>
+      <p>彰化縣米穀商業同業公會</p>
+    </div>
+    <div class="form-group">
+      <label>管理員帳號</label>
+      <input type="text" id="loginUser" placeholder="請輸入帳號" autocomplete="username">
+    </div>
+    <div class="form-group">
+      <label>GitHub Access Token（密碼）</label>
+      <input type="password" id="loginToken" placeholder="ghp_xxxxxxxxxxxx" autocomplete="current-password">
+    </div>
+    <button class="btn-login" onclick="doLogin()">登入後台</button>
+    <div class="login-error" id="loginError">帳號或 Token 錯誤，請確認後再試。</div>
+    <div class="login-hint">
+      密碼為 GitHub Personal Access Token（repo 權限）<br>
+      請聯絡網站管理員取得
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADMIN ══ -->
+<div id="adminScreen">
+  <header class="admin-header">
+    <h1>⚙️ 後台管理 <span id="loginUserDisplay"></span></h1>
+    <button class="btn-logout" onclick="doLogout()">登出</button>
+  </header>
+  <div class="admin-body">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-item active" onclick="showTab('news')" id="tab-btn-news">
+        <span class="icon">📰</span>最新消息
+      </div>
+      <div class="sidebar-item" onclick="showTab('announce')" id="tab-btn-announce">
+        <span class="icon">📢</span>會務公告
+      </div>
+      <div class="sidebar-item" onclick="showTab('gallery')" id="tab-btn-gallery">
+        <span class="icon">🖼️</span>活動花絮
+      </div>
+      <div class="sidebar-item" onclick="showTab('dm')" id="tab-btn-dm">
+        <span class="icon">📄</span>招生 DM
+      </div>
+      <div class="sidebar-item" onclick="showTab('files')" id="tab-btn-files">
+        <span class="icon">📁</span>文件下載
+      </div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main-content">
+      <div id="statusBar" class="status-bar"></div>
+
+      <!-- ── 最新消息 ── -->
+      <div class="tab-panel active" id="tab-news">
+        <div class="panel-title">📰 最新消息管理 <small>新增、編輯、刪除消息</small></div>
+        <div class="card">
+          <h3>➕ 新增消息</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>日期（民國）</label>
+              <input type="text" id="news-date" placeholder="例：115.05.19">
+            </div>
+            <div class="field">
+              <label>分類</label>
+              <select id="news-cat">
+                <option>教育訓練</option>
+                <option>會務公告</option>
+                <option>公益活動</option>
+                <option>訓練品質</option>
+                <option>活動通知</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>標題</label>
+            <input type="text" id="news-title" placeholder="請輸入消息標題">
+          </div>
+          <div class="field">
+            <label>摘要</label>
+            <textarea id="news-summary" placeholder="簡短說明（選填）"></textarea>
+          </div>
+          <div class="field">
+            <label>報名／詳細連結（選填）</label>
+            <input type="url" id="news-url" placeholder="https://...">
+            <div class="field-hint">若有報名表或外部連結，填入此欄</div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:4px">
+            <button class="btn btn-primary" onclick="addNews()">✅ 新增消息</button>
+            <button class="btn btn-outline" onclick="loadData()">🔄 重新載入</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>📋 現有消息列表</h3>
+          <div class="item-list" id="news-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 會務公告 ── -->
+      <div class="tab-panel" id="tab-announce">
+        <div class="panel-title">📢 會務公告管理 <small>顯示於最新消息頁公告列表</small></div>
+        <div class="card">
+          <h3>➕ 新增公告（同最新消息，分類選「會務公告」）</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>日期</label>
+              <input type="text" id="ann-date" placeholder="例：115.05.06">
+            </div>
+            <div class="field">
+              <label>分類</label>
+              <select id="ann-cat">
+                <option>會務公告</option>
+                <option>教育訓練</option>
+                <option>訓練品質</option>
+                <option>公益活動</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>公告標題</label>
+            <input type="text" id="ann-title" placeholder="請輸入公告標題">
+          </div>
+          <div class="field">
+            <label>說明</label>
+            <textarea id="ann-summary" placeholder="公告說明（選填）"></textarea>
+          </div>
+          <button class="btn btn-primary" onclick="addAnnounce()">✅ 新增公告</button>
+        </div>
+        <div class="card">
+          <h3>📋 現有消息（含公告）</h3>
+          <div class="item-list" id="ann-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 活動花絮 ── -->
+      <div class="tab-panel" id="tab-gallery">
+        <div class="panel-title">🖼️ 活動花絮管理 <small>新增活動相簿（使用 Google Drive 資料夾）</small></div>
+        <div class="card">
+          <h3>➕ 新增活動相簿</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>活動日期（民國）</label>
+              <input type="text" id="gal-date" placeholder="例：115.05.19">
+            </div>
+            <div class="field">
+              <label>分類</label>
+              <select id="gal-cat">
+                <option>教育訓練</option>
+                <option>會員大會</option>
+                <option>訓練品質</option>
+                <option>公益活動</option>
+                <option>活動花絮</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>活動名稱</label>
+            <input type="text" id="gal-title" placeholder="例：115年度第3次 TTQS 輔導">
+          </div>
+          <div class="field">
+            <label>摘要說明</label>
+            <textarea id="gal-summary" placeholder="活動簡短說明"></textarea>
+          </div>
+          <div class="field">
+            <label>Google Drive 相簿資料夾網址</label>
+            <input type="url" id="gal-folder" placeholder="https://drive.google.com/drive/folders/xxxxx?usp=sharing">
+            <div class="field-hint">把 Google Drive 資料夾設為「任何人都可以檢視」，再貼入連結</div>
+          </div>
+          <div class="field">
+            <label>封面圖片網址（Google Drive 分享連結）</label>
+            <input type="url" id="gal-cover" placeholder="https://drive.google.com/file/d/xxxxx/view?usp=sharing">
+            <div class="field-hint">從 Drive 選一張代表照片，右鍵 → 取得連結 → 貼入此處</div>
+          </div>
+          <div class="field">
+            <label>活動成果說明（選填）</label>
+            <input type="text" id="gal-result" placeholder="例：學員參與踴躍，活動圓滿完成">
+          </div>
+          <button class="btn btn-primary" onclick="addGallery()">✅ 新增活動相簿</button>
+        </div>
+        <div class="card">
+          <h3>📋 現有活動相簿</h3>
+          <div class="item-list" id="gal-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 招生 DM ── -->
+      <div class="tab-panel" id="tab-dm">
+        <div class="panel-title">📄 招生 DM 管理 <small>上傳 A4 PDF 宣傳單</small></div>
+        <div class="card">
+          <h3>⬆️ 上傳新 DM（PDF）</h3>
+          <div class="field">
+            <label>DM 標題</label>
+            <input type="text" id="dm-title" placeholder="例：115年度會員招募說明">
+          </div>
+          <div class="field">
+            <label>選擇 PDF 檔案</label>
+            <div class="upload-area" id="dm-drop" onclick="document.getElementById('dm-file').click()">
+              <div style="font-size:2rem">📄</div>
+              <p>點擊選擇 PDF 檔案<br><small>或拖曳至此處（A4 規格）</small></p>
+              <input type="file" id="dm-file" accept=".pdf" onchange="previewDM(this)">
+            </div>
+            <div id="dm-preview" style="margin-top:8px;font-size:.82rem;color:var(--green);display:none"></div>
+          </div>
+          <button class="btn btn-gold" onclick="uploadDM()">📤 上傳 DM</button>
+        </div>
+        <div class="card">
+          <h3>📋 現有 DM 列表</h3>
+          <div class="item-list" id="dm-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 文件下載 ── -->
+      <div class="tab-panel" id="tab-files">
+        <div class="panel-title">📁 文件下載管理 <small>管理下載專區的公文、表單</small></div>
+        <div class="card">
+          <h3>⬆️ 上傳文件（DOCX / PDF）</h3>
+          <div class="field">
+            <label>文件說明名稱</label>
+            <input type="text" id="file-title" placeholder="例：115年度教育訓練報名表">
+          </div>
+          <div class="field">
+            <label>選擇檔案</label>
+            <div class="upload-area" onclick="document.getElementById('upload-file').click()">
+              <div style="font-size:2rem">📁</div>
+              <p>點擊選擇 DOCX 或 PDF<br><small>最大 25 MB</small></p>
+              <input type="file" id="upload-file" accept=".pdf,.docx,.doc,.xlsx" onchange="previewUploadFile(this)">
+            </div>
+            <div id="file-preview" style="margin-top:8px;font-size:.82rem;color:var(--green);display:none"></div>
+          </div>
+          <button class="btn btn-primary" onclick="uploadFile()">📤 上傳文件</button>
+        </div>
+        <div class="card">
+          <h3>📋 現有下載文件</h3>
+          <div class="item-list" id="files-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const REPO = 'ccazhu-coder/changhwa-rice-guild';
+const STATIC_JS_PATH = 'assets/js/guild-data-static.js';
+let GH_TOKEN = '';
+let staticData = { news: [], gallery: [] };
+
+// ══ AUTH ══
+async function doLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const token = document.getElementById('loginToken').value.trim();
+  if (!user || !token) { showLoginError('請填寫帳號與 Token'); return; }
+
+  const btn = document.querySelector('.btn-login');
+  btn.textContent = '驗證中...'; btn.disabled = true;
+
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) throw new Error('Token 無效');
+
+    GH_TOKEN = token;
+    sessionStorage.setItem('gh_token', token);
+    sessionStorage.setItem('gh_user', user);
+    document.getElementById('loginUserDisplay').textContent = `（${user}）`;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    loadData();
+  } catch(e) {
+    showLoginError('Token 驗證失敗，請確認是否有 repo 權限');
+  } finally {
+    btn.textContent = '登入後台'; btn.disabled = false;
+  }
+}
+
+function showLoginError(msg) {
+  const el = document.getElementById('loginError');
+  el.textContent = msg; el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 4000);
+}
+
+function doLogout() {
+  sessionStorage.clear();
+  GH_TOKEN = '';
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminScreen').style.display = 'none';
+}
+
+// Auto-restore session
+window.addEventListener('DOMContentLoaded', () => {
+  const token = sessionStorage.getItem('gh_token');
+  const user = sessionStorage.getItem('gh_user');
+  if (token && user) {
+    GH_TOKEN = token;
+    document.getElementById('loginUser').value = user;
+    document.getElementById('loginUserDisplay').textContent = `（${user}）`;
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    loadData();
+  }
+  document.getElementById('loginToken').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+});
+
+// ══ TABS ══
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  document.getElementById('tab-btn-' + name).classList.add('active');
+}
+
+// ══ STATUS ══
+function showStatus(msg, isError) {
+  const el = document.getElementById('statusBar');
+  el.textContent = msg;
+  el.className = 'status-bar show' + (isError ? ' error' : '');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+// ══ LOAD DATA ══
+async function loadData() {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${STATIC_JS_PATH}`, {
+      headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    const data = await res.json();
+    const raw = atob(data.content.replace(/\n/g, ''));
+    const match = raw.match(/window\.GUILD_STATIC_DATA\s*=\s*(\{[\s\S]+\});/);
+    if (match) {
+      staticData = JSON.parse(match[1]);
+      staticData._sha = data.sha;
+    }
+  } catch(e) { showStatus('載入資料失敗：' + e.message, true); return; }
+
+  renderNewsList();
+  renderGalleryList();
+  loadFilesList();
+}
+
+// ══ SAVE DATA ══
+async function saveData(msg) {
+  const d = { ...staticData };
+  delete d._sha;
+  const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString().slice(0,10)} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
+  const b64 = btoa(unescape(encodeURIComponent(newContent)));
+
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${STATIC_JS_PATH}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+    body: JSON.stringify({ message: msg, content: b64, sha: staticData._sha })
+  });
+  if (!res.ok) throw new Error(await res.text());
+  const result = await res.json();
+  staticData._sha = result.content.sha;
+  showStatus('✅ 已儲存！網站將在 1～2 分鐘內更新。');
+}
+
+// ══ NEWS ══
+function nextId(prefix, list) {
+  const nums = (list || []).map(i => parseInt(i.id?.replace(prefix+'-','')) || 0);
+  return prefix + '-' + String(Math.max(0, ...nums) + 1).padStart(4, '0');
+}
+
+async function addNews() {
+  const date = document.getElementById('news-date').value.trim();
+  const cat  = document.getElementById('news-cat').value;
+  const title = document.getElementById('news-title').value.trim();
+  const summary = document.getElementById('news-summary').value.trim();
+  const url = document.getElementById('news-url').value.trim();
+  if (!date || !title) { showStatus('日期與標題為必填', true); return; }
+
+  const item = { id: nextId('NEWS', staticData.news), date: date.replace(/\./g,'-'), rocDate: date,
+    category: cat, title, summary, location:'', registerUrl: url, status:'活動結束',
+    isHome: true, isPinned: false, sort: (staticData.news.length+1),
+    createdAt: new Date().toISOString().slice(0,10), updatedAt: new Date().toISOString().slice(0,10), note:'' };
+
+  staticData.news = [item, ...(staticData.news || [])];
+  try {
+    await saveData('content: add news - ' + title);
+    renderNewsList();
+    ['news-date','news-title','news-summary','news-url'].forEach(id => document.getElementById(id).value = '');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+
+function renderNewsList() {
+  const el = document.getElementById('news-list');
+  const el2 = document.getElementById('ann-list');
+  const list = staticData.news || [];
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無消息</div>'; el2.innerHTML = el.innerHTML; return; }
+  const html = list.map((item, i) => `
+    <div class="item-card">
+      <div class="item-card-body">
+        <div class="item-title"><span class="badge gold">${item.category||'公告'}</span>${item.title}</div>
+        <div class="item-meta">${item.rocDate || item.date} ${item.registerUrl?'🔗 有連結':''}</div>
+        ${item.summary ? `<div class="item-desc">${item.summary}</div>` : ''}
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-red btn-sm" onclick="deleteNews(${i})">刪除</button>
+      </div>
+    </div>`).join('');
+  el.innerHTML = html;
+  el2.innerHTML = html;
+}
+
+async function deleteNews(i) {
+  if (!confirm('確定刪除此消息？')) return;
+  staticData.news.splice(i, 1);
+  try { await saveData('content: delete news item'); renderNewsList(); }
+  catch(e) { showStatus('刪除失敗：' + e.message, true); }
+}
+
+async function addAnnounce() {
+  document.getElementById('news-date').value = document.getElementById('ann-date').value;
+  document.getElementById('news-cat').value  = document.getElementById('ann-cat').value;
+  document.getElementById('news-title').value = document.getElementById('ann-title').value;
+  document.getElementById('news-summary').value = document.getElementById('ann-summary').value;
+  await addNews();
+  ['ann-date','ann-title','ann-summary'].forEach(id => document.getElementById(id).value = '');
+}
+
+// ══ GALLERY ══
+function driveFileId(url) {
+  const m = url.match(/\/d\/([^/?#]+)/);
+  return m ? m[1] : '';
+}
+function driveFolderId(url) {
+  const m = url.match(/\/folders\/([^/?#]+)/);
+  return m ? m[1] : '';
+}
+
+async function addGallery() {
+  const date = document.getElementById('gal-date').value.trim();
+  const cat  = document.getElementById('gal-cat').value;
+  const title= document.getElementById('gal-title').value.trim();
+  const summary = document.getElementById('gal-summary').value.trim();
+  const folderUrl = document.getElementById('gal-folder').value.trim();
+  const coverUrl  = document.getElementById('gal-cover').value.trim();
+  const result    = document.getElementById('gal-result').value.trim();
+  if (!date || !title) { showStatus('日期與活動名稱為必填', true); return; }
+
+  const folderId = driveFolderId(folderUrl);
+  const coverId  = driveFileId(coverUrl);
+
+  const item = {
+    id: nextId('ALB', staticData.gallery),
+    date: date.replace(/\./g,'-'), rocDate: date, category: cat, title, summary, result,
+    participantCount: '',
+    coverImage: coverId ? `https://drive.google.com/file/d/${coverId}/view?usp=sharing` : '',
+    albumUrl: folderUrl, albumFolderId: folderId, albumFolderName: title, albumFolderUrl: folderUrl,
+    isHome: true, isPinned: false, sort: (staticData.gallery.length+1),
+    createdAt: new Date().toISOString().slice(0,10),
+    updatedAt: new Date().toISOString().slice(0,10), note: '', photos: []
+  };
+  if (coverId) {
+    item.photos = [{ photoId: coverId, activityId:'', activityTitle: title,
+      url: `https://drive.google.com/thumbnail?id=${coverId}&sz=w1200`,
+      rawUrl: `https://drive.google.com/file/d/${coverId}/view`, caption:'封面',
+      isCover: true, isFeatured: true, sort: 1, createdAt:'', note:'admin_added' }];
+  }
+
+  staticData.gallery = [item, ...(staticData.gallery || [])];
+  try {
+    await saveData('content: add gallery - ' + title);
+    renderGalleryList();
+    ['gal-date','gal-title','gal-summary','gal-folder','gal-cover','gal-result'].forEach(id => document.getElementById(id).value = '');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+
+function renderGalleryList() {
+  const el = document.getElementById('gal-list');
+  const list = staticData.gallery || [];
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無活動相簿</div>'; return; }
+  el.innerHTML = list.map((item, i) => `
+    <div class="item-card">
+      ${item.coverImage ? `<img src="https://drive.google.com/thumbnail?id=${driveFileId(item.coverImage)}&sz=w200" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">` : ''}
+      <div class="item-card-body">
+        <div class="item-title"><span class="badge">${item.category}</span>${item.title}</div>
+        <div class="item-meta">${item.rocDate} ${item.albumFolderId ? '📁 已綁定 Drive 資料夾' : ''}</div>
+        ${item.summary ? `<div class="item-desc">${item.summary}</div>` : ''}
+      </div>
+      <div class="item-card-actions">
+        ${item.albumFolderUrl ? `<a href="${item.albumFolderUrl}" target="_blank" class="btn btn-outline btn-sm">檢視</a>` : ''}
+        <button class="btn btn-red btn-sm" onclick="deleteGallery(${i})">刪除</button>
+      </div>
+    </div>`).join('');
+}
+
+async function deleteGallery(i) {
+  if (!confirm('確定刪除此活動相簿？')) return;
+  staticData.gallery.splice(i, 1);
+  try { await saveData('content: delete gallery item'); renderGalleryList(); }
+  catch(e) { showStatus('刪除失敗：' + e.message, true); }
+}
+
+// ══ FILE UPLOAD ══
+let pendingFile = null;
+let pendingDM = null;
+
+function previewDM(input) {
+  if (input.files[0]) {
+    pendingDM = input.files[0];
+    document.getElementById('dm-preview').style.display = 'block';
+    document.getElementById('dm-preview').textContent = `📄 ${pendingDM.name}（${(pendingDM.size/1024).toFixed(0)} KB）`;
+  }
+}
+function previewUploadFile(input) {
+  if (input.files[0]) {
+    pendingFile = input.files[0];
+    document.getElementById('file-preview').style.display = 'block';
+    document.getElementById('file-preview').textContent = `📁 ${pendingFile.name}（${(pendingFile.size/1024).toFixed(0)} KB）`;
+  }
+}
+
+async function githubUploadFile(localFile, repoPath, commitMsg) {
+  const buf = await localFile.arrayBuffer();
+  const bytes = new Uint8Array(buf);
+  let binary = '';
+  bytes.forEach(b => binary += String.fromCharCode(b));
+  const b64 = btoa(binary);
+
+  // Get existing SHA if any
+  let sha = null;
+  try {
+    const check = await fetch(`https://api.github.com/repos/${REPO}/contents/${repoPath}`, {
+      headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (check.ok) { const d = await check.json(); sha = d.sha; }
+  } catch(e) {}
+
+  const body = { message: commitMsg, content: b64 };
+  if (sha) body.sha = sha;
+
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${repoPath}`, {
+    method: 'PUT',
+    headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return await res.json();
+}
+
+async function uploadDM() {
+  if (!pendingDM) { showStatus('請先選擇 PDF 檔案', true); return; }
+  const title = document.getElementById('dm-title').value.trim() || pendingDM.name;
+  try {
+    showStatus('上傳中...');
+    const safeName = pendingDM.name.replace(/\s+/g, '_');
+    await githubUploadFile(pendingDM, `files/dm/${safeName}`, `add: DM - ${title}`);
+    showStatus(`✅ DM「${title}」上傳成功！`);
+    pendingDM = null;
+    document.getElementById('dm-title').value = '';
+    document.getElementById('dm-preview').style.display = 'none';
+    loadFilesList();
+  } catch(e) { showStatus('上傳失敗：' + e.message, true); }
+}
+
+async function uploadFile() {
+  if (!pendingFile) { showStatus('請先選擇檔案', true); return; }
+  const title = document.getElementById('file-title').value.trim() || pendingFile.name;
+  try {
+    showStatus('上傳中...');
+    const safeName = pendingFile.name;
+    await githubUploadFile(pendingFile, `files/${safeName}`, `add: file - ${title}`);
+    showStatus(`✅「${title}」上傳成功！`);
+    pendingFile = null;
+    document.getElementById('file-title').value = '';
+    document.getElementById('file-preview').style.display = 'none';
+    loadFilesList();
+  } catch(e) { showStatus('上傳失敗：' + e.message, true); }
+}
+
+async function loadFilesList() {
+  // Load files/ directory
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/files`, {
+      headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!res.ok) { document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件</div>'; return; }
+    const files = await res.json();
+
+    // Also check files/dm
+    let dmFiles = [];
+    try {
+      const dmRes = await fetch(`https://api.github.com/repos/${REPO}/contents/files/dm`, {
+        headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      if (dmRes.ok) dmFiles = await dmRes.json();
+    } catch(e) {}
+
+    const allFiles = [...files.filter(f=>f.type==='file'), ...dmFiles.filter(f=>f.type==='file')];
+
+    if (!allFiles.length) { document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件</div>'; return; }
+
+    document.getElementById('files-list').innerHTML = allFiles.map(f => `
+      <div class="item-card">
+        <div class="item-card-body">
+          <div class="item-title">${f.name.includes('/dm/')? '📄 DM：':''} ${f.name}</div>
+          <div class="item-meta">${(f.size/1024).toFixed(0)} KB</div>
+        </div>
+        <div class="item-card-actions">
+          <a href="${f.download_url}" target="_blank" class="btn btn-outline btn-sm">下載</a>
+        </div>
+      </div>`).join('');
+
+    // Also render DM list
+    const dms = dmFiles.filter(f=>f.type==='file');
+    document.getElementById('dm-list').innerHTML = dms.length
+      ? dms.map(f => `<div class="item-card"><div class="item-card-body"><div class="item-title">📄 ${f.name}</div><div class="item-meta">${(f.size/1024).toFixed(0)} KB</div></div><div class="item-card-actions"><a href="${f.download_url}" target="_blank" class="btn btn-outline btn-sm">預覽</a></div></div>`).join('')
+      : '<div style="color:var(--muted);font-size:.85rem">尚無 DM 檔案</div>';
+  } catch(e) {
+    document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">載入失敗</div>';
+  }
+}
+
+// Enter key support
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') doLogin();
+});
+</script>
+</body>
+</html>
