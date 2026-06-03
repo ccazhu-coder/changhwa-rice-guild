@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-01 */
+/* generatedAt: 2026-06-03 */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -55,6 +55,42 @@ window.GUILD_STATIC_DATA = {
     }
   ],
   "gallery": [
+    {
+      "id": "ALB-0005",
+      "date": "1141020",
+      "rocDate": "1141020",
+      "category": "公益活動",
+      "title": "花蓮賑災白米援助行動",
+      "summary": "",
+      "result": "",
+      "participantCount": "",
+      "coverImage": "圖庫/activities/1141020_花蓮賑災白米援助行動/photo_01.jpg",
+      "albumUrl": "",
+      "albumFolderId": "",
+      "albumFolderName": "花蓮賑災白米援助行動",
+      "albumFolderUrl": "",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 5,
+      "createdAt": "2026-06-03",
+      "updatedAt": "2026-06-03",
+      "note": "uploaded to 圖庫/activities/1141020_花蓮賑災白米援助行動",
+      "photos": [
+        {
+          "photoId": "圖庫/activities/1141020_花蓮賑災白米援助行動/photo_01.jpg",
+          "activityId": "",
+          "activityTitle": "花蓮賑災白米援助行動",
+          "url": "圖庫/activities/1141020_花蓮賑災白米援助行動/photo_01.jpg",
+          "rawUrl": "圖庫/activities/1141020_花蓮賑災白米援助行動/photo_01.jpg",
+          "caption": "封面",
+          "isCover": true,
+          "isFeatured": true,
+          "sort": 1,
+          "createdAt": "2026-06-03",
+          "note": "admin_uploaded"
+        }
+      ]
+    },
     {
       "id": "ALB-0002",
       "date": "2026-05-06",
