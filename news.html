@@ -67,6 +67,25 @@
   .news-feat-img{height:200px}
   .announce-date{display:none}
 }
+
+/* ACTIVITY GALLERY (dynamic) */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.activity-card{background:var(--white,#fff);border:1px solid var(--line,#e6ddc9);border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(20,45,24,.07)}
+.activity-cover{aspect-ratio:16/10;background:#f7f1e3;margin:0}
+.activity-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.activity-card-body{padding:22px}
+.activity-card-body .tag{display:inline-flex;background:#f7f1e3;color:#7d6316;border-radius:999px;padding:5px 12px;font-size:13px;font-weight:900;margin-bottom:10px}
+.activity-card-body h3{color:#183f21;font-size:1.05rem;font-weight:800;margin-bottom:6px}
+.activity-card-body p{color:#666;line-height:1.8;font-size:.84rem}
+.activity-card-body time{display:block;font-size:.76rem;color:#999;margin-bottom:8px}
+.activity-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}
+.activity-photo-strip figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#f7f1e3}
+.activity-photo-strip img{width:100%;height:100%;object-fit:cover;display:block}
+.drive-photo-panel{padding:0 22px 22px}
+.drive-photo-panel iframe{width:100%;height:380px;border:1px solid #e6ddc9;border-radius:16px;background:#fff}
+.activity-photo-note{margin:0 22px 22px;color:#666;font-size:14px}
+@media(max-width:900px){.gallery-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.gallery-grid{grid-template-columns:1fr}.activity-photo-strip{grid-template-columns:repeat(2,1fr)}}
 </style>
 </head>
 <body>
@@ -203,8 +222,29 @@
   </div>
 </section>
 
+
+<!-- 活動花絮 -->
+<section class="section section-rice">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-label">ACTIVITY GALLERY</div>
+      <h2>活動花絮</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="gallery-grid" id="galleryApiList">
+      <article class="activity-card">
+        <div class="activity-card-body">
+          <h3>活動花絮載入中</h3>
+          <p>正在讀取活動成果資料。</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
 </main>
 <footer class="site-footer"><div class="container footer-grid"><div><div class="footer-brand"><img src="./assets/images/logo-transparent.png" alt="彰化縣米穀商業同業公會標誌"><strong>彰化縣米穀商業同業公會</strong></div><p>📍 500021 彰化市長壽街194號<br>📞 04-7222528　｜　📠 04-7222529<br>📧 riceass01@gmail.com</p></div><div><h3>關於公會</h3><a href="about.html">公會簡介</a><a href="board.html">理監事團隊</a></div><div><h3>服務項目</h3><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="news.html">活動花絮</a><a href="brand.html">彰榖米</a></div><div><h3>公告聯絡</h3><a href="news.html">最新消息</a><a href="contact.html">聯絡我們</a><a href="contact.html">申請入會</a></div></div><div class="footer-bottom"><div class="container">© 2026 彰化縣米穀商業同業公會　版權所有</div></div></footer>
 <script src="./assets/js/site.js"></script>
+<script src="./assets/js/guild-data-static.js"></script>
+<script src="./assets/js/guild-api.js?v=20260601-static-cache"></script>
 </body>
 </html>
