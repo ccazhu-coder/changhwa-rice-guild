@@ -453,7 +453,9 @@ async function loadData() {
       headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
     });
     const data = await res.json();
-    const raw = atob(data.content.replace(/\n/g, ''));
+    // Properly decode UTF-8 (handles Chinese characters)
+    const bytes = Uint8Array.from(atob(data.content.replace(/\n/g, '')), c => c.charCodeAt(0));
+    const raw = new TextDecoder('utf-8').decode(bytes);
     const match = raw.match(/window\.GUILD_STATIC_DATA\s*=\s*(\{[\s\S]+\});/);
     if (match) {
       staticData = JSON.parse(match[1]);
@@ -471,7 +473,9 @@ async function saveData(msg) {
   const d = { ...staticData };
   delete d._sha;
   const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString().slice(0,10)} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
-  const b64 = btoa(unescape(encodeURIComponent(newContent)));
+  // Properly encode UTF-8 to base64
+  const encBytes = new TextEncoder().encode(newContent);
+  const b64 = btoa(String.fromCharCode(...encBytes));
 
   const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${STATIC_JS_PATH}`, {
     method: 'PUT',
