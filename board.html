@@ -60,7 +60,21 @@
     @media(max-width:1180px){.committee-grid,.org-five{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:980px){.board-summary{grid-template-columns:repeat(3,1fr)}.roster-cards,.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.board-hero h1{font-size:34px}.board-summary,.org-two,.roster-cards,.committee-grid,.org-five{grid-template-columns:1fr}.roster-card,.committee-card{padding:22px}.role-title{align-items:flex-start;flex-direction:column}.role-title h3{font-size:24px}}
-  </style>
+  
+/* ROSTER WITH PHOTOS */
+.roster-photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.roster-photo-card{background:#fff;border:1px solid #e6ddc9;border-radius:18px;padding:20px 16px;text-align:center;box-shadow:0 8px 24px rgba(20,45,24,.07);transition:box-shadow .2s,transform .2s}
+.roster-photo-card:hover{box-shadow:0 14px 36px rgba(20,45,24,.12);transform:translateY(-3px)}
+.roster-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:3px solid #e6ddc9;display:block;background:#f0f0f0}
+.roster-photo-placeholder{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#183f21,#24592f);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#c6a437}
+.roster-photo-role{display:inline-block;background:#f7f1e3;color:#7d6316;border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:900;margin-bottom:8px}
+.roster-photo-name{font-size:1rem;font-weight:900;color:#183f21;margin-bottom:4px}
+.roster-photo-company{font-size:.76rem;color:#61716b;line-height:1.5}
+@media(max-width:1100px){.roster-photo-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:780px){.roster-photo-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.roster-photo-grid{grid-template-columns:1fr 1fr}}
+
+</style>
 </head>
 <body class="board-page">
   <div class="topbar"><div class="container topbar-inner"><span>彰化縣米穀商業同業公會 官方網站</span><span>電話：04-7222528｜辦公時間：週一至週五 09:00-17:00</span></div></div>
@@ -70,11 +84,31 @@
 
     <section class="section white" style="padding-top:0"><div class="container"><div class="board-summary"><div class="sum-card"><b>1</b><span>理事長</span></div><div class="sum-card"><b>8</b><span>理事會成員</span></div><div class="sum-card"><b>3</b><span>監事會成員</span></div></div></div></section>
 
-    <section class="section white"><div class="container"><div class="section-head"><span>ROSTER</span><h2>第29屆理監事名冊</h2><p>理事會、監事會、名譽理事長、顧問及候補名單完整公開。</p></div>
-      <div class="role-block"><div class="role-title"><span>理事會</span><h3>理事長、常務理事與理事</h3></div><div class="roster-cards"><article class="roster-card"><div class="role">理事長</div><h4>蘇建彰</h4><p>大義碾米工廠<br>彰化縣秀水鄉下崙村田洋巷28號</p></article><article class="roster-card"><div class="role">常務理事</div><h4>黃正達</h4><p>田中建新碾米工廠<br>彰化縣田中鎮民光路二段93號</p></article><article class="roster-card"><div class="role">常務理事</div><h4>施學朋</h4><p>年豐行<br>彰化縣埔鹽鄉石碑村番金路2巷14號</p></article><article class="roster-card"><div class="role">理事</div><h4>陳裕凱</h4><p>宏達裕碾米工廠<br>彰化縣溪州鄉民生路一段136號</p></article><article class="roster-card"><div class="role">理事</div><h4>楊弘煜</h4><p>榮利碾米工廠<br>彰化縣溪湖鎮二溪路1段695巷45弄46號</p></article><article class="roster-card"><div class="role">理事</div><h4>張志泓</h4><p>立大碾米工廠<br>彰化縣和美鎮源埤里大佃路392巷2號</p></article><article class="roster-card"><div class="role">理事</div><h4>周明哲</h4><p>正協碾米工廠<br>彰化縣二林鎮東華里路西巷19之21號</p></article><article class="roster-card"><div class="role">理事</div><h4>唐泉欽</h4><p>龍泉行<br>彰化市新華里彰美路1段62號</p></article><article class="roster-card"><div class="role">理事</div><h4>陳燕葶</h4><p>保證責任彰化縣第一稻米蔬果生產合作社<br>彰化縣埤頭鄉豐崙村埤周路66號</p></article></div></div>
-      <div class="role-block"><div class="role-title"><span>監事會</span><h3>常務監事與監事</h3></div><div class="roster-cards"><article class="roster-card"><div class="role">常務監事</div><h4>沈秉逸</h4><p>正益碾米工廠<br>彰化縣花壇鄉金福街350號</p></article><article class="roster-card"><div class="role">監事</div><h4>江俊雄</h4><p>三豐碾米工廠<br>彰化市中央里長安街159號</p></article><article class="roster-card"><div class="role">監事</div><h4>連吉隆</h4><p>和成糧食行<br>彰化縣鹿港鎮頂厝里鹿東路127號</p></article></div></div>
-      <div class="role-block"><div class="role-title"><span>顧問與候補</span><h3>名譽理事長、顧問、候補理監事</h3></div><div class="roster-cards"><article class="roster-card"><div class="role">名譽理事長</div><h4>陳樹林</h4><p>宏達裕碾米工廠<br>彰化縣溪州鄉民生路一段136號</p></article><article class="roster-card"><div class="role">顧問</div><h4>巫有凱</h4><p>億興碾米廠<br>彰化縣溪湖鎮彰水路一段53號</p></article><article class="roster-card"><div class="role">顧問</div><h4>陳德風</h4><p>陸和碾米工廠<br>彰化縣埤頭鄉溪林路406號</p></article><article class="roster-card"><div class="role">顧問</div><h4>陳溪泉</h4><p>南豐碾米工廠<br>彰化縣竹塘鄉中央路一段1501號</p></article><article class="roster-card"><div class="role">顧問</div><h4>劉正傑</h4><p>正新製米(股)公司<br>彰化縣田中鎮員集路一段530號</p></article><article class="roster-card"><div class="role">顧問</div><h4>陳肇浩</h4><p>壽米屋企業有限公司<br>彰化縣二林鎮南光里儒林路2-3號</p></article><article class="roster-card"><div class="role">候補理事</div><h4>沈昇翰</h4><p>金墩糧坊(股)公司<br>彰化縣花壇鄉金墩街154巷11號</p></article><article class="roster-card"><div class="role">候補理事</div><h4>陳瑞堂</h4><p>德記碾米廠<br>彰化縣埔心鄉東門村中正路1段36號</p></article><article class="roster-card"><div class="role">候補監事</div><h4>巫欣霖</h4><p>億興碾米廠<br>彰化縣西勢里彰水路1段53號</p></article></div></div>
-    </div></section>
+    <section class="section white"><div class="container">
+    <div class="section-head"><span>ROSTER</span><h2>第29屆理監事名冊</h2><p>理事會、監事會、顧問及候補名單。</p></div>
+
+    <div class="role-block">
+      <div class="role-title"><span>理事會</span><h3>理事長、常務理事與理事</h3></div>
+      <div class="roster-photo-grid" id="rosterDirectors">
+        <div style="color:#aaa;font-size:.85rem;padding:20px;grid-column:1/-1">載入中...</div>
+      </div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-title"><span>監事會</span><h3>常務監事與監事</h3></div>
+      <div class="roster-photo-grid" id="rosterSupervisors">
+        <div style="color:#aaa;font-size:.85rem;padding:20px;grid-column:1/-1">載入中...</div>
+      </div>
+    </div>
+
+    <div class="role-block">
+      <div class="role-title"><span>顧問與候補</span><h3>名譽理事長、顧問、候補理監事</h3></div>
+      <div class="roster-photo-grid" id="rosterAdvisors">
+        <div style="color:#aaa;font-size:.85rem;padding:20px;grid-column:1/-1">載入中...</div>
+      </div>
+    </div>
+
+  </div></section>
   </main>
   <footer style="position:relative;width:100%;line-height:0;overflow:hidden">
   <img src="圖庫/底部橫幅.png" alt="彰化縣米穀商業同業公會" style="width:100%;height:auto;display:block">
@@ -92,5 +126,60 @@
   <a href="contact.html"   title="聯絡公會按鈕" style="position:absolute;left:67%;top:70%;width:12%;height:14%;display:block"></a>
 </footer>
   <script src="./assets/js/site.js"></script>
+<script src="./assets/js/guild-data-static.js"></script>
+<script src="./assets/js/guild-api.js?v=20260601-static-cache"></script>
+
+<script>
+(function(){
+  var BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  var ROLE_ORDER = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
+  var ROLE_GROUP = {
+    '理事長':'理事會','副理事長':'理事會','常務理事':'理事會','理事':'理事會',
+    '常務監事':'監事會','監事':'監事會',
+    '名譽理事長':'顧問與候補','顧問':'顧問與候補','候補理事':'顧問與候補','候補監事':'顧問與候補'
+  };
+
+  function renderRoster(members) {
+    var groups = {};
+    members.forEach(function(m){
+      var g = ROLE_GROUP[m.role] || '其他';
+      if (!groups[g]) groups[g] = [];
+      groups[g].push(m);
+    });
+
+    var containers = {
+      '理事會': document.getElementById('rosterDirectors'),
+      '監事會': document.getElementById('rosterSupervisors'),
+      '顧問與候補': document.getElementById('rosterAdvisors')
+    };
+
+    Object.keys(containers).forEach(function(groupName){
+      var el = containers[groupName];
+      if (!el) return;
+      var mems = (groups[groupName] || []).sort(function(a,b){
+        return (ROLE_ORDER.indexOf(a.role)||99) - (ROLE_ORDER.indexOf(b.role)||99);
+      });
+      el.innerHTML = mems.map(function(m){
+        var photoHtml = m.photo
+          ? '<img class="roster-photo" src="' + BASE + m.photo.replace('./','') + '" alt="' + m.name + '" onerror="this.outerHTML='<div class=roster-photo-placeholder>👤</div>'">'
+          : '<div class="roster-photo-placeholder">👤</div>';
+        return '<div class="roster-photo-card">'
+          + photoHtml
+          + '<div class="roster-photo-role">' + m.role + '</div>'
+          + '<div class="roster-photo-name">' + m.name + '</div>'
+          + (m.company ? '<div class="roster-photo-company">' + m.company + '</div>' : '')
+          + '</div>';
+      }).join('');
+    });
+  }
+
+  function init(){
+    if (!window.GUILD_STATIC_DATA || !window.GUILD_STATIC_DATA.board) return;
+    renderRoster(window.GUILD_STATIC_DATA.board.members || []);
+  }
+  if (window.GUILD_STATIC_DATA) { init(); }
+  else { var t = setInterval(function(){ if(window.GUILD_STATIC_DATA){ clearInterval(t); init(); } }, 200); }
+})();
+</script>
 </body>
 </html>
