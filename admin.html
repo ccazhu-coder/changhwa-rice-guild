@@ -154,8 +154,9 @@ a{color:inherit;text-decoration:none}
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div id="modalBody"></div>
+    <div id="modalError" style="display:none;background:#fdecea;border:1px solid #f5b7b1;border-radius:8px;padding:10px 14px;font-size:.82rem;color:#c0392b;margin:0 0 12px"></div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" onclick="saveEdit()">💾 儲存修改</button>
+      <button type="button" class="btn btn-primary" id="modalSaveBtn" onclick="saveEdit()">💾 儲存修改</button>
       <button type="button" class="btn btn-outline" onclick="closeModal()">取消</button>
     </div>
   </div>
@@ -740,15 +741,32 @@ let editMode = null;
 
 let _modalLock = false;  // 防止 click 冒泡誤關 modal
 
+function showModalError(msg) {
+  const el = document.getElementById('modalError');
+  if (el) { el.textContent = '❌ ' + msg; el.style.display = 'block'; }
+  const btn = document.getElementById('modalSaveBtn');
+  if (btn) { btn.textContent = '💾 儲存修改'; btn.disabled = false; }
+}
+function setModalSaving(saving) {
+  const btn = document.getElementById('modalSaveBtn');
+  const err = document.getElementById('modalError');
+  if (btn) { btn.textContent = saving ? '⏳ 儲存中...' : '💾 儲存修改'; btn.disabled = saving; }
+  if (err && !saving) err.style.display = 'none';
+}
+
 function openModal(title, bodyHtml) {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = bodyHtml;
+  const err = document.getElementById('modalError');
+  if (err) err.style.display = 'none';
+  const btn = document.getElementById('modalSaveBtn');
+  if (btn) { btn.textContent = '💾 儲存修改'; btn.disabled = false; }
   document.getElementById('editModal').classList.add('open');
   _modalLock = true;
-  setTimeout(function(){ _modalLock = false; }, 300);  // 300ms 保護期
+  setTimeout(function(){ _modalLock = false; }, 300);
 }
 function closeModal() {
-  if (_modalLock) return;  // 剛開啟時不允許關閉
+  if (_modalLock) return;
   document.getElementById('editModal').classList.remove('open');
   editMode = null;
 }
@@ -809,7 +827,7 @@ async function saveEdit() {
     item.registerUrl=(document.getElementById('e-url')?.value||'').trim();
     item.updatedAt=new Date().toISOString().slice(0,10);
     try { await saveData('update: news - '+title); renderNewsList(); closeModal(); showStatus('✅ 消息已更新！'); }
-    catch(e) { showStatus('更新失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type === 'gallery') {
     const item = staticData.gallery[editMode.index];
     item.rocDate=date; item.date=date.replace(/\./g,'-');
@@ -817,7 +835,7 @@ async function saveEdit() {
     item.result=(document.getElementById('e-result')?.value||'').trim();
     item.updatedAt=new Date().toISOString().slice(0,10);
     try { await saveData('update: gallery - '+title); renderGalleryList(); closeModal(); showStatus('✅ 活動相簿已更新！'); }
-    catch(e) { showStatus('更新失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   }
 }
 
@@ -1355,7 +1373,7 @@ async function deleteBoardMember(i) {
   if (!confirm('確定刪除？')) return;
   staticData.board.members.splice(i,1);
   try { await saveData('delete: board member'); renderBoardList(); showStatus('✅ 已刪除'); }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 
 // ══ COMMITTEES ══
@@ -1399,7 +1417,7 @@ async function addChairperson() {
   if (isCurrent) staticData.chairpersons.forEach(c => delete c.isCurrent);
   staticData.chairpersons.push({ term, period, name, company, ...(isCurrent?{isCurrent:true}:{}) });
   try { await saveData('add: chairperson - ' + name); renderChairpersonsList(); showStatus('✅ 已新增歷屆理事長'); ['cp-term','cp-period','cp-name','cp-company'].forEach(id=>document.getElementById(id).value=''); document.getElementById('cp-current').checked=false; }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 function renderChairpersonsList() {
   const el = document.getElementById('chairpersons-list');
@@ -1437,7 +1455,7 @@ async function deleteChairperson(i) {
   if (!confirm('確定刪除？')) return;
   staticData.chairpersons.splice(i,1);
   try { await saveData('delete: chairperson'); renderChairpersonsList(); showStatus('✅ 已刪除'); }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 
 // ══ MEMBERS ══
@@ -1453,7 +1471,7 @@ async function addMember() {
   if (!staticData.members) staticData.members = [];
   staticData.members.push({ id: mid||nextId('MEM',staticData.members), grade, name, owner, area, phone, address, createdAt: new Date().toISOString().slice(0,10) });
   try { await saveData('add: member - '+name); renderMemberList(); showStatus('✅ 已新增會員'); ['mem-name','mem-owner','mem-area','mem-phone','mem-address','mem-id'].forEach(id=>document.getElementById(id).value=''); }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 function renderMemberList() {
   const el = document.getElementById('members-list');
@@ -1504,7 +1522,7 @@ async function deleteMember(i) {
   if (!confirm(`確定將「${m.name}」從會員名錄刪除（退會）？\n\n此操作無法復原。`)) return;
   staticData.members.splice(i,1);
   try { await saveData('delete: member - ' + m.name + ' (退會)'); renderMemberList(); showStatus(`✅「${m.name}」已退會刪除`); }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 
 // ══ BRAND ══
@@ -1567,7 +1585,7 @@ async function saveBrand() {
   staticData.brand.description = document.getElementById('brand-desc')?.value.trim() || '';
   staticData.brand.updatedAt = new Date().toISOString().slice(0,10);
   try { await saveData('update: brand info'); showStatus('✅ 彰榖米品牌資訊已更新！'); }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 function addBrandPoint() {
   editMode = { type:'brandPoint', index:-1 };
@@ -1588,7 +1606,7 @@ async function deleteBrandPoint(i) {
   if (!confirm('確定刪除？')) return;
   (staticData.brand.points||[]).splice(i,1);
   try { await saveData('delete: brand point'); renderBrandForm(); showStatus('✅ 已刪除'); }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 
 // ══ BRAND IMAGES (fixed slots matching brand.html) ══
@@ -1675,6 +1693,7 @@ async function doReplaceImg(input) {
 const _origSaveEdit = saveEdit;
 saveEdit = async function() {
   if (!editMode) return;
+  setModalSaving(true);
   if (editMode.type==='board') {
     const m = staticData.board.members[editMode.index];
     m.role    = document.getElementById('e-cat')?.value||m.role;
@@ -1684,10 +1703,10 @@ saveEdit = async function() {
     // Upload new photo if selected
     if (_pendingBoardPhoto) {
       try { m.photo = await uploadBoardPhoto(m.name, _pendingBoardPhoto); _pendingBoardPhoto = null; }
-      catch(e) { showStatus('照片上傳失敗：'+e.message,true); return; }
+      catch(e) { showModalError('照片上傳失敗：'+e.message); return; }
     }
     try { await saveData('update: board member - '+m.name); renderBoardList(); closeModal(); showStatus('✅ 已更新'); }
-    catch(e) { showStatus('失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type==='committee') {
     const c = staticData.committees[editMode.index];
     c.name    = (document.getElementById('e-title')?.value||'').trim();
@@ -1695,7 +1714,7 @@ saveEdit = async function() {
     c.viceChair = (document.getElementById('e-cat')?.value||'').trim();
     c.duties  = (document.getElementById('e-summary')?.value||'').trim();
     try { await saveData('update: committee - '+c.name); renderCommitteesList(); closeModal(); showStatus('✅ 已更新'); }
-    catch(e) { showStatus('失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type==='chairperson') {
     const c = staticData.chairpersons[editMode.index];
     c.term    = (document.getElementById('e-title')?.value||'').trim();
@@ -1706,7 +1725,7 @@ saveEdit = async function() {
     if (isCurrent) staticData.chairpersons.forEach(x=>delete x.isCurrent);
     if (isCurrent) c.isCurrent = true; else delete c.isCurrent;
     try { await saveData('update: chairperson - '+c.name); renderChairpersonsList(); closeModal(); showStatus('✅ 已更新'); }
-    catch(e) { showStatus('失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type==='member') {
     const m = staticData.members[editMode.index];
     m.grade   = document.getElementById('e-cat')?.value||m.grade;
@@ -1716,7 +1735,7 @@ saveEdit = async function() {
     m.phone   = (document.getElementById('e-url')?.value||'').trim();
     m.address = (document.getElementById('e-result')?.value||'').trim();
     try { await saveData('update: member - '+m.name); renderMemberList(); closeModal(); showStatus('✅ 已更新'); }
-    catch(e) { showStatus('失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type==='history') {
     const h = staticData.history[editMode.index];
     h.period = (document.getElementById('e-date')?.value||'').trim();
@@ -1725,7 +1744,7 @@ saveEdit = async function() {
     h.sort   = parseInt(document.getElementById('e-sort')?.value) || h.sort;
     staticData.history.sort((a,b)=>(a.sort||0)-(b.sort||0));
     try { await saveData('update: history - '+h.title); renderHistoryList(); closeModal(); showStatus('✅ 已更新'); }
-    catch(e) { showStatus('失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type==='brandPoint') {
     if (!staticData.brand) staticData.brand={};
     if (!staticData.brand.points) staticData.brand.points=[];
@@ -1733,7 +1752,7 @@ saveEdit = async function() {
     if (editMode.index>=0) staticData.brand.points[editMode.index]=point;
     else staticData.brand.points.push(point);
     try { await saveData('update: brand point'); renderBrandForm(); closeModal(); showStatus('✅ 已更新'); }
-    catch(e) { showStatus('失敗：'+e.message,true); }
+    catch(e) { showModalError(e.message); }
   } else { await _origSaveEdit(); }
 };
 
@@ -1805,7 +1824,7 @@ async function deleteHistory(i) {
   if (!confirm(`確定刪除「${h.title}」？`)) return;
   staticData.history.splice(i,1);
   try { await saveData('delete: history - '+h.title); renderHistoryList(); showStatus('✅ 已刪除'); }
-  catch(e) { showStatus('失敗：'+e.message,true); }
+  catch(e) { showModalError(e.message); }
 }
 
 // Enter key support
