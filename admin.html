@@ -543,30 +543,10 @@ a{color:inherit;text-decoration:none}
 
         <!-- 品牌圖片管理 -->
         <div class="card">
-          <h3>🖼️ 品牌圖片管理</h3>
-          <p style="font-size:.82rem;color:var(--muted);margin-bottom:16px">點擊「替換」可上傳新圖片覆蓋原本的品牌圖片，圖片會存入 <code>圖庫/品牌/</code> 目錄。</p>
-          <div id="brand-images-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px"></div>
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
-            <h4 style="font-size:.9rem;font-weight:800;color:var(--green);margin-bottom:12px">⬆️ 新增品牌圖片</h4>
-            <div class="field-row">
-              <div class="field"><label>圖片名稱／用途</label><input id="brand-img-label" placeholder="例：彰榖米產品展示"></div>
-              <div class="field"><label>圖片位置（選填）</label>
-                <select id="brand-img-section">
-                  <option value="showcase">彰化好米展示</option>
-                  <option value="baking">米穀粉烘焙</option>
-                  <option value="product">品牌產品</option>
-                  <option value="other">其他</option>
-                </select>
-              </div>
-            </div>
-            <div class="upload-area" onclick="document.getElementById('brand-img-file').click()" style="max-width:400px">
-              <div id="brand-img-thumb" style="font-size:2rem">🖼️</div>
-              <p>點擊選擇圖片（JPG / PNG）</p>
-              <input type="file" id="brand-img-file" accept="image/*" style="display:none" onchange="previewBrandImg(this)">
-            </div>
-            <div id="brand-img-preview" style="margin-top:8px;font-size:.82rem;color:var(--green);display:none"></div>
-            <button class="btn btn-gold" onclick="uploadBrandImage()" style="margin-top:12px">📤 上傳品牌圖片</button>
-          </div>
+          <h3>🖼️ 品牌圖片管理 <small style="font-size:.74rem;font-weight:400;color:var(--muted)">直接替換覆蓋原圖，不需修改網頁</small></h3>
+          <div id="brand-img-slots" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-top:12px"></div>
+          <!-- Hidden file input for replace -->
+          <input type="file" id="brand-replace-file" accept="image/*" style="display:none" onchange="doReplaceImg(this)">
         </div>
       </div>
 
@@ -1464,7 +1444,9 @@ function renderBrandForm() {
       : '<div style="color:var(--muted);font-size:.85rem">尚無品牌特色，點下方「新增特色」</div>';
   }
 
-  // Render brand images
+  // Render brand image slots
+  renderBrandImgSlots();
+  // Legacy: hide old images list if still present
   const imgList = document.getElementById('brand-images-list');
   if (imgList) {
     const images = b.images || [];
@@ -1521,56 +1503,84 @@ async function deleteBrandPoint(i) {
   catch(e) { showStatus('失敗：'+e.message,true); }
 }
 
-// ══ BRAND IMAGES ══
-let pendingBrandImg = null;
+// ══ BRAND IMAGES (fixed slots matching brand.html) ══
+const BRAND_IMG_SLOTS = [
+  { label:'Hero 主視覺',       section:'Hero',      path:'圖庫/圖-7.png' },
+  { label:'品牌主圖',          section:'品牌識別',   path:'圖庫/彰榖米-圖片.png' },
+  { label:'白米展示',          section:'彰化好米',   path:'圖庫/圖-5.png' },
+  { label:'品牌包裝',          section:'彰化好米',   path:'圖庫/圖-9.png' },
+  { label:'稻田景觀 1',        section:'彰化好米',   path:'圖庫/圖-1.png' },
+  { label:'稻田景觀 2',        section:'彰化好米',   path:'圖庫/圖-2.png' },
+  { label:'米食料理',          section:'彰化好米',   path:'圖庫/圖-3.png' },
+  { label:'多穀物展示',        section:'彰化好米',   path:'圖庫/圖-4.png' },
+  { label:'烘焙主圖',          section:'米穀粉烘焙', path:'圖庫/米穀粉烘焙-2.png' },
+  { label:'烘焙作品 1（蛋糕）', section:'米穀粉烘焙', path:'圖庫/米穀粉烘焙-1.png' },
+  { label:'烘焙作品 3（甜甜圈）',section:'米穀粉烘焙',path:'圖庫/米穀粉烘焙-3.png' },
+  { label:'烘焙作品 4（司康）', section:'米穀粉烘焙', path:'圖庫/米穀粉烘焙-4.png' },
+  { label:'烘焙作品 5（鬆餅）', section:'米穀粉烘焙', path:'圖庫/米穀粉烘焙-5.png' },
+  { label:'烘焙作品 6（貝果）', section:'米穀粉烘焙', path:'圖庫/米穀粉烘焙-6.png' },
+  { label:'袋裝包裝展示',       section:'更多米食',   path:'圖庫/圖-10.png' },
+  { label:'品牌系列包裝',       section:'更多米食',   path:'圖庫/圖-11.png' },
+  { label:'木盒精裝展示',       section:'更多米食',   path:'圖庫/圖-12.png' },
+];
+let _replacingSlot = null;
+const BASE_URL = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
 
-function previewBrandImg(input) {
-  if (input.files[0]) {
-    pendingBrandImg = input.files[0];
-    const url = URL.createObjectURL(pendingBrandImg);
-    document.getElementById('brand-img-thumb').innerHTML =
-      `<img src="${url}" style="width:100%;max-height:120px;object-fit:contain;border-radius:8px">`;
-    document.getElementById('brand-img-preview').style.display = 'block';
-    document.getElementById('brand-img-preview').textContent =
-      `🖼️ ${pendingBrandImg.name}（${(pendingBrandImg.size/1024).toFixed(0)} KB）`;
-  }
-}
-
-async function uploadBrandImage() {
-  if (!pendingBrandImg) { showStatus('請先選擇圖片', true); return; }
-  const label   = document.getElementById('brand-img-label').value.trim() || pendingBrandImg.name;
-  const section = document.getElementById('brand-img-section').value;
-  try {
-    showStatus('上傳中...');
-    const ext     = pendingBrandImg.name.split('.').pop().toLowerCase();
-    const safeName = label.replace(/[^a-zA-Z0-9一-龥_-]/g,'_').substring(0,30) + '_' + Date.now() + '.' + ext;
-    const repoPath = `圖庫/品牌/${safeName}`;
-    await githubUploadFile(pendingBrandImg, repoPath, `add: brand image - ${label}`);
-
-    // Save to brand.images in static data
-    if (!staticData.brand) staticData.brand = {};
-    if (!staticData.brand.images) staticData.brand.images = [];
-    staticData.brand.images.push({
-      label, section, path: `./${repoPath}`, uploadedAt: new Date().toISOString().slice(0,10)
+function renderBrandImgSlots() {
+  const el = document.getElementById('brand-img-slots');
+  if (!el) return;
+  // Group by section
+  const sections = {};
+  BRAND_IMG_SLOTS.forEach((slot, i) => {
+    if (!sections[slot.section]) sections[slot.section] = [];
+    sections[slot.section].push({...slot, index:i});
+  });
+  let html = '';
+  Object.entries(sections).forEach(([secName, slots]) => {
+    html += `<div style="grid-column:1/-1;font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);padding:8px 0 4px;border-bottom:1px solid var(--border);margin-top:4px">${secName}</div>`;
+    slots.forEach(slot => {
+      const imgUrl = BASE_URL + slot.path + '?v=' + Date.now();
+      html += `<div style="background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.06)">
+        <div style="aspect-ratio:4/3;overflow:hidden;background:#f5f5f5;position:relative;cursor:pointer" onclick="startReplace(${slot.index})" title="點擊替換">
+          <img src="${imgUrl}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="${slot.label}">
+          <div style="display:none;position:absolute;inset:0;align-items:center;justify-content:center;background:#f5f5f5;flex-direction:column;color:var(--muted);font-size:.8rem">
+            <div style="font-size:1.5rem">🖼️</div>圖片未載入
+          </div>
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.0);transition:background .2s;display:flex;align-items:center;justify-content:center;opacity:0" onmouseover="this.style.opacity=1;this.style.background='rgba(0,0,0,.35)'" onmouseout="this.style.opacity=0;this.style.background='rgba(0,0,0,0)'">
+            <span style="background:#fff;color:var(--green);padding:6px 14px;border-radius:999px;font-size:.82rem;font-weight:800">🔄 替換</span>
+          </div>
+        </div>
+        <div style="padding:10px 12px">
+          <div style="font-size:.84rem;font-weight:700;color:var(--green)">${slot.label}</div>
+          <div style="font-size:.7rem;color:var(--muted);margin-top:2px">${slot.path}</div>
+          <button class="btn btn-gold btn-sm" onclick="startReplace(${slot.index})" style="margin-top:8px;width:100%;justify-content:center">🔄 替換圖片</button>
+        </div>
+      </div>`;
     });
-    await saveData('add: brand image - ' + label);
-
-    showStatus(`✅「${label}」上傳成功！`);
-    pendingBrandImg = null;
-    document.getElementById('brand-img-label').value = '';
-    document.getElementById('brand-img-preview').style.display = 'none';
-    document.getElementById('brand-img-thumb').innerHTML = '<div style="font-size:2rem">🖼️</div>';
-    document.getElementById('brand-img-file').value = '';
-    renderBrandForm();
-  } catch(e) { showStatus('上傳失敗：' + e.message, true); }
+  });
+  el.innerHTML = html;
 }
 
-async function deleteBrandImage(i) {
-  const img = (staticData.brand?.images||[])[i];
-  if (!confirm(`確定刪除圖片「${img.label}」？`)) return;
-  staticData.brand.images.splice(i, 1);
-  try { await saveData('delete: brand image - ' + img.label); renderBrandForm(); showStatus('✅ 已刪除'); }
-  catch(e) { showStatus('失敗：'+e.message, true); }
+function startReplace(slotIndex) {
+  _replacingSlot = slotIndex;
+  const input = document.getElementById('brand-replace-file');
+  input.value = '';
+  input.click();
+}
+
+async function doReplaceImg(input) {
+  if (!input.files[0] || _replacingSlot === null) return;
+  const slot = BRAND_IMG_SLOTS[_replacingSlot];
+  const file = input.files[0];
+  try {
+    showStatus(`替換中：${slot.label}...`);
+    // Override the EXACT same path
+    await githubUploadFile(file, slot.path, `replace: brand image - ${slot.label}`);
+    showStatus(`✅「${slot.label}」替換成功！1～2 分鐘後網站更新。`);
+    // Force refresh thumbnails
+    setTimeout(() => renderBrandImgSlots(), 2000);
+  } catch(e) { showStatus('替換失敗：' + e.message, true); }
+  _replacingSlot = null;
 }
 
 // ══ Extend saveEdit for new types ══
