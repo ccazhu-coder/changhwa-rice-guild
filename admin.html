@@ -248,7 +248,16 @@ a{color:inherit;text-decoration:none}
             <div class="field-hint">若有報名表或外部連結，填入此欄</div>
           </div>
           <div style="display:flex;gap:10px;margin-top:4px">
-            <button class="btn btn-primary" onclick="addNews()">✅ 新增消息</button>
+          <div class="field">
+            <label>封面圖片路徑（選填，精選消息大圖）</label>
+            <input type="text" id="news-coverImage" placeholder="圖庫/activities/xxx/photo_01.jpg">
+            <div class="field-hint">填入後前端精選消息區塊會顯示大圖封面</div>
+          </div>
+          <div class="field" style="display:flex;align-items:center;gap:10px">
+            <input type="checkbox" id="news-isPinned" style="width:18px;height:18px">
+            <label for="news-isPinned" style="margin:0;cursor:pointer">置頂 / 設為精選消息</label>
+          </div>
+                      <button class="btn btn-primary" onclick="addNews()">✅ 新增消息</button>
             <button class="btn btn-outline" onclick="loadData()">🔄 重新載入</button>
           </div>
         </div>
@@ -792,6 +801,8 @@ function editNews(i) {
     <div class="field"><label>標題</label><input id="e-title" value="${(item.title||'').replace(/"/g,'&quot;')}"></div>
     <div class="field"><label>摘要</label><textarea id="e-summary">${item.summary||''}</textarea></div>
     <div class="field"><label>報名／連結（選填）</label><input id="e-url" value="${item.registerUrl||''}"></div>
+    <div class="field"><label>封面圖片路徑（精選消息大圖）</label><input id="e-coverImage" value="${item.coverImage||''}" placeholder="圖庫/activities/.../photo_01.jpg"></div>
+    <div class="field" style="display:flex;align-items:center;gap:10px"><input type="checkbox" id="e-isPinned" ${item.isPinned?'checked':''}><label for="e-isPinned" style="margin:0;cursor:pointer">置頂 / 精選消息</label></div>
   `);
 }
 
@@ -825,6 +836,8 @@ async function saveEdit() {
     item.rocDate=date; item.date=date.replace(/\./g,'-');
     item.category=cat; item.title=title; item.summary=summary;
     item.registerUrl=(document.getElementById('e-url')?.value||'').trim();
+    item.coverImage=(document.getElementById('e-coverImage')?.value||'').trim();
+    item.isPinned=!!(document.getElementById('e-isPinned')?.checked);
     item.updatedAt=new Date().toISOString().slice(0,10);
     try { await saveData('update: news - '+title); renderNewsList(); closeModal(); showStatus('✅ 消息已更新！'); }
     catch(e) { showModalError(e.message); }
@@ -855,14 +868,15 @@ async function addNews() {
 
   const item = { id: nextId('NEWS', staticData.news), date: date.replace(/\./g,'-'), rocDate: date,
     category: cat, title, summary, location:'', registerUrl: url, status:'活動結束',
-    isHome: true, isPinned: false, sort: (staticData.news.length+1),
+    coverImage: (document.getElementById('news-coverImage')?.value||'').trim(), isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length+1),
     createdAt: new Date().toISOString().slice(0,10), updatedAt: new Date().toISOString().slice(0,10), note:'' };
 
   staticData.news = [item, ...(staticData.news || [])];
   try {
     await saveData('content: add news - ' + title);
     renderNewsList();
-    ['news-date','news-title','news-summary','news-url'].forEach(id => document.getElementById(id).value = '');
+    ['news-date','news-title','news-summary','news-url','news-coverImage'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('news-isPinned').checked = false;
   } catch(e) { showStatus('儲存失敗：' + e.message, true); }
 }
 
@@ -1025,7 +1039,7 @@ async function addGallery() {
     participantCount: '',
     coverImage: coverPhoto ? coverPhoto.url : '',
     albumUrl: '', albumFolderId: '', albumFolderName: title, albumFolderUrl: '',
-    isHome: true, isPinned: false, sort: (staticData.gallery.length + 1),
+    coverImage: (document.getElementById('news-coverImage')?.value||'').trim(), isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.gallery.length + 1),
     createdAt: new Date().toISOString().slice(0,10),
     updatedAt: new Date().toISOString().slice(0,10),
     note: `uploaded to ${repoFolder}`,
@@ -1165,7 +1179,7 @@ async function uploadDM() {
       summary: summary || '點擊查看招生宣傳單',
       coverImage: fileUrl,
       location: '', registerUrl: fileUrl, status: '公告',
-      isHome: true, isPinned: false, sort: (staticData.news.length + 1),
+      coverImage: (document.getElementById('news-coverImage')?.value||'').trim(), isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length + 1),
       createdAt: today.toISOString().slice(0,10),
       updatedAt: today.toISOString().slice(0,10), note: 'dm_upload'
     };
