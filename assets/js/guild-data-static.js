@@ -10,7 +10,7 @@ window.GUILD_STATIC_DATA = {
       "title": "重要通知 — 食米產品產地標示查核加強",
       "summary": "農業部農糧署來函通知，將加強查核市售包裝食米產品之「產地標示」。國產米應標示「臺灣」或實際生產縣市名稱；進口米應標示生產國名；混合米應標示各國別及比例。標示內容不得與實際內容物不符，違規者除可處新臺幣4萬元至400萬元罰鍰外，情節重大者並可能停止營業或涉及刑責，請各會員留意遵循。",
       "location": "",
-      "registerUrl": "",
+      "registerUrl": "https://ccazhu-coder.github.io/changhwa-rice-guild/files/115031市售米標落實產地公文.pdf",
       "status": "公告",
       "isHome": true,
       "isPinned": true,
