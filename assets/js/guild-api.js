@@ -89,7 +89,20 @@
   if(isUsableImageUrl(item.coverImage)){return '<div class="activity-photo-strip"><figure onclick="guildLb(\''+esc(item.id)+'\',0)"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"><figcaption>活動照片</figcaption></figure></div>';}
   return '';
 }
-  function galleryCard(item){
+  function featuredNewsCard(item){
+  var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
+  var imgHtml=hasImg?'<div class="news-feat-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"><span class="news-tag">'+esc(item.category||'消息')+'</span></div>':'';
+  var bodyExtras=hasImg?'':'<span class="news-tag" style="margin-bottom:10px;display:inline-block">'+esc(item.category||'消息')+'</span><br>';
+  var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;padding:7px 18px;background:#b08a2e;color:#fff;border-radius:20px;font-size:.82rem;text-decoration:none">了解更多 →</a>':'';
+  return '<div class="news-feat-card">'+imgHtml+'<div class="news-feat-body">'+bodyExtras+'<div class="news-date">'+esc(item.rocDate||item.date)+'</div><h2>'+esc(item.title)+'</h2>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+link+'</div></div>';
+}
+function recentNewsCard(item){
+  var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
+  var imgHtml=hasImg?'<div class="news-list-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></div>':'<div class="news-list-img" style="background:linear-gradient(135deg,#e8f5e9,#f7f1e3);display:flex;align-items:center;justify-content:center;color:#5a7a5e;font-size:.72rem;font-weight:700;text-align:center;padding:8px">'+esc(item.category||'消息')+'</div>';
+  var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" style="font-size:.8rem;color:#1a5c28">詳細資訊 →</a>':'';
+  return '<div class="news-list-card">'+imgHtml+'<div class="news-list-body"><div class="news-meta"><span class="news-badge">'+esc(item.category||'消息')+'</span><span style="font-size:.74rem;color:#8c8c8c">'+esc(item.rocDate||item.date)+'</span></div><h3>'+esc(item.title)+'</h3>'+(item.summary?'<p style="font-size:.85rem;color:#666;line-height:1.6;margin-top:4px">'+esc(item.summary)+'</p>':'')+link+'</div></div>';
+}
+function galleryCard(item){
   var hasCover=item.coverImage&&isUsableImageUrl(item.coverImage);
   var lbPhotos=[];
   if(hasCover)lbPhotos.push({src:item.coverImage,alt:item.title});
@@ -101,7 +114,29 @@
   return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 }
   function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGalleryList');if(!newsBox&&!galleryBox)return;staticOrFetch('home').then(function(data){if(newsBox){var news=sortList(data.news||[]).slice(0,3);newsBox.innerHTML=news.length?news.map(newsCard).join(''):'<article class="news-item"><span>公告</span><h3>目前尚無最新消息</h3></article>'}if(galleryBox){var gallery=sortList(data.gallery||[]).slice(0,6);galleryBox.innerHTML=gallery.length?gallery.map(galleryCard).join(''):'<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現成果與照片。</p></article>'}}).catch(function(){if(newsBox){newsBox.innerHTML='<article class="news-item"><time>115.05.06</time><span>會員大會</span><h3>第29屆第2次會員大會暨理監事聯席會議</h3></article><article class="news-item"><time>115.05.19</time><span>教育訓練</span><h3>115年度會員教育訓練：農產品業稅務實務與相關法規</h3></article>'}})}
-  function renderNewsPage(){var newsBox=qs('newsApiList');var galleryBox=qs('galleryApiList');if(!newsBox&&!galleryBox)return;if(newsBox){staticOrFetch('news',{limit:100}).then(function(data){var list=sortList(data.news||[]);newsBox.innerHTML=list.length?list.map(newsCard).join(''):'<article class="news-item"><span>公告</span><h3>目前尚無最新消息</h3></article>'}).catch(function(){newsBox.innerHTML='<article class="news-item"><time>115.05.06</time><span>會員大會</span><h3>第29屆第2次會員大會暨理監事聯席會議</h3></article>'})}if(galleryBox){staticOrFetch('gallery',{limit:100}).then(function(data){var list=sortList(data.gallery||[]);galleryBox.innerHTML=list.length?list.map(galleryCard).join(''):'<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現成果與照片。</p></article>'}).catch(function(){galleryBox.innerHTML='<article class="service-card"><h3>活動花絮整理中</h3><p>請稍後再試。</p></article>'})}}
+  function renderNewsPage(){
+  var featBox=qs('featuredNewsList');
+  var recentBox=qs('recentNewsList');
+  var galleryBox=qs('galleryApiList');
+  if(!featBox&&!recentBox&&!galleryBox)return;
+  if(featBox||recentBox){
+    staticOrFetch('news',{limit:100}).then(function(data){
+      var allNews=sortList(data.news||[]);
+      if(featBox){
+        var pinned=allNews.filter(function(n){return n.isPinned;}).slice(0,2);
+        featBox.innerHTML=pinned.length?pinned.map(featuredNewsCard).join(''):'<div style="color:#888;padding:20px 0">近期無精選消息</div>';
+      }
+      if(recentBox){
+        var recent=allNews.filter(function(n){return !n.isPinned;}).slice(0,5);
+        recentBox.innerHTML=recent.length?recent.map(recentNewsCard).join(''):'<div style="color:#888;padding:20px 0">近期無消息</div>';
+      }
+    }).catch(function(){
+      if(featBox)featBox.innerHTML='<div style="color:#888">消息載入失敗</div>';
+      if(recentBox)recentBox.innerHTML='';
+    });
+  }
+  if(galleryBox){staticOrFetch('gallery',{limit:100}).then(function(data){var list=sortList(data.gallery||[]);galleryBox.innerHTML=list.length?list.map(galleryCard).join(''):'<article class="activity-card"><div class="activity-card-body"><h3>活動花紮整理中</h3><p>活動結束後將於此呼現成果與照片。</p></div></article>';}).catch(function(){galleryBox.innerHTML='<article class="activity-card"><div class="activity-card-body"><h3>活動花紮整理中</h3><p>請稍後再試。</p></div></article>';});}
+}
   function fixTalentLinks(){document.querySelectorAll('a').forEach(function(a){var href=(a.getAttribute('href')||'').trim();var text=(a.textContent||'').trim();if(href==='talent.html'||href==='./talent.html'||href==='#talent'||href.endsWith('/talent.html')||text.indexOf('人才培訓委員會')>-1||text.indexOf('查看人才培訓委員會內容')>-1){a.setAttribute('href','training.html')}})}
 
   function renderTrainingPage(){
