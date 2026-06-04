@@ -226,6 +226,7 @@ a{color:inherit;text-decoration:none}
               <select id="news-cat">
                 <option>教育訓練</option>
                 <option>會務公告</option>
+                <option>政策公告</option>
                 <option>公益活動</option>
                 <option>訓練品質</option>
                 <option>活動通知</option>
@@ -270,6 +271,7 @@ a{color:inherit;text-decoration:none}
               <label>分類</label>
               <select id="ann-cat">
                 <option>會務公告</option>
+                <option>政策公告</option>
                 <option>教育訓練</option>
                 <option>訓練品質</option>
                 <option>公益活動</option>
@@ -726,7 +728,7 @@ document.getElementById('editModal').addEventListener('click', function(e) {
 function editNews(i) {
   const item = staticData.news[i];
   editMode = { type: 'news', index: i };
-  const cats = ['教育訓練','會務公告','公益活動','訓練品質','活動通知'];
+  const cats = ['教育訓練','會務公告','政策公告','公益活動','訓練品質','活動通知'];
   const opts = cats.map(c => `<option${item.category===c?' selected':''}>${c}</option>`).join('');
   openModal('✏️ 編輯消息', `
     <div class="field-row">
