@@ -249,9 +249,18 @@ a{color:inherit;text-decoration:none}
           </div>
           <div style="display:flex;gap:10px;margin-top:4px">
           <div class="field">
-            <label>封面圖片路徑（選填，精選消息大圖）</label>
-            <input type="text" id="news-coverImage" placeholder="圖庫/activities/xxx/photo_01.jpg">
-            <div class="field-hint">填入後前端精選消息區塊會顯示大圖封面</div>
+            <label>封面圖片（選填，精選消息大圖）</label>
+            <div id="news-cover-preview" style="display:none;align-items:center;gap:12px;margin-bottom:8px;padding:10px;background:#f7f1e3;border-radius:10px;border:1px solid #e6ddc9">
+              <img id="news-cover-img" src="" alt="預覽" style="height:72px;border-radius:8px;object-fit:cover;flex-shrink:0">
+              <div style="flex:1;min-width:0">
+                <div id="news-cover-name" style="font-size:.8rem;color:#526055;word-break:break-all"></div>
+                <div style="font-size:.72rem;color:#aaa;margin-top:2px">將於儲存時自動上傳至網站</div>
+              </div>
+              <button type="button" onclick="clearNewsCover()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:4px 8px;cursor:pointer;color:#666;font-size:.78rem">✕ 移除</button>
+            </div>
+            <input type="file" id="news-coverFile" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="previewNewsCover(this)">
+            <button type="button" onclick="document.getElementById('news-coverFile').click()" class="btn btn-outline" style="width:100%;margin-top:4px">📷 從本機選擇封面圖片</button>
+            <div class="field-hint">支援 JPG / PNG / WebP・儲存時自動上傳至 圖庫/news-covers/</div>
           </div>
           <div class="field" style="display:flex;align-items:center;gap:10px">
             <input type="checkbox" id="news-isPinned" style="width:18px;height:18px">
@@ -801,7 +810,7 @@ function editNews(i) {
     <div class="field"><label>標題</label><input id="e-title" value="${(item.title||'').replace(/"/g,'&quot;')}"></div>
     <div class="field"><label>摘要</label><textarea id="e-summary">${item.summary||''}</textarea></div>
     <div class="field"><label>報名／連結（選填）</label><input id="e-url" value="${item.registerUrl||''}"></div>
-    <div class="field"><label>封面圖片路徑（精選消息大圖）</label><input id="e-coverImage" value="${item.coverImage||''}" placeholder="圖庫/activities/.../photo_01.jpg"></div>
+    <div class="field"><label>封面圖片（精選消息大圖）</label>${item.coverImage ? '<div style="margin-bottom:8px;padding:8px;background:#f7f1e3;border-radius:8px;display:flex;align-items:center;gap:10px"><img src="https://ccazhu-coder.github.io/changhwa-rice-guild/'+item.coverImage+'" style="height:52px;border-radius:6px;object-fit:cover" onerror="this.style.display=\'none\'"><span style="font-size:.74rem;color:#526055;word-break:break-all">'+item.coverImage+'</span></div>' : ''}<input type="file" id="e-coverFile" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="previewEditCover(this)"><button type="button" onclick="document.getElementById('e-coverFile').click()" class="btn btn-outline" style="width:100%;margin-top:4px">📷 ${item.coverImage ? '更換封面圖片' : '選擇封面圖片'}</button><div id="e-cover-preview" style="display:none;align-items:center;gap:10px;margin-top:8px;padding:8px;background:#f7f1e3;border-radius:8px"><img id="e-cover-img" src="" style="height:52px;border-radius:6px;object-fit:cover"><span id="e-cover-name" style="font-size:.74rem;color:#526055;flex:1"></span><button type="button" onclick="clearEditCover()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:3px 6px;cursor:pointer;font-size:.72rem">✕</button></div></div>
     <div class="field" style="display:flex;align-items:center;gap:10px"><input type="checkbox" id="e-isPinned" ${item.isPinned?'checked':''}><label for="e-isPinned" style="margin:0;cursor:pointer">置頂 / 精選消息</label></div>
   `);
 }
@@ -836,7 +845,14 @@ async function saveEdit() {
     item.rocDate=date; item.date=date.replace(/\./g,'-');
     item.category=cat; item.title=title; item.summary=summary;
     item.registerUrl=(document.getElementById('e-url')?.value||'').trim();
-    item.coverImage=(document.getElementById('e-coverImage')?.value||'').trim();
+    const _eCoverFile = document.getElementById('e-coverFile');
+    if (_eCoverFile && _eCoverFile.files[0]) {
+      const _ef = _eCoverFile.files[0];
+      const _ext2 = _ef.name.split('.').pop().toLowerCase() || 'jpg';
+      const _rp2 = `圖庫/news-covers/cover_${Date.now()}.${_ext2}`;
+      await githubUploadFile(_ef, _rp2, `update: news cover - ${title}`);
+      item.coverImage = _rp2;
+    }
     item.isPinned=!!(document.getElementById('e-isPinned')?.checked);
     item.updatedAt=new Date().toISOString().slice(0,10);
     try { await saveData('update: news - '+title); renderNewsList(); closeModal(); showStatus('✅ 消息已更新！'); }
@@ -875,8 +891,9 @@ async function addNews() {
   try {
     await saveData('content: add news - ' + title);
     renderNewsList();
-    ['news-date','news-title','news-summary','news-url','news-coverImage'].forEach(id => document.getElementById(id).value = '');
+    ['news-date','news-title','news-summary','news-url'].forEach(id => document.getElementById(id).value = '');
     document.getElementById('news-isPinned').checked = false;
+    clearNewsCover();
   } catch(e) { showStatus('儲存失敗：' + e.message, true); }
 }
 
@@ -1839,6 +1856,53 @@ async function deleteHistory(i) {
   staticData.history.splice(i,1);
   try { await saveData('delete: history - '+h.title); renderHistoryList(); showStatus('✅ 已刪除'); }
   catch(e) { showModalError(e.message); }
+}
+
+
+// ══ NEWS COVER IMAGE UPLOAD HELPERS ══
+window._pendingNewsCoverFile = null;
+
+function previewNewsCover(input) {
+  const file = input.files[0];
+  if (!file) return;
+  window._pendingNewsCoverFile = file;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('news-cover-preview');
+    const img     = document.getElementById('news-cover-img');
+    const nm      = document.getElementById('news-cover-name');
+    if (img)     img.src = e.target.result;
+    if (nm)      nm.textContent = file.name + ' (' + Math.round(file.size/1024) + ' KB)';
+    if (preview) preview.style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
+}
+function clearNewsCover() {
+  window._pendingNewsCoverFile = null;
+  const input   = document.getElementById('news-coverFile');
+  const preview = document.getElementById('news-cover-preview');
+  if (input)   input.value = '';
+  if (preview) preview.style.display = 'none';
+}
+function previewEditCover(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('e-cover-preview');
+    const img     = document.getElementById('e-cover-img');
+    const nm      = document.getElementById('e-cover-name');
+    if (img)     img.src = e.target.result;
+    if (nm)      nm.textContent = file.name;
+    if (preview) preview.style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
+}
+function clearEditCover() {
+  const input   = document.getElementById('e-coverFile');
+  const preview = document.getElementById('e-cover-preview');
+  if (input)   input.value = '';
+  if (preview) preview.style.display = 'none';
 }
 
 // Enter key support
