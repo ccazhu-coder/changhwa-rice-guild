@@ -437,6 +437,17 @@ a{color:inherit;text-decoration:none}
             <div class="field"><label>業者名稱</label><input id="brd-company" placeholder="例：大義碾米工廠"></div>
             <div class="field"><label>地址</label><input id="brd-address" placeholder="彰化縣…"></div>
           </div>
+          <div class="field">
+            <label>📸 個人照片（選填，JPG/PNG）</label>
+            <div style="display:flex;align-items:center;gap:12px">
+              <div id="brd-photo-thumb" style="width:72px;height:72px;border-radius:50%;background:#f0f0f0;border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0;overflow:hidden">👤</div>
+              <div>
+                <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('brd-photo-file').click()">選擇照片</button>
+                <input type="file" id="brd-photo-file" accept="image/*" style="display:none" onchange="previewBoardPhoto(this,'brd-photo-thumb','brd-photo-name')">
+                <div id="brd-photo-name" style="font-size:.76rem;color:var(--muted);margin-top:4px">尚未選擇</div>
+              </div>
+            </div>
+          </div>
           <button class="btn btn-primary" onclick="addBoardMember()">✅ 新增</button>
         </div>
         <div class="card">
@@ -1171,15 +1182,54 @@ async function loadFilesList() {
 }
 
 // ══ BOARD MEMBERS ══
+let _pendingBoardPhoto = null;
+
+function previewBoardPhoto(input, thumbId, nameId) {
+  if (input.files[0]) {
+    _pendingBoardPhoto = input.files[0];
+    const url = URL.createObjectURL(_pendingBoardPhoto);
+    const thumb = document.getElementById(thumbId);
+    if (thumb) thumb.innerHTML = `<img src="${url}" style="width:100%;height:100%;object-fit:cover">`;
+    const nameEl = document.getElementById(nameId);
+    if (nameEl) nameEl.textContent = `📸 ${_pendingBoardPhoto.name}（${(_pendingBoardPhoto.size/1024).toFixed(0)} KB）`;
+  }
+}
+
+async function uploadBoardPhoto(name, file) {
+  if (!file) return '';
+  const ext = file.name.split('.').pop().toLowerCase();
+  const safeName = name.replace(/\s+/g,'') + '_' + Date.now() + '.' + ext;
+  const repoPath = `圖庫/理監事/${safeName}`;
+  await githubUploadFile(file, repoPath, `add: board photo - ${name}`);
+  return `./${repoPath}`;
+}
+
 async function addBoardMember() {
   const role    = document.getElementById('brd-role').value;
   const name    = document.getElementById('brd-name').value.trim();
   const company = document.getElementById('brd-company').value.trim();
   const address = document.getElementById('brd-address').value.trim();
   if (!name) { showStatus('姓名為必填', true); return; }
+
+  showStatus('新增中...');
+  let photo = '';
+  if (_pendingBoardPhoto) {
+    try { photo = await uploadBoardPhoto(name, _pendingBoardPhoto); }
+    catch(e) { showStatus('照片上傳失敗：'+e.message, true); return; }
+  }
+
   if (!staticData.board) staticData.board = { term:'第29屆', period:'民國113～116年', members:[] };
-  staticData.board.members.push({ role, name, company, address });
-  try { await saveData('add: board member - ' + name); renderBoardList(); showStatus('✅ 已新增理監事成員'); ['brd-name','brd-company','brd-address'].forEach(id => document.getElementById(id).value=''); }
+  staticData.board.members.push({ role, name, company, address, photo });
+  try {
+    await saveData('add: board member - ' + name);
+    renderBoardList();
+    showStatus('✅ 已新增理監事成員');
+    ['brd-name','brd-company','brd-address'].forEach(id => document.getElementById(id).value='');
+    _pendingBoardPhoto = null;
+    document.getElementById('brd-photo-thumb').innerHTML = '👤';
+    document.getElementById('brd-photo-name').textContent = '尚未選擇';
+    document.getElementById('brd-photo-file').value = '';
+  }
   catch(e) { showStatus('失敗：'+e.message, true); }
 }
 function renderBoardList() {
@@ -1189,25 +1239,49 @@ function renderBoardList() {
   if (!members.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無資料</div>'; return; }
   const roleOrder = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
   const sorted = [...members].sort((a,b) => (roleOrder.indexOf(a.role)||99)-(roleOrder.indexOf(b.role)||99));
-  el.innerHTML = sorted.map((m,i) => `<div class="item-card">
-    <div class="item-card-body">
-      <div class="item-title"><span class="badge">${m.role}</span>${m.name}</div>
-      <div class="item-meta">${m.company||''} ${m.address?'・'+m.address:''}</div>
-    </div>
-    <div class="item-card-actions">
-      <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editBoardMember(${members.indexOf(m)})">✏️</button>
-      <button class="btn btn-red btn-sm" onclick="deleteBoardMember(${members.indexOf(m)})">刪除</button>
-    </div></div>`).join('');
+  const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  el.innerHTML = sorted.map((m) => {
+    const realIdx = members.indexOf(m);
+    const photoUrl = m.photo ? BASE + m.photo.replace('./','') : '';
+    const photoHtml = photoUrl
+      ? `<img src="${photoUrl}" style="width:52px;height:52px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--line)" onerror="this.outerHTML='<div style=\'width:52px;height:52px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0\'>👤</div>'">`
+      : `<div style="width:52px;height:52px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">👤</div>`;
+    return `<div class="item-card">
+      ${photoHtml}
+      <div class="item-card-body">
+        <div class="item-title"><span class="badge">${m.role}</span>${m.name}</div>
+        <div class="item-meta">${m.company||''} ${m.address?'・'+m.address:''}</div>
+        ${!m.photo?'<div style="font-size:.72rem;color:#f0a;margin-top:2px">尚未上傳照片</div>':''}
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editBoardMember(${realIdx})">✏️</button>
+        <button class="btn btn-red btn-sm" onclick="deleteBoardMember(${realIdx})">刪除</button>
+      </div></div>`;
+  }).join('');
 }
 function editBoardMember(i) {
   const m = staticData.board.members[i];
   editMode = { type:'board', index:i };
+  _pendingBoardPhoto = null;
   const roles = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
+  const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  const currentPhoto = m.photo ? `<img src="${BASE+m.photo.replace('./','')}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--line)">` : '<div style="width:64px;height:64px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:2rem">👤</div>';
   openModal('✏️ 編輯理監事成員', `
     <div class="field"><label>職稱</label><select id="e-cat">${roles.map(r=>`<option${m.role===r?' selected':''}>${r}</option>`).join('')}</select></div>
     <div class="field"><label>姓名</label><input id="e-title" value="${m.name||''}"></div>
     <div class="field"><label>業者名稱</label><input id="e-summary" value="${m.company||''}"></div>
-    <div class="field"><label>地址</label><input id="e-result" value="${m.address||''}"></div>`);
+    <div class="field"><label>地址</label><input id="e-result" value="${m.address||''}"></div>
+    <div class="field">
+      <label>📸 個人照片</label>
+      <div style="display:flex;align-items:center;gap:12px;margin-top:6px">
+        <div id="e-photo-thumb" style="width:64px;height:64px;border-radius:50%;overflow:hidden;flex-shrink:0">${currentPhoto}</div>
+        <div>
+          <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('e-photo-file').click()">${m.photo?'更換照片':'上傳照片'}</button>
+          <input type="file" id="e-photo-file" accept="image/*" style="display:none" onchange="previewBoardPhoto(this,'e-photo-thumb','e-photo-name')">
+          <div id="e-photo-name" style="font-size:.76rem;color:var(--muted);margin-top:4px">${m.photo?'已有照片（選擇新圖片即可替換）':'尚未上傳'}</div>
+        </div>
+      </div>
+    </div>`);
 }
 async function deleteBoardMember(i) {
   if (!confirm('確定刪除？')) return;
@@ -1505,10 +1579,15 @@ saveEdit = async function() {
   if (!editMode) return;
   if (editMode.type==='board') {
     const m = staticData.board.members[editMode.index];
-    m.role = document.getElementById('e-cat')?.value||m.role;
-    m.name = (document.getElementById('e-title')?.value||'').trim();
+    m.role    = document.getElementById('e-cat')?.value||m.role;
+    m.name    = (document.getElementById('e-title')?.value||'').trim();
     m.company = (document.getElementById('e-summary')?.value||'').trim();
     m.address = (document.getElementById('e-result')?.value||'').trim();
+    // Upload new photo if selected
+    if (_pendingBoardPhoto) {
+      try { m.photo = await uploadBoardPhoto(m.name, _pendingBoardPhoto); _pendingBoardPhoto = null; }
+      catch(e) { showStatus('照片上傳失敗：'+e.message,true); return; }
+    }
     try { await saveData('update: board member - '+m.name); renderBoardList(); closeModal(); showStatus('✅ 已更新'); }
     catch(e) { showStatus('失敗：'+e.message,true); }
   } else if (editMode.type==='committee') {
