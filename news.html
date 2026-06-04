@@ -112,53 +112,142 @@
 <div class="topbar"><div class="container topbar-inner"><span>彰化縣米穀商業同業公會 官方網站</span><span>電話：04-7222528｜辦公時間：週一至週五 09:00-17:00</span></div></div><header class="site-header"><div class="container header-inner"><a class="brand" href="index.html"><img class="brand-logo" src="./assets/images/logo-transparent.png" alt="公會標誌"><div class="brand-name">彰化縣米穀商業同業公會</div></a><button class="nav-toggle" id="navToggle" type="button"><span></span><span></span><span></span></button><nav class="main-nav" id="mainNav"><a href="index.html">首頁</a><a href="about.html">關於公會</a><a href="board.html">理監事團隊</a><a href="members.html">會員介紹</a><a href="news.html" class="active">最新消息</a><a href="services.html">會員服務</a><a href="training.html">教育訓練</a><a href="brand.html">彰榖米</a><a href="downloads.html">下載專區</a><a class="nav-cta" href="contact.html">聯絡公會</a></nav></div></header>
 <main>
 
-<!-- PAGE BANNER -->
+<!-- PAGE HERO -->
 <div style="width:100%;overflow:hidden;line-height:0"><img src="圖庫/最新消息頁面-橫幅圖片.png" alt="最新消息—彰化縣米穀商業同業公會" style="width:100%;height:auto;display:block"></div>
 
+<!-- 後台動態消息（admin新增的項目優先顯示） -->
+<section class="section section-alt" id="adminNewsSection" style="display:none;padding-bottom:0">
+  <div class="container">
+    <div id="adminNewsList" style="display:grid;grid-template-columns:1fr 1fr;gap:24px"></div>
+  </div>
+</section>
 <!-- 精選消息 -->
 <section class="section section-alt">
   <div class="container">
     <div class="sec-head">
-      <div class="sec-label">FEATURED NEWS</div>
+      <div class="sec-label">FEATURED</div>
       <h2>精選消息</h2>
       <div class="sec-divider"></div>
     </div>
-    <div id="newsApiList" style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
-      <div style="color:#aaa;font-size:.85rem;padding:20px">載入中…</div>
-    </div>
-  </div>
-</section>
-
-<!-- 近期消息 -->
-<section class="section section-rice">
-  <div class="container">
-    <div class="sec-head" style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px">
-      <div>
-        <div class="sec-label">RECENT NEWS</div>
-        <h2>近期消息</h2>
-        <div class="sec-divider"></div>
+    <div class="news-featured">
+      <div class="news-feat-card">
+        <div class="news-feat-img">
+          <img src="https://drive.google.com/thumbnail?id=15lBdPpKmPWUn2XUMuWBz83duehJdMOpx&sz=w1200" alt="115年度會員教育訓練">
+          <span class="news-tag">教育訓練</span>
+        </div>
+        <div class="news-feat-body">
+          <div class="news-date">2026年5月19日</div>
+          <h2>115年度會員教育訓練—農產品業稅務實務與相關法規</h2>
+          <p>本屆教育訓練於 115 年 5 月 19 日圓滿完成，邀請專業講師深入講解農產品業稅務實務與相關法規，提升會員財務管理能力及法規遵循意識，全程參與人員踴躍，反應熱烈。</p>
+        </div>
+      </div>
+      <div class="news-feat-card">
+        <div class="news-feat-img">
+          <img src="./assets/images/disaster-001.jpg" alt="花蓮震災白米援助行動">
+          <span class="news-tag">公益活動</span>
+        </div>
+        <div class="news-feat-body">
+          <div class="news-date">民國114年</div>
+          <h2>花蓮震災白米援助行動—彰化米穀業者挺花蓮</h2>
+          <p>彰化縣米穀商業同業公會號召縣內會員共同響應花蓮震災援助行動，捐贈大量白米支援受災民眾，展現米穀業者守望相助的精神與社會責任。</p>
+        </div>
       </div>
     </div>
-    <div id="recentNewsList" style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px">
-      <div style="color:#aaa;font-size:.85rem;padding:20px">載入中…</div>
+
+    <!-- 近期消息 -->
+    <div class="sec-head" style="margin-top:16px">
+      <div class="sec-label">MORE NEWS</div>
+      <h2>近期消息</h2>
+      <div class="sec-divider"></div>
+    </div>
+    <div class="news-list">
+      <div class="news-list-card">
+        <div class="news-list-img">
+          <img src="https://drive.google.com/thumbnail?id=1hpov55RkKeOOa810bdrdjXd0AD_ZA0Uw&sz=w1200" alt="第29屆會員大會">
+        </div>
+        <div class="news-list-body">
+          <div class="news-meta">
+            <span class="news-badge">會務公告</span>
+            <span style="font-size:.74rem;color:var(--muted)">2026年5月6日</span>
+          </div>
+          <h3>第29屆會員大會暨第8次理監事會議</h3>
+          <p>本屆理監事會議順利召開，通過多項重要會務決議，推動公會品牌行銷、教育訓練、TTQS 品質系統等各項業務持續推進，與會理監事積極討論，會議圓滿完成。</p>
+        </div>
+      </div>
+      <div class="news-list-card">
+        <div class="news-list-img">
+          <img src="https://drive.google.com/thumbnail?id=1QXQgsS1d5WPpl6B88COIxr9F2iX0KJNx&sz=w1200" alt="第2次TTQS輔導">
+        </div>
+        <div class="news-list-body">
+          <div class="news-meta">
+            <span class="news-badge">訓練品質</span>
+            <span style="font-size:.74rem;color:var(--muted)">2026年4月16日</span>
+          </div>
+          <h3>115年度第2次 TTQS 訓練品質輔導</h3>
+          <p>公會積極推動 TTQS（訓練品質系統）認證，持續接受專業輔導，強化訓練規劃與執行品質，確保教育訓練效益符合國家標準，提升會員學習成效。</p>
+        </div>
+      </div>
+      <div class="news-list-card">
+        <div class="news-list-img">
+          <img src="https://drive.google.com/thumbnail?id=1qTYdQUlKwIi4yaSAmc6_cVf0pY-fQ7Hv&sz=w1200" alt="第1次TTQS輔導">
+        </div>
+        <div class="news-list-body">
+          <div class="news-meta">
+            <span class="news-badge">訓練品質</span>
+            <span style="font-size:.74rem;color:var(--muted)">2026年3月11日</span>
+          </div>
+          <h3>115年度第1次 TTQS 訓練品質輔導啟動</h3>
+          <p>本公會率先引進 TTQS 訓練品質管理體系，於 115 年 3 月展開首次輔導，由專業顧問協助建立系統化訓練流程，為年度教育訓練奠定高品質基礎。</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- 會務公告 -->
-<section class="section section-alt">
+<section class="section section-rice">
   <div class="container">
     <div class="sec-head">
       <div class="sec-label">ANNOUNCEMENTS</div>
       <h2>會務公告</h2>
-      <p>公會行政公告、政策資訊、會費繳納通知等。</p>
+      <p>公會行政公告、會費繳納通知、政府政策訊息傳遞等。</p>
       <div class="sec-divider"></div>
     </div>
-    <div id="announceList" style="display:grid;gap:10px">
-      <div style="color:#aaa;font-size:.85rem;padding:20px">載入中…</div>
+    <div class="announce-list">
+      <div class="announce-item">
+        <div class="announce-dot"></div>
+        <div class="announce-date">2026.05.19</div>
+        <div class="announce-title">115年度會員教育訓練活動—農產品業稅務實務圓滿結束，感謝踴躍參與</div>
+        <span class="announce-tag">教育訓練</span>
+      </div>
+      <div class="announce-item">
+        <div class="announce-dot"></div>
+        <div class="announce-date">2026.05.06</div>
+        <div class="announce-title">第29屆第8次理監事會議議決事項通知</div>
+        <span class="announce-tag">會務公告</span>
+      </div>
+      <div class="announce-item">
+        <div class="announce-dot"></div>
+        <div class="announce-date">2026.04.16</div>
+        <div class="announce-title">115年度第2次 TTQS 訓練品質系統輔導完成</div>
+        <span class="announce-tag">訓練品質</span>
+      </div>
+      <div class="announce-item">
+        <div class="announce-dot"></div>
+        <div class="announce-date">2026.03.11</div>
+        <div class="announce-title">115年度第1次 TTQS 訓練品質系統輔導啟動</div>
+        <span class="announce-tag">訓練品質</span>
+      </div>
+      <div class="announce-item">
+        <div class="announce-dot"></div>
+        <div class="announce-date">2025年</div>
+        <div class="announce-title">花蓮震災白米援助行動圓滿完成，感謝各會員熱情響應</div>
+        <span class="announce-tag">公益活動</span>
+      </div>
     </div>
   </div>
 </section>
+
 
 <!-- 活動花絮 -->
 <section class="section section-rice">
@@ -169,11 +258,15 @@
       <div class="sec-divider"></div>
     </div>
     <div class="gallery-grid" id="galleryApiList">
-      <article class="activity-card"><div class="activity-card-body"><h3>活動花絮載入中</h3><p>正在讀取活動成果資料。</p></div></article>
+      <article class="activity-card">
+        <div class="activity-card-body">
+          <h3>活動花絮載入中</h3>
+          <p>正在讀取活動成果資料。</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>
-
 </main>
 <footer style="position:relative;width:100%;line-height:0;overflow:hidden">
   <img src="圖庫/底部橫幅.png" alt="彰化縣米穀商業同業公會" style="width:100%;height:auto;display:block">
@@ -193,5 +286,33 @@
 <script src="./assets/js/site.js"></script>
 <script src="./assets/js/guild-data-static.js"></script>
 <script src="./assets/js/guild-api.js?v=20260601-static-cache"></script>
+
+<script>
+// Load admin-added news items and show them above static content
+(function(){
+  function loadAdminNews(){
+    if(!window.GUILD_STATIC_DATA)return;
+    var items=(GUILD_STATIC_DATA.news||[]).slice(0,4);
+    if(!items.length)return;
+    var sec=document.getElementById('adminNewsSection');
+    var list=document.getElementById('adminNewsList');
+    if(!sec||!list)return;
+    var cats={'教育訓練':'#c6a437','會務公告':'#183f21','公益活動':'#2e7d52','訓練品質':'#1565c0','招生DM':'#6a1b9a'};
+    list.innerHTML=items.map(function(item){
+      var color=cats[item.category]||'#183f21';
+      var link=item.registerUrl?'<a href="'+item.registerUrl+'" target="_blank" style="display:inline-block;margin-top:10px;font-size:.8rem;font-weight:700;color:'+color+'">查看詳情 →</a>':'';
+      return '<article style="background:#fff;border:1px solid #e6ddc9;border-radius:16px;padding:20px 22px;box-shadow:0 4px 14px rgba(20,45,24,.06)">'
+        +'<span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:800;background:'+color+';color:#fff;margin-bottom:8px">'+item.category+'</span>'
+        +'<h3 style="font-size:.98rem;font-weight:800;color:#183f21;line-height:1.4;margin-bottom:6px">'+item.title+'</h3>'
+        +(item.summary?'<p style="font-size:.82rem;color:#61716b;line-height:1.65">'+item.summary+'</p>':'')
+        +'<div style="font-size:.72rem;color:#aaa;margin-top:8px">'+item.rocDate+'</div>'
+        +link+'</article>';
+    }).join('');
+    sec.style.display='block';
+  }
+  if(window.GUILD_STATIC_DATA){loadAdminNews();}
+  else{var t=setInterval(function(){if(window.GUILD_STATIC_DATA){clearInterval(t);loadAdminNews();}},200);}
+})();
+</script>
 </body>
 </html>
