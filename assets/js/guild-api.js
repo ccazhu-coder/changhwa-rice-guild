@@ -12,7 +12,57 @@
   function fetchApi(action,params){return Promise.reject(new Error('Google API removed'))}
   function staticOrFetch(action,params){var d={};var s=window.GUILD_STATIC_DATA||{};if(action==='home')d={news:s.news||[],gallery:s.gallery||[]};else if(action==='news')d={news:s.news||[]};else if(action==='gallery')d={gallery:s.gallery||[]};else if(action==='members')d={members:s.members||[]};else if(action==='board')d={board:s.board||[]};return Promise.resolve(d)}
   function sortList(list){return (list||[]).slice().sort(function(a,b){if(!!a.isPinned!==!!b.isPinned)return a.isPinned?-1:1;if((Number(a.sort)||999)!==(Number(b.sort)||999))return (Number(a.sort)||999)-(Number(b.sort)||999);return String(b.date||'').localeCompare(String(a.date||''))})}
-  function injectStyles(){if(document.getElementById('guild-api-photo-style'))return;var s=document.createElement('style');s.id='guild-api-photo-style';s.textContent='.activity-card{background:#fff;border:1px solid #e6ddc9;border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(20,45,24,.07)}.activity-cover{aspect-ratio:16/10;background:#f7f1e3;margin:0}.activity-cover img{width:100%;height:100%;object-fit:cover;display:block}.activity-card-body{padding:22px}.activity-card-body h3{color:#183f21}.activity-card-body p{color:#666;line-height:1.8}.activity-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}.activity-photo-strip figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;border:1px solid #e6ddc9;background:#f7f1e3}.activity-photo-strip img{width:100%;height:100%;object-fit:cover;display:block}.activity-photo-strip figcaption{background:#fff;padding:7px 9px;color:#526055;font-size:13px}.drive-photo-panel{padding:0 22px 22px}.drive-photo-panel iframe{width:100%;height:420px;border:1px solid #e6ddc9;border-radius:16px;background:#fff}.activity-photo-note{margin:0 22px 22px;color:#666;font-size:14px}@media(max-width:900px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.drive-photo-panel iframe{height:360px}}';document.head.appendChild(s)}
+  function injectStyles(){if(document.getElementById('guild-api-photo-style'))return;
+  var s=document.createElement('style');
+  s.id='guild-api-photo-style';
+  s.textContent='.activity-card{background:#fff;border:1px solid #e6ddc9;border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(20,45,24,.07)}.activity-cover{aspect-ratio:16/9;background:#f7f1e3;margin:0;overflow:hidden;cursor:zoom-in}.activity-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-cover:hover img{transform:scale(1.05)}.activity-card-body{padding:22px}.activity-card-body h3{color:#183f21}.activity-card-body p{color:#666;line-height:1.8}.activity-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}.activity-photo-strip figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;border:1px solid #e6ddc9;background:#f7f1e3;cursor:zoom-in}.activity-photo-strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-photo-strip figure:hover img{transform:scale(1.07)}.activity-photo-strip figcaption{background:#fff;padding:7px 9px;color:#526055;font-size:13px}.activity-photo-note{margin:0 22px 22px;color:#666;font-size:14px}#guild-lightbox{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:99999;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}#guild-lightbox.open{display:flex}#guild-lb-wrap{text-align:center;max-width:92vw}#guild-lb-img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:8px;display:block;margin:0 auto;box-shadow:0 8px 60px rgba(0,0,0,.7)}#guild-lb-caption{color:#d4c9b0;font-size:15px;margin-top:12px}#guild-lb-counter{color:#888;font-size:13px;margin-top:4px}.guild-lb-close{position:fixed;top:16px;right:20px;color:#fff;font-size:24px;cursor:pointer;background:rgba(255,255,255,.14);border:none;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:100000}.guild-lb-close:hover{background:rgba(255,255,255,.3)}.guild-lb-nav{position:fixed;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:background .2s;user-select:none;z-index:100000}.guild-lb-nav:hover{background:rgba(255,255,255,.25)}#guild-lb-prev{left:14px}#guild-lb-next{right:14px}@media(max-width:900px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-nav{width:42px;height:42px;font-size:30px}}@media(max-width:560px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-close{top:8px;right:10px}}';
+  document.head.appendChild(s);
+  var lb=document.createElement('div');
+  lb.id='guild-lightbox';
+  lb.innerHTML='<button class="guild-lb-close" onclick="guildLbClose()">&#x2715;</button><button class="guild-lb-nav" id="guild-lb-prev" onclick="guildLbNav(-1)">&#8249;</button><div id="guild-lb-wrap"><img id="guild-lb-img" src="" alt=""><p id="guild-lb-caption"></p><span id="guild-lb-counter"></span></div><button class="guild-lb-nav" id="guild-lb-next" onclick="guildLbNav(1)">&#8250;</button>';
+  lb.addEventListener('click',function(e){if(e.target===lb)guildLbClose();});
+  document.body.appendChild(lb);
+  window._lbPhotos=[];
+  window._lbIdx=0;
+  window._lbAlbums={};
+  window.guildLb=function(albumId,idx){
+    var photos=window._lbAlbums[albumId]||[];
+    if(!photos.length)return;
+    window._lbPhotos=photos;
+    window._lbIdx=(idx||0);
+    _guildLbShow();
+    document.getElementById('guild-lightbox').classList.add('open');
+    document.addEventListener('keydown',_guildLbKey);
+  };
+  window.guildLbClose=function(){
+    document.getElementById('guild-lightbox').classList.remove('open');
+    document.removeEventListener('keydown',_guildLbKey);
+  };
+  window.guildLbNav=function(dir){
+    var n=window._lbPhotos.length;
+    if(!n)return;
+    window._lbIdx=(window._lbIdx+dir+n)%n;
+    _guildLbShow();
+  };
+  function _guildLbShow(){
+    var p=window._lbPhotos[window._lbIdx];
+    if(!p)return;
+    var imgEl=document.getElementById('guild-lb-img');
+    imgEl.src='';
+    imgEl.src=p.src;
+    imgEl.alt=p.alt||'';
+    document.getElementById('guild-lb-caption').textContent=p.alt||'';
+    var n=window._lbPhotos.length;
+    document.getElementById('guild-lb-counter').textContent=n>1?(window._lbIdx+1)+' / '+n:'';
+    document.getElementById('guild-lb-prev').style.display=n>1?'flex':'none';
+    document.getElementById('guild-lb-next').style.display=n>1?'flex':'none';
+  }
+  function _guildLbKey(e){
+    if(e.key==='Escape')guildLbClose();
+    else if(e.key==='ArrowLeft')guildLbNav(-1);
+    else if(e.key==='ArrowRight')guildLbNav(1);
+  }
+}
   function extractDriveFolderId(url){url=clean(url);var m=url.match(/\/folders\/([^/?#]+)/);return m&&m[1]?m[1]:''}
   function extractDriveFileId(url){url=clean(url);var m=url.match(/\/file\/d\/([^/?#]+)/);if(m&&m[1])return m[1];m=url.match(/[?&]id=([^&]+)/);return m&&m[1]?m[1]:''}
   function isUsableImageUrl(v){v=clean(v);if(!v)return false;if(/^https?:\/\//i.test(v)&&/\.(jpg|jpeg|png|webp|gif)(\?|#|$)/i.test(v))return true;if(/^(\.\/)?(圖庫|assets)\//.test(v))return true;return false}
@@ -32,17 +82,24 @@
     var color=newsBadgeColor(item.category||'');
     return '<div style="background:#fff;border:1px solid #e6ddc9;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:box-shadow .18s"><div style="width:8px;height:8px;border-radius:50%;background:'+color+';flex-shrink:0"></div><div style="font-size:.72rem;color:#aaa;flex-shrink:0;width:80px">'+esc(item.rocDate||item.date)+'</div><div style="font-size:.9rem;font-weight:700;color:#183f21;flex:1">'+esc(item.title)+'</div><span style="background:'+color+';color:#fff;font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap">'+cat+'</span></div>';
   }
-  function photoGrid(item){
-    var photos=(item.photos||[]).filter(function(p){return isUsableImageUrl(p.url||p.rawUrl)}).slice(0,8);
-    if(photos.length){return '<div class="activity-photo-strip">'+photos.map(function(p){var img=driveImageUrl(p.url||p.rawUrl);return '<figure><img src="'+esc(img)+'" alt="'+esc(p.caption||item.title)+'" loading="lazy"><figcaption>'+esc(p.caption||'活動照片')+'</figcaption></figure>'}).join('')+'</div>'}
-    var album=clean(item.albumUrl||item.albumFolderUrl||item.folderUrl);
-    if(!album&&isTrainingItem(item))album=TRAINING_ALBUM_URL;
-    var embed=driveFolderEmbed(album);
-    if(embed)return embed;
-    if(isUsableImageUrl(item.coverImage)){return '<div class="activity-photo-strip"><figure><img src="'+esc(driveImageUrl(item.coverImage))+'" alt="'+esc(item.title)+'" loading="lazy"><figcaption>活動照片</figcaption></figure></div>'}
-    return '<p class="activity-photo-note">照片將依活動名稱自中央相簿資料夾整理顯示。</p>';
-  }
-  function galleryCard(item){var photos=photoGrid(item);var cover=item.coverImage?'<figure class="activity-cover"><img src="'+esc(driveImageUrl(item.coverImage))+'" alt="'+esc(item.title)+'" loading="lazy"></figure>':'';return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>'}
+  function photoGrid(item,coverOffset){
+  var co=coverOffset||0;
+  var photos=(item.photos||[]).filter(function(p){return isUsableImageUrl(p.url||p.rawUrl);});
+  if(photos.length){return '<div class="activity-photo-strip">'+photos.map(function(p,i){var img=p.url||p.rawUrl;return '<figure onclick="guildLb(\''+esc(item.id)+'\','+(i+co)+')"><img src="'+esc(img)+'" alt="'+esc(p.caption||item.title)+'" loading="lazy"><figcaption>'+esc(p.caption||'活動照片')+'</figcaption></figure>';}).join('')+'</div>';}
+  if(isUsableImageUrl(item.coverImage)){return '<div class="activity-photo-strip"><figure onclick="guildLb(\''+esc(item.id)+'\',0)"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"><figcaption>活動照片</figcaption></figure></div>';}
+  return '';
+}
+  function galleryCard(item){
+  var hasCover=item.coverImage&&isUsableImageUrl(item.coverImage);
+  var lbPhotos=[];
+  if(hasCover)lbPhotos.push({src:item.coverImage,alt:item.title});
+  (item.photos||[]).filter(function(p){return isUsableImageUrl(p.url||p.rawUrl);}).forEach(function(p){lbPhotos.push({src:p.url||p.rawUrl,alt:p.caption||item.title});});
+  if(window._lbAlbums)window._lbAlbums[esc(item.id)]=lbPhotos;
+  var coverOffset=hasCover?1:0;
+  var photos=photoGrid(item,coverOffset);
+  var cover=hasCover?'<figure class="activity-cover" onclick="guildLb(\''+esc(item.id)+'\',0)"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></figure>':'';
+  return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
+}
   function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGalleryList');if(!newsBox&&!galleryBox)return;staticOrFetch('home').then(function(data){if(newsBox){var news=sortList(data.news||[]).slice(0,3);newsBox.innerHTML=news.length?news.map(newsCard).join(''):'<article class="news-item"><span>公告</span><h3>目前尚無最新消息</h3></article>'}if(galleryBox){var gallery=sortList(data.gallery||[]).slice(0,6);galleryBox.innerHTML=gallery.length?gallery.map(galleryCard).join(''):'<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現成果與照片。</p></article>'}}).catch(function(){if(newsBox){newsBox.innerHTML='<article class="news-item"><time>115.05.06</time><span>會員大會</span><h3>第29屆第2次會員大會暨理監事聯席會議</h3></article><article class="news-item"><time>115.05.19</time><span>教育訓練</span><h3>115年度會員教育訓練：農產品業稅務實務與相關法規</h3></article>'}})}
   function renderNewsPage(){var newsBox=qs('newsApiList');var galleryBox=qs('galleryApiList');if(!newsBox&&!galleryBox)return;if(newsBox){staticOrFetch('news',{limit:100}).then(function(data){var list=sortList(data.news||[]);newsBox.innerHTML=list.length?list.map(newsCard).join(''):'<article class="news-item"><span>公告</span><h3>目前尚無最新消息</h3></article>'}).catch(function(){newsBox.innerHTML='<article class="news-item"><time>115.05.06</time><span>會員大會</span><h3>第29屆第2次會員大會暨理監事聯席會議</h3></article>'})}if(galleryBox){staticOrFetch('gallery',{limit:100}).then(function(data){var list=sortList(data.gallery||[]);galleryBox.innerHTML=list.length?list.map(galleryCard).join(''):'<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現成果與照片。</p></article>'}).catch(function(){galleryBox.innerHTML='<article class="service-card"><h3>活動花絮整理中</h3><p>請稍後再試。</p></article>'})}}
   function fixTalentLinks(){document.querySelectorAll('a').forEach(function(a){var href=(a.getAttribute('href')||'').trim();var text=(a.textContent||'').trim();if(href==='talent.html'||href==='./talent.html'||href==='#talent'||href.endsWith('/talent.html')||text.indexOf('人才培訓委員會')>-1||text.indexOf('查看人才培訓委員會內容')>-1){a.setAttribute('href','training.html')}})}
