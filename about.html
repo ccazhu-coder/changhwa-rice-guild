@@ -255,37 +255,8 @@
           <p>從戰後重建到現代化農糧產業，彰化縣米穀商業同業公會走過七十五年歲月。</p>
           <div class="sec-divider"></div>
         </div>
-        <div class="timeline">
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">民國 39 年（1950）</div>
-            <h3>公會成立</h3>
-            <p>依據商業團體法正式成立，整合彰化縣內米穀業者，建立同業組織基礎。</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">民國 70～80 年代</div>
-            <h3>穩健成長期</h3>
-            <p>隨台灣經濟起飛，縣內碾米業者逐步擴大，公會會員數持續增加，服務功能日趨完善。</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">民國 90 年代</div>
-            <h3>組織深化與教育推廣</h3>
-            <p>開始規劃系統性教育訓練課程，協助業者強化專業知能，並積極參與政府農業政策推廣。</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">民國 110 年後</div>
-            <h3>彰榖米品牌啟動</h3>
-            <p>推動「彰榖米」自有品牌，結合食農教育、米穀粉烘焙推廣，開創在地稻米多元應用新局。</p>
-          </div>
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div class="tl-year">民國 114～115 年（現任第29屆）</div>
-            <h3>積極推動 TTQS 與業界培訓</h3>
-            <p>引進 TTQS 訓練品質管理系統，提升公會教育訓練品質，並舉辦農產品業稅務實務等專業課程。</p>
-          </div>
+        <div class="timeline" id="historyTimeline">
+          <p style="color:#aaa;font-size:.85rem">載入中...</p>
         </div>
       </div>
       <div>
@@ -397,5 +368,28 @@
   <a href="contact.html"   title="聯絡公會按鈕" style="position:absolute;left:67%;top:70%;width:12%;height:14%;display:block"></a>
 </footer>
 <script src="./assets/js/site.js"></script>
+<script src="./assets/js/guild-data-static.js"></script>
+
+<script>
+(function(){
+  function renderHistory(){
+    var el = document.getElementById('historyTimeline');
+    if(!el) return;
+    if(!window.GUILD_STATIC_DATA||!window.GUILD_STATIC_DATA.history) return;
+    var items = window.GUILD_STATIC_DATA.history.slice().sort(function(a,b){return (a.sort||0)-(b.sort||0);});
+    if(!items.length){ el.innerHTML='<p style="color:#aaa">尚無沿革資料</p>'; return; }
+    el.innerHTML = items.map(function(item){
+      return '<div class="tl-item">'
+        +'<div class="tl-dot"></div>'
+        +'<div class="tl-year">'+item.period+'</div>'
+        +'<h3>'+item.title+'</h3>'
+        +'<p>'+item.desc+'</p>'
+        +'</div>';
+    }).join('');
+  }
+  if(window.GUILD_STATIC_DATA){ renderHistory(); }
+  else { var t=setInterval(function(){ if(window.GUILD_STATIC_DATA){ clearInterval(t); renderHistory(); } },200); }
+})();
+</script>
 </body>
 </html>
