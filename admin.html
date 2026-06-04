@@ -202,6 +202,9 @@ a{color:inherit;text-decoration:none}
       <div class="sidebar-item" onclick="showTab('brand')" id="tab-btn-brand">
         <span class="icon">🌾</span>彰榖米品牌
       </div>
+      <div class="sidebar-item" onclick="showTab('history')" id="tab-btn-history">
+        <span class="icon">📜</span>成立沿革
+      </div>
     </div>
 
     <!-- MAIN -->
@@ -547,6 +550,25 @@ a{color:inherit;text-decoration:none}
           <div id="brand-img-slots" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;margin-top:12px"></div>
           <!-- Hidden file input for replace -->
           <input type="file" id="brand-replace-file" accept="image/*" style="display:none" onchange="doReplaceImg(this)">
+        </div>
+      </div>
+
+      <!-- ── 成立沿革 ── -->
+      <div class="tab-panel" id="tab-history">
+        <div class="panel-title">📜 成立沿革管理 <small>新增、修改、刪除公會歷史里程碑</small></div>
+        <div class="card">
+          <h3>➕ 新增里程碑</h3>
+          <div class="field-row">
+            <div class="field"><label>時間（年代）</label><input id="hist-period" placeholder="例：民國 39 年（1950）"></div>
+            <div class="field"><label>排序（數字越小越前）</label><input id="hist-sort" type="number" placeholder="例：6" min="1"></div>
+          </div>
+          <div class="field"><label>標題</label><input id="hist-title" placeholder="例：公會正式成立"></div>
+          <div class="field"><label>說明</label><textarea id="hist-desc" placeholder="這個里程碑的詳細說明..."></textarea></div>
+          <button class="btn btn-primary" onclick="addHistory()">✅ 新增</button>
+        </div>
+        <div class="card">
+          <h3>📋 現有沿革列表</h3>
+          <div class="item-list" id="history-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
         </div>
       </div>
 
@@ -1629,6 +1651,15 @@ saveEdit = async function() {
     m.address = (document.getElementById('e-result')?.value||'').trim();
     try { await saveData('update: member - '+m.name); renderMemberList(); closeModal(); showStatus('✅ 已更新'); }
     catch(e) { showStatus('失敗：'+e.message,true); }
+  } else if (editMode.type==='history') {
+    const h = staticData.history[editMode.index];
+    h.period = (document.getElementById('e-date')?.value||'').trim();
+    h.title  = (document.getElementById('e-title')?.value||'').trim();
+    h.desc   = (document.getElementById('e-summary')?.value||'').trim();
+    h.sort   = parseInt(document.getElementById('e-sort')?.value) || h.sort;
+    staticData.history.sort((a,b)=>(a.sort||0)-(b.sort||0));
+    try { await saveData('update: history - '+h.title); renderHistoryList(); closeModal(); showStatus('✅ 已更新'); }
+    catch(e) { showStatus('失敗：'+e.message,true); }
   } else if (editMode.type==='brandPoint') {
     if (!staticData.brand) staticData.brand={};
     if (!staticData.brand.points) staticData.brand.points=[];
@@ -1649,7 +1680,67 @@ loadData = async function() {
   renderChairpersonsList();
   renderMemberList();
   renderBrandForm();
+  renderHistoryList();
 };
+
+// ══ HISTORY (成立沿革) ══
+async function addHistory() {
+  const period = document.getElementById('hist-period').value.trim();
+  const title  = document.getElementById('hist-title').value.trim();
+  const desc   = document.getElementById('hist-desc').value.trim();
+  const sort   = parseInt(document.getElementById('hist-sort').value) || (staticData.history?.length + 1 || 1);
+  if (!period || !title) { showStatus('時間與標題為必填', true); return; }
+  if (!staticData.history) staticData.history = [];
+  const id = 'H-' + String(Math.max(0, ...staticData.history.map(h=>parseInt(h.id?.replace('H-','')||0))) + 1).padStart(3,'0');
+  staticData.history.push({ id, period, title, desc, sort });
+  staticData.history.sort((a,b) => (a.sort||0)-(b.sort||0));
+  try {
+    await saveData('add: history - ' + title);
+    renderHistoryList();
+    showStatus('✅ 已新增里程碑：' + title);
+    ['hist-period','hist-title','hist-desc','hist-sort'].forEach(i => document.getElementById(i).value='');
+  } catch(e) { showStatus('失敗：'+e.message, true); }
+}
+
+function renderHistoryList() {
+  const el = document.getElementById('history-list');
+  if (!el) return;
+  const list = (staticData.history || []).slice().sort((a,b)=>(a.sort||0)-(b.sort||0));
+  if (!list.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無資料</div>'; return; }
+  el.innerHTML = list.map((h,i) => `
+    <div class="item-card">
+      <div style="width:40px;height:40px;border-radius:50%;background:var(--gold);color:var(--green);display:flex;align-items:center;justify-content:center;font-weight:900;flex-shrink:0;font-size:.9rem">${h.sort||i+1}</div>
+      <div class="item-card-body">
+        <div class="item-title">${h.title}</div>
+        <div class="item-meta" style="color:var(--gold);font-weight:700">${h.period}</div>
+        <div class="item-desc">${h.desc}</div>
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editHistory(${(staticData.history||[]).indexOf(h)})">✏️</button>
+        <button class="btn btn-red btn-sm" onclick="deleteHistory(${(staticData.history||[]).indexOf(h)})">刪除</button>
+      </div>
+    </div>`).join('');
+}
+
+function editHistory(i) {
+  const h = staticData.history[i];
+  editMode = { type:'history', index:i };
+  openModal('✏️ 編輯成立沿革', `
+    <div class="field-row">
+      <div class="field"><label>時間（年代）</label><input id="e-date" value="${h.period||''}"></div>
+      <div class="field"><label>排序</label><input id="e-sort" type="number" value="${h.sort||''}"></div>
+    </div>
+    <div class="field"><label>標題</label><input id="e-title" value="${(h.title||'').replace(/"/g,'&quot;')}"></div>
+    <div class="field"><label>說明</label><textarea id="e-summary">${h.desc||''}</textarea></div>`);
+}
+
+async function deleteHistory(i) {
+  const h = staticData.history[i];
+  if (!confirm(`確定刪除「${h.title}」？`)) return;
+  staticData.history.splice(i,1);
+  try { await saveData('delete: history - '+h.title); renderHistoryList(); showStatus('✅ 已刪除'); }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
 
 // Enter key support
 document.addEventListener('keydown', e => {
