@@ -90,42 +90,6 @@ window.GUILD_STATIC_DATA = {
   ],
   "gallery": [
     {
-      "id": "ALB-0002",
-      "date": "2026-05-06",
-      "rocDate": "115.05.06",
-      "category": "會員大會",
-      "title": "第29屆第3次會員大會",
-      "summary": "第29屆第3次會員大會活動",
-      "result": "會員參與踴躍，現場互動熱烈。",
-      "participantCount": "",
-      "coverImage": "./assets/images/training-001.jpg",
-      "albumUrl": "",
-      "albumFolderId": "",
-      "albumFolderName": "第29屆第3次會員大會",
-      "albumFolderUrl": "",
-      "isHome": true,
-      "isPinned": true,
-      "sort": 1,
-      "createdAt": "2026-05-06",
-      "updatedAt": "2026-06-04",
-      "note": "restored",
-      "photos": [
-        {
-          "photoId": "training-001",
-          "activityId": "",
-          "activityTitle": "第29屆第3次會員大會",
-          "url": "./assets/images/training-001.jpg",
-          "rawUrl": "./assets/images/training-001.jpg",
-          "caption": "會員大會",
-          "isCover": true,
-          "isFeatured": true,
-          "sort": 1,
-          "createdAt": "",
-          "note": "local_asset"
-        }
-      ]
-    },
-    {
       "id": "ALB-0001",
       "date": "2026-05-19",
       "rocDate": "115.05.19",
