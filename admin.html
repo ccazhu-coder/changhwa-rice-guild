@@ -1164,16 +1164,27 @@ async function loadFilesList() {
 
     if (!allFiles.length) { document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件</div>'; return; }
 
-    document.getElementById('files-list').innerHTML = allFiles.map(f => `
-      <div class="item-card">
-        <div class="item-card-body">
-          <div class="item-title">${f.name.includes('/dm/')? '📄 DM：':''} ${f.name}</div>
+    const BASE_SITE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
+    document.getElementById('files-list').innerHTML = allFiles.map(f => {
+      const siteUrl = BASE_SITE + f.path;
+      return `<div class="item-card" style="flex-wrap:wrap;gap:10px">
+        <div class="item-card-body" style="min-width:0">
+          <div class="item-title">${f.name}</div>
           <div class="item-meta">${(f.size/1024).toFixed(0)} KB</div>
+          <div style="margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+            <input readonly value="${siteUrl}" id="url-${f.sha?.substring(0,8)||f.name.replace(/[^a-z0-9]/gi,'')}"
+              style="font-size:.72rem;color:var(--muted);background:#f8f8f8;border:1px solid var(--border);border-radius:6px;padding:4px 8px;flex:1;min-width:200px;outline:none">
+            <button class="btn btn-sm" style="background:var(--gold);color:var(--green);flex-shrink:0"
+              onclick="navigator.clipboard.writeText('${siteUrl}').then(()=>{this.textContent='✅ 已複製';setTimeout(()=>this.textContent='📋 複製連結',2000)})">
+              📋 複製連結
+            </button>
+          </div>
         </div>
-        <div class="item-card-actions">
-          <a href="${f.download_url}" target="_blank" class="btn btn-outline btn-sm">下載</a>
+        <div class="item-card-actions" style="flex-shrink:0">
+          <a href="${f.download_url}" target="_blank" class="btn btn-outline btn-sm">預覽</a>
         </div>
-      </div>`).join('');
+      </div>`;
+    }).join('');
 
     // Also render DM list
     const dms = dmFiles.filter(f=>f.type==='file');
