@@ -155,8 +155,8 @@ a{color:inherit;text-decoration:none}
     </div>
     <div id="modalBody"></div>
     <div class="modal-footer">
-      <button class="btn btn-primary" onclick="saveEdit()">💾 儲存修改</button>
-      <button class="btn btn-outline" onclick="closeModal()">取消</button>
+      <button type="button" class="btn btn-primary" onclick="saveEdit()">💾 儲存修改</button>
+      <button type="button" class="btn btn-outline" onclick="closeModal()">取消</button>
     </div>
   </div>
 </div>
@@ -723,17 +723,27 @@ async function saveData(msg) {
 // ══ MODAL EDIT ══
 let editMode = null;
 
+let _modalLock = false;  // 防止 click 冒泡誤關 modal
+
 function openModal(title, bodyHtml) {
   document.getElementById('modalTitle').textContent = title;
   document.getElementById('modalBody').innerHTML = bodyHtml;
   document.getElementById('editModal').classList.add('open');
+  _modalLock = true;
+  setTimeout(function(){ _modalLock = false; }, 300);  // 300ms 保護期
 }
 function closeModal() {
+  if (_modalLock) return;  // 剛開啟時不允許關閉
   document.getElementById('editModal').classList.remove('open');
   editMode = null;
 }
+// 點 overlay 背景才關閉（不是點 modal-box 內部）
 document.getElementById('editModal').addEventListener('click', function(e) {
-  if (e.target === this) closeModal();
+  if (e.target === this && !_modalLock) closeModal();
+});
+// modal-box 內的點擊不冒泡到 overlay
+document.querySelector('#editModal .modal-box').addEventListener('click', function(e) {
+  e.stopPropagation();
 });
 
 function editNews(i) {
