@@ -349,8 +349,12 @@ a{color:inherit;text-decoration:none}
         <div class="card">
           <h3>⬆️ 上傳新 DM（PDF）</h3>
           <div class="field">
-            <label>DM 標題</label>
+            <label>DM 標題（將顯示在最新消息）</label>
             <input type="text" id="dm-title" placeholder="例：115年度會員招募說明">
+          </div>
+          <div class="field">
+            <label>說明文字（選填）</label>
+            <input type="text" id="dm-summary" placeholder="例：歡迎符合資格的米穀業者申請入會">
           </div>
           <div class="field">
             <label>選擇 PDF 檔案</label>
@@ -893,15 +897,38 @@ async function githubUploadFile(localFile, repoPath, commitMsg) {
 
 async function uploadDM() {
   if (!pendingDM) { showStatus('請先選擇 PDF 檔案', true); return; }
-  const title = document.getElementById('dm-title').value.trim() || pendingDM.name;
+  const title   = document.getElementById('dm-title').value.trim() || pendingDM.name;
+  const summary = document.getElementById('dm-summary')?.value.trim() || '';
   try {
     showStatus('上傳中...');
     const safeName = pendingDM.name.replace(/\s+/g, '_');
-    await githubUploadFile(pendingDM, `files/dm/${safeName}`, `add: DM - ${title}`);
-    showStatus(`✅ DM「${title}」上傳成功！`);
+    const repoPath = `files/dm/${safeName}`;
+    await githubUploadFile(pendingDM, repoPath, `add: DM - ${title}`);
+
+    // 自動在最新消息新增一筆 DM 連結
+    const fileUrl = `./files/dm/${safeName}`;
+    const today = new Date();
+    const roc = `${today.getFullYear()-1911}.${String(today.getMonth()+1).padStart(2,'0')}.${String(today.getDate()).padStart(2,'0')}`;
+    const newsItem = {
+      id: nextId('NEWS', staticData.news),
+      date: today.toISOString().slice(0,10),
+      rocDate: roc,
+      category: '招生DM',
+      title: title,
+      summary: summary || '點擊下載招生宣傳單（PDF）',
+      location: '', registerUrl: fileUrl, status: '公告',
+      isHome: true, isPinned: false, sort: (staticData.news.length + 1),
+      createdAt: today.toISOString().slice(0,10),
+      updatedAt: today.toISOString().slice(0,10), note: 'dm_upload'
+    };
+    staticData.news = [newsItem, ...(staticData.news || [])];
+    await saveData('add: DM news item - ' + title);
+
+    showStatus(`✅ DM「${title}」上傳成功！已自動加入最新消息。`);
     pendingDM = null;
     document.getElementById('dm-title').value = '';
     document.getElementById('dm-preview').style.display = 'none';
+    renderNewsList();
     loadFilesList();
   } catch(e) { showStatus('上傳失敗：' + e.message, true); }
 }
