@@ -365,68 +365,6 @@ window.GUILD_STATIC_DATA = {
           "note": "from_drive_folder"
         }
       ]
-    },
-    {
-      "id": "ALB-0004",
-      "date": "2026-04-16",
-      "rocDate": "115.04.16",
-      "category": "教育訓練",
-      "title": "第2次 TTQS輔導",
-      "summary": "第2次 TTQS輔導",
-      "result": "",
-      "participantCount": "",
-      "coverImage": "./assets/images/training-004.jpg",
-      "albumUrl": "https://drive.google.com/drive/folders/1zc6DNFuDoU8Dw-JTroOYi_4E6sojprNi?usp=sharing",
-      "albumFolderId": "1zc6DNFuDoU8Dw-JTroOYi_4E6sojprNi",
-      "albumFolderName": "第2次 TTQS輔導",
-      "albumFolderUrl": "https://drive.google.com/drive/folders/1zc6DNFuDoU8Dw-JTroOYi_4E6sojprNi?usp=sharing",
-      "isHome": true,
-      "isPinned": false,
-      "sort": 3,
-      "createdAt": "",
-      "updatedAt": "",
-      "note": "",
-      "photos": [
-        {
-          "photoId": "1QXQgsS1d5WPpl6B88COIxr9F2iX0KJNx",
-          "activityId": "",
-          "activityTitle": "第2次 TTQS輔導",
-          "url": "./assets/images/training-004.jpg",
-          "rawUrl": "./assets/images/training-004.jpg",
-          "caption": "封面",
-          "isCover": true,
-          "isFeatured": true,
-          "sort": 1,
-          "createdAt": "",
-          "note": "from_drive_folder"
-        },
-        {
-          "photoId": "1KoEv_rFFfMqK1XRH6SbiWRokWw6x3hNQ",
-          "activityId": "",
-          "activityTitle": "第2次 TTQS輔導",
-          "url": "https://drive.google.com/thumbnail?id=1KoEv_rFFfMqK1XRH6SbiWRokWw6x3hNQ&sz=w1200",
-          "rawUrl": "https://drive.google.com/file/d/1KoEv_rFFfMqK1XRH6SbiWRokWw6x3hNQ/view",
-          "caption": "LINE ALBUM 第二次TTQS輔導 260601 3",
-          "isCover": false,
-          "isFeatured": true,
-          "sort": 2,
-          "createdAt": "",
-          "note": "from_drive_folder"
-        },
-        {
-          "photoId": "1zoohHh69UOd9XQbB1vA-EFV0KH8C5uko",
-          "activityId": "",
-          "activityTitle": "第2次 TTQS輔導",
-          "url": "https://drive.google.com/thumbnail?id=1zoohHh69UOd9XQbB1vA-EFV0KH8C5uko&sz=w1200",
-          "rawUrl": "https://drive.google.com/file/d/1zoohHh69UOd9XQbB1vA-EFV0KH8C5uko/view",
-          "caption": "LINE ALBUM 第二次TTQS輔導 260601 2",
-          "isCover": false,
-          "isFeatured": true,
-          "sort": 3,
-          "createdAt": "",
-          "note": "from_drive_folder"
-        }
-      ]
     }
   ],
   "chairpersons": [
