@@ -175,58 +175,69 @@ function galleryCard(item){
   var s = window.GUILD_STATIC_DATA||{};
   var bd = s.board||{};
   var members = bd.members||[];
-  if(!members.length){box.innerHTML='<p style="color:#888;padding:20px">理監事名冊資料載入中...</p>';return;}
+  if(!members.length){
+    box.innerHTML='<p style="color:#888;padding:30px 0;text-align:center">理監事名冊資料載入中...</p>';
+    return;
+  }
 
-  // Update term title
+  // Update heading
   var titleEl = qs('boardTermTitle');
   if(titleEl && bd.term) titleEl.textContent = bd.term + '理監事名冊';
 
   // Update summary counts
-  var cnt = {理事長:0,理事:0,監事:0};
+  var dirCnt=0, supCnt=0, chairCnt=0;
   members.forEach(function(m){
-    var r = m.role||'';
-    if(r==='理事長') cnt['理事長']++;
-    else if(r.indexOf('理事')>=0) cnt['理事']++;
-    else if(r.indexOf('監事')>=0) cnt['監事']++;
+    var r=m.role||'';
+    if(r==='理事長'){chairCnt++;}
+    else if(r.indexOf('理事')>=0){dirCnt++;}
+    else if(r.indexOf('監事')>=0){supCnt++;}
   });
-  var sumCards = document.querySelectorAll('.sum-card b');
+  var sumCards=document.querySelectorAll('.sum-card b');
   if(sumCards.length>=3){
-    sumCards[0].textContent = cnt['理事長'];
-    sumCards[1].textContent = cnt['理事'];
-    sumCards[2].textContent = cnt['監事'];
+    sumCards[0].textContent=chairCnt;
+    sumCards[1].textContent=dirCnt;
+    sumCards[2].textContent=supCnt;
   }
 
-  // Role groups (in display order)
-  var GROUPS = [
-    {label:'理事會', sub:'理事長、常務理事與理事', test:function(r){return r==='理事長'||r==='常務理事'||r==='理事';}},
-    {label:'監事會', sub:'常務監事與監事',         test:function(r){return r==='常務監事'||r==='監事';}},
-    {label:'候補', sub:'候補理事與候補監事',       test:function(r){return r.indexOf('候補')>=0;}},
-    {label:'顧問', sub:'名譽理事長與顧問',         test:function(r){return r==='名譽理事長'||r==='顧問';}}
+  // Role groups (display order)
+  var GROUPS=[
+    {label:'理事會', sub:'理事長、常務理事與理事',
+     test:function(r){return r==='理事長'||r==='常務理事'||r==='理事';}},
+    {label:'監事會', sub:'常務監事與監事',
+     test:function(r){return r==='常務監事'||r==='監事';}},
+    {label:'候補', sub:'候補理事與候補監事',
+     test:function(r){return r.indexOf('候補')>=0;}},
+    {label:'顧問', sub:'名譽理事長與顧問',
+     test:function(r){return r==='名譽理事長'||r==='顧問';}}
   ];
 
-  var html = '';
+  function memberCard(m){
+    var hasPhoto = m.photo && isUsableImageUrl(m.photo);
+    var initial  = esc((m.name||'人').slice(0,1));
+    var photoHtml = hasPhoto
+      ? '<div class="roster-photo"><img src="'+esc(m.photo)+'" alt="'+esc(m.name)+'" loading="lazy"></div>'
+      : '<div class="roster-photo"><span class="roster-avatar-text">'+initial+'</span></div>';
+    return '<article class="roster-card">'
+      +photoHtml
+      +'<div class="roster-role-badge">'+esc(m.role||'成員')+'</div>'
+      +'<h4 class="roster-name">'+esc(m.name)+'</h4>'
+      +(m.company?'<p class="roster-company">'+esc(m.company)+'</p>':'')
+      +'</article>';
+  }
+
+  var html='';
   GROUPS.forEach(function(g){
-    var list = members.filter(function(m){ return g.test(m.role||''); });
+    var list=members.filter(function(m){return g.test(m.role||'');});
     if(!list.length) return;
-    html += '<div class="role-block">'
+    html+='<div class="role-block">'
       +'<div class="role-title"><span>'+esc(g.label)+'</span><h3>'+esc(g.sub)+'</h3></div>'
-      +'<div class="roster-cards">';
-    list.forEach(function(m){
-      var photoHtml = (m.photo && isUsableImageUrl(m.photo))
-        ? '<div class="roster-photo"><img src="'+esc(m.photo)+'" alt="'+esc(m.name)+'" loading="lazy"></div>'
-        : '<div class="roster-photo roster-photo--none"><span>'+esc((m.name||'').slice(0,1))+'</span></div>';
-      html += '<article class="roster-card">'
-        +photoHtml
-        +'<div class="role">'+esc(m.role)+'</div>'
-        +'<h4>'+esc(m.name)+'</h4>'
-        +(m.company?'<p>'+esc(m.company)+'</p>':'')
-        +'</article>';
-    });
-    html += '</div></div>';
+      +'<div class="roster-cards">'+list.map(memberCard).join('')+'</div>'
+      +'</div>';
   });
 
-  box.innerHTML = html || '<p style="color:#888">目前無理監事資料</p>';
+  box.innerHTML = html||'<p style="color:#888;text-align:center;padding:20px">目前無理監事資料</p>';
 }
+
 
   function renderTrainingPage(){
     var box=qs('trainingGalleryList');
