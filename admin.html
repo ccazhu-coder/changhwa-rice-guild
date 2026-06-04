@@ -93,6 +93,18 @@ a{color:inherit;text-decoration:none}
 .status-bar.show{display:block}
 .loading{opacity:.5;pointer-events:none}
 
+/* ── EDIT MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal-box{background:var(--white);border-radius:20px;padding:28px 32px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.25)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.modal-header h3{font-size:1.05rem;font-weight:900;color:var(--green)}
+.modal-close{background:none;border:none;font-size:1.4rem;cursor:pointer;color:var(--muted);padding:4px 8px;border-radius:6px;line-height:1}
+.modal-close:hover{background:var(--border);color:var(--text)}
+.modal-footer{display:flex;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.btn-edit{background:var(--blue);color:#fff}
+.btn-edit:hover{background:#1a6fa8}
+
 /* ── FILE UPLOAD ── */
 .upload-area{border:2px dashed var(--border);border-radius:10px;padding:28px;text-align:center;cursor:pointer;transition:all .2s}
 .upload-area:hover,.upload-area.drag{border-color:var(--green);background:#f0f7f0}
@@ -131,6 +143,21 @@ a{color:inherit;text-decoration:none}
     <button class="btn-login" onclick="doLogin()">登入後台</button>
     <div class="login-error" id="loginError">帳號或密碼錯誤，請再試。</div>
     <div class="login-hint">如忘記密碼請聯絡系統管理員</div>
+  </div>
+</div>
+
+<!-- ══ EDIT MODAL ══ -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 id="modalTitle">編輯項目</h3>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modalBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-primary" onclick="saveEdit()">💾 儲存修改</button>
+      <button class="btn btn-outline" onclick="closeModal()">取消</button>
+    </div>
   </div>
 </div>
 
@@ -500,6 +527,82 @@ async function saveData(msg) {
   showStatus('✅ 已儲存！網站將在 1～2 分鐘內更新。');
 }
 
+// ══ MODAL EDIT ══
+let editMode = null;
+
+function openModal(title, bodyHtml) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = bodyHtml;
+  document.getElementById('editModal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('editModal').classList.remove('open');
+  editMode = null;
+}
+document.getElementById('editModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+
+function editNews(i) {
+  const item = staticData.news[i];
+  editMode = { type: 'news', index: i };
+  const cats = ['教育訓練','會務公告','公益活動','訓練品質','活動通知'];
+  const opts = cats.map(c => `<option${item.category===c?' selected':''}>${c}</option>`).join('');
+  openModal('✏️ 編輯消息', `
+    <div class="field-row">
+      <div class="field"><label>日期（民國）</label><input id="e-date" value="${item.rocDate||item.date||''}"></div>
+      <div class="field"><label>分類</label><select id="e-cat">${opts}</select></div>
+    </div>
+    <div class="field"><label>標題</label><input id="e-title" value="${(item.title||'').replace(/"/g,'&quot;')}"></div>
+    <div class="field"><label>摘要</label><textarea id="e-summary">${item.summary||''}</textarea></div>
+    <div class="field"><label>報名／連結（選填）</label><input id="e-url" value="${item.registerUrl||''}"></div>
+  `);
+}
+
+function editGallery(i) {
+  const item = staticData.gallery[i];
+  editMode = { type: 'gallery', index: i };
+  const cats = ['教育訓練','會員大會','訓練品質','公益活動','活動花絮'];
+  const opts = cats.map(c => `<option${item.category===c?' selected':''}>${c}</option>`).join('');
+  openModal('✏️ 編輯活動相簿', `
+    <div class="field-row">
+      <div class="field"><label>活動日期（民國）</label><input id="e-date" value="${item.rocDate||item.date||''}"></div>
+      <div class="field"><label>分類</label><select id="e-cat">${opts}</select></div>
+    </div>
+    <div class="field"><label>活動名稱</label><input id="e-title" value="${(item.title||'').replace(/"/g,'&quot;')}"></div>
+    <div class="field"><label>摘要說明</label><textarea id="e-summary">${item.summary||''}</textarea></div>
+    <div class="field"><label>活動成果說明</label><input id="e-result" value="${item.result||''}"></div>
+    <p style="font-size:.76rem;color:var(--muted);margin-top:6px">📸 如需更新照片，請刪除後重新上傳</p>
+  `);
+}
+
+async function saveEdit() {
+  if (!editMode) return;
+  const date    = (document.getElementById('e-date')?.value||'').trim();
+  const cat     = document.getElementById('e-cat')?.value||'';
+  const title   = (document.getElementById('e-title')?.value||'').trim();
+  const summary = (document.getElementById('e-summary')?.value||'').trim();
+  if (!title) { showStatus('標題為必填', true); return; }
+
+  if (editMode.type === 'news') {
+    const item = staticData.news[editMode.index];
+    item.rocDate=date; item.date=date.replace(/\./g,'-');
+    item.category=cat; item.title=title; item.summary=summary;
+    item.registerUrl=(document.getElementById('e-url')?.value||'').trim();
+    item.updatedAt=new Date().toISOString().slice(0,10);
+    try { await saveData('update: news - '+title); renderNewsList(); closeModal(); showStatus('✅ 消息已更新！'); }
+    catch(e) { showStatus('更新失敗：'+e.message,true); }
+  } else if (editMode.type === 'gallery') {
+    const item = staticData.gallery[editMode.index];
+    item.rocDate=date; item.date=date.replace(/\./g,'-');
+    item.category=cat; item.title=title; item.summary=summary;
+    item.result=(document.getElementById('e-result')?.value||'').trim();
+    item.updatedAt=new Date().toISOString().slice(0,10);
+    try { await saveData('update: gallery - '+title); renderGalleryList(); closeModal(); showStatus('✅ 活動相簿已更新！'); }
+    catch(e) { showStatus('更新失敗：'+e.message,true); }
+  }
+}
+
 // ══ NEWS ══
 function nextId(prefix, list) {
   const nums = (list || []).map(i => parseInt(i.id?.replace(prefix+'-','')) || 0);
@@ -540,6 +643,7 @@ function renderNewsList() {
         ${item.summary ? `<div class="item-desc">${item.summary}</div>` : ''}
       </div>
       <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editNews(${i})">✏️ 編輯</button>
         <button class="btn btn-red btn-sm" onclick="deleteNews(${i})">刪除</button>
       </div>
     </div>`).join('');
@@ -726,6 +830,7 @@ function renderGalleryList() {
         ${item.summary ? `<div class="item-desc">${item.summary}</div>` : ''}
       </div>
       <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editGallery(${i})">✏️ 編輯</button>
         <button class="btn btn-red btn-sm" onclick="deleteGallery(${i})">刪除</button>
       </div>
     </div>`;
