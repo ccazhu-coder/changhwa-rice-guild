@@ -38,10 +38,10 @@ window.GUILD_STATIC_DATA = {
     },
     {
       "id": "NEWS-0001",
-      "date": "2026-05-06",
+      "date": "115-05-06",
       "rocDate": "115.05.06",
-      "category": "會員大會",
-      "title": "第29屆第3次會員大會暨理監事聯席會議",
+      "category": "教育訓練",
+      "title": "第29屆第3次會員大會",
       "summary": "公會會員大會與理監事聯席會議公告。",
       "location": "",
       "registerUrl": "",
@@ -50,7 +50,7 @@ window.GUILD_STATIC_DATA = {
       "isPinned": true,
       "sort": 1,
       "createdAt": "2026-05-29",
-      "updatedAt": "2026-05-29",
+      "updatedAt": "2026-06-04",
       "note": ""
     },
     {
