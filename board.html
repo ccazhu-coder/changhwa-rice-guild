@@ -29,8 +29,8 @@
     .board-hero .container{position:relative;max-width:1160px!important;margin:auto!important;padding-top:78px;padding-bottom:78px}
     .board-hero .breadcrumb{color:#f4d983;font-weight:800;font-size:13px;margin-bottom:14px}
     .board-hero h1{font-family:var(--serif);font-size:48px;letter-spacing:.07em;margin-bottom:0}
-    .board-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:64px;position:relative;z-index:3;max-width:860px;margin-left:auto;margin-right:auto}
-    .sum-card{background:#fff;border:1px solid #e6ddc9;border-radius:20px;padding:24px;box-shadow:0 18px 42px rgba(20,45,24,.09)}
+    .board-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:0;position:relative;z-index:3;max-width:760px;margin-left:auto;margin-right:auto}
+    .sum-card{background:#fff;border:1px solid #e6ddc9;border-radius:20px;padding:20px 24px;box-shadow:0 8px 28px rgba(20,45,24,.07)}
     .sum-card b{display:block;color:#c6a437;font-size:28px;line-height:1;margin-bottom:8px;font-family:var(--serif)}
     .sum-card span{color:#183f21;font-weight:900}
     .org-elegant{max-width:1060px;margin:0 auto;position:relative}
@@ -48,15 +48,15 @@
     .committee-people{display:grid;gap:6px;margin-bottom:12px;color:#444;position:relative;z-index:1}
     .committee-people b{color:#183f21}
     .committee-card p{color:#666;line-height:1.8;font-size:14px;margin:0;position:relative;z-index:1}
-    .role-block{margin-top:40px}
+    .role-block{margin-top:0}
     .role-title{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-    .role-title span{background:#183f21;color:#fff;border-radius:999px;padding:7px 14px;font-size:14px;font-weight:900;white-space:nowrap}
-    .role-title h3{font-family:var(--serif);font-size:28px;color:#183f21}
-    .roster-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .roster-card{background:#fff;border:1px solid #e6ddc9;border-radius:22px;padding:24px;box-shadow:0 14px 36px rgba(20,45,24,.07)}
-    .roster-card .role{display:inline-flex;background:#f7f1e3;color:#7d6316;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:900;margin-bottom:10px}
-    .roster-card h4{font-size:22px;color:#183f21;margin-bottom:8px}
-    .roster-card p{color:#666;line-height:1.75;margin:0;font-size:14px}
+    .role-title span{background:#183f21;color:#e0c783;border-radius:20px;padding:5px 14px;font-size:.6rem;font-weight:800;letter-spacing:.1em;white-space:nowrap;flex-shrink:0}
+    .role-title h3{font-size:1rem;font-weight:700;color:#526055;margin:0;line-height:1.3}
+    /* roster-cards grid handled by guild-api.js */
+    /* roster-card styled by guild-api.js injectStyles */
+    /* roster-card .role handled by guild-api.js */
+    /* roster h4 handled by guild-api.js */
+    /* roster p handled by guild-api.js */
     @media(max-width:1180px){.committee-grid,.org-five{grid-template-columns:repeat(3,1fr)}}
     @media(max-width:980px){.board-summary{grid-template-columns:repeat(3,1fr)}.roster-cards,.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.board-hero h1{font-size:34px}.board-summary,.org-two,.roster-cards,.committee-grid,.org-five{grid-template-columns:1fr}.roster-card,.committee-card{padding:22px}.role-title{align-items:flex-start;flex-direction:column}.role-title h3{font-size:24px}}
@@ -82,9 +82,9 @@
   <main>
     <div class="board-banner-wrap" style="width:100%;overflow:hidden;line-height:0"><img src="圖庫/理監事團隊頁面-橫幅圖片.png" alt="第29屆理監事團隊—彰化縣米穀商業同業公會" style="width:100%;height:auto;display:block"></div>
 
-    <section class="section white" style="padding-top:0"><div class="container"><div class="board-summary"><div class="sum-card"><b>1</b><span>理事長</span></div><div class="sum-card"><b>8</b><span>理事會成員</span></div><div class="sum-card"><b>3</b><span>監事會成員</span></div></div></div></section>
+    <section class="section white" style="padding:28px 0 32px"><div class="container"><div class="board-summary"><div class="sum-card"><b>1</b><span>理事長</span></div><div class="sum-card"><b>8</b><span>理事會成員</span></div><div class="sum-card"><b>3</b><span>監事會成員</span></div></div></div></section>
 
-    <section class="section white"><div class="container"><div class="section-head">
+    <section class="section white" style="padding-top:36px"><div class="container"><div class="section-head" style="margin-bottom:32px">
       <span>ROSTER</span>
       <h2 id="boardTermTitle">第29屆理監事名冊</h2>
       <p>理事會、監事會、名譽理事長、顧問與候補名冊公開資料。</p>
