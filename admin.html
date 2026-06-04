@@ -499,10 +499,12 @@ a{color:inherit;text-decoration:none}
           <button class="btn btn-primary" onclick="addMember()">✅ 新增會員</button>
         </div>
         <div class="card">
-          <h3 style="display:flex;align-items:center;gap:12px">📋 會員名錄
+          <h3 style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">📋 會員名錄
             <select id="mem-filter" onchange="renderMemberList()" style="font-size:.8rem;padding:4px 8px;border-radius:6px;border:1px solid var(--border)">
               <option value="">全部</option><option value="甲">甲級</option><option value="乙">乙級</option>
             </select>
+            <input id="mem-search" type="text" placeholder="搜尋姓名/業者..." oninput="renderMemberList()"
+              style="font-size:.82rem;padding:4px 10px;border-radius:6px;border:1px solid var(--border);width:160px;outline:none">
             <span id="mem-count" style="font-size:.78rem;color:var(--muted);font-weight:400"></span>
           </h3>
           <div class="item-list" id="members-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
@@ -1284,7 +1286,12 @@ function renderMemberList() {
   const countEl = document.getElementById('mem-count');
   if (!el) return;
   const filter = document.getElementById('mem-filter')?.value || '';
-  const list = (staticData.members||[]).filter(m => !filter || m.grade===filter);
+  const search = (document.getElementById('mem-search')?.value || '').toLowerCase();
+  const list = (staticData.members||[]).filter(m => {
+    if (filter && m.grade !== filter) return false;
+    if (search && !(m.name||'').toLowerCase().includes(search) && !(m.owner||'').toLowerCase().includes(search) && !(m.company||'').toLowerCase().includes(search)) return false;
+    return true;
+  });
   if (countEl) countEl.textContent = `共 ${list.length} 筆`;
   if (!list.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無會員資料</div>'; return; }
   el.innerHTML = list.map((m,i) => {
@@ -1319,9 +1326,10 @@ function editMember(i) {
     </div>`);
 }
 async function deleteMember(i) {
-  if (!confirm('確定刪除此會員？')) return;
+  const m = staticData.members[i];
+  if (!confirm(`確定將「${m.name}」從會員名錄刪除（退會）？\n\n此操作無法復原。`)) return;
   staticData.members.splice(i,1);
-  try { await saveData('delete: member'); renderMemberList(); showStatus('✅ 已刪除會員'); }
+  try { await saveData('delete: member - ' + m.name + ' (退會)'); renderMemberList(); showStatus(`✅「${m.name}」已退會刪除`); }
   catch(e) { showStatus('失敗：'+e.message,true); }
 }
 
