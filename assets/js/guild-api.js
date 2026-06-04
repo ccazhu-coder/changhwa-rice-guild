@@ -115,27 +115,57 @@ function galleryCard(item){
 }
   function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGalleryList');if(!newsBox&&!galleryBox)return;staticOrFetch('home').then(function(data){if(newsBox){var news=sortList(data.news||[]).slice(0,3);newsBox.innerHTML=news.length?news.map(newsCard).join(''):'<article class="news-item"><span>公告</span><h3>目前尚無最新消息</h3></article>'}if(galleryBox){var gallery=sortList(data.gallery||[]).slice(0,6);galleryBox.innerHTML=gallery.length?gallery.map(galleryCard).join(''):'<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現成果與照片。</p></article>'}}).catch(function(){if(newsBox){newsBox.innerHTML='<article class="news-item"><time>115.05.06</time><span>會員大會</span><h3>第29屆第2次會員大會暨理監事聯席會議</h3></article><article class="news-item"><time>115.05.19</time><span>教育訓練</span><h3>115年度會員教育訓練：農產品業稅務實務與相關法規</h3></article>'}})}
   function renderNewsPage(){
-  var featBox=qs('featuredNewsList');
-  var recentBox=qs('recentNewsList');
-  var galleryBox=qs('galleryApiList');
-  if(!featBox&&!recentBox&&!galleryBox)return;
-  if(featBox||recentBox){
+  var featBox    = qs('featuredNewsList');
+  var recentBox  = qs('recentNewsList');
+  var annBox     = qs('announceList');
+  var galleryBox = qs('galleryApiList');
+  if(!featBox&&!recentBox&&!annBox&&!galleryBox) return;
+
+  if(featBox||recentBox||annBox){
     staticOrFetch('news',{limit:100}).then(function(data){
-      var allNews=sortList(data.news||[]);
+      var all = sortList(data.news||[]);
+      var nonAnn = all.filter(function(n){ return n.category !== '會務公告'; });
+      var ann    = all.filter(function(n){ return n.category === '會務公告'; });
+
       if(featBox){
-        var pinned=allNews.filter(function(n){return n.isPinned;}).slice(0,2);
-        featBox.innerHTML=pinned.length?pinned.map(featuredNewsCard).join(''):'<div style="color:#888;padding:20px 0">近期無精選消息</div>';
+        var pinned = nonAnn.filter(function(n){ return n.isPinned; }).slice(0,2);
+        featBox.innerHTML = pinned.length
+          ? pinned.map(featuredNewsCard).join('')
+          : '<div style="color:#888;padding:20px 0">近期無精選消息</div>';
       }
+
       if(recentBox){
-        var recent=allNews.filter(function(n){return !n.isPinned;}).slice(0,5);
-        recentBox.innerHTML=recent.length?recent.map(recentNewsCard).join(''):'<div style="color:#888;padding:20px 0">近期無消息</div>';
+        var recent = nonAnn.filter(function(n){ return !n.isPinned; }).slice(0,5);
+        recentBox.innerHTML = recent.length
+          ? recent.map(recentNewsCard).join('')
+          : '<div style="color:#888;padding:20px 0">近期無最新消息</div>';
+      }
+
+      if(annBox){
+        annBox.innerHTML = ann.length
+          ? ann.map(announceCard).join('')
+          : '<div style="color:#888;padding:16px 0">目前無會務公告</div>';
       }
     }).catch(function(){
-      if(featBox)featBox.innerHTML='<div style="color:#888">消息載入失敗</div>';
-      if(recentBox)recentBox.innerHTML='';
+      if(featBox)  featBox.innerHTML  = '<div style="color:#888">消息載入失敗，請稍後再試</div>';
+      if(recentBox)recentBox.innerHTML = '';
+      if(annBox)   annBox.innerHTML    = '';
     });
   }
-  if(galleryBox){staticOrFetch('gallery',{limit:100}).then(function(data){var list=sortList(data.gallery||[]);galleryBox.innerHTML=list.length?list.map(galleryCard).join(''):'<article class="activity-card"><div class="activity-card-body"><h3>活動花紮整理中</h3><p>活動結束後將於此呼現成果與照片。</p></div></article>';}).catch(function(){galleryBox.innerHTML='<article class="activity-card"><div class="activity-card-body"><h3>活動花紮整理中</h3><p>請稍後再試。</p></div></article>';});}
+
+  if(galleryBox){
+    staticOrFetch('gallery',{limit:100}).then(function(data){
+      var list = sortList(data.gallery||[]);
+      galleryBox.innerHTML = list.length
+        ? list.map(galleryCard).join('')
+        : '<article class="activity-card"><div class="activity-card-body">'
+          +'<h3>活動花絮整理中</h3>'
+          +'<p>活動結束後將於此呈現成果與照片。</p></div></article>';
+    }).catch(function(){
+      galleryBox.innerHTML = '<article class="activity-card"><div class="activity-card-body">'
+        +'<h3>活動花絮整理中</h3><p>請稍後再試。</p></div></article>';
+    });
+  }
 }
   function fixTalentLinks(){document.querySelectorAll('a').forEach(function(a){var href=(a.getAttribute('href')||'').trim();var text=(a.textContent||'').trim();if(href==='talent.html'||href==='./talent.html'||href==='#talent'||href.endsWith('/talent.html')||text.indexOf('人才培訓委員會')>-1||text.indexOf('查看人才培訓委員會內容')>-1){a.setAttribute('href','training.html')}})}
 
