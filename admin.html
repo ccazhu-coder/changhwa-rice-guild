@@ -356,15 +356,27 @@ a{color:inherit;text-decoration:none}
             <label>說明文字（選填）</label>
             <input type="text" id="dm-summary" placeholder="例：歡迎符合資格的米穀業者申請入會">
           </div>
-          <div class="field">
-            <label>選擇 PDF 檔案</label>
-            <div class="upload-area" id="dm-drop" onclick="document.getElementById('dm-file').click()">
-              <div style="font-size:2rem">📄</div>
-              <p>點擊選擇 PDF 檔案<br><small>或拖曳至此處（A4 規格）</small></p>
-              <input type="file" id="dm-file" accept=".pdf" onchange="previewDM(this)">
+          <div class="field-row">
+            <div class="field">
+              <label>📄 PDF 檔案（A4 規格）</label>
+              <div class="upload-area" onclick="document.getElementById('dm-file').click()" style="padding:16px">
+                <div style="font-size:1.5rem">📄</div>
+                <p style="font-size:.8rem">點擊選擇 PDF</p>
+                <input type="file" id="dm-file" accept=".pdf" onchange="previewDM(this)" style="display:none">
+              </div>
+              <div id="dm-preview" style="margin-top:6px;font-size:.8rem;color:var(--green);display:none"></div>
             </div>
-            <div id="dm-preview" style="margin-top:8px;font-size:.82rem;color:var(--green);display:none"></div>
+            <div class="field">
+              <label>🖼️ 封面預覽圖（JPG/PNG）</label>
+              <div class="upload-area" onclick="document.getElementById('dm-img').click()" style="padding:16px">
+                <div id="dm-img-thumb" style="font-size:1.5rem">🖼️</div>
+                <p style="font-size:.8rem">點擊選擇預覽圖</p>
+                <input type="file" id="dm-img" accept="image/*" onchange="previewDMImg(this)" style="display:none">
+              </div>
+              <div id="dm-img-preview" style="margin-top:6px;font-size:.8rem;color:var(--green);display:none"></div>
+            </div>
           </div>
+          <div style="font-size:.76rem;color:var(--muted);margin-bottom:12px">💡 建議先截圖 DM 第一頁存成 JPG，作為封面預覽圖</div>
           <button class="btn btn-gold" onclick="uploadDM()">📤 上傳 DM</button>
         </div>
         <div class="card">
@@ -852,11 +864,22 @@ async function deleteGallery(i) {
 let pendingFile = null;
 let pendingDM = null;
 
+let pendingDMImg = null;
+
 function previewDM(input) {
   if (input.files[0]) {
     pendingDM = input.files[0];
     document.getElementById('dm-preview').style.display = 'block';
     document.getElementById('dm-preview').textContent = `📄 ${pendingDM.name}（${(pendingDM.size/1024).toFixed(0)} KB）`;
+  }
+}
+function previewDMImg(input) {
+  if (input.files[0]) {
+    pendingDMImg = input.files[0];
+    const url = URL.createObjectURL(pendingDMImg);
+    document.getElementById('dm-img-thumb').innerHTML = `<img src="${url}" style="width:100%;height:80px;object-fit:contain;border-radius:6px">`;
+    document.getElementById('dm-img-preview').style.display = 'block';
+    document.getElementById('dm-img-preview').textContent = `🖼️ ${pendingDMImg.name}`;
   }
 }
 function previewUploadFile(input) {
@@ -905,6 +928,14 @@ async function uploadDM() {
     const repoPath = `files/dm/${safeName}`;
     await githubUploadFile(pendingDM, repoPath, `add: DM - ${title}`);
 
+    // 上傳封面預覽圖（若有）
+    let coverUrl = '';
+    if (pendingDMImg) {
+      const imgName = safeName.replace(/\.pdf$/i, '') + '_cover.' + pendingDMImg.name.split('.').pop();
+      await githubUploadFile(pendingDMImg, `files/dm/${imgName}`, `add: DM cover - ${title}`);
+      coverUrl = `./files/dm/${imgName}`;
+    }
+
     // 自動在最新消息新增一筆 DM 連結
     const fileUrl = `./files/dm/${safeName}`;
     const today = new Date();
@@ -915,7 +946,8 @@ async function uploadDM() {
       rocDate: roc,
       category: '招生DM',
       title: title,
-      summary: summary || '點擊下載招生宣傳單（PDF）',
+      summary: summary || '點擊查看招生宣傳單',
+      coverImage: coverUrl,
       location: '', registerUrl: fileUrl, status: '公告',
       isHome: true, isPinned: false, sort: (staticData.news.length + 1),
       createdAt: today.toISOString().slice(0,10),
