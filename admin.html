@@ -705,9 +705,13 @@ async function saveData(msg) {
   const d = { ...staticData };
   delete d._sha;
   const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString().slice(0,10)} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
-  // Properly encode UTF-8 to base64
+  // 分塊編碼（避免大檔案 call stack overflow）
   const encBytes = new TextEncoder().encode(newContent);
-  const b64 = btoa(String.fromCharCode(...encBytes));
+  let b64 = '';
+  const CHUNK = 8192;
+  for (let i = 0; i < encBytes.length; i += CHUNK) {
+    b64 += btoa(String.fromCharCode(...encBytes.subarray(i, i + CHUNK)));
+  }
 
   const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${STATIC_JS_PATH}`, {
     method: 'PUT',
