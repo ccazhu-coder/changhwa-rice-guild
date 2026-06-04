@@ -882,9 +882,21 @@ async function addNews() {
   const url = document.getElementById('news-url').value.trim();
   if (!date || !title) { showStatus('日期與標題為必填', true); return; }
 
+  // Upload cover image file if selected
+  let coverImage = '';
+  if (window._pendingNewsCoverFile) {
+    try {
+      showStatus('封面圖片上傳中...');
+      const _ext = window._pendingNewsCoverFile.name.split('.').pop().toLowerCase() || 'jpg';
+      const _repoPath = ;
+      await githubUploadFile(window._pendingNewsCoverFile, _repoPath, );
+      coverImage = _repoPath;
+      window._pendingNewsCoverFile = null;
+    } catch(e) { showStatus('封面圖片上傳失敗：' + e.message, true); return; }
+  }
   const item = { id: nextId('NEWS', staticData.news), date: date.replace(/\./g,'-'), rocDate: date,
     category: cat, title, summary, location:'', registerUrl: url, status:'活動結束',
-    coverImage: (document.getElementById('news-coverImage')?.value||'').trim(), isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length+1),
+    coverImage, isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length+1),
     createdAt: new Date().toISOString().slice(0,10), updatedAt: new Date().toISOString().slice(0,10), note:'' };
 
   staticData.news = [item, ...(staticData.news || [])];
@@ -1056,7 +1068,7 @@ async function addGallery() {
     participantCount: '',
     coverImage: coverPhoto ? coverPhoto.url : '',
     albumUrl: '', albumFolderId: '', albumFolderName: title, albumFolderUrl: '',
-    coverImage: (document.getElementById('news-coverImage')?.value||'').trim(), isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.gallery.length + 1),
+    coverImage, isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.gallery.length + 1),
     createdAt: new Date().toISOString().slice(0,10),
     updatedAt: new Date().toISOString().slice(0,10),
     note: `uploaded to ${repoFolder}`,
@@ -1196,7 +1208,7 @@ async function uploadDM() {
       summary: summary || '點擊查看招生宣傳單',
       coverImage: fileUrl,
       location: '', registerUrl: fileUrl, status: '公告',
-      coverImage: (document.getElementById('news-coverImage')?.value||'').trim(), isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length + 1),
+      coverImage, isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length + 1),
       createdAt: today.toISOString().slice(0,10),
       updatedAt: today.toISOString().slice(0,10), note: 'dm_upload'
     };
