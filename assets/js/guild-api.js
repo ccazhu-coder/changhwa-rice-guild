@@ -19,7 +19,19 @@
   function driveImageUrl(url){var id=extractDriveFileId(url);if(id)return 'https://drive.google.com/thumbnail?id='+encodeURIComponent(id)+'&sz=w1200';return url}
   function driveFolderEmbed(url){var id=extractDriveFolderId(url);return id?'<div class="drive-photo-panel"><iframe src="https://drive.google.com/embeddedfolderview?id='+esc(id)+'#grid" loading="lazy" title="活動照片"></iframe></div>':''}
   function isTrainingItem(item){var t=clean(item.title||item.activityTitle);return t.indexOf('115年度會員教育訓練')>-1||t.indexOf('農產品業稅務')>-1}
-  function newsCard(item){return '<article class="news-item"><time>'+esc(item.rocDate||item.date)+'</time><span>'+esc(item.category||'公告')+'</span><h3>'+esc(item.title)+'</h3>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.registerUrl?'<a class="text-link" href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener">查看報名或詳細資訊</a>':'')+'</article>'}
+  function newsBadgeColor(cat){var m={'教育訓練':'#c6a437','會務公告':'#183f21','公益活動':'#2e7d52','訓練品質':'#1565c0','活動通知':'#6a1b9a'};return m[cat]||'#183f21';}
+  function newsCard(item){
+    var cat=esc(item.category||'公告');
+    var color=newsBadgeColor(item.category||'');
+    var badge='<span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:800;letter-spacing:.04em;background:'+color+';color:#fff;margin-bottom:8px">'+cat+'</span>';
+    var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:.8rem;font-weight:700;color:'+color+'">查看詳情 →</a>':'';
+    return '<article style="background:#fff;border:1px solid #e6ddc9;border-radius:16px;padding:20px 22px;box-shadow:0 4px 14px rgba(20,45,24,.06);transition:box-shadow .2s" onmouseover="this.style.boxShadow='0 8px 24px rgba(20,45,24,.12)'" onmouseout="this.style.boxShadow='0 4px 14px rgba(20,45,24,.06)'">'+badge+'<h3 style="font-size:.98rem;font-weight:800;color:#183f21;line-height:1.4;margin-bottom:6px">'+esc(item.title)+'</h3>'+(item.summary?'<p style="font-size:.82rem;color:#61716b;line-height:1.65">'+esc(item.summary)+'</p>':'')+'<div style="font-size:.72rem;color:#aaa;margin-top:8px">'+esc(item.rocDate||item.date)+'</div>'+link+'</article>';
+  }
+  function announceCard(item){
+    var cat=esc(item.category||'公告');
+    var color=newsBadgeColor(item.category||'');
+    return '<div style="background:#fff;border:1px solid #e6ddc9;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:box-shadow .18s" onmouseover="this.style.boxShadow='0 6px 18px rgba(20,45,24,.09)'" onmouseout="this.style.boxShadow='none'"><div style="width:8px;height:8px;border-radius:50%;background:'+color+';flex-shrink:0"></div><div style="font-size:.72rem;color:#aaa;flex-shrink:0;width:80px">'+esc(item.rocDate||item.date)+'</div><div style="font-size:.9rem;font-weight:700;color:#183f21;flex:1">'+esc(item.title)+'</div><span style="background:'+color+';color:#fff;font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap">'+cat+'</span></div>';
+  }
   function photoGrid(item){
     var photos=(item.photos||[]).filter(function(p){return isUsableImageUrl(p.url||p.rawUrl)}).slice(0,8);
     if(photos.length){return '<div class="activity-photo-strip">'+photos.map(function(p){var img=driveImageUrl(p.url||p.rawUrl);return '<figure><img src="'+esc(img)+'" alt="'+esc(p.caption||item.title)+'" loading="lazy"><figcaption>'+esc(p.caption||'活動照片')+'</figcaption></figure>'}).join('')+'</div>'}
