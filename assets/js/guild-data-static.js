@@ -4284,6 +4284,15 @@ window.GUILD_STATIC_DATA = {
   ],
   "documents": [
     {
+      "id": "DOC-POLICY-115031",
+      "title": "市售米標落實產地公文",
+      "category": "政策公告",
+      "path": "./files/115031市售米標落實產地公文.pdf",
+      "fileName": "115031市售米標落實產地公文.pdf",
+      "uploadedAt": "2026-06-04",
+      "rocDate": "115.06.04"
+    },
+    {
       "id": "DOC-CHARTER",
       "title": "彰化縣米穀商業同業公會章程",
       "category": "章程",
@@ -4300,16 +4309,6 @@ window.GUILD_STATIC_DATA = {
       "fileName": "會員入會申請書.docx",
       "uploadedAt": "2026-06-02",
       "rocDate": "115.06.02"
-    },
-    {
-      "id": "DOC-POLICY-001",
-      "title": "重要通知 — 食米產品產地標示查核加強",
-      "category": "政策公告",
-      "path": "./files/",
-      "fileName": "",
-      "uploadedAt": "2026-06-04",
-      "rocDate": "115.06.04",
-      "note": "公文尚未上傳，請至後台上傳 PDF"
     }
   ]
 };
