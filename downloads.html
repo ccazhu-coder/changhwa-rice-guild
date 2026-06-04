@@ -122,6 +122,19 @@ a{color:inherit;text-decoration:none}
 
   </div>
 </section>
+
+<!-- 動態文件區塊（由後台管理） -->
+<section class="section section-rice" id="dynamicDocsSection" style="display:none">
+  <div class="container">
+    <div class="sec-head">
+      <div class="sec-label">POLICY & DOCUMENTS</div>
+      <h2>政策公告與文件下載</h2>
+      <p>以下文件由公會秘書處不定期更新，如需最新版本請隨時下載。</p>
+      <div class="sec-divider"></div>
+    </div>
+    <div id="dynamicDocsList"></div>
+  </div>
+</section>
 </main>
 <footer style="position:relative;width:100%;line-height:0;overflow:hidden">
   <img src="圖庫/底部橫幅.jpg" alt="彰化縣米穀商業同業公會" style="width:100%;height:auto;display:block">
@@ -139,54 +152,36 @@ a{color:inherit;text-decoration:none}
   <a href="contact.html"   title="聯絡公會按鈕" style="position:absolute;left:67%;top:70%;width:12%;height:14%;display:block"></a>
 </footer>
 <script>(function(){var t=document.getElementById("navToggle");var n=document.getElementById("mainNav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});}})();</script><!-- LOCKED: downloads.html uses inline JS only, no site.js dependency -->
-
-<!-- 動態文件區塊 -->
-<section class="section section-rice" id="dynamicDocsSection" style="display:none;padding-top:40px">
-  <div class="container">
-    <div class="sec-head">
-      <div class="sec-label">POLICY & DOCUMENTS</div>
-      <h2>政策公告與文件下載</h2>
-      <p>以下文件由公會秘書處不定期更新，如需最新版本請隨時下載。</p>
-      <div class="sec-divider"></div>
-    </div>
-    <div id="dynamicDocsList"></div>
-  </div>
-</section>
-
 <script src="./assets/js/guild-data-static.js"></script>
 <script>
 (function(){
-  var CAT_ICONS={'政策公告':'📋','章程':'📜','申請書表':'📝','其他':'📄'};
+  var CAT_ICONS={'정책공告':'📋','政策公告':'📋','章程':'📜','申請書表':'📝','其他':'📄'};
   var CAT_COLORS={'政策公告':'#c0392b','章程':'#183f21','申請書表':'#2980b9','其他':'#7f8c8d'};
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
-
   function renderDocs(docs){
-    if(!docs||!docs.length) return;
+    if(!docs||!docs.length)return;
     var section=document.getElementById('dynamicDocsSection');
     var list=document.getElementById('dynamicDocsList');
-    if(!section||!list) return;
-    // Group by category
+    if(!section||!list)return;
     var groups={};
     docs.forEach(function(d){
-      if(!d.fileName) return; // skip placeholders
+      if(!d.fileName)return;
       var c=d.category||'其他';
-      if(!groups[c]) groups[c]=[];
+      if(!groups[c])groups[c]=[];
       groups[c].push(d);
     });
-    if(!Object.keys(groups).length) return;
+    if(!Object.keys(groups).length)return;
     var html='';
     Object.keys(groups).forEach(function(cat){
       var color=CAT_COLORS[cat]||'#666';
-      var icon=CAT_ICONS[cat]||'📄';
       html+='<div style="margin-bottom:36px">';
       html+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #c6a437">';
-      html+='<div style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;color:#fff;flex-shrink:0;background:'+color+'">'+icon+'</div>';
+      html+='<div style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;flex-shrink:0;background:'+color+'">'+cat.charAt(0)+'</div>';
       html+='<h3 style="font-size:1.1rem;font-weight:900;color:#183f21">'+cat+'</h3>';
       html+='</div><div class="dl-list">';
       groups[cat].forEach(function(doc){
         var ext=(doc.fileName||'').split('.').pop().toUpperCase();
-        var isWord=['DOCX','DOC'].indexOf(ext)>=0;
-        var iconCls=isWord?'word':'pdf';
+        var iconCls=['DOCX','DOC'].indexOf(ext)>=0?'word':'pdf';
         var fileUrl=BASE+(doc.path||'').replace('./','');
         html+='<a class="dl-item" href="'+fileUrl+'" target="_blank" download>'
           +'<div class="dl-file-icon '+iconCls+'">'+ext+'</div>'
@@ -202,14 +197,11 @@ a{color:inherit;text-decoration:none}
     list.innerHTML=html;
     section.style.display='block';
   }
-
-  // Run after DOM is ready
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',function(){renderDocs((window.GUILD_STATIC_DATA||{}).documents);});
-  } else {
+  window.addEventListener('load',function(){
     renderDocs((window.GUILD_STATIC_DATA||{}).documents);
-  }
+  });
 })();
 </script>
+
 </body>
 </html>
