@@ -244,6 +244,6 @@ function galleryCard(item){
       box.innerHTML='<p style="color:#666;padding:20px">載入失敗，請稍後再試。</p>';
     });
   }
-  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage()});
+  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage()});
   window.GuildApi={renderHome:renderHome,renderNewsPage:renderNewsPage,renderTrainingPage:renderTrainingPage,fixTalentLinks:fixTalentLinks};
 })();
