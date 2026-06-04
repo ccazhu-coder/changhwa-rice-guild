@@ -58,22 +58,42 @@
     /* roster h4 handled by guild-api.js */
     /* roster p handled by guild-api.js */
     @media(max-width:1180px){.committee-grid,.org-five{grid-template-columns:repeat(3,1fr)}}
-    @media(max-width:980px){.board-summary{grid-template-columns:repeat(3,1fr)}.roster-cards,.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
-    @media(max-width:620px){.board-hero h1{font-size:34px}.board-summary,.org-two,.roster-cards,.committee-grid,.org-five{grid-template-columns:1fr}.roster-card,.committee-card{padding:22px}.role-title{align-items:flex-start;flex-direction:column}.role-title h3{font-size:24px}}
-  
-/* ROSTER WITH PHOTOS */
-.roster-photo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
-.roster-photo-card{background:#fff;border:1px solid #e6ddc9;border-radius:18px;padding:20px 16px;text-align:center;box-shadow:0 8px 24px rgba(20,45,24,.07);transition:box-shadow .2s,transform .2s}
-.roster-photo-card:hover{box-shadow:0 14px 36px rgba(20,45,24,.12);transform:translateY(-3px)}
-.roster-photo{width:90px;height:90px;border-radius:50%;object-fit:cover;margin:0 auto 12px;border:3px solid #e6ddc9;display:block;background:#f0f0f0}
-.roster-photo-placeholder{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,#183f21,#24592f);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-size:2rem;color:#c6a437}
-.roster-photo-role{display:inline-block;background:#f7f1e3;color:#7d6316;border-radius:999px;padding:3px 10px;font-size:.7rem;font-weight:900;margin-bottom:8px}
-.roster-photo-name{font-size:1rem;font-weight:900;color:#183f21;margin-bottom:4px}
-.roster-photo-company{font-size:.76rem;color:#61716b;line-height:1.5}
-@media(max-width:1100px){.roster-photo-grid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:780px){.roster-photo-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:480px){.roster-photo-grid{grid-template-columns:1fr 1fr}}
+    @media(max-width:980px){.board-summary{grid-template-columns:repeat(3,1fr)}.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:620px){.board-hero h1{font-size:34px}.board-summary,.org-two,.committee-grid,.org-five{grid-template-columns:1fr}.committee-card{padding:22px}.role-title{align-items:flex-start;flex-direction:column}.role-title h3{font-size:24px}}
 
+/* ── 理監事名冊 名片排版 ── */
+.role-block         { margin-bottom: 48px; }
+.role-block:last-child { margin-bottom: 0; }
+.role-title         { display:flex; align-items:center; gap:14px; margin-bottom:28px;
+                      padding-bottom:14px; border-bottom:1px solid rgba(198,164,55,.22); }
+.role-title > span  { display:inline-flex; align-items:center; background:#183f21; color:#e0c783;
+                      font-size:.62rem; font-weight:800; letter-spacing:.1em; padding:5px 14px;
+                      border-radius:20px; white-space:nowrap; flex-shrink:0; }
+.role-title > h3    { font-size:1rem; font-weight:700; color:#526055; margin:0; line-height:1.3; }
+.roster-cards       { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start; }
+.roster-card        { background:#fff; border:1px solid rgba(198,164,55,.28); border-radius:18px;
+                      padding:28px 20px 22px; display:flex; flex-direction:column;
+                      align-items:center; text-align:center;
+                      box-shadow:0 4px 18px rgba(20,45,24,.05);
+                      transition:box-shadow .22s, transform .22s; }
+.roster-card:hover  { box-shadow:0 10px 32px rgba(20,45,24,.11); transform:translateY(-3px); }
+.roster-photo       { width:110px; height:110px; border-radius:50%; overflow:hidden;
+                      border:2.5px solid rgba(198,164,55,.45); background:#f7f1e3;
+                      display:flex; align-items:center; justify-content:center;
+                      margin:0 auto 14px; flex-shrink:0; }
+.roster-photo img   { width:100%; height:100%; object-fit:cover; display:block; }
+.roster-avatar-text { font-size:2rem; font-weight:900; color:#183f21; line-height:1;
+                      user-select:none; }
+.roster-role-badge  { display:inline-block; font-size:.68rem; font-weight:800;
+                      letter-spacing:.06em; padding:4px 14px; border-radius:20px;
+                      background:rgba(198,164,55,.15); color:#183f21; margin-bottom:10px; }
+.roster-name        { font-size:1.25rem; font-weight:900; color:#183f21;
+                      line-height:1.2; margin:0 0 6px; }
+.roster-company     { font-size:.88rem; color:#666; line-height:1.5; margin:0;
+                      word-break:break-all; }
+@media(max-width:900px)  { .roster-cards { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:560px)  { .roster-cards { grid-template-columns:1fr; }
+                            .roster-card { padding:22px 16px 18px; } }
 </style>
 </head>
 <body class="board-page">
@@ -143,7 +163,7 @@
 </footer>
   <script src="./assets/js/site.js"></script>
 <script src="./assets/js/guild-data-static.js"></script>
-<script src="./assets/js/guild-api.js?v=20260604-board3"></script>
+<script src="./assets/js/guild-api.js?v=20260604-board4"></script>
 
 <script>
 (function(){
