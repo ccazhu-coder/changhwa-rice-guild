@@ -713,12 +713,23 @@ async function saveData(msg) {
     b64 += btoa(String.fromCharCode(...encBytes.subarray(i, i + CHUNK)));
   }
 
-  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${STATIC_JS_PATH}`, {
-    method: 'PUT',
-    headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
-    body: JSON.stringify({ message: msg, content: b64, sha: staticData._sha })
+  const _API = `https://api.github.com/repos/${REPO}/contents/${STATIC_JS_PATH}`;
+  const _H   = { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' };
+
+  // Always re-fetch latest SHA before saving (prevents stale-SHA conflicts)
+  const latestMeta = await fetch(_API, { headers: _H });
+  const latestData = await latestMeta.json();
+  const freshSha   = latestData.sha || staticData._sha;
+
+  const res = await fetch(_API, {
+    method: 'PUT', headers: _H,
+    body: JSON.stringify({ message: msg, content: b64, sha: freshSha })
   });
-  if (!res.ok) throw new Error(await res.text());
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`儲存失敗 HTTP ${res.status}: ${errText.substring(0,150)}`);
+  }
   const result = await res.json();
   staticData._sha = result.content.sha;
   showStatus('✅ 已儲存！網站將在 1～2 分鐘內更新。');
