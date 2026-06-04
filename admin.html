@@ -170,6 +170,7 @@ a{color:inherit;text-decoration:none}
   <div class="admin-body">
     <!-- SIDEBAR -->
     <div class="sidebar">
+      <div style="padding:10px 16px 4px;font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase">內容管理</div>
       <div class="sidebar-item active" onclick="showTab('news')" id="tab-btn-news">
         <span class="icon">📰</span>最新消息
       </div>
@@ -184,6 +185,22 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="sidebar-item" onclick="showTab('files')" id="tab-btn-files">
         <span class="icon">📁</span>文件下載
+      </div>
+      <div style="padding:10px 16px 4px;font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;margin-top:8px">組織管理</div>
+      <div class="sidebar-item" onclick="showTab('board')" id="tab-btn-board">
+        <span class="icon">👔</span>理監事名冊
+      </div>
+      <div class="sidebar-item" onclick="showTab('committees')" id="tab-btn-committees">
+        <span class="icon">🏛️</span>各委員會
+      </div>
+      <div class="sidebar-item" onclick="showTab('chairpersons')" id="tab-btn-chairpersons">
+        <span class="icon">👑</span>歷屆理事長
+      </div>
+      <div class="sidebar-item" onclick="showTab('members')" id="tab-btn-members">
+        <span class="icon">👥</span>會員名錄
+      </div>
+      <div class="sidebar-item" onclick="showTab('brand')" id="tab-btn-brand">
+        <span class="icon">🌾</span>彰榖米品牌
       </div>
     </div>
 
@@ -401,7 +418,116 @@ a{color:inherit;text-decoration:none}
           <div class="item-list" id="files-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
         </div>
       </div>
+
+      <!-- ── 理監事名冊 ── -->
+      <div class="tab-panel" id="tab-board">
+        <div class="panel-title">👔 理監事名冊 <small>第29屆理監事完整名單管理</small></div>
+        <div class="card">
+          <h3>➕ 新增理監事成員</h3>
+          <div class="field-row">
+            <div class="field"><label>職稱</label>
+              <select id="brd-role">
+                <option>理事長</option><option>副理事長</option><option>常務理事</option>
+                <option>理事</option><option>常務監事</option><option>監事</option>
+                <option>名譽理事長</option><option>顧問</option><option>候補理事</option><option>候補監事</option>
+              </select></div>
+            <div class="field"><label>姓名</label><input id="brd-name" placeholder="例：王大明"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>業者名稱</label><input id="brd-company" placeholder="例：大義碾米工廠"></div>
+            <div class="field"><label>地址</label><input id="brd-address" placeholder="彰化縣…"></div>
+          </div>
+          <button class="btn btn-primary" onclick="addBoardMember()">✅ 新增</button>
+        </div>
+        <div class="card">
+          <h3>📋 現任理監事名冊</h3>
+          <div class="item-list" id="board-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 各委員會 ── -->
+      <div class="tab-panel" id="tab-committees">
+        <div class="panel-title">🏛️ 各委員會管理 <small>委員會主委、副主委與工作執掌</small></div>
+        <div class="card">
+          <h3>委員會列表（點擊「✏️ 編輯」修改）</h3>
+          <div class="item-list" id="committees-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 歷屆理事長 ── -->
+      <div class="tab-panel" id="tab-chairpersons">
+        <div class="panel-title">👑 歷屆理事長名單 <small>新增、修改歷屆理事長記錄</small></div>
+        <div class="card">
+          <h3>➕ 新增屆別</h3>
+          <div class="field-row">
+            <div class="field"><label>屆別</label><input id="cp-term" placeholder="例：第30屆"></div>
+            <div class="field"><label>任期</label><input id="cp-period" placeholder="例：民國116～119年"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>理事長姓名</label><input id="cp-name" placeholder="例：王大明"></div>
+            <div class="field"><label>所屬業者（選填）</label><input id="cp-company" placeholder="例：大義碾米工廠"></div>
+          </div>
+          <div class="field"><label><input type="checkbox" id="cp-current"> 標示為現任</label></div>
+          <button class="btn btn-primary" onclick="addChairperson()">✅ 新增</button>
+        </div>
+        <div class="card">
+          <h3>📋 歷屆理事長名單</h3>
+          <div class="item-list" id="chairpersons-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 會員名錄 ── -->
+      <div class="tab-panel" id="tab-members">
+        <div class="panel-title">👥 會員名錄 <small>管理甲、乙級會員資料</small></div>
+        <div class="card">
+          <h3>➕ 新增會員</h3>
+          <div class="field-row">
+            <div class="field"><label>會員等級</label>
+              <select id="mem-grade"><option value="甲">甲級（碾米業者）</option><option value="乙">乙級（販售業者）</option></select>
+            </div>
+            <div class="field"><label>會員編號（選填）</label><input id="mem-id" placeholder="例：A-001"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>業者名稱</label><input id="mem-name" placeholder="例：大義碾米工廠"></div>
+            <div class="field"><label>負責人</label><input id="mem-owner" placeholder="例：王大明"></div>
+          </div>
+          <div class="field-row">
+            <div class="field"><label>地區</label><input id="mem-area" placeholder="例：彰化市"></div>
+            <div class="field"><label>電話（選填）</label><input id="mem-phone" placeholder="04-XXXXXXX"></div>
+          </div>
+          <div class="field"><label>地址</label><input id="mem-address" placeholder="彰化縣…"></div>
+          <button class="btn btn-primary" onclick="addMember()">✅ 新增會員</button>
+        </div>
+        <div class="card">
+          <h3 style="display:flex;align-items:center;gap:12px">📋 會員名錄
+            <select id="mem-filter" onchange="renderMemberList()" style="font-size:.8rem;padding:4px 8px;border-radius:6px;border:1px solid var(--border)">
+              <option value="">全部</option><option value="甲">甲級</option><option value="乙">乙級</option>
+            </select>
+            <span id="mem-count" style="font-size:.78rem;color:var(--muted);font-weight:400"></span>
+          </h3>
+          <div class="item-list" id="members-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      <!-- ── 彰榖米品牌 ── -->
+      <div class="tab-panel" id="tab-brand">
+        <div class="panel-title">🌾 彰榖米品牌 <small>管理品牌頁面文字說明</small></div>
+        <div class="card">
+          <h3>✏️ 品牌資訊</h3>
+          <div class="field"><label>品牌標語</label><input id="brand-tagline" placeholder="例：一粒好米，種出彰化的風土好味道"></div>
+          <div class="field"><label>品牌說明</label><textarea id="brand-desc" rows="4"></textarea></div>
+          <button class="btn btn-primary" onclick="saveBrand()">💾 儲存品牌資訊</button>
+        </div>
+        <div class="card">
+          <h3>品牌特色說明（三點）</h3>
+          <div id="brand-points-list"></div>
+          <button class="btn btn-outline" onclick="addBrandPoint()" style="margin-top:12px">➕ 新增特色</button>
+        </div>
+      </div>
+
     </div>
+  </div>
+
   </div>
 </div>
 
@@ -1009,6 +1135,309 @@ async function loadFilesList() {
     document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">載入失敗</div>';
   }
 }
+
+// ══ BOARD MEMBERS ══
+async function addBoardMember() {
+  const role    = document.getElementById('brd-role').value;
+  const name    = document.getElementById('brd-name').value.trim();
+  const company = document.getElementById('brd-company').value.trim();
+  const address = document.getElementById('brd-address').value.trim();
+  if (!name) { showStatus('姓名為必填', true); return; }
+  if (!staticData.board) staticData.board = { term:'第29屆', period:'民國113～116年', members:[] };
+  staticData.board.members.push({ role, name, company, address });
+  try { await saveData('add: board member - ' + name); renderBoardList(); showStatus('✅ 已新增理監事成員'); ['brd-name','brd-company','brd-address'].forEach(id => document.getElementById(id).value=''); }
+  catch(e) { showStatus('失敗：'+e.message, true); }
+}
+function renderBoardList() {
+  const el = document.getElementById('board-list');
+  if (!el) return;
+  const members = (staticData.board?.members || []);
+  if (!members.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無資料</div>'; return; }
+  const roleOrder = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
+  const sorted = [...members].sort((a,b) => (roleOrder.indexOf(a.role)||99)-(roleOrder.indexOf(b.role)||99));
+  el.innerHTML = sorted.map((m,i) => `<div class="item-card">
+    <div class="item-card-body">
+      <div class="item-title"><span class="badge">${m.role}</span>${m.name}</div>
+      <div class="item-meta">${m.company||''} ${m.address?'・'+m.address:''}</div>
+    </div>
+    <div class="item-card-actions">
+      <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editBoardMember(${members.indexOf(m)})">✏️</button>
+      <button class="btn btn-red btn-sm" onclick="deleteBoardMember(${members.indexOf(m)})">刪除</button>
+    </div></div>`).join('');
+}
+function editBoardMember(i) {
+  const m = staticData.board.members[i];
+  editMode = { type:'board', index:i };
+  const roles = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
+  openModal('✏️ 編輯理監事成員', `
+    <div class="field"><label>職稱</label><select id="e-cat">${roles.map(r=>`<option${m.role===r?' selected':''}>${r}</option>`).join('')}</select></div>
+    <div class="field"><label>姓名</label><input id="e-title" value="${m.name||''}"></div>
+    <div class="field"><label>業者名稱</label><input id="e-summary" value="${m.company||''}"></div>
+    <div class="field"><label>地址</label><input id="e-result" value="${m.address||''}"></div>`);
+}
+async function deleteBoardMember(i) {
+  if (!confirm('確定刪除？')) return;
+  staticData.board.members.splice(i,1);
+  try { await saveData('delete: board member'); renderBoardList(); showStatus('✅ 已刪除'); }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
+
+// ══ COMMITTEES ══
+function renderCommitteesList() {
+  const el = document.getElementById('committees-list');
+  if (!el) return;
+  const list = staticData.committees || [];
+  if (!list.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無資料</div>'; return; }
+  el.innerHTML = list.map((c,i) => `<div class="item-card">
+    <div class="item-card-body">
+      <div class="item-title"><span class="badge gold">${c.name}</span></div>
+      <div class="item-meta">主委：${c.chair}　副主委：${c.viceChair}</div>
+      <div class="item-desc">${c.duties}</div>
+    </div>
+    <div class="item-card-actions">
+      <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editCommittee(${i})">✏️ 編輯</button>
+    </div></div>`).join('');
+}
+function editCommittee(i) {
+  const c = staticData.committees[i];
+  editMode = { type:'committee', index:i };
+  openModal('✏️ 編輯委員會', `
+    <div class="field"><label>委員會名稱</label><input id="e-title" value="${c.name||''}"></div>
+    <div class="field-row">
+      <div class="field"><label>主委姓名</label><input id="e-date" value="${c.chair||''}"></div>
+      <div class="field"><label>副主委姓名</label><input id="e-cat" value="${c.viceChair||''}"></div>
+    </div>
+    <div class="field"><label>工作執掌</label><textarea id="e-summary">${c.duties||''}</textarea></div>`);
+}
+
+// ══ CHAIRPERSONS ══
+async function addChairperson() {
+  const term    = document.getElementById('cp-term').value.trim();
+  const period  = document.getElementById('cp-period').value.trim();
+  const name    = document.getElementById('cp-name').value.trim();
+  const company = document.getElementById('cp-company').value.trim();
+  const isCurrent = document.getElementById('cp-current').checked;
+  if (!term || !name) { showStatus('屆別與姓名為必填', true); return; }
+  if (!staticData.chairpersons) staticData.chairpersons = [];
+  // Remove current flag from previous
+  if (isCurrent) staticData.chairpersons.forEach(c => delete c.isCurrent);
+  staticData.chairpersons.push({ term, period, name, company, ...(isCurrent?{isCurrent:true}:{}) });
+  try { await saveData('add: chairperson - ' + name); renderChairpersonsList(); showStatus('✅ 已新增歷屆理事長'); ['cp-term','cp-period','cp-name','cp-company'].forEach(id=>document.getElementById(id).value=''); document.getElementById('cp-current').checked=false; }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
+function renderChairpersonsList() {
+  const el = document.getElementById('chairpersons-list');
+  if (!el) return;
+  const list = staticData.chairpersons || [];
+  if (!list.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無資料</div>'; return; }
+  el.innerHTML = [...list].reverse().map((c,ri) => {
+    const i = list.length-1-ri;
+    return `<div class="item-card">
+      <div class="item-card-body">
+        <div class="item-title">${c.isCurrent?'<span class="badge gold">現任</span> ':''}<strong>${c.term}</strong>　${c.name}</div>
+        <div class="item-meta">${c.period}${c.company?' ・ '+c.company:''}</div>
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editChairperson(${i})">✏️</button>
+        <button class="btn btn-red btn-sm" onclick="deleteChairperson(${i})">刪除</button>
+      </div></div>`;
+  }).join('');
+}
+function editChairperson(i) {
+  const c = staticData.chairpersons[i];
+  editMode = { type:'chairperson', index:i };
+  openModal('✏️ 編輯歷屆理事長', `
+    <div class="field-row">
+      <div class="field"><label>屆別</label><input id="e-title" value="${c.term||''}"></div>
+      <div class="field"><label>任期</label><input id="e-date" value="${c.period||''}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>姓名</label><input id="e-cat" value="${c.name||''}"></div>
+      <div class="field"><label>所屬業者</label><input id="e-summary" value="${c.company||''}"></div>
+    </div>
+    <div class="field"><label><input type="checkbox" id="e-current"${c.isCurrent?' checked':''}> 標示為現任</label></div>`);
+}
+async function deleteChairperson(i) {
+  if (!confirm('確定刪除？')) return;
+  staticData.chairpersons.splice(i,1);
+  try { await saveData('delete: chairperson'); renderChairpersonsList(); showStatus('✅ 已刪除'); }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
+
+// ══ MEMBERS ══
+async function addMember() {
+  const grade   = document.getElementById('mem-grade').value;
+  const name    = document.getElementById('mem-name').value.trim();
+  const owner   = document.getElementById('mem-owner').value.trim();
+  const area    = document.getElementById('mem-area').value.trim();
+  const phone   = document.getElementById('mem-phone').value.trim();
+  const address = document.getElementById('mem-address').value.trim();
+  const mid     = document.getElementById('mem-id').value.trim();
+  if (!name) { showStatus('業者名稱為必填', true); return; }
+  if (!staticData.members) staticData.members = [];
+  staticData.members.push({ id: mid||nextId('MEM',staticData.members), grade, name, owner, area, phone, address, createdAt: new Date().toISOString().slice(0,10) });
+  try { await saveData('add: member - '+name); renderMemberList(); showStatus('✅ 已新增會員'); ['mem-name','mem-owner','mem-area','mem-phone','mem-address','mem-id'].forEach(id=>document.getElementById(id).value=''); }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
+function renderMemberList() {
+  const el = document.getElementById('members-list');
+  const countEl = document.getElementById('mem-count');
+  if (!el) return;
+  const filter = document.getElementById('mem-filter')?.value || '';
+  const list = (staticData.members||[]).filter(m => !filter || m.grade===filter);
+  if (countEl) countEl.textContent = `共 ${list.length} 筆`;
+  if (!list.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無會員資料</div>'; return; }
+  el.innerHTML = list.map((m,i) => {
+    const realIdx = (staticData.members||[]).indexOf(m);
+    return `<div class="item-card">
+      <div class="item-card-body">
+        <div class="item-title"><span class="badge ${m.grade==='甲'?'gold':''}">${m.grade}級</span>${m.name}</div>
+        <div class="item-meta">負責人：${m.owner||'-'}　地區：${m.area||'-'}${m.phone?' ・ '+m.phone:''}</div>
+        ${m.address?`<div class="item-desc">${m.address}</div>`:''}
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editMember(${realIdx})">✏️</button>
+        <button class="btn btn-red btn-sm" onclick="deleteMember(${realIdx})">刪除</button>
+      </div></div>`;
+  }).join('');
+}
+function editMember(i) {
+  const m = staticData.members[i];
+  editMode = { type:'member', index:i };
+  openModal('✏️ 編輯會員', `
+    <div class="field-row">
+      <div class="field"><label>等級</label><select id="e-cat"><option${m.grade==='甲'?' selected':''}>甲</option><option${m.grade==='乙'?' selected':''}>乙</option></select></div>
+      <div class="field"><label>業者名稱</label><input id="e-title" value="${m.name||''}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>負責人</label><input id="e-date" value="${m.owner||''}"></div>
+      <div class="field"><label>地區</label><input id="e-summary" value="${m.area||''}"></div>
+    </div>
+    <div class="field-row">
+      <div class="field"><label>電話</label><input id="e-url" value="${m.phone||''}"></div>
+      <div class="field"><label>地址</label><input id="e-result" value="${m.address||''}"></div>
+    </div>`);
+}
+async function deleteMember(i) {
+  if (!confirm('確定刪除此會員？')) return;
+  staticData.members.splice(i,1);
+  try { await saveData('delete: member'); renderMemberList(); showStatus('✅ 已刪除會員'); }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
+
+// ══ BRAND ══
+function renderBrandForm() {
+  const b = staticData.brand || {};
+  const t = document.getElementById('brand-tagline');
+  const d = document.getElementById('brand-desc');
+  if (t) t.value = b.tagline || '';
+  if (d) d.value = b.description || '';
+  const pts = document.getElementById('brand-points-list');
+  if (pts) {
+    pts.innerHTML = (b.points||[]).map((p,i) => `
+      <div class="item-card" style="margin-bottom:10px">
+        <div class="item-card-body">
+          <div class="item-title">[${p.icon}] ${p.title}</div>
+          <div class="item-desc">${p.desc}</div>
+        </div>
+        <div class="item-card-actions">
+          <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editBrandPoint(${i})">✏️</button>
+          <button class="btn btn-red btn-sm" onclick="deleteBrandPoint(${i})">刪除</button>
+        </div></div>`).join('');
+  }
+}
+async function saveBrand() {
+  if (!staticData.brand) staticData.brand = {};
+  staticData.brand.tagline = document.getElementById('brand-tagline')?.value.trim() || '';
+  staticData.brand.description = document.getElementById('brand-desc')?.value.trim() || '';
+  staticData.brand.updatedAt = new Date().toISOString().slice(0,10);
+  try { await saveData('update: brand info'); showStatus('✅ 彰榖米品牌資訊已更新！'); }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
+function addBrandPoint() {
+  editMode = { type:'brandPoint', index:-1 };
+  openModal('➕ 新增品牌特色', `
+    <div class="field"><label>圖示（一個字）</label><input id="e-title" placeholder="例：源" maxlength="2"></div>
+    <div class="field"><label>標題</label><input id="e-cat" placeholder="例：在地風土傳承"></div>
+    <div class="field"><label>說明</label><textarea id="e-summary" placeholder="特色說明文字..."></textarea></div>`);
+}
+function editBrandPoint(i) {
+  const p = (staticData.brand?.points||[])[i];
+  editMode = { type:'brandPoint', index:i };
+  openModal('✏️ 編輯品牌特色', `
+    <div class="field"><label>圖示（一個字）</label><input id="e-title" value="${p.icon||''}" maxlength="2"></div>
+    <div class="field"><label>標題</label><input id="e-cat" value="${p.title||''}"></div>
+    <div class="field"><label>說明</label><textarea id="e-summary">${p.desc||''}</textarea></div>`);
+}
+async function deleteBrandPoint(i) {
+  if (!confirm('確定刪除？')) return;
+  (staticData.brand.points||[]).splice(i,1);
+  try { await saveData('delete: brand point'); renderBrandForm(); showStatus('✅ 已刪除'); }
+  catch(e) { showStatus('失敗：'+e.message,true); }
+}
+
+// ══ Extend saveEdit for new types ══
+const _origSaveEdit = saveEdit;
+saveEdit = async function() {
+  if (!editMode) return;
+  if (editMode.type==='board') {
+    const m = staticData.board.members[editMode.index];
+    m.role = document.getElementById('e-cat')?.value||m.role;
+    m.name = (document.getElementById('e-title')?.value||'').trim();
+    m.company = (document.getElementById('e-summary')?.value||'').trim();
+    m.address = (document.getElementById('e-result')?.value||'').trim();
+    try { await saveData('update: board member - '+m.name); renderBoardList(); closeModal(); showStatus('✅ 已更新'); }
+    catch(e) { showStatus('失敗：'+e.message,true); }
+  } else if (editMode.type==='committee') {
+    const c = staticData.committees[editMode.index];
+    c.name    = (document.getElementById('e-title')?.value||'').trim();
+    c.chair   = (document.getElementById('e-date')?.value||'').trim();
+    c.viceChair = (document.getElementById('e-cat')?.value||'').trim();
+    c.duties  = (document.getElementById('e-summary')?.value||'').trim();
+    try { await saveData('update: committee - '+c.name); renderCommitteesList(); closeModal(); showStatus('✅ 已更新'); }
+    catch(e) { showStatus('失敗：'+e.message,true); }
+  } else if (editMode.type==='chairperson') {
+    const c = staticData.chairpersons[editMode.index];
+    c.term    = (document.getElementById('e-title')?.value||'').trim();
+    c.period  = (document.getElementById('e-date')?.value||'').trim();
+    c.name    = (document.getElementById('e-cat')?.value||'').trim();
+    c.company = (document.getElementById('e-summary')?.value||'').trim();
+    const isCurrent = document.getElementById('e-current')?.checked;
+    if (isCurrent) staticData.chairpersons.forEach(x=>delete x.isCurrent);
+    if (isCurrent) c.isCurrent = true; else delete c.isCurrent;
+    try { await saveData('update: chairperson - '+c.name); renderChairpersonsList(); closeModal(); showStatus('✅ 已更新'); }
+    catch(e) { showStatus('失敗：'+e.message,true); }
+  } else if (editMode.type==='member') {
+    const m = staticData.members[editMode.index];
+    m.grade   = document.getElementById('e-cat')?.value||m.grade;
+    m.name    = (document.getElementById('e-title')?.value||'').trim();
+    m.owner   = (document.getElementById('e-date')?.value||'').trim();
+    m.area    = (document.getElementById('e-summary')?.value||'').trim();
+    m.phone   = (document.getElementById('e-url')?.value||'').trim();
+    m.address = (document.getElementById('e-result')?.value||'').trim();
+    try { await saveData('update: member - '+m.name); renderMemberList(); closeModal(); showStatus('✅ 已更新'); }
+    catch(e) { showStatus('失敗：'+e.message,true); }
+  } else if (editMode.type==='brandPoint') {
+    if (!staticData.brand) staticData.brand={};
+    if (!staticData.brand.points) staticData.brand.points=[];
+    const point = { icon:(document.getElementById('e-title')?.value||'').trim(), title:(document.getElementById('e-cat')?.value||'').trim(), desc:(document.getElementById('e-summary')?.value||'').trim() };
+    if (editMode.index>=0) staticData.brand.points[editMode.index]=point;
+    else staticData.brand.points.push(point);
+    try { await saveData('update: brand point'); renderBrandForm(); closeModal(); showStatus('✅ 已更新'); }
+    catch(e) { showStatus('失敗：'+e.message,true); }
+  } else { await _origSaveEdit(); }
+};
+
+// ══ Extend loadData to render new lists ══
+const _origLoadData = loadData;
+loadData = async function() {
+  await _origLoadData();
+  renderBoardList();
+  renderCommitteesList();
+  renderChairpersonsList();
+  renderMemberList();
+  renderBrandForm();
+};
 
 // Enter key support
 document.addEventListener('keydown', e => {
