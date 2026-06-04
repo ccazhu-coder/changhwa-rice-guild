@@ -4291,24 +4291,6 @@ window.GUILD_STATIC_DATA = {
       "fileName": "115031市售米標落實產地公文.pdf",
       "uploadedAt": "2026-06-04",
       "rocDate": "115.06.04"
-    },
-    {
-      "id": "DOC-CHARTER",
-      "title": "彰化縣米穀商業同業公會章程",
-      "category": "章程",
-      "path": "./files/彰化縣米穀商業同業公會章程.docx",
-      "fileName": "彰化縣米穀商業同業公會章程.docx",
-      "uploadedAt": "2026-06-02",
-      "rocDate": "115.06.02"
-    },
-    {
-      "id": "DOC-APPLICATION",
-      "title": "會員入會申請書",
-      "category": "申請書表",
-      "path": "./files/會員入會申請書.docx",
-      "fileName": "會員入會申請書.docx",
-      "uploadedAt": "2026-06-02",
-      "rocDate": "115.06.02"
     }
   ]
 };
