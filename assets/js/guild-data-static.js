@@ -4281,5 +4281,35 @@ window.GUILD_STATIC_DATA = {
       "desc": "引進 TTQS 訓練品質管理系統，提升公會教育訓練品質，並舉辦農產品業稅務實務等專業課程。",
       "sort": 5
     }
+  ],
+  "documents": [
+    {
+      "id": "DOC-CHARTER",
+      "title": "彰化縣米穀商業同業公會章程",
+      "category": "章程",
+      "path": "./files/彰化縣米穀商業同業公會章程.docx",
+      "fileName": "彰化縣米穀商業同業公會章程.docx",
+      "uploadedAt": "2026-06-02",
+      "rocDate": "115.06.02"
+    },
+    {
+      "id": "DOC-APPLICATION",
+      "title": "會員入會申請書",
+      "category": "申請書表",
+      "path": "./files/會員入會申請書.docx",
+      "fileName": "會員入會申請書.docx",
+      "uploadedAt": "2026-06-02",
+      "rocDate": "115.06.02"
+    },
+    {
+      "id": "DOC-POLICY-001",
+      "title": "重要通知 — 食米產品產地標示查核加強",
+      "category": "政策公告",
+      "path": "./files/",
+      "fileName": "",
+      "uploadedAt": "2026-06-04",
+      "rocDate": "115.06.04",
+      "note": "公文尚未上傳，請至後台上傳 PDF"
+    }
   ]
 };
