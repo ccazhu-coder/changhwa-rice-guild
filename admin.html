@@ -706,10 +706,10 @@ async function saveData(msg) {
   const d = { ...staticData };
   delete d._sha;
   const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString().slice(0,10)} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
-  // 分塊編碼（避免大檔案 call stack overflow）
+  // 正確的分塊 base64 編碼（chunk 必須是 3 的倍數，否則 padding 會導致無效 base64）
   const encBytes = new TextEncoder().encode(newContent);
   let b64 = '';
-  const CHUNK = 8192;
+  const CHUNK = 3 * 2048; // 6144，3的倍數，確保中間區塊無 padding
   for (let i = 0; i < encBytes.length; i += CHUNK) {
     b64 += btoa(String.fromCharCode(...encBytes.subarray(i, i + CHUNK)));
   }
