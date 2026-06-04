@@ -4,7 +4,7 @@ window.GUILD_STATIC_DATA = {
   "news": [
     {
       "id": "NEWS-POLICY-001",
-      "date": "2026-06-04",
+      "date": "115-06-04",
       "rocDate": "115.06.04",
       "category": "政策公告",
       "title": "重要通知 — 食米產品產地標示查核加強",
