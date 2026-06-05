@@ -107,7 +107,7 @@ window.GUILD_STATIC_DATA = {
       "createdAt": "2026-06-02",
       "updatedAt": "2026-06-05",
       "note": "",
-      "coverImage": "圖庫/news-covers/cover_1780624669493.jpg"
+      "coverImage": "圖庫/news-covers/cover_1780626414488.jpg"
     }
   ],
   "gallery": [
