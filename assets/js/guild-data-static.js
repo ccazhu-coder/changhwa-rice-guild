@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:29:37.676Z */
+/* generatedAt: 2026-06-05T06:52:36.898Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -689,7 +689,9 @@ window.GUILD_STATIC_DATA = {
         "role": "理事",
         "name": "陳燕葶",
         "company": "保證責任彰化縣第一稻米蔬果生產合作社",
-        "address": "彰化縣埤頭鄉豐崙村埤周路66號"
+        "address": "彰化縣埤頭鄉豐崙村埤周路66號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/陳燕葶_1780642352537.png"
       },
       {
         "role": "常務監事",
