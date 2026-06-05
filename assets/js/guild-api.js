@@ -103,10 +103,25 @@
   return '<div class="news-feat-card">'+imgHtml+'<div class="news-feat-body">'+bodyExtras+'<div class="news-date">'+esc(item.rocDate||item.date)+'</div><h2>'+esc(item.title)+'</h2>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+dmFileBtn+link+'</div></div>';
 }
 function recentNewsCard(item){
+  var isDM=item.category==='招生DM';
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
-  var imgHtml=hasImg?'<div class="news-list-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></div>':'<div class="news-list-img" style="background:linear-gradient(135deg,#e8f5e9,#f7f1e3);display:flex;align-items:center;justify-content:center;color:#5a7a5e;font-size:.72rem;font-weight:700;text-align:center;padding:8px">'+esc(item.category||'消息')+'</div>';
-  var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" style="font-size:.8rem;color:#1a5c28">詳細資訊 →</a>':'';
-  return '<div class="news-list-card">'+imgHtml+'<div class="news-list-body"><div class="news-meta"><span class="news-badge">'+esc(item.category||'消息')+'</span><span style="font-size:.74rem;color:#8c8c8c">'+esc(item.rocDate||item.date)+'</span></div><h3>'+esc(item.title)+'</h3>'+(item.summary?'<p style="font-size:.85rem;color:#666;line-height:1.6;margin-top:4px">'+esc(item.summary)+'</p>':'')+dmFileBtn+link+'</div></div>';
+  var imgHtml=hasImg
+    ?'<div class="news-list-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></div>'
+    :'<div class="news-list-img" style="background:linear-gradient(135deg,#e8f5e9,#f7f1e3);display:flex;align-items:center;justify-content:center;color:#5a7a5e;font-size:.72rem;font-weight:700;text-align:center;padding:8px">'+esc(item.category||'消息')+'</div>';
+  var linkLabel=isDM?'✍️ 立即報名':'詳細資訊 →';
+  var linkColor=isDM?'#c0392b':'#1a5c28';
+  var link=item.registerUrl
+    ?'<a href="'+esc(item.registerUrl)+'" target="_blank" style="font-size:.8rem;color:'+linkColor+';font-weight:800">'+linkLabel+'</a>'
+    :'';
+  var summaryHtml=item.summary?'<p style="font-size:.85rem;color:#666;line-height:1.6;margin-top:4px">'+esc(item.summary)+'</p>':'';
+  return '<div class="news-list-card">'+imgHtml
+    +'<div class="news-list-body">'
+    +'<div class="news-meta"><span class="news-badge">'+esc(item.category||'消息')+'</span>'
+    +'<span style="font-size:.74rem;color:#8c8c8c">'+esc(item.rocDate||item.date)+'</span></div>'
+    +'<h3>'+esc(item.title)+'</h3>'
+    +summaryHtml
+    +link
+    +'</div></div>';
 }
 function galleryCard(item){
   var hasCover=item.coverImage&&isUsableImageUrl(item.coverImage);
