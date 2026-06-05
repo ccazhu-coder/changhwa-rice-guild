@@ -82,7 +82,7 @@
 /* Card grid: 3 cols desktop / 2 tablet / 1 mobile */
 .nc-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 /* Name card: horizontal layout */
@@ -128,7 +128,7 @@
   width: 100%; height: 100%;
   display: flex; align-items: center; justify-content: center;
   font-family: var(--serif,'Noto Serif TC',serif);
-  font-size: clamp(48px, 6vw, 80px);
+  font-size: clamp(48px, 7vw, 80px);
   font-weight: 900;
   color: #183f21;
   background: linear-gradient(145deg, #f7f1e3, #ede5cb);
@@ -165,7 +165,7 @@
   border-radius: 8px;
   padding: 6px 12px;
   font-family: var(--serif,'Noto Serif TC',serif);
-  font-size: clamp(32px, 4.5vw, 62px);
+  font-size: clamp(36px, 5vw, 58px);
   font-weight: 900;
   color: #183f21;
   text-align: center;
@@ -185,12 +185,12 @@
   word-break: break-all;
 }
 /* RWD */
-@media(max-width:1100px){
-  .nc-grid{grid-template-columns:repeat(2,1fr);}
-  .nc-name{font-size:clamp(28px,4vw,48px);}
-  .nc-role{font-size:clamp(16px,1.8vw,22px);}
-  .nc-company{font-size:clamp(12px,1.4vw,18px);}
-  .nc-initial{font-size:clamp(40px,5vw,64px);}
+@media(max-width:900px){
+  .nc-name{font-size:clamp(28px,5vw,44px);}
+  .nc-role{font-size:clamp(15px,2vw,21px);}
+  .nc-role-long{font-size:clamp(13px,1.8vw,18px);}
+  .nc-company{font-size:clamp(12px,1.8vw,17px);}
+  .nc-initial{font-size:clamp(40px,6vw,64px);}
 }
 @media(max-width:680px){
   .nc-grid{grid-template-columns:1fr;}
