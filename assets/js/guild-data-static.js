@@ -78,7 +78,7 @@ window.GUILD_STATIC_DATA = {
       "id": "NEWS-0001",
       "date": "115-05-06",
       "rocDate": "115.05.06",
-      "category": "教育訓練",
+      "category": "會員大會",
       "title": "第29屆第3次會員大會",
       "summary": "公會會員大會與理監事聯席會議公告。",
       "location": "",
