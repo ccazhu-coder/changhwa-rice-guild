@@ -62,166 +62,125 @@
     @media(max-width:980px){.board-summary{grid-template-columns:repeat(3,1fr)}.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.board-hero h1{font-size:34px}.board-summary,.org-two,.committee-grid,.org-five{grid-template-columns:1fr}.committee-card{padding:22px}.role-title{align-items:flex-start;flex-direction:column}.role-title h3{font-size:24px}}
 
-/* ── 理監事名片卡片設計 ── */
-/* Group section */
-.nc-group { margin-bottom: 60px; }
-.nc-group:last-child { margin-bottom: 0; }
-.nc-group-header {
-  display: flex; align-items: center; gap: 16px;
-  margin-bottom: 28px;
-  padding-bottom: 14px;
-  border-bottom: 1.5px solid rgba(198,164,55,.3);
-}
-.nc-group-label {
-  font-family: var(--serif,'Noto Serif TC',serif);
-  font-size: 1.05rem; font-weight: 800; color: #fff;
-  padding: 8px 24px; border-radius: 20px;
-  background: #183f21;
-  border: 1.5px solid rgba(198,164,55,.5);
-  white-space: nowrap;
-  letter-spacing: .04em;
-  box-shadow: 0 3px 10px rgba(20,45,24,.18);
-}
-/* Card grid: 3 cols desktop / 2 tablet / 1 mobile */
-.nc-grid-solo {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-bottom: 20px;
-}
-.nc-grid-solo .nc-card {
-  max-width: 100%;
-  grid-column: 1;
-}
-.nc-grid + .nc-grid { margin-top: 20px; }
-.nc-grid-solo + .nc-grid { margin-top: 0; }
-.nc-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
-/* Name card: horizontal layout */
+/* ── 理監事名片卡片設計 v2 ── */
+/* Grid */
+.nc-grid         { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; align-items:start; }
+.nc-grid-solo    { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; margin-bottom:20px; }
+.nc-grid-solo .nc-card { max-width:100%; }
+.nc-grid + .nc-grid  { margin-top:20px; }
+
+/* Card — fixed 220px height, no stretch */
 .nc-card {
-  display: flex;
-  flex-direction: row;
-  background: #fdfbf4;
-  border: 1.5px solid rgba(198,164,55,.45);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 4px 20px rgba(20,45,24,.07), inset 0 1px 0 rgba(255,255,255,.8);
-  transition: box-shadow .22s, transform .22s;
-  /* Fixed height for consistency */
-  min-height: 180px;
+  display:flex; flex-direction:row;
+  height:220px; overflow:hidden;
+  background:#fffdf7;
+  border:1.5px solid rgba(198,164,55,.28);
+  border-radius:16px;
+  box-shadow:0 4px 18px rgba(20,45,24,.06);
+  transition:box-shadow .22s,transform .22s;
 }
-.nc-card:hover { box-shadow: 0 12px 36px rgba(20,45,24,.14); transform: translateY(-3px); }
-/* Photo area */
+.nc-card:hover { box-shadow:0 10px 32px rgba(20,45,24,.11); transform:translateY(-3px); }
+
+/* Photo — 45% width, full height, object-fit:cover */
 .nc-photo {
-  width: 42%;
-  height: 168px;              /* Fixed: all photos same height */
-  align-self: flex-start;
-  min-height: 168px;
-  max-height: 168px;
-  flex-shrink: 0;
-  align-self: flex-start;     /* Don't stretch with text */
-  position: relative;
-  background: #f0ece0;
-  overflow: hidden;
+  width:45%; height:100%; flex-shrink:0;
+  overflow:hidden; background:#f0ece0;
+  position:relative;
 }
 .nc-photo img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center top; /* prevent head cropping */
-  display: block;
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:center 20%;
+  display:block;
 }
-/* Green diagonal corner accent */
-/* nc-photo::after removed - no green corner */
-/* Initial character for no-photo */
+/* Initial letter avatar */
 .nc-initial {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--serif,'Noto Serif TC',serif);
-  font-size: clamp(48px, 7vw, 80px);
-  font-weight: 900;
-  color: #183f21;
-  background: linear-gradient(145deg, #f7f1e3, #ede5cb);
-  position: relative; z-index: 1;
+  width:100%; height:100%;
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--serif,'Noto Serif TC',serif);
+  font-size:2.8rem; font-weight:900; color:#183f21;
+  background:linear-gradient(145deg,#f7f1e3,#ede5cb);
+  user-select:none;
 }
-/* Info area */
+
+/* Info — 55% width, fixed height, overflow hidden */
 .nc-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 18px;
-  padding: 20px 22px;
+  width:55%; height:100%;
+  display:flex; flex-direction:column;
+  justify-content:center; gap:6px;
+  padding:14px 18px; overflow:hidden;
 }
-/* Role box: pill shape */
+
+/* Role badge — green pill, single line */
 .nc-role {
-  display: inline-flex; align-items: center;
-  align-self: flex-start;
-  border: 1.5px solid #183f21;
-  border-radius: 999px;
-  padding: 4px 12px;
-  font-size: clamp(13px, 1.2vw, 16px);
-  font-weight: 700;
-  color: #fff;
-  text-align: left;
-  white-space: nowrap;
-  background: #183f21;
-  white-space: nowrap;
-  overflow: hidden;
+  display:inline-block; align-self:flex-start;
+  background:#183f21; color:#fff;
+  font-size:.62rem; font-weight:800; letter-spacing:.06em;
+  padding:4px 12px; border-radius:20px;
+  white-space:nowrap; flex-shrink:0;
 }
-.nc-role-long { font-size: clamp(12px, 1.1vw, 14px); white-space: nowrap; }
-/* Name box */
+.nc-role-long { font-size:.56rem; }
+
+/* Name — large, single line, truncate */
 .nc-name {
-  display: inline-flex; align-items: center;
-  align-self: flex-start;
-  border: 1.5px solid rgba(198,164,55,.5);
-  border-radius: 8px;
-  padding: 6px 16px;
-  font-family: var(--serif,'Noto Serif TC',serif);
-  font-size: clamp(36px, 5vw, 58px);
-  font-weight: 900;
-  color: #183f21;
-  text-align: left;
-  letter-spacing: .18em;
-  line-height: 1.1;
+  font-family:var(--serif,'Noto Serif TC',serif);
+  font-size:1.35rem; font-weight:900; color:#183f21;
+  letter-spacing:.14em; line-height:1.2;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  flex-shrink:0;
 }
-/* Company box */
+
+/* Company — max 2 lines, ellipsis */
 .nc-company {
-  display: inline-flex; align-items: center;
-  align-self: flex-start;
-  border: 1px solid rgba(198,164,55,.4);
-  border-radius: 6px;
-  padding: 5px 12px;
-  font-size: clamp(13px, 1.5vw, 20px);
-  color: #526055;
-  text-align: left;
-  line-height: 1.4;
-  word-break: break-all;
-}
-/* RWD */
-@media(max-width:900px){
-  .nc-name{font-size:clamp(28px,5vw,44px);}
-  .nc-role{font-size:clamp(15px,2vw,21px);}
-  .nc-role-long{font-size:clamp(13px,1.8vw,18px);}
-  .nc-company{font-size:clamp(12px,1.8vw,17px);}
-  .nc-initial{font-size:clamp(40px,6vw,64px);}
-}
-@media(max-width:680px){
-  .nc-grid{grid-template-columns:1fr;}
-  .nc-card{min-height:160px;}
-  .nc-name{font-size:clamp(28px,8vw,44px);}
-  .nc-role{font-size:clamp(15px,3.5vw,20px);}
-  .nc-role-long{font-size:clamp(13px,3vw,17px);}
-  .nc-company{font-size:clamp(12px,3vw,17px);}
-  .nc-initial{font-size:clamp(36px,10vw,56px);}
+  font-size:.8rem; color:#666; line-height:1.55;
+  overflow:hidden;
+  display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+  flex-shrink:0;
 }
 
+/* Group headers */
+.nc-group { margin-bottom:40px; }
+.nc-group:last-child { margin-bottom:0; }
+.nc-group-header { margin-bottom:20px; }
+.nc-group-label {
+  display:inline-flex; align-items:center;
+  background:#183f21; color:#fff;
+  font-size:.65rem; font-weight:800; letter-spacing:.08em;
+  padding:7px 20px; border-radius:20px; white-space:nowrap;
+}
+/* Rice background groups */
+.nc-group-rice {
+  background:#f7f1e3; border-radius:16px;
+  padding:24px 22px; margin-bottom:40px;
+}
+.nc-group-rice:last-child { margin-bottom:0; }
+.nc-group-rice .nc-group-header { margin-bottom:20px; }
 
-.role-block-rice        { background: #f7f1e3; border-radius: 16px; padding: 28px 24px; margin-bottom: 52px; }
-.role-block-rice:last-child { margin-bottom: 0; }
-.nc-group-rice { background: #f7f1e3; border-radius: 18px; padding: 28px 24px; }
+/* Divider */
+.role-divider {
+  display:flex; align-items:center;
+  gap:0; margin:14px 0 20px;
+  color:rgba(198,164,55,.55); font-size:.55rem; letter-spacing:2px;
+}
+.role-divider::before,.role-divider::after {
+  content:''; flex:1; height:1px; background:rgba(198,164,55,.3);
+}
+.role-divider span { padding:0 12px; }
+
+/* Mobile: photo top + text bottom, fixed total height */
+@media(max-width:900px) { .nc-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:560px) {
+  .nc-grid,.nc-grid-solo { grid-template-columns:1fr; }
+  .nc-card {
+    flex-direction:column;
+    height:280px;
+  }
+  .nc-photo { width:100%; height:155px; }
+  .nc-info  { width:100%; height:125px; padding:10px 14px; gap:4px; }
+  .nc-name  { font-size:1.1rem; }
+  .nc-company { font-size:.76rem; }
+}
+
 </style>
 <script type="application/ld+json">
 [
