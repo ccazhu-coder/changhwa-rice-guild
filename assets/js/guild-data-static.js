@@ -653,7 +653,9 @@ window.GUILD_STATIC_DATA = {
         "role": "理事",
         "name": "陳裕凱",
         "company": "宏達裕碾米工廠",
-        "address": "彰化縣溪州鄉民生路一段136號"
+        "address": "彰化縣溪州鄉民生路一段136號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/陳裕凱_1780637625075.png"
       },
       {
         "role": "理事",
