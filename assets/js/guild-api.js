@@ -366,6 +366,29 @@ function injectNotifJsonLd(notifList){
   document.head.appendChild(s);
 }
 
-  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderDownloadsPage()});
+  
+function injectMembersJsonLd(membersList){
+  if(!membersList||!membersList.length)return;
+  var ex=document.getElementById('members-jsonld-dyn');
+  if(ex)ex.remove();
+  var s=document.createElement('script');
+  s.type='application/ld+json';
+  s.id='members-jsonld-dyn';
+  var items=membersList.map(function(m,i){
+    var co=m.company||m.companyName||m.name||'';
+    if(!co)return null;
+    var obj={'@type':'ListItem','position':i+1,'item':{'@type':'LocalBusiness','name':co,'memberOf':{'@type':'Organization','name':'\u5f70\u5316\u7e23\u7c73\u7a40\u5546\u696d\u540c\u696d\u516c\u6703','url':'https://rice.net.tw'}}};
+    if(m.address)obj.item.address={'@type':'PostalAddress','streetAddress':m.address,'addressRegion':'\u5f70\u5316\u7e23','addressCountry':'TW'};
+    return obj;
+  }).filter(Boolean);
+  var schema={'@context':'https://schema.org','@type':'ItemList',
+    'name':'\u5f70\u5316\u7e23\u7c73\u7a40\u5546\u696d\u540c\u696d\u516c\u6703\u6703\u54e1\u540d\u518a',
+    'url':'https://rice.net.tw/members.html',
+    'numberOfItems':items.length,'itemListElement':items};
+  s.textContent=JSON.stringify(schema);
+  document.head.appendChild(s);
+}
+
+  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderDownloadsPage();if(window.GUILD_STATIC_DATA&&window.GUILD_STATIC_DATA.members&&window.location.pathname.indexOf('members')>=0){injectMembersJsonLd(window.GUILD_STATIC_DATA.members);}});
   window.GuildApi={renderHome:renderHome,renderNewsPage:renderNewsPage,renderTrainingPage:renderTrainingPage,fixTalentLinks:fixTalentLinks};
 })();
