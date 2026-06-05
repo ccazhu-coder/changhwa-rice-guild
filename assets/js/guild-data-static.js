@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:53:23.460Z */
+/* generatedAt: 2026-06-05T06:54:26.222Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -735,7 +735,9 @@ window.GUILD_STATIC_DATA = {
         "role": "顧問",
         "name": "陳德風",
         "company": "陸和碾米工廠",
-        "address": "彰化縣埤頭鄉溪林路406號"
+        "address": "彰化縣埤頭鄉溪林路406號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/陳德風_1780642462123.png"
       },
       {
         "role": "顧問",
