@@ -331,7 +331,13 @@
 <script>
 (function(){var t=document.getElementById('navToggle'),n=document.getElementById('mainNav');if(t&&n){t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',String(o));});}})();
 </script>
-<script src="./assets/js/guild-data-static.js"></script>
+<script>
+(function(){
+  var s=document.createElement('script');
+  s.src='./assets/js/guild-data-static.js?t='+Math.floor(Date.now()/600000);
+  document.head.appendChild(s);
+})();
+</script>
 <script src="./assets/js/guild-api.js?v=20260607-revert"></script>
 </body>
 </html>
