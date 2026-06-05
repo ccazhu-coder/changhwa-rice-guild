@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:52:36.898Z */
+/* generatedAt: 2026-06-05T06:52:52.540Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -677,7 +677,9 @@ window.GUILD_STATIC_DATA = {
         "role": "理事",
         "name": "周明哲",
         "company": "正協碾米工廠",
-        "address": "彰化縣二林鎮東華里路西巷19之21號"
+        "address": "彰化縣二林鎮東華里路西巷19之21號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/周明哲_1780642369625.png"
       },
       {
         "role": "理事",
