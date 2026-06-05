@@ -143,7 +143,40 @@ function galleryCard(item){
   return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 }
       var allN=sortList(data.news||[]);var dmN=allN.filter(function(n){return n.category==='招生DM';});var otherN=allN.filter(function(n){return n.category!=='招生DM';});var news=dmN.concat(otherN).slice(0,3);
-  function renderHome(){
+  function homeNewsCard(item){
+  var cat=item.category||'消息';
+  var isDM=cat==='招生DM';
+  var COLORS={
+    '政策公告':'linear-gradient(135deg,#183f21,#24592f)',
+    '教育訓練':'linear-gradient(135deg,#1a5c4a,#2d9b78)',
+    '訓練品質':'linear-gradient(135deg,#2e5cb8,#1a3060)',
+    '會務公告':'linear-gradient(135deg,#183f21,#0d2714)',
+    '公益活動':'linear-gradient(135deg,#6b3a2e,#8a5a40)',
+    '會員大會':'linear-gradient(135deg,#5c4a00,#8a6800)',
+    '招生DM':'linear-gradient(135deg,#7b1a1a,#c0392b)'
+  };
+  var bg=COLORS[cat]||'linear-gradient(135deg,#183f21,#1a5c4a)';
+  var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
+  var imgHtml=hasImg?'<img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy">':'';
+  var dateStr=item.rocDate||item.date||'';
+  var linkLabel=isDM?'👆 立即報名 →':'查看詳情 →';
+  var linkHref=item.registerUrl?esc(item.registerUrl):'news.html';
+  var target=item.registerUrl?' target="_blank" rel="noopener"':'';
+  var linkHtml='<a href="'+linkHref+'"'+target+' class="news-link-l">'+linkLabel+'</a>';
+  return '<div class="news-card-l">'
+    +'<div class="news-card-l-img" style="background:'+bg+'">'+imgHtml
+    +'<span class="news-tag-l">'+esc(cat)+'</span>'
+    +'</div>'
+    +'<div class="news-card-l-body">'
+    +'<div class="news-date-l">'+esc(dateStr)+'</div>'
+    +'<h3>'+esc(item.title||'')+'</h3>'
+    +(item.summary?'<p>'+esc(item.summary)+'</p>':'')
+    +linkHtml
+    +'</div>'
+    +'</div>';
+}
+
+function renderHome(){
   var newsBox=qs('homeNewsList');
   var galleryBox=qs('homeGalleryList');
   if(!newsBox&&!galleryBox)return;
