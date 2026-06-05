@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T07:15:17.010Z */
+/* generatedAt: 2026-06-05T07:15:26.294Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4346,7 +4346,9 @@ window.GUILD_STATIC_DATA = {
       "path": "./files/115031市售米標落實產地公文.pdf",
       "fileName": "115031市售米標落實產地公文.pdf",
       "uploadedAt": "2026-06-04",
-      "rocDate": "115.06.04"
+      "rocDate": "115.06.04",
+      "published": true,
+      "updatedAt": "2026-06-05"
     }
   ],
   "notifications": [
