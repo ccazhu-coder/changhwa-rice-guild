@@ -15,7 +15,7 @@
   function injectStyles(){if(document.getElementById('guild-api-photo-style'))return;
   var s=document.createElement('style');
   s.id='guild-api-photo-style';
-  s.textContent='.activity-card{background:#fff;border:1px solid #e6ddc9;border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(20,45,24,.07)}.activity-cover{aspect-ratio:16/9;background:#f7f1e3;margin:0;overflow:hidden;cursor:zoom-in}.activity-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-cover:hover img{transform:scale(1.05)}.activity-card-body{padding:22px}.activity-card-body h3{color:#183f21}.activity-card-body p{color:#666;line-height:1.8}.activity-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}.activity-photo-strip figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;border:1px solid #e6ddc9;background:#f7f1e3;cursor:zoom-in}.activity-photo-strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-photo-strip figure:hover img{transform:scale(1.07)}.activity-photo-strip figcaption{background:#fff;padding:7px 9px;color:#526055;font-size:13px}.activity-photo-note{margin:0 22px 22px;color:#666;font-size:14px}#guild-lightbox{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:99999;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}#guild-lightbox.open{display:flex}#guild-lb-wrap{text-align:center;max-width:92vw}#guild-lb-img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:8px;display:block;margin:0 auto;box-shadow:0 8px 60px rgba(0,0,0,.7)}#guild-lb-caption{color:#d4c9b0;font-size:15px;margin-top:12px}#guild-lb-counter{color:#888;font-size:13px;margin-top:4px}.guild-lb-close{position:fixed;top:16px;right:20px;color:#fff;font-size:24px;cursor:pointer;background:rgba(255,255,255,.14);border:none;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:100000}.guild-lb-close:hover{background:rgba(255,255,255,.3)}.guild-lb-nav{position:fixed;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:background .2s;user-select:none;z-index:100000}.guild-lb-nav:hover{background:rgba(255,255,255,.25)}#guild-lb-prev{left:14px}#guild-lb-next{right:14px}@media(max-width:900px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-nav{width:42px;height:42px;font-size:30px}}@media(max-width:560px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-close{top:8px;right:10px}}}}.notif-item{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid #e6ddc9;border-radius:14px;padding:16px 20px;margin-bottom:12px;transition:box-shadow .18s}.notif-item:hover{box-shadow:0 6px 20px rgba(20,45,24,.09)}.notif-agency{flex-shrink:0;color:#fff;font-size:.68rem;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;align-self:flex-start;margin-top:2px}.notif-body{flex:1;min-width:0}.notif-date{font-size:.72rem;color:#aaa;margin-bottom:4px}.notif-title{font-size:.95rem;font-weight:700;color:#183f21;line-height:1.4}.notif-summary{font-size:.82rem;color:#666;margin-top:4px;line-height:1.6}.notif-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0;min-width:90px}.notif-btn{display:inline-flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:700;text-decoration:none;white-space:nowrap}.notif-btn-link{background:#e8f5e9;color:#183f21;border:1px solid rgba(20,45,24,.2)}.notif-btn-link:hover{background:#183f21;color:#fff}.notif-btn-dl{background:#f7f1e3;color:#7d5c0a;border:1px solid rgba(198,164,55,.4)}.notif-btn-dl:hover{background:#c6a437;color:#fff}@media(max-width:680px){.notif-item{flex-wrap:wrap}.notif-actions{flex-direction:row;min-width:0}}.policy-cat-title h3{font-size:1.05rem;font-weight:800;color:#183f21;margin:0}.policy-item:hover{background:#fffdf7;box-shadow:0 4px 14px rgba(20,45,24,.08)}.policy-link:hover{color:#c6a437;text-decoration:underline}';
+  s.textContent='.activity-card{background:#fff;border:1px solid #e6ddc9;border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(20,45,24,.07)}.activity-cover{aspect-ratio:16/9;background:#f7f1e3;margin:0;overflow:hidden;cursor:zoom-in}.activity-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-cover:hover img{transform:scale(1.05)}.activity-card-body{padding:22px}.activity-card-body h3{color:#183f21}.activity-card-body p{color:#666;line-height:1.8}.activity-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}.activity-photo-strip figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;border:1px solid #e6ddc9;background:#f7f1e3;cursor:zoom-in}.activity-photo-strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-photo-strip figure:hover img{transform:scale(1.07)}.activity-photo-strip figcaption{background:#fff;padding:7px 9px;color:#526055;font-size:13px}.activity-photo-note{margin:0 22px 22px;color:#666;font-size:14px}#guild-lightbox{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:99999;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}#guild-lightbox.open{display:flex}#guild-lb-wrap{text-align:center;max-width:92vw}#guild-lb-img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:8px;display:block;margin:0 auto;box-shadow:0 8px 60px rgba(0,0,0,.7)}#guild-lb-caption{color:#d4c9b0;font-size:15px;margin-top:12px}#guild-lb-counter{color:#888;font-size:13px;margin-top:4px}.guild-lb-close{position:fixed;top:16px;right:20px;color:#fff;font-size:24px;cursor:pointer;background:rgba(255,255,255,.14);border:none;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:100000}.guild-lb-close:hover{background:rgba(255,255,255,.3)}.guild-lb-nav{position:fixed;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:background .2s;user-select:none;z-index:100000}.guild-lb-nav:hover{background:rgba(255,255,255,.25)}#guild-lb-prev{left:14px}#guild-lb-next{right:14px}@media(max-width:900px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-nav{width:42px;height:42px;font-size:30px}}@media(max-width:560px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-close{top:8px;right:10px}}}}.notif-item:hover{box-shadow:0 6px 20px rgba(20,45,24,.09)}.notif-btn-link:hover{background:#183f21;color:#fff}.notif-btn-dl:hover{background:#c6a437;color:#fff}@media(max-width:680px){}.policy-cat-title h3{font-size:1.05rem;font-weight:800;color:#183f21;margin:0}.policy-item:hover{background:#fffdf7;box-shadow:0 4px 14px rgba(20,45,24,.08)}.policy-link:hover{color:#c6a437;text-decoration:underline}.notif-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}.notif-card{background:#fff;border:1px solid #e6ddc9;border-radius:18px;padding:22px 24px;box-shadow:0 4px 16px rgba(20,45,24,.06);transition:box-shadow .2s,transform .2s;display:flex;flex-direction:column}.notif-card:hover{box-shadow:0 10px 28px rgba(20,45,24,.11);transform:translateY(-2px)}.notif-card-top{display:flex;align-items:center;gap:10px;margin-bottom:12px}.notif-agency-pill{display:inline-block;color:#fff;font-size:.65rem;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.03em}.notif-date-small{font-size:.74rem;color:#aaa;margin-left:auto}.notif-title{font-size:.98rem;font-weight:800;color:#183f21;line-height:1.45;margin:0 0 8px}.notif-summary{font-size:.84rem;color:#666;line-height:1.65;margin:0;flex:1}.notif-btns{margin-top:4px}@media(max-width:900px){.notif-grid{grid-template-columns:1fr}}';
   document.head.appendChild(s);
   var lb=document.createElement('div');
   lb.id='guild-lightbox';
@@ -226,7 +226,7 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
       });
       var sec=document.getElementById('notifSection');
       if(list.length){
-        notifBox.innerHTML=list.map(notifCard).join('');
+        notifBox.innerHTML='<div class="notif-grid">'+list.map(notifCard).join('')+'</div>';
         if(sec)sec.style.display='';
       } else {
         notifBox.innerHTML='<div style="color:#888;padding:16px 0">目前無訊息轉知</div>';
@@ -351,17 +351,32 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
     });
   }
   function notifCard(item){
-  var agencyColor={'農糧署':'#2e6b2e','衛生局':'#1a5c8c','產銷履歷':'#7a4e00','環保局':'#1a6b5c'}[item.agency||'']||'#183f21';
-  var linkBtn=item.externalUrl?'<a href="'+esc(item.externalUrl)+'" target="_blank" rel="noopener" class="notif-btn notif-btn-link">🔗 查看連結</a>':'';
-  var fileBtn=item.fileUrl?'<a href="'+esc(item.fileUrl)+'" target="_blank" rel="noopener" class="notif-btn notif-btn-dl">📄 '+(item.fileLabel||'附件下載')+'</a>':'';
-  return '<div class="notif-item">'
-    +'<div class="notif-agency" style="background:'+agencyColor+'">'+esc(item.agency||'公告')+'</div>'
-    +'<div class="notif-body">'
-    +'<div class="notif-date">'+esc(item.rocDate||item.date||'')+'</div>'
-    +'<div class="notif-title">'+esc(item.title||'')+'</div>'
-    +(item.summary?'<div class="notif-summary">'+esc(item.summary)+'</div>':'')
+  var agencyColors={
+    '農糧署':'#2e6b2e','衛生局':'#1a5c8c','產銷履歷':'#7a4e00',
+    '環保局':'#1a6b5c','農業部':'#3a5a1a','食藥署':'#8b1a1a'
+  };
+  var agencyColor=agencyColors[item.agency||'']||'#183f21';
+  var linkBtn=item.externalUrl
+    ?'<a href="'+esc(item.externalUrl)+'" target="_blank" rel="noopener" class="notif-link-btn"'
+     +' style="display:inline-block;margin-top:14px;margin-right:8px;padding:8px 20px;'
+     +'background:'+agencyColor+';color:#fff;border-radius:20px;font-size:.82rem;font-weight:800;text-decoration:none"'
+     +'>🔗 查看連結 →</a>'
+    :'';
+  var fileBtn=item.fileUrl
+    ?'<a href="'+esc(item.fileUrl)+'" target="_blank" rel="noopener" class="notif-file-btn"'
+     +' style="display:inline-block;margin-top:14px;padding:8px 18px;'
+     +'background:rgba(198,164,55,.15);color:#7d5c0a;border:1px solid rgba(198,164,55,.4);'
+     +'border-radius:20px;font-size:.78rem;font-weight:700;text-decoration:none"'
+     +'>📎 '+(item.fileLabel||'附件下載')+'</a>'
+    :'';
+  return '<div class="notif-card">'
+    +'<div class="notif-card-top">'
+    +'<span class="notif-agency-pill" style="background:'+agencyColor+'">'+esc(item.agency||'公告')+'</span>'
+    +'<span class="notif-date-small">'+esc(item.rocDate||item.date||'')+'</span>'
     +'</div>'
-    +(linkBtn||fileBtn?'<div class="notif-actions">'+linkBtn+fileBtn+'</div>':'')
+    +'<h3 class="notif-title">'+esc(item.title||'')+'</h3>'
+    +(item.summary?'<p class="notif-summary">'+esc(item.summary)+'</p>':'')
+    +(linkBtn||fileBtn?'<div class="notif-btns">'+linkBtn+fileBtn+'</div>':'')
     +'</div>';
 }
 function renderDownloadsPage(){
@@ -371,7 +386,7 @@ function renderDownloadsPage(){
     var list=(data.notifications||[]).slice().sort(function(a,b){
       return (b.rocDate||b.date||'').localeCompare(a.rocDate||a.date||'');
     });
-    box.innerHTML=list.length?list.map(notifCard).join('')
+    box.innerHTML=list.length?'<div class="notif-grid">'+list.map(notifCard).join('')+'</div>'
       :'<div style="color:#888;padding:20px 0">目前無訊息轉知</div>';
     var sec=document.getElementById('notifDownloadSection');
     if(sec)sec.style.display=list.length?'':'none';
