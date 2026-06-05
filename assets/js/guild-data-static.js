@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:59:28.093Z */
+/* generatedAt: 2026-06-05T07:01:35.645Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -689,7 +689,9 @@ window.GUILD_STATIC_DATA = {
         "role": "理事",
         "name": "唐泉欽",
         "company": "龍泉行",
-        "address": "彰化市新華里彰美路1段62號"
+        "address": "彰化市新華里彰美路1段62號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/唐泉欽_1780642891251.png"
       },
       {
         "role": "理事",
