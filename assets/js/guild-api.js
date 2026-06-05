@@ -334,7 +334,7 @@ function renderDownloadsPage(){
     var list=(data.notifications||[]).slice().sort(function(a,b){
       return (b.rocDate||b.date||'').localeCompare(a.rocDate||a.date||'');
     });
-    box.innerHTML=list.length?list.map(notifCard).join('')
+    box.innerHTML=list.length?'<div class="notif-grid">'+list.map(notifCard).join('')+'</div>'
       :'<div style="color:#888;padding:20px 0">目前無訊息轉知</div>';
     var sec=document.getElementById('notifDownloadSection');
     if(sec)sec.style.display=list.length?'':'none';
