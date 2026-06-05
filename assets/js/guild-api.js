@@ -124,7 +124,7 @@ function recentNewsCard(item){
   var registerBtn='';
   if(item.registerUrl){
     registerBtn='<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" '
-      +'style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:9px 20px;'
+      +'style="display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:10px;padding:9px 20px;'
       +'background:'+(isDM?'linear-gradient(135deg,#c0392b,#e74c3c)':'linear-gradient(135deg,#183f21,#24592f)')+';'
       +'color:#fff;border-radius:25px;font-size:.88rem;font-weight:800;text-decoration:none;'
       +'box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .15s" '
