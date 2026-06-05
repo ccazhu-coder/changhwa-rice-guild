@@ -179,12 +179,9 @@ function galleryCard(item){
     box.innerHTML='<p style="color:#888;padding:30px 0;text-align:center">理監事名冊載入中...</p>';
     return;
   }
-
-  // Update heading
   var titleEl=qs('boardTermTitle');
   if(titleEl&&bd.term)titleEl.textContent=bd.term+'理監事名冊';
 
-  // Update summary counts
   var dirCnt=0,supCnt=0,chairCnt=0;
   members.forEach(function(m){
     var r=m.role||'';
@@ -195,25 +192,16 @@ function galleryCard(item){
   var sumCards=document.querySelectorAll('.sum-card b');
   if(sumCards.length>=3){sumCards[0].textContent=chairCnt;sumCards[1].textContent=dirCnt;sumCards[2].textContent=supCnt;}
 
-  // Role → group mapping
-  var GROUPS=[
-    {label:'理事長、常務理事與理事',  test:function(r){return r==='理事長'||r==='常務理事'||r==='理事';}},
-    {label:'常務監事與監事',          test:function(r){return r==='常務監事'||r==='監事';}},
-    {label:'候補理事與候補監事',      test:function(r){return r.indexOf('候補')>=0;}},
-    {label:'名譽理事長與顧問',        test:function(r){return r==='名譽理事長'||r==='顧問';}}
-  ];
-
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
 
   function nameCard(m){
     var hasPhoto=m.photo&&isUsableImageUrl(m.photo);
     var photoSrc=hasPhoto?(BASE+m.photo.replace('./','')):' ';
     var surname=esc((m.name||'人').slice(0,1));
-    // Long role detection (>4 chars)
     var isLongRole=(m.role||'').length>4;
     var photoHtml=hasPhoto
-      ?'<img src="'+esc(photoSrc)+'" alt="'+esc(m.name)+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
-       +'<div class="nc-initial" style="display:none">'+surname+'</div>'
+      ?('<img src="'+esc(photoSrc)+'" alt="'+esc(m.name)+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+       +'<div class="nc-initial" style="display:none">'+surname+'</div>')
       :'<div class="nc-initial">'+surname+'</div>';
     return '<article class="nc-card">'
       +'<div class="nc-photo">'+photoHtml+'</div>'
@@ -225,17 +213,45 @@ function galleryCard(item){
       +'</article>';
   }
 
+  // 理事會: 理事長 solo row / 常務理事 2-col / 理事 2-col
+  function renderDirGroup(list){
+    var chair    = list.filter(function(m){return m.role==='理事長';});
+    var standing = list.filter(function(m){return m.role==='常務理事';});
+    var dirs     = list.filter(function(m){return m.role==='理事';});
+    var h='';
+    if(chair.length)    h+='<div class="nc-grid-solo">'+chair.map(nameCard).join('')+'</div>';
+    if(standing.length) h+='<div class="nc-grid">'+standing.map(nameCard).join('')+'</div>';
+    if(dirs.length)     h+='<div class="nc-grid">'+dirs.map(nameCard).join('')+'</div>';
+    return h;
+  }
+
+  var GROUPS=[
+    {label:'理事長、常務理事與理事',
+     test:function(r){return r==='理事長'||r==='常務理事'||r==='理事';},
+     custom:true},
+    {label:'常務監事與監事',
+     test:function(r){return r==='常務監事'||r==='監事';}},
+    {label:'候補理事與候補監事',
+     test:function(r){return r.indexOf('候補')>=0;}},
+    {label:'名譽理事長與顧問',
+     test:function(r){return r==='名譽理事長'||r==='顧問';}}
+  ];
+
   var html='';
   GROUPS.forEach(function(g){
     var list=members.filter(function(m){return g.test(m.role||'');});
     if(!list.length)return;
+    var gridHtml=g.custom
+      ? renderDirGroup(list)
+      : '<div class="nc-grid">'+list.map(nameCard).join('')+'</div>';
     html+='<div class="nc-group">'
       +'<div class="nc-group-header"><span class="nc-group-label">'+esc(g.label)+'</span></div>'
-      +'<div class="nc-grid">'+list.map(nameCard).join('')+'</div>'
+      +gridHtml
       +'</div>';
   });
   box.innerHTML=html||'<p style="color:#888;text-align:center;padding:20px">目前無理監事資料</p>';
 }
+
 
 
 
