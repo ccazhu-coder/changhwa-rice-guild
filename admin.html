@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<!DOCTYP
+      <button class="tab-btn" id="tab-btn-policy" onclick="switchTab('policy')">
+        <span class="icon">⚖️</span>政策法規
+      </button>E html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -363,6 +366,45 @@ a{color:inherit;text-decoration:none}
         <div class="card">
           <h3>📋 現有訊息轉知列表</h3>
           <div class="item-list" id="notif-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      
+      <!-- ── 政策法規 ── -->
+      <div class="tab-panel" id="tab-policy">
+        <div class="panel-title">⚖️ 政策法規管理 <small>糧食產業、食品安全、人民團體法規連結</small></div>
+        <div class="card">
+          <h3>➕ 新增法規</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>分類</label>
+              <select id="pol-cat">
+                <option>糧食產業類</option>
+                <option>糧食儲運類</option>
+                <option>食品安全衛生管理法規</option>
+                <option>人民團體法規</option>
+                <option>其他法規</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>排序</label>
+              <input type="number" id="pol-sort" placeholder="1" min="1" style="width:80px">
+            </div>
+          </div>
+          <div class="field">
+            <label>法規名稱</label>
+            <input type="text" id="pol-name" placeholder="例：糧食管理法">
+          </div>
+          <div class="field">
+            <label>官方連結（選填）</label>
+            <input type="url" id="pol-url" placeholder="https://law.moj.gov.tw/...">
+            <div class="field-hint">農業部、法務部、農糧署等官方網站條文連結</div>
+          </div>
+          <button class="btn btn-primary" onclick="addPolicy()">✅ 新增法規</button>
+        </div>
+        <div class="card">
+          <h3>📋 現有法規列表</h3>
+          <div class="item-list" id="policy-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
         </div>
       </div>
 
@@ -770,6 +812,7 @@ async function loadData() {
   renderNewsList();
   renderGalleryList();
   renderNotifList();
+  renderPolicyList();
   loadFilesList();
 }
 
@@ -2096,6 +2139,61 @@ function editNotif(i) {
 
 function esc2(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
+
+// ══ 政策法規 CRUD ══
+async function addPolicy() {
+  const cat  = document.getElementById('pol-cat').value;
+  const name = document.getElementById('pol-name').value.trim();
+  const url  = document.getElementById('pol-url').value.trim();
+  const sort = parseInt(document.getElementById('pol-sort').value) || ((staticData.policies||[]).length + 1);
+  if (!name) { showStatus('法規名稱為必填', true); return; }
+  const item = {
+    id: nextId('POL', staticData.policies),
+    category: cat, name, url, sort,
+    createdAt: new Date().toISOString().slice(0,10)
+  };
+  staticData.policies = [...(staticData.policies || []), item];
+  staticData.policies.sort((a,b) => {
+    const catOrder = ['糧食產業類','糧食儲運類','食品安全衛生管理法規','人民團體法規'];
+    const ci = catOrder.indexOf(a.category) - catOrder.indexOf(b.category);
+    return ci !== 0 ? ci : (a.sort||99) - (b.sort||99);
+  });
+  try {
+    await saveData('content: add policy - ' + name);
+    renderPolicyList();
+    ['pol-name','pol-url','pol-sort'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+    showStatus('✅ 法規已新增！');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+function renderPolicyList() {
+  const el = document.getElementById('policy-list');
+  if (!el) return;
+  const list = staticData.policies || [];
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無法規資料</div>'; return; }
+  const cats = {};
+  list.forEach(p => { (cats[p.category] = cats[p.category]||[]).push(p); });
+  el.innerHTML = Object.entries(cats).map(([cat, items]) =>
+    `<div style="margin-bottom:16px"><div style="font-weight:800;color:#183f21;margin-bottom:8px;font-size:.85rem">${cat}</div>`
+    + items.map((p,i) => {
+        const globalIdx = list.indexOf(p);
+        return `<div class="item-card">
+          <div class="item-card-body">
+            <div class="item-title">${p.name}</div>
+            ${p.url ? `<div class="item-meta"><a href="${p.url}" target="_blank" style="color:var(--blue);font-size:.78rem">🔗 查看法規原文</a></div>` : ''}
+          </div>
+          <div class="item-card-actions">
+            <button class="btn btn-red btn-sm" onclick="deletePolicy(${globalIdx})">刪除</button>
+          </div>
+        </div>`;
+      }).join('') + '</div>'
+  ).join('');
+}
+async function deletePolicy(i) {
+  if (!confirm('確定刪除此法規？')) return;
+  staticData.policies.splice(i, 1);
+  try { await saveData('delete: policy item'); renderPolicyList(); showStatus('已刪除'); }
+  catch(e) { showStatus('刪除失敗：' + e.message, true); }
+}
 // Enter key support
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') doLogin();
