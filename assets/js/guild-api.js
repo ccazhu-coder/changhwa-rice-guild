@@ -273,28 +273,26 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
 
   function nameCard(m){
-    var hasPhoto=m.photo&&isUsableImageUrl(m.photo);
-    var photoSrc=hasPhoto?(BASE+m.photo.replace('./','')):' ';
-    var surname=esc((m.name||'人').slice(0,1));
-    var isLongRole=(m.role||'').length>4;
-    var objPos=m.photoPosition||'center 20%';
-    var photoHtml=hasPhoto
-      ?('<img src="'+esc(photoSrc)+'" alt="'+esc(m.name)+'" loading="lazy"'
-        +' style="object-position:'+esc(objPos)+'"'
-        +' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
-       +'<div class="nc-initial" style="display:none">'+surname+'</div>')
-      :'<div class="nc-initial">'+surname+'</div>';
-    return '<article class="nc-card">'
-      +'<div class="nc-photo">'+photoHtml+'</div>'
-      +'<div class="nc-info">'
-      +'<div class="nc-role'+(isLongRole?' nc-role-long':'')+'">'+esc(m.role||'')+'</div>'
-      +'<div class="nc-name">'+esc(m.name||'')+'</div>'
-      +'<div class="nc-company">'+esc(m.company||'')+'</div>'
-      +'</div>'
-      +'</article>';
-  }
-
-  // 理事會: 理事長 solo row / 常務理事 2-col / 理事 2-col
+  var hasPhoto=m.photo&&isUsableImageUrl(m.photo);
+  var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  var surname=esc((m.name||'\u4eba').slice(0,1));
+  var isLongRole=(m.role||'').length>4;
+  var objPos=m.photoPosition||'center 20%';
+  var photoContent=hasPhoto
+    ?'<img src="'+esc(BASE+m.photo.replace("./",''))+'" alt="'+esc(m.name)+'"'
+     +' loading="lazy" class="nc-photo-img" style="object-position:'+esc(objPos)+'">' 
+    :'';
+  return '<article class="nc-card">'
+    +'<div class="nc-photo">'
+    +photoContent
+    +'<div class="nc-initial">'+surname+'</div>'
+    +'</div>'
+    +'<div class="nc-info">'
+    +'<div class="nc-role'+(isLongRole?' nc-role-long':'')+'">'+esc(m.role||'')+'</div>'
+    +'<div class="nc-name">'+esc(m.name||'')+'</div>'
+    +(m.company?'<div class="nc-company">'+esc(m.company)+'</div>':'')
+    +'</div></article>';
+}
   function renderDirGroup(list){
     var chair    = list.filter(function(m){return m.role==='理事長';});
     var standing = list.filter(function(m){return m.role==='常務理事';});
