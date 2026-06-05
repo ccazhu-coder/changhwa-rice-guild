@@ -82,6 +82,18 @@
   box-shadow: 0 3px 10px rgba(20,45,24,.18);
 }
 /* Card grid: 3 cols desktop / 2 tablet / 1 mobile */
+.nc-grid-solo {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 20px;
+}
+.nc-grid-solo .nc-card {
+  max-width: 100%;
+  grid-column: 1;
+}
+.nc-grid + .nc-grid { margin-top: 20px; }
+.nc-grid-solo + .nc-grid { margin-top: 0; }
 .nc-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
