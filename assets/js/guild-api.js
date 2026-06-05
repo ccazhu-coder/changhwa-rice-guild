@@ -305,6 +305,55 @@ function renderDownloadsPage(){
   });
 }
 
-  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderDownloadsPage()});
+  
+function renderPoliciesPage(){
+  var box=qs('policiesList');
+  if(!box)return;
+  staticOrFetch('policies').then(function(data){
+    var list=data.policies||[];
+    if(!list.length){box.innerHTML='<p style="color:#888;padding:20px">目前無政策法規資料</p>';return;}
+    var CAT_CONFIG={
+      '糧食產業類':    {icon:'🌾', color:'#8a6800', bg:'#fffbee', border:'#c6a437'},
+      '糧食儲運類':    {icon:'📦', color:'#1a5c4a', bg:'#f0faf7', border:'#2d9b78'},
+      '食品安全衛生管理法規':{icon:'🛡️', color:'#7b1a1a', bg:'#fdf4f4', border:'#c0392b'},
+      '人民團體法規':  {icon:'📋', color:'#1a3060', bg:'#f0f3fa', border:'#2e5cb8'}
+    };
+    var DEFAULT={icon:'📄', color:'#666', bg:'#f9f9f9', border:'#aaa'};
+    var cats={};
+    var catOrder=[];
+    list.forEach(function(p){
+      var c=p.category||'其他';
+      if(!cats[c]){cats[c]=[];catOrder.push(c);}
+      cats[c].push(p);
+    });
+    var html='';
+    catOrder.forEach(function(cat){
+      var cfg=CAT_CONFIG[cat]||DEFAULT;
+      html+='<div class="pol-group pol-custom" style="background:'+cfg.bg+';border:1px solid '+cfg.border+'33;border-left:4px solid '+cfg.border+';border-radius:16px;padding:22px 26px;margin-bottom:26px">'
+        +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:1.5px solid '+cfg.border+'44">'
+        +'<span style="font-size:1.3rem">'+cfg.icon+'</span>'
+        +'<h3 style="font-size:1.02rem;font-weight:900;color:'+cfg.color+';margin:0">'+esc(cat)+'</h3>'
+        +'<span style="margin-left:auto;font-size:.72rem;color:'+cfg.border+';font-weight:700;background:'+cfg.border+'18;padding:3px 10px;border-radius:20px">'+list.filter(function(p){return(p.category||'其他')===cat;}).length+' 條</span>'
+        +'</div>'
+        +'<div style="display:grid;gap:10px">';
+      cats[cat].sort(function(a,b){return (a.sort||0)-(b.sort||0);}).forEach(function(p){
+        html+='<div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid '+cfg.border+'28;border-radius:10px;padding:12px 16px;">'
+          +'<span style="width:8px;height:8px;border-radius:50%;background:'+cfg.border+';flex-shrink:0;display:inline-block"></span>';
+        if(p.url){
+          html+='<a href="'+esc(p.url)+'" target="_blank" rel="noopener" style="color:#183f21;font-weight:600;font-size:.9rem;text-decoration:none;flex:1;line-height:1.5">'+esc(p.name)+'<span style="font-size:.72rem;color:'+cfg.border+';margin-left:6px;opacity:.8">↗ 查看條文</span></a>';
+        } else {
+          html+='<span style="color:#526055;font-size:.9rem;flex:1">'+esc(p.name)+'</span>';
+        }
+        html+='</div>';
+      });
+      html+='</div></div>';
+    });
+    box.innerHTML=html||'<p style="color:#888">目前無政策法規資料</p>';
+    var sec=document.getElementById('policiesSection');
+    if(sec)sec.style.display='';
+  });
+}
+
+  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderPoliciesPage();renderDownloadsPage();renderDownloadsPage()});
   window.GuildApi={renderHome:renderHome,renderNewsPage:renderNewsPage,renderTrainingPage:renderTrainingPage,fixTalentLinks:fixTalentLinks};
 })();
