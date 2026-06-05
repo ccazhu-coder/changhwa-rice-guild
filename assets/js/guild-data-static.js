@@ -55,7 +55,7 @@ window.GUILD_STATIC_DATA = {
     },
     {
       "id": "NEWS-0002",
-      "date": "2026-05-19",
+      "date": "115-05-19",
       "rocDate": "115.05.19",
       "category": "教育訓練",
       "title": "115年度會員教育訓練：農產品業稅務實務與相關法規",
@@ -67,8 +67,9 @@ window.GUILD_STATIC_DATA = {
       "isPinned": false,
       "sort": 2,
       "createdAt": "2026-05-29",
-      "updatedAt": "2026-05-29",
-      "note": ""
+      "updatedAt": "2026-06-05",
+      "note": "",
+      "coverImage": "圖庫/news-covers/cover_1780624695602.jpg"
     },
     {
       "id": "NEWS-0003",
