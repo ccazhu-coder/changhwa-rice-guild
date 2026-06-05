@@ -50,8 +50,9 @@ window.GUILD_STATIC_DATA = {
       "isPinned": true,
       "sort": 1,
       "createdAt": "2026-05-29",
-      "updatedAt": "2026-06-04",
-      "note": ""
+      "updatedAt": "2026-06-05",
+      "note": "",
+      "coverImage": "圖庫/news-covers/cover_1780624737788.jpg"
     },
     {
       "id": "NEWS-0002",
