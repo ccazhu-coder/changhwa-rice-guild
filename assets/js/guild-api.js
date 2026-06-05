@@ -275,6 +275,78 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
 function nameCard(m){
   var hasPhoto=m.photo&&isUsableImageUrl(m.photo);
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  var name=m.name||'';
+  var surname=esc(name.slice(0,1)||'\u4eba');
+  var nameLen=name.length;
+  var nameClass='nc-name'+(nameLen>=4?' nc-name-4plus':nameLen===3?' nc-name-3':'');
+  var isLongRole=(m.role||'').length>=5;
+  var roleClass='nc-role'+(isLongRole?' nc-role-long':'');
+  var objPos=m.photoPosition||'center top';
+  var photoImg=hasPhoto
+    ?('<img src="'+esc(BASE+m.photo.replace("./",""))+'" alt="'+esc(name)+'"'
+      +' loading="lazy" style="object-position:'+esc(objPos)+'">')
+    :'';
+  return '<article class="nc-card">'
+    +'<div class="nc-photo">'+photoImg+'<div class="nc-initial">'+surname+'</div></div>'
+    +'<div class="nc-info">'
+    +'<div class="'+roleClass+'">'+esc(m.role||'')+'</div>'
+    +'<div class="'+nameClass+'">'+esc(name)+'</div>'
+    +(m.company?'<div class="nc-company">'+esc(m.company)+'</div>':'')
+    +'</div></article>';
+}
+
+function renderBoardPage(){
+  var box=qs('boardApiList');
+  if(!box)return;
+  var bd=(window.GUILD_STATIC_DATA||{}).board||{};
+  var members=bd.members||[];
+  if(!members.length){box.innerHTML='<p style="color:#888;padding:30px 0;text-align:center">理監事名冊載入中...</p>';return;}
+  var titleEl=qs('boardTermTitle');
+  if(titleEl&&bd.term)titleEl.textContent=bd.term+'理監事名冊';
+
+  // Update summary counts
+  var chairCnt=0,dirCnt=0,supCnt=0;
+  members.forEach(function(m){
+    var r=m.role||'';
+    if(r==='理事長')chairCnt++;
+    else if(r.indexOf('理事')>=0)dirCnt++;
+    else if(r.indexOf('監事')>=0)supCnt++;
+  });
+  var sumCards=document.querySelectorAll('.sum-card b');
+  if(sumCards.length>=3){sumCards[0].textContent=chairCnt;sumCards[1].textContent=dirCnt;sumCards[2].textContent=supCnt;}
+
+  // 5 groups
+  var GROUPS=[
+    {label:'理事長', solo:true, rice:false,
+     test:function(r){return r==='理事長';}},
+    {label:'常務理事與理事', solo:false, rice:true,
+     test:function(r){return r==='常務理事'||r==='理事';}},
+    {label:'常務監事與監事', solo:false, rice:false,
+     test:function(r){return r==='常務監事'||r==='監事';}},
+    {label:'候補理事與候補監事', solo:false, rice:true,
+     test:function(r){return r.indexOf('候補')>=0;}},
+    {label:'名譽理事長與顧問', solo:false, rice:false,
+     test:function(r){return r==='名譽理事長'||r==='顧問';}}
+  ];
+
+  var html='';
+  GROUPS.forEach(function(g){
+    var list=members.filter(function(m){return g.test(m.role||'');});
+    if(!list.length)return;
+    var groupWrapClass=g.rice?'nc-group nc-group-rice':'nc-group';
+    var gridClass=g.solo?'nc-grid-solo':'nc-grid-normal';
+    html+='<div class="'+groupWrapClass+'">'
+      +'<div class="nc-group-header"><span class="nc-group-label">'+esc(g.label)+'</span></div>'
+      +'<div class="role-divider"><span>◆</span></div>'
+      +'<div class="'+gridClass+'">'+list.map(nameCard).join('')+'</div>'
+      +'</div>';
+  });
+  box.innerHTML=html||'<p style="color:#888;text-align:center;padding:20px">目前無理監事資料</p>';
+}
+
+function nameCard(m){
+  var hasPhoto=m.photo&&isUsableImageUrl(m.photo);
+  var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
   var surname=esc((m.name||'\u4eba').slice(0,1));
   var isLongRole=(m.role||'').length>4;
   var objPos=m.photoPosition||'center 40%';
