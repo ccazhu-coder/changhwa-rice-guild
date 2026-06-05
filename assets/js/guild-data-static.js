@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T07:01:35.645Z */
+/* generatedAt: 2026-06-05T07:09:11.731Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -763,7 +763,9 @@ window.GUILD_STATIC_DATA = {
         "role": "顧問",
         "name": "陳肇浩",
         "company": "壽米屋企業有限公司",
-        "address": "彰化縣二林鎮南光里儒林路2-3號"
+        "address": "彰化縣二林鎮南光里儒林路2-3號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/陳肇浩_1780643347073.png"
       },
       {
         "role": "候補理事",
