@@ -831,7 +831,10 @@ async function saveData(msg) {
   }
   const result = await res.json();
   staticData._sha = result.content.sha;
-  showStatus('✅ 已儲存！網站將在 1～2 分鐘內更新。');
+  showStatus('✅ 已儲存！正在更新所有頁面版本...');
+    autoUpdatePageVersions(new Date().toISOString()).then(()=>{
+      showStatus('✅ 已儲存並更新所有頁面！網站將在 1～2 分鐘內生效。');
+    });
 }
 
 // ══ MODAL EDIT ══
@@ -2257,6 +2260,49 @@ async function deleteDoc(i) {
   staticData.documents.splice(i, 1);
   try { await saveData('delete: doc item'); renderDocsList(); showStatus('已從清單移除'); }
   catch(e) { showStatus('移除失敗：' + e.message, true); }
+}
+
+
+// ══ AUTO-VERSION: 每次儲存後自動更新所有頁面版本號 ══
+async function autoUpdatePageVersions(timestamp) {
+  const pages = ['index','about','board','members','news','services',
+                  'training','brand','downloads','contact'];
+  const newV = timestamp.replace(/[^0-9]/g, '').slice(0, 14);
+
+  for (const page of pages) {
+    try {
+      const fname = page + '.html';
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${fname}`, {
+        headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      const data = await res.json();
+      const bytes = Uint8Array.from(atob(data.content.replace(/\n/g,'')), c=>c.charCodeAt(0));
+      let html = new TextDecoder('utf-8').decode(bytes);
+
+      // Replace guild-data-static.js version
+      html = html.replace(/guild-data-static\.js\?v=[^\s'"]+/g, `guild-data-static.js?v=${newV}`);
+      // Replace guild-api.js version
+      html = html.replace(/guild-api\.js\?v=[^\s'"]+/g, `guild-api.js?v=${newV}`);
+
+      const encoder = new TextEncoder();
+      const encoded = encoder.encode(html);
+      let b64 = '';
+      const CHUNK = 6144;
+      for (let i = 0; i < encoded.length; i += CHUNK) {
+        b64 += btoa(String.fromCharCode(...encoded.subarray(i, i + CHUNK)));
+      }
+
+      await fetch(`https://api.github.com/repos/${REPO}/contents/${fname}`, {
+        method: 'PUT',
+        headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+        body: JSON.stringify({ message: `auto-version: ${fname} v${newV}`, content: b64, sha: data.sha })
+      });
+    } catch(e) {
+      // Silent - version update is best-effort
+      console.warn('autoUpdatePageVersions failed for', page, e);
+    }
+  }
+  console.log('[AutoVersion] All pages updated to v' + newV);
 }
 
 // Enter key support
