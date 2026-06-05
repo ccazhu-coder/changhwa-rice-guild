@@ -277,7 +277,7 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
   var surname=esc((m.name||'\u4eba').slice(0,1));
   var isLongRole=(m.role||'').length>4;
-  var objPos=m.photoPosition||'center 20%';
+  var objPos=m.photoPosition||'center 40%';
   var photoContent=hasPhoto
     ?'<img src="'+esc(BASE+m.photo.replace("./",''))+'" alt="'+esc(m.name)+'"'
      +' loading="lazy" class="nc-photo-img" style="object-position:'+esc(objPos)+'">' 
