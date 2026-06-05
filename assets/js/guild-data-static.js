@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:16:38.736Z */
+/* generatedAt: 2026-06-05T06:21:35.812Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -739,7 +739,9 @@ window.GUILD_STATIC_DATA = {
         "role": "顧問",
         "name": "劉正傑",
         "company": "正新製米(股)公司",
-        "address": "彰化縣田中鎮員集路一段530號"
+        "address": "彰化縣田中鎮員集路一段530號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/劉正傑_1780640491585.jpg"
       },
       {
         "role": "顧問",
