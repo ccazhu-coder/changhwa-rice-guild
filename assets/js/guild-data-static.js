@@ -667,7 +667,9 @@ window.GUILD_STATIC_DATA = {
         "role": "理事",
         "name": "張志泓",
         "company": "立大碾米工廠",
-        "address": "彰化縣和美鎮源埤里大佃路392巷2號"
+        "address": "彰化縣和美鎮源埤里大佃路392巷2號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/張志泓_1780638145947.png"
       },
       {
         "role": "理事",
