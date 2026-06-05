@@ -2,6 +2,7 @@
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="UTF-8">
+<meta name="google-site-verification" content="LrfdKCtw-Xz-NPntCGhHJMvGJc01De1z4XxqU2zzldY">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>理監事團隊｜彰化縣米穀商業同業公會</title>
 <meta name="description" content="第29屆彰化縣米穀商業同業公會理監事團隊介紹，包含組織架構與各委員會主委名單。">
@@ -14,11 +15,11 @@
 <meta property="og:title" content="理監事團隊｜彰化縣米穀商業同業公會">
 <meta property="og:description" content="第29屆彰化縣米穀商業同業公會理監事團隊介紹，包含組織架構與各委員會主委名單。">
 <meta property="og:url" content="https://rice.net.tw/board.html">
-<meta property="og:image" content="https://rice.net.tw/assets/images/logo-official-hq.jpg">
+<meta property="og:image" content="https://rice.net.tw/assets/images/og-image.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="理監事團隊｜彰化縣米穀商業同業公會">
 <meta name="twitter:description" content="第29屆彰化縣米穀商業同業公會理監事團隊介紹，包含組織架構與各委員會主委名單。">
-<meta name="twitter:image" content="https://rice.net.tw/assets/images/logo-official-hq.jpg">
+<meta name="twitter:image" content="https://rice.net.tw/assets/images/og-image.jpg">
 <link rel="icon" type="image/jpeg" href="/assets/images/logo-official.jpg">
 <link rel="stylesheet" href="./assets/css/style.css">
   <link rel="stylesheet" href="./assets/css/formal.css">
@@ -266,57 +267,6 @@
 <script>document.write('<scr'+'ipt src="./assets/js/guild-data-static.js?t='+Math.floor(Date.now()/60000)+'"><\/scr'+'ipt>');</script>
 <script src="./assets/js/guild-api.js?v=20260607-final"></script>
 
-<script>
-(function(){
-  var BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
-  var ROLE_ORDER = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
-  var ROLE_GROUP = {
-    '理事長':'理事會','副理事長':'理事會','常務理事':'理事會','理事':'理事會',
-    '常務監事':'監事會','監事':'監事會',
-    '名譽理事長':'顧問與候補','顧問':'顧問與候補','候補理事':'顧問與候補','候補監事':'顧問與候補'
-  };
 
-  function renderRoster(members) {
-    var groups = {};
-    members.forEach(function(m){
-      var g = ROLE_GROUP[m.role] || '其他';
-      if (!groups[g]) groups[g] = [];
-      groups[g].push(m);
-    });
-
-    var containers = {
-      '理事會': document.getElementById('rosterDirectors'),
-      '監事會': document.getElementById('rosterSupervisors'),
-      '顧問與候補': document.getElementById('rosterAdvisors')
-    };
-
-    Object.keys(containers).forEach(function(groupName){
-      var el = containers[groupName];
-      if (!el) return;
-      var mems = (groups[groupName] || []).sort(function(a,b){
-        return (ROLE_ORDER.indexOf(a.role)||99) - (ROLE_ORDER.indexOf(b.role)||99);
-      });
-      el.innerHTML = mems.map(function(m){
-        var photoHtml = m.photo
-          ? '<img class="roster-photo" src="' + BASE + m.photo.replace('./','') + '" alt="' + m.name + '" onerror="this.outerHTML='<div class=roster-photo-placeholder>👤</div>'">'
-          : '<div class="roster-photo-placeholder">👤</div>';
-        return '<div class="roster-photo-card">'
-          + photoHtml
-          + '<div class="roster-photo-role">' + m.role + '</div>'
-          + '<div class="roster-photo-name">' + m.name + '</div>'
-          + (m.company ? '<div class="roster-photo-company">' + m.company + '</div>' : '')
-          + '</div>';
-      }).join('');
-    });
-  }
-
-  function init(){
-    if (!window.GUILD_STATIC_DATA || !window.GUILD_STATIC_DATA.board) return;
-    renderRoster(window.GUILD_STATIC_DATA.board.members || []);
-  }
-  if (window.GUILD_STATIC_DATA) { init(); }
-  else { var t = setInterval(function(){ if(window.GUILD_STATIC_DATA){ clearInterval(t); init(); } }, 200); }
-})();
-</script>
 </body>
 </html>
