@@ -73,11 +73,13 @@
 }
 .nc-group-label {
   font-family: var(--serif,'Noto Serif TC',serif);
-  font-size: 1.05rem; font-weight: 800; color: #183f21;
-  padding: 6px 20px; border-radius: 20px;
-  background: rgba(198,164,55,.12);
-  border: 1px solid rgba(198,164,55,.35);
+  font-size: 1.05rem; font-weight: 800; color: #e8d88a;
+  padding: 8px 24px; border-radius: 20px;
+  background: #183f21;
+  border: 1.5px solid rgba(198,164,55,.5);
   white-space: nowrap;
+  letter-spacing: .04em;
+  box-shadow: 0 3px 10px rgba(20,45,24,.18);
 }
 /* Card grid: 3 cols desktop / 2 tablet / 1 mobile */
 .nc-grid {
@@ -114,15 +116,7 @@
   display: block;
 }
 /* Green diagonal corner accent */
-.nc-photo::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 52%; height: 42%;
-  background: #183f21;
-  clip-path: polygon(0 100%, 100% 100%, 0 0);
-  pointer-events: none;
-}
+/* nc-photo::after removed - no green corner */
 /* Initial character for no-photo */
 .nc-initial {
   width: 100%; height: 100%;
