@@ -206,7 +206,7 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
           '<div style="color:#888;padding:20px 0">近期無精選消息</div>';
       }
       if(recentBox){
-        var recent=nonAnn.filter(function(n){return !n.isPinned;}).slice(0,5);
+        var recent=nonAnn.filter(function(n){return !n.isPinned;}).sort(function(a,b){var da=a.date||a.rocDate||'';var db=b.date||b.rocDate||'';return db.localeCompare(da);}).slice(0,5);
         recentBox.innerHTML=recent.length?recent.map(recentNewsCard).join(''):
           '<div style="color:#888;padding:20px 0">近期無消息</div>';
       }
