@@ -74,7 +74,9 @@
     var cat=esc(item.category||'公告');
     var color=newsBadgeColor(item.category||'');
     var badge='<span style="display:inline-block;padding:3px 10px;border-radius:20px;font-size:.65rem;font-weight:800;letter-spacing:.04em;background:'+color+';color:#fff;margin-bottom:8px">'+cat+'</span>';
-    var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:.8rem;font-weight:700;color:'+color+'">查看詳情 →</a>':'';
+      var isDM=item.category==='招生DM';
+  var dmFileBtn=item.dmFileUrl?'<a href="'+esc(item.dmFileUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;margin-right:8px;padding:6px 14px;background:#526055;color:#fff;border-radius:20px;font-size:.78rem;text-decoration:none">📄 查看DM</a>':'';
+  var link=(item.registerUrl&&item.registerUrl!==item.dmFileUrl)?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:6px 18px;background:'+(isDM?'#c0392b':'#b08a2e')+';color:#fff;border-radius:20px;font-size:.82rem;text-decoration:none;font-weight:800">'+(isDM?'✍️ 立即報名':'了解更多 →')+'</a>':(item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#b08a2e;color:#fff;border-radius:20px;font-size:.78rem;text-decoration:none">了解更多 →</a>':'');
     return '<article style="background:#fff;border:1px solid #e6ddc9;border-radius:16px;padding:20px 22px;box-shadow:0 4px 14px rgba(20,45,24,.06);transition:box-shadow .2s">'+badge+'<h3 style="font-size:.98rem;font-weight:800;color:#183f21;line-height:1.4;margin-bottom:6px">'+esc(item.title)+'</h3>'+(item.summary?'<p style="font-size:.82rem;color:#61716b;line-height:1.65">'+esc(item.summary)+'</p>':'')+'<div style="font-size:.72rem;color:#aaa;margin-top:8px">'+esc(item.rocDate||item.date)+'</div>'+link+'</article>';
   }
   function announceCard(item){
@@ -94,13 +96,13 @@
   var imgHtml=hasImg?'<div class="news-feat-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"><span class="news-tag">'+esc(item.category||'消息')+'</span></div>':'';
   var bodyExtras=hasImg?'':'<span class="news-tag" style="margin-bottom:10px;display:inline-block">'+esc(item.category||'消息')+'</span><br>';
   var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;padding:7px 18px;background:#b08a2e;color:#fff;border-radius:20px;font-size:.82rem;text-decoration:none">了解更多 →</a>':'';
-  return '<div class="news-feat-card">'+imgHtml+'<div class="news-feat-body">'+bodyExtras+'<div class="news-date">'+esc(item.rocDate||item.date)+'</div><h2>'+esc(item.title)+'</h2>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+link+'</div></div>';
+  return '<div class="news-feat-card">'+imgHtml+'<div class="news-feat-body">'+bodyExtras+'<div class="news-date">'+esc(item.rocDate||item.date)+'</div><h2>'+esc(item.title)+'</h2>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+dmFileBtn+link+'</div></div>';
 }
 function recentNewsCard(item){
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
   var imgHtml=hasImg?'<div class="news-list-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></div>':'<div class="news-list-img" style="background:linear-gradient(135deg,#e8f5e9,#f7f1e3);display:flex;align-items:center;justify-content:center;color:#5a7a5e;font-size:.72rem;font-weight:700;text-align:center;padding:8px">'+esc(item.category||'消息')+'</div>';
   var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" style="font-size:.8rem;color:#1a5c28">詳細資訊 →</a>':'';
-  return '<div class="news-list-card">'+imgHtml+'<div class="news-list-body"><div class="news-meta"><span class="news-badge">'+esc(item.category||'消息')+'</span><span style="font-size:.74rem;color:#8c8c8c">'+esc(item.rocDate||item.date)+'</span></div><h3>'+esc(item.title)+'</h3>'+(item.summary?'<p style="font-size:.85rem;color:#666;line-height:1.6;margin-top:4px">'+esc(item.summary)+'</p>':'')+link+'</div></div>';
+  return '<div class="news-list-card">'+imgHtml+'<div class="news-list-body"><div class="news-meta"><span class="news-badge">'+esc(item.category||'消息')+'</span><span style="font-size:.74rem;color:#8c8c8c">'+esc(item.rocDate||item.date)+'</span></div><h3>'+esc(item.title)+'</h3>'+(item.summary?'<p style="font-size:.85rem;color:#666;line-height:1.6;margin-top:4px">'+esc(item.summary)+'</p>':'')+dmFileBtn+link+'</div></div>';
 }
 function galleryCard(item){
   var hasCover=item.coverImage&&isUsableImageUrl(item.coverImage);
