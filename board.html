@@ -61,58 +61,147 @@
     @media(max-width:980px){.board-summary{grid-template-columns:repeat(3,1fr)}.committee-grid,.org-five{grid-template-columns:repeat(2,1fr)}}
     @media(max-width:620px){.board-hero h1{font-size:34px}.board-summary,.org-two,.committee-grid,.org-five{grid-template-columns:1fr}.committee-card{padding:22px}.role-title{align-items:flex-start;flex-direction:column}.role-title h3{font-size:24px}}
 
-/* ── 理監事名冊 橫向排版 (參考設計) ── */
-.role-block         { margin-bottom: 52px; }
-.role-block:last-child { margin-bottom: 0; }
-.role-title         { display:flex; align-items:center; gap:14px; margin-bottom:0;
-                      padding-bottom:16px; }
-.role-title > span  { display:inline-flex; align-items:center; background:#183f21; color:#e0c783;
-                      font-size:.65rem; font-weight:800; letter-spacing:.08em; padding:6px 16px;
-                      border-radius:20px; white-space:nowrap; flex-shrink:0; }
-.role-title > h3    { font-family:var(--serif,'Noto Serif TC',serif); font-size:1.15rem;
-                      font-weight:700; color:#183f21; margin:0; line-height:1.3; }
-/* Decorative divider between role-title and cards */
-.role-divider       { display:flex; align-items:center; gap:0; margin:16px 0 24px;
-                      color:rgba(198,164,55,.55); font-size:.55rem; letter-spacing:2px; }
-.role-divider::before,.role-divider::after
-                    { content:''; flex:1; height:1px; background:rgba(198,164,55,.35); }
-.role-divider span  { padding:0 12px; }
-/* Card grid */
-.roster-cards       { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-/* Horizontal card layout */
-.roster-card        { background:#fffdf7; border:1px solid rgba(198,164,55,.32); border-radius:16px;
-                      padding:20px 22px; display:flex; flex-direction:row;
-                      align-items:center; gap:18px;
-                      box-shadow:0 3px 14px rgba(20,45,24,.06);
-                      transition:box-shadow .2s,transform .2s; }
-.roster-card:hover  { box-shadow:0 8px 28px rgba(20,45,24,.12); transform:translateY(-2px); }
-/* Avatar area */
-.roster-avatar      { width:88px; height:88px; border-radius:12px; overflow:hidden;
-                      border:1.5px solid rgba(198,164,55,.5); background:#f7f1e3;
-                      display:flex; align-items:center; justify-content:center;
-                      flex-shrink:0; }
-.roster-avatar img  { width:100%; height:100%; object-fit:cover; display:block; }
-.roster-initial     { font-family:var(--serif,'Noto Serif TC',serif);
-                      font-size:2.2rem; font-weight:900; color:#183f21; line-height:1;
-                      user-select:none; }
+/* ── 理監事名片卡片設計 ── */
+/* Group section */
+.nc-group { margin-bottom: 60px; }
+.nc-group:last-child { margin-bottom: 0; }
+.nc-group-header {
+  display: flex; align-items: center; gap: 16px;
+  margin-bottom: 28px;
+  padding-bottom: 14px;
+  border-bottom: 1.5px solid rgba(198,164,55,.3);
+}
+.nc-group-label {
+  font-family: var(--serif,'Noto Serif TC',serif);
+  font-size: 1.05rem; font-weight: 800; color: #183f21;
+  padding: 6px 20px; border-radius: 20px;
+  background: rgba(198,164,55,.12);
+  border: 1px solid rgba(198,164,55,.35);
+  white-space: nowrap;
+}
+/* Card grid: 3 cols desktop / 2 tablet / 1 mobile */
+.nc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+/* Name card: horizontal layout */
+.nc-card {
+  display: flex;
+  flex-direction: row;
+  background: #fdfbf4;
+  border: 1.5px solid rgba(198,164,55,.45);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(20,45,24,.07), inset 0 1px 0 rgba(255,255,255,.8);
+  transition: box-shadow .22s, transform .22s;
+  /* Fixed height for consistency */
+  min-height: 180px;
+}
+.nc-card:hover { box-shadow: 0 12px 36px rgba(20,45,24,.14); transform: translateY(-3px); }
+/* Photo area */
+.nc-photo {
+  width: 42%;
+  flex-shrink: 0;
+  position: relative;
+  background: #f0ece0;
+  overflow: hidden;
+}
+.nc-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top; /* prevent head cropping */
+  display: block;
+}
+/* Green diagonal corner accent */
+.nc-photo::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 52%; height: 42%;
+  background: #183f21;
+  clip-path: polygon(0 100%, 100% 100%, 0 0);
+  pointer-events: none;
+}
+/* Initial character for no-photo */
+.nc-initial {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif,'Noto Serif TC',serif);
+  font-size: clamp(48px, 6vw, 80px);
+  font-weight: 900;
+  color: #183f21;
+  background: linear-gradient(145deg, #f7f1e3, #ede5cb);
+  position: relative; z-index: 1;
+}
 /* Info area */
-.roster-info        { display:flex; flex-direction:column; align-items:flex-start;
-                      text-align:left; min-width:0; }
-.roster-role-badge  { display:inline-block; font-size:.63rem; font-weight:800;
-                      letter-spacing:.05em; padding:3px 10px; border-radius:20px;
-                      background:rgba(198,164,55,.18); color:#7d5c0a; margin-bottom:6px;
-                      white-space:nowrap; }
-.roster-name        { font-family:var(--serif,'Noto Serif TC',serif);
-                      font-size:1.3rem; font-weight:900; color:#183f21;
-                      line-height:1.2; margin:0 0 5px; }
-.roster-company     { font-size:.8rem; color:#61716b; line-height:1.5; margin:0;
-                      word-break:break-all; }
-/* Bottom accent line on card */
-.roster-card::after { content:''; display:block; }
+.nc-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 18px;
+}
+/* Role box: pill shape */
+.nc-role {
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid rgba(198,164,55,.6);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 700;
+  color: #183f21;
+  text-align: center;
+  background: rgba(198,164,55,.08);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.nc-role-long { font-size: clamp(14px, 1.6vw, 20px); white-space: nowrap; }
+/* Name box */
+.nc-name {
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid rgba(198,164,55,.5);
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-family: var(--serif,'Noto Serif TC',serif);
+  font-size: clamp(32px, 4.5vw, 62px);
+  font-weight: 900;
+  color: #183f21;
+  text-align: center;
+  letter-spacing: .06em;
+  line-height: 1.1;
+}
+/* Company box */
+.nc-company {
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(198,164,55,.4);
+  border-radius: 6px;
+  padding: 5px 10px;
+  font-size: clamp(13px, 1.5vw, 20px);
+  color: #526055;
+  text-align: center;
+  line-height: 1.4;
+  word-break: break-all;
+}
 /* RWD */
-@media(max-width:1080px) { .roster-cards { grid-template-columns:repeat(2,1fr); } }
-@media(max-width:680px)  { .roster-cards { grid-template-columns:1fr; }
-                            .roster-card { padding:16px 18px; } }
+@media(max-width:1100px){
+  .nc-grid{grid-template-columns:repeat(2,1fr);}
+  .nc-name{font-size:clamp(28px,4vw,48px);}
+  .nc-role{font-size:clamp(16px,1.8vw,22px);}
+  .nc-company{font-size:clamp(12px,1.4vw,18px);}
+  .nc-initial{font-size:clamp(40px,5vw,64px);}
+}
+@media(max-width:680px){
+  .nc-grid{grid-template-columns:1fr;}
+  .nc-card{min-height:160px;}
+  .nc-name{font-size:clamp(28px,8vw,44px);}
+  .nc-role{font-size:clamp(15px,3.5vw,20px);}
+  .nc-role-long{font-size:clamp(13px,3vw,17px);}
+  .nc-company{font-size:clamp(12px,3vw,17px);}
+  .nc-initial{font-size:clamp(36px,10vw,56px);}
+}
+
 
 </style>
 </head>
