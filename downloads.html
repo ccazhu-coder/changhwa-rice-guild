@@ -239,41 +239,44 @@ a{color:inherit;text-decoration:none}
   <a href="contact.html"   title="聯絡公會按鈕" style="position:absolute;left:67%;top:70%;width:12%;height:14%;display:block"></a>
 </footer>
 <script>(function(){var t=document.getElementById("navToggle");var n=document.getElementById("mainNav");if(t&&n){t.addEventListener("click",function(){n.classList.toggle("open");});}})();</script><!-- LOCKED: downloads.html uses inline JS only, no site.js dependency -->
-<script>document.write('<scr'+'ipt src="./assets/js/guild-data-static.js?t='+Math.floor(Date.now()/600000)+'"><\/scr'+'ipt>');</script>
+<script>document.write('<scr'+'ipt src="./assets/js/guild-data-static.js?t='+Math.floor(Date.now()/60000)+'"><\/scr'+'ipt>');</script>
 <script>
 (function(){
-  var CAT_ICONS={'정책공告':'📋','政策公告':'📋','章程':'📜','申請書表':'📝','其他':'📄'};
-  var CAT_COLORS={'政策公告':'#c0392b','章程':'#183f21','申請書表':'#2980b9','其他':'#7f8c8d'};
+  var CAT_COLORS={'政策公告':'#c0392b','章程':'#183f21','申請書表':'#2980b9','其他文件':'#7f8c8d','其他':'#7f8c8d'};
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
   function renderDocs(docs){
-    if(!docs||!docs.length)return;
     var section=document.getElementById('dynamicDocsSection');
     var list=document.getElementById('dynamicDocsList');
     if(!section||!list)return;
+    // Accept all docs (remove strict fileName filter)
+    var validDocs=(docs||[]).filter(function(d){ return d&&(d.title||d.fileName); });
+    if(!validDocs.length){ section.style.display='none'; return; }
+    // Group by category (preserving insertion order)
+    var cats=[];
     var groups={};
-    docs.forEach(function(d){
-      if(!d.fileName)return;
+    validDocs.forEach(function(d){
       var c=d.category||'其他';
-      if(!groups[c])groups[c]=[];
+      if(!groups[c]){ groups[c]=[]; cats.push(c); }
       groups[c].push(d);
     });
-    if(!Object.keys(groups).length)return;
     var html='';
-    Object.keys(groups).forEach(function(cat){
-      var color=CAT_COLORS[cat]||'#666';
+    cats.forEach(function(cat){
+      var color=CAT_COLORS[cat]||'#526055';
       html+='<div style="margin-bottom:36px">';
-      html+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #c6a437">';
-      html+='<div style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;flex-shrink:0;background:'+color+'">'+cat.charAt(0)+'</div>';
-      html+='<h3 style="font-size:1.1rem;font-weight:900;color:#183f21">'+cat+'</h3>';
+      html+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid rgba(198,164,55,.5)">';
+      html+='<div style="width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.8rem;color:#fff;flex-shrink:0;background:'+color+'">'+cat.slice(0,2)+'</div>';
+      html+='<h3 style="font-size:1.1rem;font-weight:900;color:#183f21;margin:0">'+cat+'</h3>';
       html+='</div><div class="dl-list">';
       groups[cat].forEach(function(doc){
-        var ext=(doc.fileName||'').split('.').pop().toUpperCase();
-        var iconCls=['DOCX','DOC'].indexOf(ext)>=0?'word':'pdf';
-        var fileUrl=BASE+(doc.path||'').replace('./','');
-        html+='<a class="dl-item" href="'+fileUrl+'" target="_blank" download>'
+        var fn=doc.fileName||doc.path||'';
+        var ext=(fn.split('.').pop()||'').toUpperCase()||'FILE';
+        var iconCls=(ext==='DOCX'||ext==='DOC')?'word':'pdf';
+        var filePath=(doc.path||('files/'+fn)).replace('./','');
+        var fileUrl=BASE+filePath;
+        html+='<a class="dl-item" href="'+fileUrl+'" target="_blank" rel="noopener">'
           +'<div class="dl-file-icon '+iconCls+'">'+ext+'</div>'
           +'<div class="dl-item-info">'
-          +'<div class="dl-item-name">'+doc.title+'</div>'
+          +'<div class="dl-item-name">'+(doc.title||fn)+'</div>'
           +'<div class="dl-item-desc">上傳日期：'+(doc.rocDate||doc.uploadedAt||'')+'</div>'
           +'</div>'
           +'<div class="dl-btn dl-btn-gold">下載</div>'
@@ -284,9 +287,21 @@ a{color:inherit;text-decoration:none}
     list.innerHTML=html;
     section.style.display='block';
   }
-  window.addEventListener('load',function(){
-    renderDocs((window.GUILD_STATIC_DATA||{}).documents);
-  });
+  // Try to render immediately, fallback to load event
+  function tryRender(){
+    if(window.GUILD_STATIC_DATA){
+      renderDocs(window.GUILD_STATIC_DATA.documents);
+    } else {
+      window.addEventListener('load',function(){
+        renderDocs((window.GUILD_STATIC_DATA||{}).documents);
+      });
+    }
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', tryRender);
+  } else {
+    tryRender();
+  }
 })();
 </script>
 
