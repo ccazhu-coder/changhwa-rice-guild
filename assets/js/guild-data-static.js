@@ -3,6 +3,24 @@
 window.GUILD_STATIC_DATA = {
   "news": [
     {
+      "id": "NEWS-0004",
+      "date": "115-5-12",
+      "rocDate": "115.5.12",
+      "category": "教育訓練",
+      "title": "與大葉大學餐旅學院鄭院長共同拜訪台南米師傅",
+      "summary": "本會與大葉大學餐旅學院鄭院長共同拜訪台南米師傅，就米食文化推廣、專業人才培育及未來教育訓練合作方向進行交流。透過產官學資源連結與經驗分享，期望建立長期合作機制，共同培育符合產業需求之專業人才，促進米食產業創新與永續發展。",
+      "location": "",
+      "registerUrl": "",
+      "status": "活動結束",
+      "coverImage": "圖庫/news-covers/cover_1780625707314.jpg",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 6,
+      "createdAt": "2026-06-05",
+      "updatedAt": "2026-06-05",
+      "note": ""
+    },
+    {
       "id": "NEWS-0001-HW",
       "date": "115-04-01",
       "rocDate": "115.04.01",
