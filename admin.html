@@ -235,6 +235,7 @@ a{color:inherit;text-decoration:none}
                 <option value="公益活動">❤️ 公益活動（賑災/捐贈/社區）</option>
                 <option value="會員大會">👥 會員大會（年度大會/選舉）</option>
                 <option value="活動通知">📣 活動通知（一般公告）</option>
+                <option value="招生DM">📄 招生DM（課程招生/報名）</option>
               </select>
               <div class="field-hint">分類決定在哪個區塊顯示：政策/會務公告→獨立區塊，其他→精選/近期消息</div>
             </div>
@@ -447,14 +448,23 @@ a{color:inherit;text-decoration:none}
       <div class="tab-panel" id="tab-dm">
         <div class="panel-title">📄 招生 DM 管理 <small>上傳 DM 圖片，自動顯示在最新消息</small></div>
         <div class="card">
-          <h3>⬆️ 上傳新 DM（JPG / PNG 圖片）</h3>
+          <h3>⬆️ 上傳新招生 DM</h3>
           <div class="field">
-            <label>DM 標題（將顯示在最新消息）</label>
-            <input type="text" id="dm-title" placeholder="例：115年度會員招募說明">
+            <label>DM 標題 <span style="color:#c0392b">*</span>（顯示在最新消息標題）</label>
+            <input type="text" id="dm-title" placeholder="例：115年度教育訓練招生簡章">
           </div>
           <div class="field">
-            <label>說明文字（選填）</label>
-            <input type="text" id="dm-summary" placeholder="例：歡迎符合資格的米穀業者申請入會">
+            <label>課程名稱 <span style="color:#c0392b">*</span></label>
+            <input type="text" id="dm-course" placeholder="例：農產品業稅務實務與相關法規研習班">
+          </div>
+          <div class="field">
+            <label>招生文案說明</label>
+            <textarea id="dm-summary" rows="3" placeholder="例：本課程由農業部農糧署補助辦理，歡迎公會會員及米穀從業人員踴躍報名，名額有限！"></textarea>
+          </div>
+          <div class="field">
+            <label>🔗 線上報名連結（選填）</label>
+            <input type="url" id="dm-register" placeholder="https://forms.gle/... 或 https://...">
+            <div class="field-hint">填入後前台最新消息自動顯示「立即報名」按鈕</div>
           </div>
           <div class="field">
             <label>🖼️ DM 圖片（JPG / PNG）</label>
@@ -1279,8 +1289,10 @@ async function githubUploadFile(localFile, repoPath, commitMsg) {
 
 async function uploadDM() {
   if (!pendingDM) { showStatus('請先選擇 PDF 檔案', true); return; }
-  const title   = document.getElementById('dm-title').value.trim() || pendingDM.name;
-  const summary = document.getElementById('dm-summary')?.value.trim() || '';
+  const title    = document.getElementById('dm-title').value.trim() || pendingDM.name;
+  const course   = document.getElementById('dm-course')?.value.trim() || '';
+  const summary  = (course ? course + '\n' : '') + (document.getElementById('dm-summary')?.value.trim() || '點擊查看招生宣傳單');
+  const registerUrl = document.getElementById('dm-register')?.value.trim() || '';
   try {
     showStatus('上傳中...');
     const safeName = pendingDM.name.replace(/\s+/g, '_');
@@ -1297,10 +1309,14 @@ async function uploadDM() {
       rocDate: roc,
       category: '招生DM',
       title: title,
-      summary: summary || '點擊查看招生宣傳單',
+      summary: summary,
       coverImage: fileUrl,
-      location: '', registerUrl: fileUrl, status: '公告',
-      coverImage, isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length + 1),
+      location: '',
+      registerUrl: registerUrl || fileUrl,
+      dmFileUrl: fileUrl,
+      status: '公告',
+      isHome: true, isPinned: false,
+      sort: (staticData.news.length + 1),
       createdAt: today.toISOString().slice(0,10),
       updatedAt: today.toISOString().slice(0,10), note: 'dm_upload'
     };
@@ -1309,7 +1325,10 @@ async function uploadDM() {
 
     showStatus(`✅ DM「${title}」上傳成功！已自動加入最新消息。`);
     pendingDM = null;
-    document.getElementById('dm-title').value = '';
+    ['dm-title','dm-course','dm-summary','dm-register'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.value = '';
+    });
+    document.getElementById('dm-img-thumb').textContent = '🖼️';
     document.getElementById('dm-preview').style.display = 'none';
     renderNewsList();
     loadFilesList();
