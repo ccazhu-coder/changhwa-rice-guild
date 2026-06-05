@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T07:09:11.731Z */
+/* generatedAt: 2026-06-05T07:15:17.010Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4335,7 +4335,9 @@ window.GUILD_STATIC_DATA = {
       "path": "./files/彰化縣米穀公會贊助會員辦法.pdf",
       "fileName": "彰化縣米穀公會贊助會員辦法.pdf",
       "uploadedAt": "2026-06-05",
-      "rocDate": "115.06.05"
+      "rocDate": "115.06.05",
+      "published": true,
+      "updatedAt": "2026-06-05"
     },
     {
       "id": "DOC-POLICY-115031",
