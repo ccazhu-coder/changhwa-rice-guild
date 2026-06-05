@@ -139,14 +139,16 @@
 }
 /* Role box: pill shape */
 .nc-role {
-  display: flex; align-items: center; justify-content: flex-start;
+  display: inline-flex; align-items: center;
+  align-self: flex-start;
   border: 1.5px solid rgba(198,164,55,.6);
   border-radius: 999px;
-  padding: 5px 16px;
+  padding: 5px 18px;
   font-size: clamp(18px, 2vw, 26px);
   font-weight: 700;
   color: #183f21;
   text-align: left;
+  white-space: nowrap;
   background: rgba(198,164,55,.08);
   white-space: nowrap;
   overflow: hidden;
