@@ -190,3 +190,8 @@ img{display:block;max-width:100%;height:auto}
 .site-header .main-nav a:hover,.site-header .main-nav a.active{color:#fff!important}
 .site-header .main-nav .nav-cta,.site-header .main-nav .nav-cta:hover{color:#1a3520!important}
 .topbar,.topbar *{color:rgba(255,255,255,.85)!important}
+
+/* Activity Gallery Grid */
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.gallery-grid{grid-template-columns:1fr}}
