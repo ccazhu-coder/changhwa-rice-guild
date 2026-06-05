@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:52:52.540Z */
+/* generatedAt: 2026-06-05T06:53:23.460Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -663,7 +663,9 @@ window.GUILD_STATIC_DATA = {
         "role": "理事",
         "name": "楊弘煜",
         "company": "榮利碾米工廠",
-        "address": "彰化縣溪湖鎮二溪路1段695巷45弄46號"
+        "address": "彰化縣溪湖鎮二溪路1段695巷45弄46號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/楊弘煜_1780642399500.png"
       },
       {
         "role": "理事",
