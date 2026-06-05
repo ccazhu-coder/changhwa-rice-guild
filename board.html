@@ -83,14 +83,13 @@
 }
 /* Card grid: 3 cols desktop / 2 tablet / 1 mobile */
 .nc-grid-solo {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  display: flex;
+  justify-content: center;   /* 理事長卡片置中 */
   margin-bottom: 20px;
 }
 .nc-grid-solo .nc-card {
+  width: 50%;                /* 與其他卡片等寬（2欄時各50%）*/
   max-width: 100%;
-  grid-column: 1;
 }
 .nc-grid + .nc-grid { margin-top: 20px; }
 .nc-grid-solo + .nc-grid { margin-top: 0; }
