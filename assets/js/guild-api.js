@@ -162,7 +162,7 @@ function galleryCard(item){
           '<div style="color:#888;padding:20px 0">近期無精選消息</div>';
       }
       if(recentBox){
-        var recent=nonAnn.filter(function(n){return !n.isPinned;}).slice(0,5);
+        var recent=nonAnn.filter(function(n){return !n.isPinned;}).sort(function(a,b){var da=a.date||(a.rocDate?a.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');var db=b.date||(b.rocDate?b.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');return db.localeCompare(da);}).slice(0,5);
         recentBox.innerHTML=recent.length?recent.map(recentNewsCard).join(''):
           '<div style="color:#888;padding:20px 0">近期無消息</div>';
       }
