@@ -65,7 +65,7 @@
 }
   function extractDriveFolderId(url){url=clean(url);var m=url.match(/\/folders\/([^/?#]+)/);return m&&m[1]?m[1]:''}
   function extractDriveFileId(url){url=clean(url);var m=url.match(/\/file\/d\/([^/?#]+)/);if(m&&m[1])return m[1];m=url.match(/[?&]id=([^&]+)/);return m&&m[1]?m[1]:''}
-  function isUsableImageUrl(v){v=clean(v);if(!v)return false;if(/^https?:\/\//i.test(v)&&/\.(jpg|jpeg|png|webp|gif)(\?|#|$)/i.test(v))return true;if(/^(\.\/)?(圖庫|assets)\//.test(v))return true;return false}
+  function isUsableImageUrl(v){v=clean(v);if(!v)return false;if(/^https?:\/\//i.test(v)&&/\.(jpg|jpeg|png|webp|gif)(\?|#|$)/i.test(v))return true;if(/^(\.\/)?(圖庫|assets|files)\/./.test(v))return true;return false}
   function driveImageUrl(url){return clean(url)}
   function driveFolderEmbed(url){return ''}
   function isTrainingItem(item){var t=clean(item.title||item.activityTitle);return t.indexOf('115年度會員教育訓練')>-1||t.indexOf('農產品業稅務')>-1}
