@@ -4292,6 +4292,15 @@ window.GUILD_STATIC_DATA = {
   ],
   "documents": [
     {
+      "id": "DOC-1780636258439",
+      "title": "彰化縣米穀公會贊助會員-申請書",
+      "category": "申請書表",
+      "path": "./files/贊助會員申請辦法_申請書.pdf",
+      "fileName": "贊助會員申請辦法_申請書.pdf",
+      "uploadedAt": "2026-06-05",
+      "rocDate": "115.06.05"
+    },
+    {
       "id": "DOC-1780636202763",
       "title": "彰化縣米穀公會贊助會員辦法",
       "category": "章程",
