@@ -175,9 +175,6 @@ a{color:inherit;text-decoration:none}
       <div class="sidebar-item active" onclick="showTab('news')" id="tab-btn-news">
         <span class="icon">📰</span>最新消息
       </div>
-      <div class="sidebar-item" onclick="showTab('announce')" id="tab-btn-announce">
-        <span class="icon">📢</span>會務公告
-      </div>
       <div class="sidebar-item" onclick="showTab('notif')" id="tab-btn-notif">
         <span class="icon">📡</span>訊息轉知
       </div>
@@ -229,15 +226,17 @@ a{color:inherit;text-decoration:none}
               <input type="text" id="news-date" placeholder="例：115.05.19">
             </div>
             <div class="field">
-              <label>分類</label>
+              <label>分類 <span style="font-size:.72rem;color:#aaa;font-weight:400">（每個分類會在前台獨立引流）</span></label>
               <select id="news-cat">
-                <option>教育訓練</option>
-                <option>會務公告</option>
-                <option>政策公告</option>
-                <option>公益活動</option>
-                <option>訓練品質</option>
-                <option>活動通知</option>
+                <option value="政策公告">🏛️ 政策公告（農糧署/衛生局公文）</option>
+                <option value="會務公告">📋 會務公告（理監事會議/決議）</option>
+                <option value="教育訓練">📚 教育訓練（TTQS/研習課程）</option>
+                <option value="訓練品質">🏆 訓練品質（TTQS輔導/認證）</option>
+                <option value="公益活動">❤️ 公益活動（賑災/捐贈/社區）</option>
+                <option value="會員大會">👥 會員大會（年度大會/選舉）</option>
+                <option value="活動通知">📣 活動通知（一般公告）</option>
               </select>
+              <div class="field-hint">分類決定在哪個區塊顯示：政策/會務公告→獨立區塊，其他→精選/近期消息</div>
             </div>
           </div>
           <div class="field">
@@ -282,44 +281,6 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- ── 會務公告 ── -->
-      <div class="tab-panel" id="tab-announce">
-        <div class="panel-title">📢 會務公告管理 <small>顯示於最新消息頁公告列表</small></div>
-        <div class="card">
-          <h3>➕ 新增公告（同最新消息，分類選「會務公告」）</h3>
-          <div class="field-row">
-            <div class="field">
-              <label>日期</label>
-              <input type="text" id="ann-date" placeholder="例：115.05.06">
-            </div>
-            <div class="field">
-              <label>分類</label>
-              <select id="ann-cat">
-                <option>會務公告</option>
-                <option>政策公告</option>
-                <option>教育訓練</option>
-                <option>訓練品質</option>
-                <option>公益活動</option>
-              </select>
-            </div>
-          </div>
-          <div class="field">
-            <label>公告標題</label>
-            <input type="text" id="ann-title" placeholder="請輸入公告標題">
-          </div>
-          <div class="field">
-            <label>說明</label>
-            <textarea id="ann-summary" placeholder="公告說明（選填）"></textarea>
-          </div>
-          <button class="btn btn-primary" onclick="addAnnounce()">✅ 新增公告</button>
-        </div>
-        <div class="card">
-          <h3>📋 現有消息（含公告）</h3>
-          <div class="item-list" id="ann-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
-        </div>
-      </div>
-
-      
       <!-- ── 訊息轉知 ── -->
       <div class="tab-panel" id="tab-notif">
         <div class="panel-title">📡 訊息轉知管理 <small>農糧署、衛生局等相關機關轉知事項</small></div>
@@ -1030,23 +991,44 @@ async function addNews() {
 
 function renderNewsList() {
   const el = document.getElementById('news-list');
-  const el2 = document.getElementById('ann-list');
   const list = staticData.news || [];
-  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無消息</div>'; el2.innerHTML = el.innerHTML; return; }
-  const html = list.map((item, i) => `
-    <div class="item-card">
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無消息。請使用上方表單新增。</div>'; return; }
+  const CAT_COLORS = {
+    '政策公告':'#1a3060','會務公告':'#183f21','教育訓練':'#1a5c4a',
+    '訓練品質':'#2e5cb8','公益活動':'#6b3a2e','會員大會':'#5c4a00','活動通知':'#526055'
+  };
+  // Group by category for display
+  const cats = {};
+  const catOrder = ['政策公告','會務公告','教育訓練','訓練品質','公益活動','會員大會','活動通知'];
+  list.forEach((item, i) => {
+    const cat = item.category || '活動通知';
+    if (!cats[cat]) cats[cat] = [];
+    cats[cat].push({item, i});
+  });
+  let html = '';
+  // Show all items sorted by date (newest first), with category color
+  const sorted = list.map((item,i) => ({item,i})).sort((a,b) =>
+    (b.item.rocDate||b.item.date||'').localeCompare(a.item.rocDate||a.item.date||'')
+  );
+  html += `<div style="margin-bottom:12px;font-size:.78rem;color:#666">共 ${list.length} 則，依日期排列（最新在前）</div>`;
+  html += sorted.map(({item, i}) => {
+    const color = CAT_COLORS[item.category] || '#526055';
+    return `<div class="item-card">
       <div class="item-card-body">
-        <div class="item-title"><span class="badge gold">${item.category||'公告'}</span>${item.title}</div>
-        <div class="item-meta">${item.rocDate || item.date} ${item.registerUrl?'🔗 有連結':''}</div>
+        <div class="item-title">
+          <span style="background:${color};color:#fff;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:800;margin-right:8px">${item.category||'公告'}</span>
+          ${item.isPinned ? '<span title="精選消息">⭐</span> ' : ''}${item.title}
+        </div>
+        <div class="item-meta">${item.rocDate||item.date||''} ${item.registerUrl?'🔗 有連結':''} ${item.coverImage?'🖼️ 有封面':''}</div>
         ${item.summary ? `<div class="item-desc">${item.summary}</div>` : ''}
       </div>
       <div class="item-card-actions">
         <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editNews(${i})">✏️ 編輯</button>
         <button class="btn btn-red btn-sm" onclick="deleteNews(${i})">刪除</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   el.innerHTML = html;
-  el2.innerHTML = html;
 }
 
 async function deleteNews(i) {
@@ -1056,14 +1038,7 @@ async function deleteNews(i) {
   catch(e) { showStatus('刪除失敗：' + e.message, true); }
 }
 
-async function addAnnounce() {
-  document.getElementById('news-date').value = document.getElementById('ann-date').value;
-  document.getElementById('news-cat').value  = document.getElementById('ann-cat').value;
-  document.getElementById('news-title').value = document.getElementById('ann-title').value;
-  document.getElementById('news-summary').value = document.getElementById('ann-summary').value;
-  await addNews();
-  ['ann-date','ann-title','ann-summary'].forEach(id => document.getElementById(id).value = '');
-}
+/* addAnnounce removed - use addNews with 會務公告 category */
 
 // ══ GALLERY ══
 let pendingGalleryPhotos = [];  // Array of {file, objectUrl}
