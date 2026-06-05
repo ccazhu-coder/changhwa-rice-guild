@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T07:15:26.294Z */
+/* generatedAt: 2026-06-05T07:32:14.618Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -705,7 +705,9 @@ window.GUILD_STATIC_DATA = {
         "role": "常務監事",
         "name": "沈秉逸",
         "company": "正益碾米工廠",
-        "address": "彰化縣花壇鄉金福街350號"
+        "address": "彰化縣花壇鄉金福街350號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/沈秉逸_1780644728081.png"
       },
       {
         "role": "監事",
