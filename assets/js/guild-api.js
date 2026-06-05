@@ -304,12 +304,12 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
   }
 
   var GROUPS=[
-    {label:'理事長、常務理事與理事',
+    {label:'理事長、常務理事與理事', rice:true,
      test:function(r){return r==='理事長'||r==='常務理事'||r==='理事';},
      custom:true},
     {label:'常務監事與監事',
      test:function(r){return r==='常務監事'||r==='監事';}},
-    {label:'候補理事與候補監事',
+    {label:'候補理事與候補監事', rice:true,
      test:function(r){return r.indexOf('候補')>=0;}},
     {label:'名譽理事長與顧問',
      test:function(r){return r==='名譽理事長'||r==='顧問';}}
@@ -322,7 +322,8 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
     var gridHtml=g.custom
       ? renderDirGroup(list)
       : '<div class="nc-grid">'+list.map(nameCard).join('')+'</div>';
-    html+='<div class="nc-group">'
+    var groupClass='nc-group'+(g.rice?' nc-group-rice':'');
+    html+='<div class="'+groupClass+'">'
       +'<div class="nc-group-header"><span class="nc-group-label">'+esc(g.label)+'</span></div>'
       +gridHtml
       +'</div>';
