@@ -143,7 +143,31 @@ function galleryCard(item){
   return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 }
       var allN=sortList(data.news||[]);var dmN=allN.filter(function(n){return n.category==='招生DM';});var otherN=allN.filter(function(n){return n.category!=='招生DM';});var news=dmN.concat(otherN).slice(0,3);
-  function renderNewsPage(){
+  function renderHome(){
+  var newsBox=qs('homeNewsList');
+  var galleryBox=qs('homeGalleryList');
+  if(!newsBox&&!galleryBox)return;
+  staticOrFetch('home').then(function(data){
+    if(newsBox){
+      var allN=sortList(data.news||[]);
+      var dmN=allN.filter(function(n){return n.category==='招生DM';});
+      var otherN=allN.filter(function(n){return n.category!=='招生DM';});
+      var news=dmN.concat(otherN).slice(0,3);
+      newsBox.innerHTML=news.length?news.map(homeNewsCard).join(''):
+        '<div style="color:#888;padding:20px">近期無最新消息</div>';
+    }
+    if(galleryBox){
+      var gallery=sortList(data.gallery||[]).slice(0,6);
+      galleryBox.innerHTML=gallery.length?gallery.map(galleryCard).join(''):
+        '<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現。</p></article>';
+    }
+  }).catch(function(){
+    if(newsBox){
+      newsBox.innerHTML='<div style="color:#888;padding:20px">消息載入失敗，請稍後再試</div>';
+    }
+  });
+}
+function renderNewsPage(){
   var featBox    = qs('featuredNewsList');
   var recentBox  = qs('recentNewsList');
   var annBox     = qs('announceList');
