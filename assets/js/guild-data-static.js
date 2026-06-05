@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:21:35.812Z */
+/* generatedAt: 2026-06-05T06:29:37.676Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -641,7 +641,9 @@ window.GUILD_STATIC_DATA = {
         "role": "常務理事",
         "name": "黃正達",
         "company": "田中建新碾米工廠",
-        "address": "彰化縣田中鎮民光路二段93號"
+        "address": "彰化縣田中鎮民光路二段93號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/黃正達_1780640972936.png"
       },
       {
         "role": "常務理事",
