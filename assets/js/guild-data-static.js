@@ -635,7 +635,7 @@ window.GUILD_STATIC_DATA = {
         "company": "大義碾米工廠",
         "address": "彰化縣秀水鄉下崙村田洋巷28號",
         "photo": "./圖庫/理監事/蘇建彰_1780552212978.jpg",
-        "photoPosition": "center center"
+        "photoPosition": "top center"
       },
       {
         "role": "常務理事",
