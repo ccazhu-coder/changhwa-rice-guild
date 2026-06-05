@@ -799,7 +799,7 @@ async function loadData() {
 async function saveData(msg) {
   const d = { ...staticData };
   delete d._sha;
-  const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString().slice(0,10)} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
+  const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString()} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
   // 正確的分塊 base64 編碼（chunk 必須是 3 的倍數，否則 padding 會導致無效 base64）
   const encBytes = new TextEncoder().encode(newContent);
   let b64 = '';
