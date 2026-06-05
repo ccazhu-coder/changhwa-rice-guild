@@ -871,7 +871,7 @@ document.querySelector('#editModal .modal-box').addEventListener('click', functi
 function editNews(i) {
   const item = staticData.news[i];
   editMode = { type: 'news', index: i };
-  const cats = ['教育訓練','會務公告','政策公告','公益活動','訓練品質','活動通知'];
+  const cats = ['政策公告','會務公告','教育訓練','訓練品質','公益活動','會員大會','活動通知','招生DM'];
   const opts = cats.map(c => `<option${item.category===c?' selected':''}>${c}</option>`).join('');
   openModal('✏️ 編輯消息', `
     <div class="field-row">
