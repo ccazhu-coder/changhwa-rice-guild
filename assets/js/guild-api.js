@@ -11,7 +11,7 @@
   function url(action,params){var q=new URLSearchParams(Object.assign({action:action},params||{}));return API_URL+'?'+q.toString()}
   function fetchApi(action,params){return Promise.reject(new Error('Google API removed'))}
   function staticOrFetch(action,params){var d={};var s=window.GUILD_STATIC_DATA||{};if(action==='home')d={news:s.news||[],gallery:s.gallery||[]};else if(action==='news')d={news:s.news||[]};else if(action==='gallery')d={gallery:s.gallery||[]};else if(action==='members')d={members:s.members||[]};else if(action==='board')d={board:s.board||{}};else if(action==='notifications')d={notifications:s.notifications||[]};else if(action==='policies')d={policies:s.policies||[]};return Promise.resolve(d)}
-  function sortList(list){return (list||[]).slice().sort(function(a,b){if(!!a.isPinned!==!!b.isPinned)return a.isPinned?-1:1;if((Number(a.sort)||999)!==(Number(b.sort)||999))return (Number(a.sort)||999)-(Number(b.sort)||999);return String(b.date||'').localeCompare(String(a.date||''))})}
+  function sortList(list){return (list||[]).slice().sort(function(a,b){if(!!a.isPinned!==!!b.isPinned)return a.isPinned?-1:1;if((Number(a.sort)||999)!==(Number(b.sort)||999))return (Number(a.sort)||999)-(Number(b.sort)||999);var _da=a.date||(a.rocDate?a.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');var _db=b.date||(b.rocDate?b.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');return String(_db).localeCompare(String(_da))})}
   function injectStyles(){if(document.getElementById('guild-api-photo-style'))return;
   var s=document.createElement('style');
   s.id='guild-api-photo-style';
@@ -206,7 +206,7 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
           '<div style="color:#888;padding:20px 0">近期無精選消息</div>';
       }
       if(recentBox){
-        var recent=nonAnn.filter(function(n){return !n.isPinned;}).sort(function(a,b){var da=a.date||a.rocDate||'';var db=b.date||b.rocDate||'';return db.localeCompare(da);}).slice(0,5);
+        var recent=nonAnn.filter(function(n){return !n.isPinned;}).sort(function(a,b){var da=a.date||(a.rocDate?a.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');var db=b.date||(b.rocDate?b.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');return db.localeCompare(da);}).slice(0,5);
         recentBox.innerHTML=recent.length?recent.map(recentNewsCard).join(''):
           '<div style="color:#888;padding:20px 0">近期無消息</div>';
       }
