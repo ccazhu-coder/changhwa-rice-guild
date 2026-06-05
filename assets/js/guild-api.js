@@ -10,7 +10,7 @@
   function esc(v){return clean(v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
   function url(action,params){var q=new URLSearchParams(Object.assign({action:action},params||{}));return API_URL+'?'+q.toString()}
   function fetchApi(action,params){return Promise.reject(new Error('Google API removed'))}
-  function staticOrFetch(action,params){var d={};var s=window.GUILD_STATIC_DATA||{};if(action==='home')d={news:s.news||[],gallery:s.gallery||[]};else if(action==='news')d={news:s.news||[]};else if(action==='gallery')d={gallery:s.gallery||[]};else if(action==='members')d={members:s.members||[]};else if(action==='board')d={board:s.board||{}};else if(action==='notifications')d={notifications:s.notifications||[]};return Promise.resolve(d)}
+  function staticOrFetch(action,params){var d={};var s=window.GUILD_STATIC_DATA||{};if(action==='home')d={news:s.news||[],gallery:s.gallery||[]};else if(action==='news')d={news:s.news||[]};else if(action==='gallery')d={gallery:s.gallery||[]};else if(action==='members')d={members:s.members||[]};else if(action==='board')d={board:s.board||{}};else if(action==='notifications')d={notifications:s.notifications||[]};else if(action==='policies')d={policies:s.policies||[]};else if(action==='documents')d={documents:s.documents||[]};return Promise.resolve(d)}
   function sortList(list){return (list||[]).slice().sort(function(a,b){if(!!a.isPinned!==!!b.isPinned)return a.isPinned?-1:1;if((Number(a.sort)||999)!==(Number(b.sort)||999))return (Number(a.sort)||999)-(Number(b.sort)||999);return String(b.date||'').localeCompare(String(a.date||''))})}
   function injectStyles(){if(document.getElementById('guild-api-photo-style'))return;
   var s=document.createElement('style');
