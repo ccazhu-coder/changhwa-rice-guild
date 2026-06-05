@@ -709,7 +709,9 @@ window.GUILD_STATIC_DATA = {
         "role": "名譽理事長",
         "name": "陳樹林",
         "company": "宏達裕碾米工廠",
-        "address": "彰化縣溪州鄉民生路一段136號"
+        "address": "彰化縣溪州鄉民生路一段136號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/陳樹林_1780638105793.png"
       },
       {
         "role": "顧問",
