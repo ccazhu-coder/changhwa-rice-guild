@@ -92,10 +92,14 @@
   return '';
 }
   function featuredNewsCard(item){
+  var isDM=item.category==='招生DM';
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
   var imgHtml=hasImg?'<div class="news-feat-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"><span class="news-tag">'+esc(item.category||'消息')+'</span></div>':'';
   var bodyExtras=hasImg?'':'<span class="news-tag" style="margin-bottom:10px;display:inline-block">'+esc(item.category||'消息')+'</span><br>';
-  var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:12px;padding:7px 18px;background:#b08a2e;color:#fff;border-radius:20px;font-size:.82rem;text-decoration:none">了解更多 →</a>':'';
+  var dmFileBtn=item.dmFileUrl?'<a href="'+esc(item.dmFileUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;margin-right:8px;padding:6px 14px;background:#526055;color:#fff;border-radius:20px;font-size:.78rem;text-decoration:none">📄 查看DM</a>':'';
+  var linkBg=isDM?'#c0392b':'#b08a2e';
+  var linkLabel=isDM?'✍️ 立即報名':'了解更多 →';
+  var link=(item.registerUrl&&item.registerUrl!==item.dmFileUrl)?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:6px 18px;background:'+linkBg+';color:#fff;border-radius:20px;font-size:.82rem;text-decoration:none;font-weight:800">'+linkLabel+'</a>':(item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-block;margin-top:8px;padding:6px 14px;background:#b08a2e;color:#fff;border-radius:20px;font-size:.78rem;text-decoration:none">了解更多 →</a>':'');
   return '<div class="news-feat-card">'+imgHtml+'<div class="news-feat-body">'+bodyExtras+'<div class="news-date">'+esc(item.rocDate||item.date)+'</div><h2>'+esc(item.title)+'</h2>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+dmFileBtn+link+'</div></div>';
 }
 function recentNewsCard(item){
