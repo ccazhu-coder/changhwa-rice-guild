@@ -1413,58 +1413,10 @@ function renderDMList() {
 }
 
 async function loadFilesList() {
-  // Load files/ directory
-  try {
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/files`, {
-      headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
-    });
-    if (!res.ok) { document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件</div>'; return; }
-    const files = await res.json();
-
-    // Also check files/dm
-    let dmFiles = [];
-    try {
-      const dmRes = await fetch(`https://api.github.com/repos/${REPO}/contents/files/dm`, {
-        headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
-      });
-      if (dmRes.ok) dmFiles = await dmRes.json();
-    } catch(e) {}
-
-    const allFiles = [...files.filter(f=>f.type==='file'), ...dmFiles.filter(f=>f.type==='file')];
-
-    if (!allFiles.length) { document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件</div>'; return; }
-
-    const BASE_SITE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
-    document.getElementById('files-list').innerHTML = allFiles.map(f => {
-      const siteUrl = BASE_SITE + f.path;
-      return `<div class="item-card" style="flex-wrap:wrap;gap:10px">
-        <div class="item-card-body" style="min-width:0">
-          <div class="item-title">${f.name}</div>
-          <div class="item-meta">${(f.size/1024).toFixed(0)} KB</div>
-          <div style="margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            <input readonly value="${siteUrl}" id="url-${f.sha?.substring(0,8)||f.name.replace(/[^a-z0-9]/gi,'')}"
-              style="font-size:.72rem;color:var(--muted);background:#f8f8f8;border:1px solid var(--border);border-radius:6px;padding:4px 8px;flex:1;min-width:200px;outline:none">
-            <button class="btn btn-sm" style="background:var(--gold);color:var(--green);flex-shrink:0"
-              onclick="navigator.clipboard.writeText('${siteUrl}').then(()=>{this.textContent='✅ 已複製';setTimeout(()=>this.textContent='📋 複製連結',2000)})">
-              📋 複製連結
-            </button>
-          </div>
-        </div>
-        <div class="item-card-actions" style="flex-shrink:0">
-          <a href="${f.download_url}" target="_blank" class="btn btn-outline btn-sm">預覽</a>
-        </div>
-      </div>`;
-    }).join('');
-
-    // DM list rendered from news items (renderDMList)
-  } catch(e) {
-    document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">載入失敗</div>';
-  }
+  // files-list managed by renderDocsList() from staticData.documents
+  // Only refresh DM list
+  renderDMList();
 }
-
-// ══ BOARD MEMBERS ══
-let _pendingBoardPhoto = null;
-
 function previewBoardPhoto(input, thumbId, nameId) {
   if (input.files[0]) {
     _pendingBoardPhoto = input.files[0];
