@@ -108,9 +108,8 @@
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(20,45,24,.07), inset 0 1px 0 rgba(255,255,255,.8);
   transition: box-shadow .22s, transform .22s;
-  /* Fixed height - cards always same size */
-  height: 200px;
-  max-height: 200px;
+  /* Fixed height for consistency */
+  min-height: 180px;
 }
 .nc-card:hover { box-shadow: 0 12px 36px rgba(20,45,24,.14); transform: translateY(-3px); }
 /* Photo area */
@@ -215,7 +214,7 @@
 }
 @media(max-width:680px){
   .nc-grid{grid-template-columns:1fr;}
-  .nc-card{height:180px;max-height:180px;}
+  .nc-card{min-height:160px;}
   .nc-name{font-size:clamp(28px,8vw,44px);}
   .nc-role{font-size:clamp(15px,3.5vw,20px);}
   .nc-role-long{font-size:clamp(13px,3vw,17px);}
