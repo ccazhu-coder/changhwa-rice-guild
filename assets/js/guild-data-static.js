@@ -4,8 +4,8 @@ window.GUILD_STATIC_DATA = {
   "news": [
     {
       "id": "NEWS-0001-HW",
-      "date": "2026-05-06",
-      "rocDate": "115.05.06",
+      "date": "115-04-01",
+      "rocDate": "115.04.01",
       "category": "會務公告",
       "title": "第29屆第8次理監事會議議決事項通知",
       "summary": "公會第29屆第8次理監事會議順利召開，通過重要會務決議，推動公會各項業務持續推進。",
@@ -16,8 +16,9 @@ window.GUILD_STATIC_DATA = {
       "isPinned": true,
       "sort": 0,
       "createdAt": "2026-05-06",
-      "updatedAt": "2026-05-06",
-      "note": ""
+      "updatedAt": "2026-06-05",
+      "note": "",
+      "coverImage": "圖庫/news-covers/cover_1780624786326.jpg"
     },
     {
       "id": "NEWS-POLICY-001",
