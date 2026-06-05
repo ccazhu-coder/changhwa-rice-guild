@@ -117,7 +117,11 @@
 /* Photo area */
 .nc-photo {
   width: 42%;
+  height: 168px;              /* Fixed: all photos same height */
+  min-height: 168px;
+  max-height: 168px;
   flex-shrink: 0;
+  align-self: flex-start;     /* Don't stretch with text */
   position: relative;
   background: #f0ece0;
   overflow: hidden;
