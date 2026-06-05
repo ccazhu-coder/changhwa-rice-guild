@@ -15,7 +15,7 @@
   function injectStyles(){if(document.getElementById('guild-api-photo-style'))return;
   var s=document.createElement('style');
   s.id='guild-api-photo-style';
-  s.textContent='.activity-card{background:#fff;border:1px solid #e6ddc9;border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(20,45,24,.07)}.activity-cover{aspect-ratio:16/9;background:#f7f1e3;margin:0;overflow:hidden;cursor:zoom-in}.activity-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-cover:hover img{transform:scale(1.05)}.activity-card-body{padding:22px}.activity-card-body h3{color:#183f21}.activity-card-body p{color:#666;line-height:1.8}.activity-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}.activity-photo-strip figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;border:1px solid #e6ddc9;background:#f7f1e3;cursor:zoom-in}.activity-photo-strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-photo-strip figure:hover img{transform:scale(1.07)}.activity-photo-strip figcaption{background:#fff;padding:7px 9px;color:#526055;font-size:13px}.activity-photo-note{margin:0 22px 22px;color:#666;font-size:14px}#guild-lightbox{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:99999;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}#guild-lightbox.open{display:flex}#guild-lb-wrap{text-align:center;max-width:92vw}#guild-lb-img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:8px;display:block;margin:0 auto;box-shadow:0 8px 60px rgba(0,0,0,.7)}#guild-lb-caption{color:#d4c9b0;font-size:15px;margin-top:12px}#guild-lb-counter{color:#888;font-size:13px;margin-top:4px}.guild-lb-close{position:fixed;top:16px;right:20px;color:#fff;font-size:24px;cursor:pointer;background:rgba(255,255,255,.14);border:none;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:100000}.guild-lb-close:hover{background:rgba(255,255,255,.3)}.guild-lb-nav{position:fixed;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:background .2s;user-select:none;z-index:100000}.guild-lb-nav:hover{background:rgba(255,255,255,.25)}#guild-lb-prev{left:14px}#guild-lb-next{right:14px}@media(max-width:900px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-nav{width:42px;height:42px;font-size:30px}}@media(max-width:560px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-close{top:8px;right:10px}}}}.notif-item{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid #e6ddc9;border-radius:14px;padding:16px 20px;margin-bottom:12px;transition:box-shadow .18s}.notif-item:hover{box-shadow:0 6px 20px rgba(20,45,24,.09)}.notif-agency{flex-shrink:0;color:#fff;font-size:.68rem;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;align-self:flex-start;margin-top:2px}.notif-body{flex:1;min-width:0}.notif-date{font-size:.72rem;color:#aaa;margin-bottom:4px}.notif-title{font-size:.95rem;font-weight:700;color:#183f21;line-height:1.4}.notif-summary{font-size:.82rem;color:#666;margin-top:4px;line-height:1.6}.notif-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0;min-width:90px}.notif-btn{display:inline-flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:700;text-decoration:none;white-space:nowrap}.notif-btn-link{background:#e8f5e9;color:#183f21;border:1px solid rgba(20,45,24,.2)}.notif-btn-link:hover{background:#183f21;color:#fff}.notif-btn-dl{background:#f7f1e3;color:#7d5c0a;border:1px solid rgba(198,164,55,.4)}.notif-btn-dl:hover{background:#c6a437;color:#fff}@media(max-width:680px){.notif-item{flex-wrap:wrap}.notif-actions{flex-direction:row;min-width:0}}.policy-group{margin-bottom:36px}.policy-cat-title{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:2px solid rgba(198,164,55,.3)}.policy-cat-icon{font-size:1.4rem}.policy-cat-title h3{font-size:1.05rem;font-weight:800;color:#183f21;margin:0}.policy-list{list-style:none;padding:0;margin:0;display:grid;gap:10px}.policy-item{display:flex;align-items:flex-start;gap:10px;padding:10px 16px;background:#fff;border:1px solid #e6ddc9;border-radius:10px;transition:box-shadow .18s,background .18s}.policy-item:hover{background:#fffdf7;box-shadow:0 4px 14px rgba(20,45,24,.08)}.policy-dot{color:rgba(198,164,55,.8);font-size:.6rem;margin-top:5px;flex-shrink:0}.policy-link{color:#183f21;font-weight:600;font-size:.9rem;text-decoration:none;line-height:1.5;flex:1}.policy-link:hover{color:#c6a437;text-decoration:underline}.policy-ext{font-size:.72rem;color:#aaa;margin-left:4px}.policy-name{color:#526055;font-size:.9rem;line-height:1.5}';
+  s.textContent='.activity-card{background:#fff;border:1px solid #e6ddc9;border-radius:22px;overflow:hidden;box-shadow:0 14px 36px rgba(20,45,24,.07)}.activity-cover{aspect-ratio:16/9;background:#f7f1e3;margin:0;overflow:hidden;cursor:zoom-in}.activity-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-cover:hover img{transform:scale(1.05)}.activity-card-body{padding:22px}.activity-card-body h3{color:#183f21}.activity-card-body p{color:#666;line-height:1.8}.activity-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 22px 22px}.activity-photo-strip figure{margin:0;border-radius:14px;overflow:hidden;aspect-ratio:4/3;border:1px solid #e6ddc9;background:#f7f1e3;cursor:zoom-in}.activity-photo-strip img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s}.activity-photo-strip figure:hover img{transform:scale(1.07)}.activity-photo-strip figcaption{background:#fff;padding:7px 9px;color:#526055;font-size:13px}.activity-photo-note{margin:0 22px 22px;color:#666;font-size:14px}#guild-lightbox{position:fixed;inset:0;background:rgba(10,10,10,.92);z-index:99999;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px}#guild-lightbox.open{display:flex}#guild-lb-wrap{text-align:center;max-width:92vw}#guild-lb-img{max-width:92vw;max-height:80vh;object-fit:contain;border-radius:8px;display:block;margin:0 auto;box-shadow:0 8px 60px rgba(0,0,0,.7)}#guild-lb-caption{color:#d4c9b0;font-size:15px;margin-top:12px}#guild-lb-counter{color:#888;font-size:13px;margin-top:4px}.guild-lb-close{position:fixed;top:16px;right:20px;color:#fff;font-size:24px;cursor:pointer;background:rgba(255,255,255,.14);border:none;border-radius:50%;width:42px;height:42px;display:flex;align-items:center;justify-content:center;transition:background .2s;z-index:100000}.guild-lb-close:hover{background:rgba(255,255,255,.3)}.guild-lb-nav{position:fixed;top:50%;transform:translateY(-50%);color:#fff;font-size:40px;cursor:pointer;background:rgba(255,255,255,.1);border:none;border-radius:50%;width:52px;height:52px;display:flex;align-items:center;justify-content:center;transition:background .2s;user-select:none;z-index:100000}.guild-lb-nav:hover{background:rgba(255,255,255,.25)}#guild-lb-prev{left:14px}#guild-lb-next{right:14px}@media(max-width:900px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-nav{width:42px;height:42px;font-size:30px}}@media(max-width:560px){.activity-photo-strip{grid-template-columns:repeat(2,1fr)}.guild-lb-close{top:8px;right:10px}}}}.notif-item{display:flex;align-items:flex-start;gap:14px;background:#fff;border:1px solid #e6ddc9;border-radius:14px;padding:16px 20px;margin-bottom:12px;transition:box-shadow .18s}.notif-item:hover{box-shadow:0 6px 20px rgba(20,45,24,.09)}.notif-agency{flex-shrink:0;color:#fff;font-size:.68rem;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;align-self:flex-start;margin-top:2px}.notif-body{flex:1;min-width:0}.notif-date{font-size:.72rem;color:#aaa;margin-bottom:4px}.notif-title{font-size:.95rem;font-weight:700;color:#183f21;line-height:1.4}.notif-summary{font-size:.82rem;color:#666;margin-top:4px;line-height:1.6}.notif-actions{display:flex;flex-direction:column;gap:8px;flex-shrink:0;min-width:90px}.notif-btn{display:inline-flex;align-items:center;justify-content:center;padding:6px 12px;border-radius:8px;font-size:.75rem;font-weight:700;text-decoration:none;white-space:nowrap}.notif-btn-link{background:#e8f5e9;color:#183f21;border:1px solid rgba(20,45,24,.2)}.notif-btn-link:hover{background:#183f21;color:#fff}.notif-btn-dl{background:#f7f1e3;color:#7d5c0a;border:1px solid rgba(198,164,55,.4)}.notif-btn-dl:hover{background:#c6a437;color:#fff}@media(max-width:680px){.notif-item{flex-wrap:wrap}.notif-actions{flex-direction:row;min-width:0}}.policy-cat-title h3{font-size:1.05rem;font-weight:800;color:#183f21;margin:0}.policy-item:hover{background:#fffdf7;box-shadow:0 4px 14px rgba(20,45,24,.08)}.policy-link:hover{color:#c6a437;text-decoration:underline}';
   document.head.appendChild(s);
   var lb=document.createElement('div');
   lb.id='guild-lightbox';
@@ -396,37 +396,69 @@ function renderPoliciesPage(){
   staticOrFetch('policies').then(function(data){
     var list=data.policies||[];
     if(!list.length){box.innerHTML='<p style="color:#888;padding:20px">目前無政策法規資料</p>';return;}
+
+    // Category config: name, icon, class suffix, color set
+    var CAT_CONFIG={
+      '糧食產業類':    {icon:'🌾', cls:'grain',   badge:'#8a6800', bg:'#fffbee', border:'#c6a437', light:'#fff8e5'},
+      '糧食儲運類':    {icon:'📦', cls:'storage', badge:'#1a5c4a', bg:'#f0faf7', border:'#2d9b78', light:'#e8f5f0'},
+      '食品安全衛生管理法規':{icon:'🛡️', cls:'safety',  badge:'#7b1a1a', bg:'#fdf4f4', border:'#c0392b', light:'#fdf0f0'},
+      '人民團體法規':  {icon:'📋', cls:'civic',   badge:'#1a3060', bg:'#f0f3fa', border:'#2e5cb8', light:'#edf0f8'},
+    };
+    var DEFAULT_CFG={icon:'📄', cls:'other', badge:'#183f21', bg:'#f7f9f7', border:'#183f21', light:'#eef6ef'};
+
     // Group by category
     var cats={};
-    var catOrder=[];
+    var catOrder=['糧食產業類','糧食儲運類','食品安全衛生管理法規','人民團體法規'];
     list.forEach(function(p){
       var cat=p.category||'其他';
-      if(!cats[cat]){cats[cat]=[];catOrder.push(cat);}
+      if(!cats[cat]){cats[cat]=[];}
+      if(catOrder.indexOf(cat)<0) catOrder.push(cat);
       cats[cat].push(p);
     });
-    var CAT_ICONS={'糧食產業類':'🌾','糧食儲運類':'📦','食品安全衛生管理法規':'🍽️','人民團體法規':'📋'};
+
     var html='';
     catOrder.forEach(function(cat){
       var items=cats[cat];
-      var icon=CAT_ICONS[cat]||'📄';
-      html+='<div class="policy-group">'
-        +'<div class="policy-cat-title"><span class="policy-cat-icon">'+icon+'</span><h3>'+esc(cat)+'</h3></div>'
-        +'<ul class="policy-list">';
+      if(!items||!items.length) return;
+      var cfg=CAT_CONFIG[cat]||DEFAULT_CFG;
+      html+='<div class="pol-group pol-'+esc(cfg.cls)+'" style="'
+        +'background:'+cfg.bg+';'
+        +'border:1px solid '+cfg.border+'33;'
+        +'border-left:4px solid '+cfg.border+';'
+        +'border-radius:16px;padding:24px 28px;margin-bottom:28px">'
+        +'<div class="pol-cat-header" style="display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:14px;border-bottom:1.5px solid '+cfg.border+'44">'
+        +'<span style="font-size:1.4rem">'+cfg.icon+'</span>'
+        +'<h3 style="font-size:1.05rem;font-weight:900;color:'+cfg.badge+';margin:0">'+esc(cat)+'</h3>'
+        +'<span style="margin-left:auto;font-size:.72rem;color:'+cfg.border+';font-weight:700;background:'+cfg.border+'18;padding:3px 10px;border-radius:20px">'+items.length+' 條法規</span>'
+        +'</div>'
+        +'<div class="pol-list" style="display:grid;gap:10px">';
       items.sort(function(a,b){return (a.sort||0)-(b.sort||0);}).forEach(function(p){
-        html+='<li class="policy-item">'
-          +'<span class="policy-dot">◆</span>'
-          +(p.url
-            ?'<a href="'+esc(p.url)+'" target="_blank" rel="noopener noreferrer" class="policy-link">'+esc(p.name)+'<span class="policy-ext">↗</span></a>'
-            :'<span class="policy-name">'+esc(p.name)+'</span>')
-          +'</li>';
+        html+='<div class="pol-item" style="'
+          +'display:flex;align-items:center;gap:12px;'
+          +'background:#fff;border:1px solid '+cfg.border+'28;border-radius:10px;'
+          +'padding:13px 18px;transition:all .2s;cursor:pointer"'
+          +' onmouseover="this.style.background=\''+cfg.light+'\';this.style.borderColor=\''+cfg.border+'\'"'
+          +' onmouseout="this.style.background=\'#fff\';this.style.borderColor=\''+cfg.border+'28\'">';
+        html+='<span style="width:8px;height:8px;border-radius:50%;background:'+cfg.border+';flex-shrink:0;display:inline-block"></span>';
+        if(p.url){
+          html+='<a href="'+esc(p.url)+'" target="_blank" rel="noopener" '
+            +'style="color:#183f21;font-weight:600;font-size:.9rem;text-decoration:none;flex:1;line-height:1.5">'
+            +esc(p.name)
+            +'<span style="font-size:.72rem;color:'+cfg.border+';margin-left:6px;opacity:.8">↗ 查看條文</span>'
+            +'</a>';
+        } else {
+          html+='<span style="color:#526055;font-size:.9rem;flex:1">'+esc(p.name)+'</span>';
+        }
+        html+='</div>';
       });
-      html+='</ul></div>';
+      html+='</div></div>';
     });
-    box.innerHTML=html;
+    box.innerHTML=html||'<p style="color:#888;text-align:center;padding:20px">目前無政策法規資料</p>';
     var sec=document.getElementById('policiesSection');
     if(sec)sec.style.display='';
   });
 }
+
 
   document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderDownloadsPage();if(window.GUILD_STATIC_DATA&&window.GUILD_STATIC_DATA.members&&window.location.pathname.indexOf('members')>=0){injectMembersJsonLd(window.GUILD_STATIC_DATA.members);}renderPoliciesPage();});
   window.GuildApi={renderHome:renderHome,renderNewsPage:renderNewsPage,renderTrainingPage:renderTrainingPage,fixTalentLinks:fixTalentLinks};
