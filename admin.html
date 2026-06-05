@@ -313,6 +313,59 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
+      
+      <!-- ── 訊息轉知 ── -->
+      <div class="tab-panel" id="tab-notif">
+        <div class="panel-title">📡 訊息轉知管理 <small>農糧署、衛生局等相關機關轉知事項</small></div>
+        <div class="card">
+          <h3>➕ 新增訊息轉知</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>日期（民國）</label>
+              <input type="text" id="notif-date" placeholder="例：115.06.05">
+            </div>
+            <div class="field">
+              <label>來源機關</label>
+              <input type="text" id="notif-agency" placeholder="例：農糧署、衛生局、產銷履歷">
+            </div>
+          </div>
+          <div class="field">
+            <label>轉知事項（標題）</label>
+            <input type="text" id="notif-title" placeholder="請輸入轉知事項標題">
+          </div>
+          <div class="field">
+            <label>說明（選填）</label>
+            <textarea id="notif-summary" placeholder="補充說明文字（選填）"></textarea>
+          </div>
+          <div class="field">
+            <label>外部連結（選填）</label>
+            <input type="url" id="notif-externalUrl" placeholder="https://...">
+            <div class="field-hint">政府機關公告頁面連結</div>
+          </div>
+          <div class="field">
+            <label>連結按鈕文字（選填）</label>
+            <input type="text" id="notif-fileLabel" placeholder="例：查看公告、下載文件">
+          </div>
+          <div class="field">
+            <label>附件上傳（選填，PDF / Word / 圖片）</label>
+            <div id="notif-file-preview" style="display:none;align-items:center;gap:12px;margin-bottom:8px;padding:10px;background:#f7f1e3;border-radius:10px;border:1px solid #e6ddc9">
+              <span id="notif-file-name" style="font-size:.82rem;color:#526055;flex:1"></span>
+              <button type="button" onclick="clearNotifFile()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:4px 8px;cursor:pointer;color:#666;font-size:.78rem">✕ 移除</button>
+            </div>
+            <input type="file" id="notif-file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display:none" onchange="previewNotifFile(this)">
+            <button type="button" onclick="document.getElementById('notif-file').click()" class="btn btn-outline" style="width:100%">📎 選擇附件檔案</button>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:4px">
+            <button class="btn btn-primary" onclick="addNotif()">✅ 新增訊息轉知</button>
+            <button class="btn btn-outline" onclick="loadData()">🔄 重新載入</button>
+          </div>
+        </div>
+        <div class="card">
+          <h3>📋 現有訊息轉知列表</h3>
+          <div class="item-list" id="notif-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
       <!-- ── 活動花絮 ── -->
       <div class="tab-panel" id="tab-gallery">
         <div class="panel-title">🖼️ 活動花絮管理 <small>上傳照片直接存入網站，快速載入不依賴 Drive</small></div>
@@ -716,6 +769,7 @@ async function loadData() {
 
   renderNewsList();
   renderGalleryList();
+  renderNotifList();
   loadFilesList();
 }
 
@@ -857,7 +911,26 @@ async function saveEdit() {
     item.updatedAt=new Date().toISOString().slice(0,10);
     try { await saveData('update: news - '+title); renderNewsList(); closeModal(); showStatus('✅ 消息已更新！'); }
     catch(e) { showModalError(e.message); }
+  } else if (editMode.type === 'notif') {
+    const item = staticData.notifications[editMode.index];
+    item.rocDate = date; item.date = date.replace(/\./g,'-');
+    item.agency  = (document.getElementById('e-agency')?.value||'').trim();
+    item.title   = title; item.summary = summary;
+    item.externalUrl = (document.getElementById('e-url')?.value||'').trim();
+    item.fileLabel   = (document.getElementById('e-fileLabel')?.value||'').trim();
+    const _eNF = document.getElementById('e-notifFile');
+    if (_eNF && _eNF.files[0]) {
+      const _nf = _eNF.files[0];
+      const _ext3 = _nf.name.split('.').pop().toLowerCase();
+      const _rp3 = `files/notifications/${Date.now()}_${_nf.name.replace(/\s+/g,'_')}`;
+      await githubUploadFile(_nf, _rp3, `update: notification file - ${title}`);
+      item.fileUrl = _rp3;
+    }
+    item.updatedAt = new Date().toISOString().slice(0,10);
+    try { await saveData('update: notification - '+title); renderNotifList(); closeModal(); showStatus('訊息轉知已更新！'); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type === 'gallery') {
+
     const item = staticData.gallery[editMode.index];
     item.rocDate=date; item.date=date.replace(/\./g,'-');
     item.category=cat; item.title=title; item.summary=summary;
@@ -1916,6 +1989,112 @@ function clearEditCover() {
   if (input)   input.value = '';
   if (preview) preview.style.display = 'none';
 }
+
+
+// ══ 訊息轉知 CRUD ══
+window._pendingNotifFile = null;
+
+function previewNotifFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  window._pendingNotifFile = file;
+  const preview = document.getElementById('notif-file-preview');
+  const name    = document.getElementById('notif-file-name');
+  if (name)    name.textContent = file.name + ' (' + Math.round(file.size/1024) + ' KB)';
+  if (preview) preview.style.display = 'flex';
+}
+function clearNotifFile() {
+  window._pendingNotifFile = null;
+  const input   = document.getElementById('notif-file');
+  const preview = document.getElementById('notif-file-preview');
+  if (input)   input.value = '';
+  if (preview) preview.style.display = 'none';
+}
+
+async function addNotif() {
+  const date       = document.getElementById('notif-date').value.trim();
+  const agency     = document.getElementById('notif-agency').value.trim();
+  const title      = document.getElementById('notif-title').value.trim();
+  const summary    = document.getElementById('notif-summary').value.trim();
+  const extUrl     = document.getElementById('notif-externalUrl').value.trim();
+  const fileLabel  = document.getElementById('notif-fileLabel').value.trim() || '附件下載';
+  if (!date || !agency || !title) { showStatus('日期、機關與標題為必填', true); return; }
+
+  let fileUrl = '';
+  if (window._pendingNotifFile) {
+    try {
+      showStatus('附件上傳中...');
+      const ext = window._pendingNotifFile.name.split('.').pop().toLowerCase();
+      const safeName = `${Date.now()}_${window._pendingNotifFile.name.replace(/\s+/g,'_')}`;
+      const repoPath = `files/notifications/${safeName}`;
+      await githubUploadFile(window._pendingNotifFile, repoPath, `add: notification file - ${title}`);
+      fileUrl = repoPath;
+      window._pendingNotifFile = null;
+      clearNotifFile();
+    } catch(e) { showStatus('附件上傳失敗：' + e.message, true); return; }
+  }
+
+  const item = {
+    id: nextId('NOTIF', staticData.notifications),
+    date: date.replace(/\./g, '-'), rocDate: date,
+    agency, title, summary,
+    externalUrl: extUrl, fileUrl, fileLabel,
+    sort: (staticData.notifications.length + 1),
+    createdAt: new Date().toISOString().slice(0,10)
+  };
+  staticData.notifications = [item, ...(staticData.notifications || [])];
+  try {
+    await saveData('content: add notification - ' + title);
+    renderNotifList();
+    ['notif-date','notif-agency','notif-title','notif-summary','notif-externalUrl','notif-fileLabel'].forEach(id => document.getElementById(id).value = '');
+    showStatus('✅ 訊息轉知已新增！');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+
+function renderNotifList() {
+  const el = document.getElementById('notif-list');
+  if (!el) return;
+  const list = staticData.notifications || [];
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無訊息轉知</div>'; return; }
+  el.innerHTML = list.map((item, i) => `
+    <div class="item-card">
+      <div class="item-card-body">
+        <div class="item-title"><span class="badge gold">${item.agency||'公告'}</span>${item.title}</div>
+        <div class="item-meta">${item.rocDate||item.date||''} ${item.externalUrl?'🔗 有連結':''} ${item.fileUrl?'📄 有附件':''}</div>
+        ${item.summary?`<div class="item-desc">${item.summary}</div>`:''}
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editNotif(${i})">✏️ 編輯</button>
+        <button class="btn btn-red btn-sm" onclick="deleteNotif(${i})">刪除</button>
+      </div>
+    </div>`).join('');
+}
+
+async function deleteNotif(i) {
+  if (!confirm('確定刪除此訊息轉知？')) return;
+  staticData.notifications.splice(i, 1);
+  try { await saveData('delete: notification item'); renderNotifList(); showStatus('已刪除'); }
+  catch(e) { showStatus('刪除失敗：' + e.message, true); }
+}
+
+function editNotif(i) {
+  const item = staticData.notifications[i];
+  editMode = { type: 'notif', index: i };
+  openModal('✏️ 編輯訊息轉知', `
+    <div class="field-row">
+      <div class="field"><label>日期（民國）</label><input id="e-date" value="${item.rocDate||item.date||''}"></div>
+      <div class="field"><label>來源機關</label><input id="e-agency" value="${esc2(item.agency||'')}"></div>
+    </div>
+    <div class="field"><label>轉知事項（標題）</label><input id="e-title" value="${esc2(item.title||'')}"></div>
+    <div class="field"><label>說明</label><textarea id="e-summary">${item.summary||''}</textarea></div>
+    <div class="field"><label>外部連結</label><input id="e-url" value="${item.externalUrl||''}" placeholder="https://..."></div>
+    <div class="field"><label>連結按鈕文字</label><input id="e-fileLabel" value="${item.fileLabel||''}"></div>
+    <div class="field"><label>現有附件</label><div style="font-size:.8rem;color:#666">${item.fileUrl||'（無附件）'}</div></div>
+    <div class="field"><label>更換附件（選填）</label><input type="file" id="e-notifFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></div>
+  `);
+}
+
+function esc2(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
 
 // Enter key support
 document.addEventListener('keydown', e => {
