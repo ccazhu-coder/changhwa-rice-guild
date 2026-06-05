@@ -1004,8 +1004,8 @@ async function addNews() {
     try {
       showStatus('封面圖片上傳中...');
       const _ext = window._pendingNewsCoverFile.name.split('.').pop().toLowerCase() || 'jpg';
-      const _repoPath = ;
-      await githubUploadFile(window._pendingNewsCoverFile, _repoPath, );
+      const _repoPath = '圖庫/news-covers/cover_' + Date.now() + '.' + _ext;
+      await githubUploadFile(window._pendingNewsCoverFile, _repoPath, 'add: news cover - ' + title);
       coverImage = _repoPath;
       window._pendingNewsCoverFile = null;
     } catch(e) { showStatus('封面圖片上傳失敗：' + e.message, true); return; }
