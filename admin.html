@@ -1191,9 +1191,7 @@ function renderGalleryList() {
     // Cover: local repo path or Drive
     const cover = item.coverImage || '';
     const isLocal = cover && !cover.startsWith('http');
-    const coverSrc = isLocal
-      ? `https://ccazhu-coder.github.io/changhwa-rice-guild/${cover}`
-      : (cover.includes('drive.google') ? `https://drive.google.com/thumbnail?id=${(cover.match(/\/d\/([^/?#]+)/)||[])[1]}&sz=w200` : cover);
+    const coverSrc = `https://ccazhu-coder.github.io/changhwa-rice-guild/${cover.replace('./','')}`;
     const photoCount = (item.photos||[]).length;
     return `<div class="item-card">
       ${cover ? `<img src="${coverSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">` : ''}
