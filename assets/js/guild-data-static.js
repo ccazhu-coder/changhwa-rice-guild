@@ -4300,7 +4300,21 @@ window.GUILD_STATIC_DATA = {
       "rocDate": "115.06.04"
     }
   ],
-  "notifications": [],
+  "notifications": [
+    {
+      "id": "NOTIF-0001",
+      "date": "115-6-4",
+      "rocDate": "115.6.4",
+      "agency": "農糧署",
+      "title": "米糧俱樂部展售活動廠商遴選辦法",
+      "summary": "農糧署115年7月至12月【米糧俱樂部展售活動廠商遴選辦法】，報名至6/12截止",
+      "externalUrl": "https://share.google/5ZitlOSuJ7A2fg3Bp",
+      "fileUrl": "",
+      "fileLabel": "附件下載",
+      "sort": 1,
+      "createdAt": "2026-06-05"
+    }
+  ],
   "policies": [
     {
       "id": "POL-001",
