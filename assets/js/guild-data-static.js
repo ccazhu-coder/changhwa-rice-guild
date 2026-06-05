@@ -1,4 +1,4 @@
-/* 靜態快取資料 */
+/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
 /* generatedAt: 2026-06-05 */
 window.GUILD_STATIC_DATA = {
   "news": [
@@ -84,8 +84,9 @@ window.GUILD_STATIC_DATA = {
       "isPinned": false,
       "sort": 3,
       "createdAt": "2026-06-02",
-      "updatedAt": "2026-06-04",
-      "note": ""
+      "updatedAt": "2026-06-05",
+      "note": "",
+      "coverImage": "圖庫/news-covers/cover_1780624669493.jpg"
     }
   ],
   "gallery": [
