@@ -277,8 +277,11 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
     var photoSrc=hasPhoto?(BASE+m.photo.replace('./','')):' ';
     var surname=esc((m.name||'人').slice(0,1));
     var isLongRole=(m.role||'').length>4;
+    var objPos=m.photoPosition||'center 20%';
     var photoHtml=hasPhoto
-      ?('<img src="'+esc(photoSrc)+'" alt="'+esc(m.name)+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+      ?('<img src="'+esc(photoSrc)+'" alt="'+esc(m.name)+'" loading="lazy"'
+        +' style="object-position:'+esc(objPos)+'"'
+        +' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
        +'<div class="nc-initial" style="display:none">'+surname+'</div>')
       :'<div class="nc-initial">'+surname+'</div>';
     return '<article class="nc-card">'
