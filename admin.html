@@ -795,6 +795,7 @@ async function loadData() {
   renderNotifList();
   renderPolicyList();
   renderDMList();
+  renderDocsList();
   loadFilesList();
 }
 
@@ -935,6 +936,14 @@ async function saveEdit() {
     item.isPinned=!!(document.getElementById('e-isPinned')?.checked);
     item.updatedAt=new Date().toISOString().slice(0,10);
     try { await saveData('update: news - '+title); renderNewsList(); closeModal(); showStatus('✅ 消息已更新！'); }
+    catch(e) { showModalError(e.message); }
+    } else if (editMode.type === 'doc') {
+    const doc = staticData.documents[editMode.index];
+    doc.title = (document.getElementById('e-title')?.value||'').trim() || doc.title;
+    doc.category = document.getElementById('e-doc-cat')?.value || doc.category;
+    doc.published = !!(document.getElementById('e-doc-published')?.checked);
+    doc.updatedAt = new Date().toISOString().slice(0,10);
+    try { await saveData('update: doc - '+doc.title); renderDocsList(); closeModal(); showStatus('文件已更新！'); }
     catch(e) { showModalError(e.message); }
   } else if (editMode.type === 'notif') {
     const item = staticData.notifications[editMode.index];
@@ -2223,6 +2232,81 @@ async function deletePolicy(i) {
   try { await saveData('delete: policy item'); renderPolicyList(); showStatus('已刪除'); }
   catch(e) { showStatus('刪除失敗：' + e.message, true); }
 }
+
+// ══ 文件下載清單 ══
+function renderDocsList() {
+  const el = document.getElementById('files-list');
+  if (!el) return;
+  const list = staticData.documents || [];
+  if (!list.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件。上傳後自動出現在此列表。</div>';
+    return;
+  }
+  const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  const CAT_COLORS = {'政策公告':'#c0392b','章程':'#183f21','申請書表':'#2980b9','公告文件':'#7f8c8d','教育訓練':'#1a5c4a','其他文件':'#526055'};
+  el.innerHTML = list.map((doc, i) => {
+    const isPublished = doc.published !== false;
+    const color = CAT_COLORS[doc.category] || '#526055';
+    const fileUrl = BASE + (doc.path||'').replace('./', '');
+    return `<div class="item-card" style="align-items:center">
+      <div class="item-card-body" style="flex:1;min-width:0">
+        <div class="item-title" style="display:flex;align-items:center;gap:8px">
+          <span style="background:${color};color:#fff;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:10px;white-space:nowrap">${doc.category||'未分類'}</span>
+          <span style="${isPublished?'':'color:#aaa;text-decoration:line-through'}">${doc.title||doc.fileName||'(無標題)'}</span>
+          ${isPublished ? '<span style="color:#27ae60;font-size:.7rem">● 顯示中</span>' : '<span style="color:#aaa;font-size:.7rem">○ 已隱藏</span>'}
+        </div>
+        <div class="item-meta">${doc.rocDate||doc.uploadedAt||''} <a href="${fileUrl}" target="_blank" style="color:var(--blue);font-size:.75rem">📎 查看檔案</a></div>
+      </div>
+      <div class="item-card-actions" style="flex-shrink:0;gap:6px">
+        <button class="btn btn-sm" style="background:${isPublished?'#e67e22':'#27ae60'};color:#fff"
+          onclick="toggleDocPublish(${i})">${isPublished ? '隱藏' : '顯示'}</button>
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff"
+          onclick="editDoc(${i})">✏️ 編輯</button>
+        <button class="btn btn-red btn-sm" onclick="deleteDoc(${i})">刪除</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function toggleDocPublish(i) {
+  const doc = staticData.documents[i];
+  if (!doc) return;
+  doc.published = doc.published === false ? true : false;
+  doc.updatedAt = new Date().toISOString().slice(0,10);
+  try {
+    await saveData('update: doc publish - ' + doc.title);
+    renderDocsList();
+    showStatus(doc.published ? '✅ 已設為顯示' : '文件已隱藏');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+
+function editDoc(i) {
+  const doc = staticData.documents[i];
+  if (!doc) return;
+  editMode = { type: 'doc', index: i };
+  const cats = ['申請書表','章程','政策公告','公告文件','教育訓練','其他文件'];
+  const opts = cats.map(c => `<option${doc.category===c?' selected':''}>${c}</option>`).join('');
+  openModal('✏️ 編輯文件設定', `
+    <div class="field"><label>文件名稱</label><input id="e-title" value="${(doc.title||'').replace(/"/g,'&quot;')}"></div>
+    <div class="field">
+      <label>分類（決定顯示在下載專區哪個類別）</label>
+      <select id="e-doc-cat">${opts}</select>
+    </div>
+    <div class="field" style="display:flex;align-items:center;gap:10px">
+      <input type="checkbox" id="e-doc-published" ${doc.published!==false?'checked':''} style="width:18px;height:18px">
+      <label for="e-doc-published" style="margin:0;cursor:pointer">在下載專區顯示此文件</label>
+    </div>
+    <div class="field-hint">隱藏後文件仍保留在後台，可隨時重新開啟顯示。</div>
+  `);
+}
+
+async function deleteDoc(i) {
+  if (!confirm('確定從清單中移除此文件？（檔案仍保留在伺服器，只是從前台移除）')) return;
+  staticData.documents.splice(i, 1);
+  try { await saveData('delete: doc item'); renderDocsList(); showStatus('已從清單移除'); }
+  catch(e) { showStatus('移除失敗：' + e.message, true); }
+}
+
 // Enter key support
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') doLogin();
