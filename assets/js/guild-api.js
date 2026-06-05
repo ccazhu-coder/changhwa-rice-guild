@@ -65,7 +65,7 @@
 }
   function extractDriveFolderId(url){url=clean(url);var m=url.match(/\/folders\/([^/?#]+)/);return m&&m[1]?m[1]:''}
   function extractDriveFileId(url){url=clean(url);var m=url.match(/\/file\/d\/([^/?#]+)/);if(m&&m[1])return m[1];m=url.match(/[?&]id=([^&]+)/);return m&&m[1]?m[1]:''}
-  function isUsableImageUrl(v){v=clean(v);if(!v)return false;if(/^https?:\/\//i.test(v)&&/\.(jpg|jpeg|png|webp|gif)(\?|#|$)/i.test(v))return true;if(/^(\.\/)?(圖庫|assets)\//.test(v))return true;return false}
+  function isUsableImageUrl(v){v=clean(v);if(!v)return false;if(/^https?:\/\//i.test(v)&&/\.(jpg|jpeg|png|webp|gif)(\?|#|$)/i.test(v))return true;if(/^(\.\/)?(圖庫|assets|files)\/./.test(v))return true;return false}
   function driveImageUrl(url){return clean(url)}
   function driveFolderEmbed(url){return ''}
   function isTrainingItem(item){var t=clean(item.title||item.activityTitle);return t.indexOf('115年度會員教育訓練')>-1||t.indexOf('農產品業稅務')>-1}
@@ -105,22 +105,41 @@
 function recentNewsCard(item){
   var isDM=item.category==='招生DM';
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
-  var imgHtml=hasImg
-    ?'<div class="news-list-img"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></div>'
-    :'<div class="news-list-img" style="background:linear-gradient(135deg,#e8f5e9,#f7f1e3);display:flex;align-items:center;justify-content:center;color:#5a7a5e;font-size:.72rem;font-weight:700;text-align:center;padding:8px">'+esc(item.category||'消息')+'</div>';
-  var linkLabel=isDM?'✍️ 立即報名':'詳細資訊 →';
-  var linkColor=isDM?'#c0392b':'#1a5c28';
-  var link=item.registerUrl
-    ?'<a href="'+esc(item.registerUrl)+'" target="_blank" style="font-size:.8rem;color:'+linkColor+';font-weight:800">'+linkLabel+'</a>'
-    :'';
-  var summaryHtml=item.summary?'<p style="font-size:.85rem;color:#666;line-height:1.6;margin-top:4px">'+esc(item.summary)+'</p>':'';
-  return '<div class="news-list-card">'+imgHtml
+  var imgSrc=hasImg?item.coverImage:'';
+  var dmLink=item.dmFileUrl||item.registerUrl||'';
+  var imgHtml;
+  if(hasImg){
+    var clickTarget=isDM&&dmLink?dmLink:imgSrc;
+    imgHtml='<a href="'+esc(clickTarget)+'" target="_blank" rel="noopener" '
+      +'style="display:block;cursor:zoom-in;position:relative;overflow:hidden" '
+      +'title="'+(isDM?'點擊查看完整 DM':'查看圖片')+'">'
+      +'<div class="news-list-img"><img src="'+esc(imgSrc)+'" alt="'+esc(item.title)+'" loading="lazy"></div>'
+      +(isDM?'<div style="position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.55);color:#fff;border-radius:8px;padding:3px 8px;font-size:.68rem">👆 點開查看</div>':'')
+      +'</a>';
+  } else {
+    imgHtml='<div class="news-list-img" style="background:linear-gradient(135deg,'+(isDM?'#7b1a1a,#c0392b':'#e8f5e9,#f7f1e3')+';display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-size:.7rem;font-weight:700;text-align:center;padding:8px">'
+      +(isDM?'<span style="font-size:1.5rem">📄</span><span>招生DM</span>':'<span style="color:#5a7a5e">'+esc(item.category||'消息')+'</span>')
+      +'</div>';
+  }
+  var registerBtn='';
+  if(item.registerUrl){
+    registerBtn='<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" '
+      +'style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:9px 20px;'
+      +'background:'+(isDM?'linear-gradient(135deg,#c0392b,#e74c3c)':'linear-gradient(135deg,#183f21,#24592f)')+';'
+      +'color:#fff;border-radius:25px;font-size:.88rem;font-weight:800;text-decoration:none;'
+      +'box-shadow:0 4px 12px rgba(0,0,0,.2);transition:transform .15s" '
+      +'onmouseover="this.style.transform=\'translateY(-2px)\'" '
+      +'onmouseout="this.style.transform=\'translateY(0)\'">'+(isDM?'👆 立即報名 →':'🔗 詳細資訊 →')+'</a>';
+  }
+  var summaryHtml=item.summary?'<p style="font-size:.84rem;color:#666;line-height:1.6;margin-top:4px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">'+esc(item.summary)+'</p>':'';
+  return '<div class="news-list-card">'
+    +imgHtml
     +'<div class="news-list-body">'
-    +'<div class="news-meta"><span class="news-badge">'+esc(item.category||'消息')+'</span>'
+    +'<div class="news-meta"><span class="news-badge"'+(isDM?' style="background:#c0392b;color:#fff"':'')+'>'+esc(item.category||'消息')+'</span>'
     +'<span style="font-size:.74rem;color:#8c8c8c">'+esc(item.rocDate||item.date)+'</span></div>'
     +'<h3>'+esc(item.title)+'</h3>'
     +summaryHtml
-    +link
+    +registerBtn
     +'</div></div>';
 }
 function galleryCard(item){
