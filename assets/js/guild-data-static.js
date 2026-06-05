@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:54:26.222Z */
+/* generatedAt: 2026-06-05T06:57:09.462Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -707,7 +707,9 @@ window.GUILD_STATIC_DATA = {
         "role": "監事",
         "name": "江俊雄",
         "company": "三豐碾米工廠",
-        "address": "彰化市中央里長安街159號"
+        "address": "彰化市中央里長安街159號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/江俊雄_1780642625233.png"
       },
       {
         "role": "監事",
