@@ -249,7 +249,7 @@ a{color:inherit;text-decoration:none}
     var list=document.getElementById('dynamicDocsList');
     if(!section||!list)return;
     // Accept all docs (remove strict fileName filter)
-    var validDocs=(docs||[]).filter(function(d){ return d&&(d.title||d.fileName); });
+    var validDocs=(docs||[]).filter(function(d){ return d&&(d.title||d.fileName)&&d.published!==false; });
     if(!validDocs.length){ section.style.display='none'; return; }
     // Group by category (preserving insertion order)
     var cats=[];
