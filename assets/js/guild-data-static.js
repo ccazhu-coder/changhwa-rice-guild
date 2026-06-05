@@ -1,4 +1,4 @@
-/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
+/* 靜態快取資料 */
 /* generatedAt: 2026-06-05 */
 window.GUILD_STATIC_DATA = {
   "news": [
@@ -4259,5 +4259,161 @@ window.GUILD_STATIC_DATA = {
       "rocDate": "115.06.04"
     }
   ],
-  "notifications": []
+  "notifications": [],
+  "policies": [
+    {
+      "id": "POL-001",
+      "category": "糧食產業類",
+      "name": "糧食標示辦法",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=248",
+      "sort": 1
+    },
+    {
+      "id": "POL-002",
+      "category": "糧食產業類",
+      "name": "糧食管理法",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=417",
+      "sort": 2
+    },
+    {
+      "id": "POL-003",
+      "category": "糧食產業類",
+      "name": "進口原料糯（碎）米加工外銷管理辦法",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=240",
+      "sort": 3
+    },
+    {
+      "id": "POL-004",
+      "category": "糧食產業類",
+      "name": "糧食管理法施行細則",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=237",
+      "sort": 4
+    },
+    {
+      "id": "POL-005",
+      "category": "糧食產業類",
+      "name": "糧商管理規則",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=234",
+      "sort": 5
+    },
+    {
+      "id": "POL-006",
+      "category": "糧食產業類",
+      "name": "糧商登記規費收費標準",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=228",
+      "sort": 6
+    },
+    {
+      "id": "POL-007",
+      "category": "糧食產業類",
+      "name": "市場銷售糧食抽查及檢驗辦法",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=227",
+      "sort": 7
+    },
+    {
+      "id": "POL-008",
+      "category": "糧食產業類",
+      "name": "經營糧食輸入或加工業務應記錄供應來源及流向資料之規模及其應記錄事項",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=226",
+      "sort": 8
+    },
+    {
+      "id": "POL-009",
+      "category": "糧食儲運類",
+      "name": "公糧稻穀驗收標準",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=260",
+      "sort": 1
+    },
+    {
+      "id": "POL-010",
+      "category": "糧食儲運類",
+      "name": "國內稻米安全存量標準",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=258",
+      "sort": 2
+    },
+    {
+      "id": "POL-011",
+      "category": "糧食儲運類",
+      "name": "公糧業者管理辦法",
+      "url": "https://www.afa.gov.tw/cht/index.php?code=list&ids=353&mod_code=view&a_id=256",
+      "sort": 3
+    },
+    {
+      "id": "POL-012",
+      "category": "食品安全衛生管理法規",
+      "name": "食品安全衛生管理法",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0040001",
+      "sort": 1
+    },
+    {
+      "id": "POL-013",
+      "category": "食品安全衛生管理法規",
+      "name": "食品安全衛生管理法施行細則",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0040003",
+      "sort": 2
+    },
+    {
+      "id": "POL-014",
+      "category": "食品安全衛生管理法規",
+      "name": "食品安全衛生管理法第四十四條第一項罰鍰裁罰標準",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0040134",
+      "sort": 3
+    },
+    {
+      "id": "POL-015",
+      "category": "食品安全衛生管理法規",
+      "name": "食品良好衛生規範準則",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0040122",
+      "sort": 4
+    },
+    {
+      "id": "POL-016",
+      "category": "食品安全衛生管理法規",
+      "name": "食品業者登錄辦法",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=L0040112",
+      "sort": 5
+    },
+    {
+      "id": "POL-017",
+      "category": "食品安全衛生管理法規",
+      "name": "食品製造工廠衛生管理人員設置辦法",
+      "url": "https://consumer.fda.gov.tw/Law/Detail.aspx?nodeID=518&lawid=42",
+      "sort": 6
+    },
+    {
+      "id": "POL-018",
+      "category": "人民團體法規",
+      "name": "人民團體選舉罷免辦法",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0050093",
+      "sort": 1
+    },
+    {
+      "id": "POL-019",
+      "category": "人民團體法規",
+      "name": "工商團體財務處理辦法",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050106",
+      "sort": 2
+    },
+    {
+      "id": "POL-020",
+      "category": "人民團體法規",
+      "name": "工商團體會務工作人員管理辦法",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0050107",
+      "sort": 3
+    },
+    {
+      "id": "POL-021",
+      "category": "人民團體法規",
+      "name": "商業團體法",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?PCode=D0050100",
+      "sort": 4
+    },
+    {
+      "id": "POL-022",
+      "category": "人民團體法規",
+      "name": "商業團體法施行細則",
+      "url": "https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=D0050101",
+      "sort": 5
+    }
+  ]
 };
