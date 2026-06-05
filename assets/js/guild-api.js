@@ -366,9 +366,9 @@ function renderPoliciesPage(){
     catOrder.forEach(function(cat){
       var cfg=CAT_CONFIG[cat]||DEFAULT;
       html+='<div class="pol-group pol-custom" style="background:'+cfg.bg+';border:1px solid '+cfg.border+'33;border-left:4px solid '+cfg.border+';border-radius:16px;padding:22px 26px;margin-bottom:26px">'
-        +'<div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:1.5px solid '+cfg.border+'44">'
-        +'<span style="font-size:1.3rem">'+cfg.icon+'</span>'
-        +'<h3 style="font-size:1.02rem;font-weight:900;color:'+cfg.color+';margin:0">'+esc(cat)+'</h3>'
+        +'<div style="display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:18px;padding-bottom:12px;border-bottom:1.5px solid '+cfg.border+'44">'
+        +'<span style="font-size:1.6rem">'+cfg.icon+'</span>'
+        +'<h3 style="font-size:1.3rem;font-weight:900;color:'+cfg.color+';margin:0;text-align:center">'+esc(cat)+'</h3>'
         +'<span style="margin-left:auto;font-size:.72rem;color:'+cfg.border+';font-weight:700;background:'+cfg.border+'18;padding:3px 10px;border-radius:20px">'+list.filter(function(p){return(p.category||'其他')===cat;}).length+' 條</span>'
         +'</div>'
         +'<div style="display:grid;gap:10px">';
