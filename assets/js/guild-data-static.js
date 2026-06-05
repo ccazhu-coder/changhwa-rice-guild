@@ -4292,6 +4292,15 @@ window.GUILD_STATIC_DATA = {
   ],
   "documents": [
     {
+      "id": "DOC-1780636202763",
+      "title": "彰化縣米穀公會贊助會員辦法",
+      "category": "章程",
+      "path": "./files/彰化縣米穀公會贊助會員辦法.pdf",
+      "fileName": "彰化縣米穀公會贊助會員辦法.pdf",
+      "uploadedAt": "2026-06-05",
+      "rocDate": "115.06.05"
+    },
+    {
       "id": "DOC-POLICY-115031",
       "title": "市售米標落實產地公文",
       "category": "政策公告",
