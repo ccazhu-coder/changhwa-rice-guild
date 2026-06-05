@@ -142,7 +142,7 @@ function galleryCard(item){
   var cover=hasCover?'<figure class="activity-cover" onclick="guildLb(\''+esc(item.id)+'\',0)"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></figure>':'';
   return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 }
-  function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGalleryList');if(!newsBox&&!galleryBox)return;staticOrFetch('home').then(function(data){if(newsBox){var news=sortList(data.news||[]).slice(0,3);newsBox.innerHTML=news.length?news.map(newsCard).join(''):'<article class="news-item"><span>公告</span><h3>目前尚無最新消息</h3></article>'}if(galleryBox){var gallery=sortList(data.gallery||[]).slice(0,6);galleryBox.innerHTML=gallery.length?gallery.map(galleryCard).join(''):'<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現成果與照片。</p></article>'}}).catch(function(){if(newsBox){newsBox.innerHTML='<article class="news-item"><time>115.05.06</time><span>會員大會</span><h3>第29屆第2次會員大會暨理監事聯席會議</h3></article><article class="news-item"><time>115.05.19</time><span>教育訓練</span><h3>115年度會員教育訓練：農產品業稅務實務與相關法規</h3></article>'}})}
+      var allN=sortList(data.news||[]);var dmN=allN.filter(function(n){return n.category==='招生DM';});var otherN=allN.filter(function(n){return n.category!=='招生DM';});var news=dmN.concat(otherN).slice(0,3);
   function renderNewsPage(){
   var featBox    = qs('featuredNewsList');
   var recentBox  = qs('recentNewsList');
