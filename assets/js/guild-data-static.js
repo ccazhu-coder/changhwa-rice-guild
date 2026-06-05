@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:16:31.175Z */
+/* generatedAt: 2026-06-05T06:16:38.736Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -635,7 +635,7 @@ window.GUILD_STATIC_DATA = {
         "company": "大義碾米工廠",
         "address": "彰化縣秀水鄉下崙村田洋巷28號",
         "photo": "./圖庫/理監事/蘇建彰_1780638126707.png",
-        "photoPosition": "center center"
+        "photoPosition": "center 20%"
       },
       {
         "role": "常務理事",
