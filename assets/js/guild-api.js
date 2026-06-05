@@ -272,26 +272,25 @@ function renderHome(){var newsBox=qs('homeNewsList');var galleryBox=qs('homeGall
 
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
 
-  function nameCard(m){
+function nameCard(m){
   var hasPhoto=m.photo&&isUsableImageUrl(m.photo);
   var BASE='https://ccazhu-coder.github.io/changhwa-rice-guild/';
   var surname=esc((m.name||'\u4eba').slice(0,1));
   var isLongRole=(m.role||'').length>4;
   var objPos=m.photoPosition||'center 40%';
-  var photoContent=hasPhoto
-    ?'<img src="'+esc(BASE+m.photo.replace("./",''))+'" alt="'+esc(m.name)+'"'
-     +' loading="lazy" class="nc-photo-img" style="object-position:'+esc(objPos)+'">' 
+  var photoImg=hasPhoto
+    ?('<img src="'+esc(BASE+m.photo.replace("./",''))+' " alt="'+esc(m.name)+'"'
+      +' loading="lazy" class="nc-photo-img" style="object-position:'+esc(objPos)+'">')
     :'';
   return '<article class="nc-card">'
     +'<div class="nc-photo">'
-    +photoContent
+    +photoImg
     +'<div class="nc-initial">'+surname+'</div>'
     +'</div>'
-    +'<div class="nc-info">'
     +'<div class="nc-role'+(isLongRole?' nc-role-long':'')+'">'+esc(m.role||'')+'</div>'
     +'<div class="nc-name">'+esc(m.name||'')+'</div>'
     +(m.company?'<div class="nc-company">'+esc(m.company)+'</div>':'')
-    +'</div></article>';
+    +'</article>';
 }
   function renderDirGroup(list){
     var chair    = list.filter(function(m){return m.role==='理事長';});
