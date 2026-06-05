@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T06:12:57.106Z */
+/* generatedAt: 2026-06-05T06:16:31.175Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -705,7 +705,9 @@ window.GUILD_STATIC_DATA = {
         "role": "監事",
         "name": "連吉隆",
         "company": "和成糧食行",
-        "address": "彰化縣鹿港鎮頂厝里鹿東路127號"
+        "address": "彰化縣鹿港鎮頂厝里鹿東路127號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/連吉隆_1780640187127.png"
       },
       {
         "role": "名譽理事長",
