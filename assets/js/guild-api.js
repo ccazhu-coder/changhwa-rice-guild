@@ -127,6 +127,7 @@ function galleryCard(item){
       var all=sortList(data.news||[]);
       var nonAnn=all.filter(function(n){return n.category!=='會務公告';});
       var ann=all.filter(function(n){return n.category==='會務公告';});
+      injectNewsJsonLd(all);
       if(featBox){
         var pinned=nonAnn.filter(function(n){return n.isPinned;}).slice(0,2);
         featBox.innerHTML=pinned.length?pinned.map(featuredNewsCard).join(''):
@@ -303,6 +304,66 @@ function renderDownloadsPage(){
     var sec=document.getElementById('notifDownloadSection');
     if(sec)sec.style.display=list.length?'':'none';
   });
+}
+
+  
+function injectNewsJsonLd(newsList){
+  if(!newsList||!newsList.length)return;
+  var existing=document.getElementById('dynamic-news-jsonld');
+  if(existing)existing.remove();
+  var s=document.createElement('script');
+  s.type='application/ld+json';
+  s.id='dynamic-news-jsonld';
+  var items=newsList.slice(0,10).map(function(n,i){
+    return {
+      '@type':'ListItem',
+      'position':i+1,
+      'url':'https://rice.net.tw/news.html',
+      'name':n.title||'',
+      'description':n.summary||''
+    };
+  });
+  var schema=[
+    {
+      '@context':'https://schema.org',
+      '@type':'ItemList',
+      'name':'彰化縣米穀商業同業公會最新消息',
+      'description':'彰化縣米穀商業同業公會最新公告、會務消息、教育訓練資訊',
+      'url':'https://rice.net.tw/news.html',
+      'numberOfItems':items.length,
+      'itemListElement':items
+    }
+  ];
+  s.textContent=JSON.stringify(schema);
+  document.head.appendChild(s);
+}
+function injectNotifJsonLd(notifList){
+  if(!notifList||!notifList.length)return;
+  var existing=document.getElementById('dynamic-notif-jsonld');
+  if(existing)existing.remove();
+  var s=document.createElement('script');
+  s.type='application/ld+json';
+  s.id='dynamic-notif-jsonld';
+  var items=notifList.map(function(n,i){
+    return {
+      '@type':'ListItem',
+      'position':i+1,
+      'url':n.externalUrl||('https://rice.net.tw/news.html'),
+      'name':(n.agency?'【'+n.agency+'】':'')+n.title,
+      'description':n.summary||''
+    };
+  });
+  var schema={
+    '@context':'https://schema.org',
+    '@type':'ItemList',
+    'name':'彰化縣米穀商業同業公會訊息轉知',
+    'description':'農糧署、衛生局等政府機關訊息轉知，含政策公告、法規說明、附件下載',
+    'url':'https://rice.net.tw/news.html',
+    'numberOfItems':items.length,
+    'itemListElement':items
+  };
+  s.textContent=JSON.stringify(schema);
+  document.head.appendChild(s);
 }
 
   document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderDownloadsPage()});
