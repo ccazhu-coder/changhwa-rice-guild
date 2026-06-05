@@ -1550,7 +1550,8 @@ function editBoardMember(i) {
           <div id="e-photo-name" style="font-size:.76rem;color:var(--muted);margin-top:4px">${m.photo?'已有照片（選擇新圖片即可替換）':'尚未上傳'}</div>
         </div>
       </div>
-    </div>`);
+    </div>
+    <div class='field'><label>📐 照片顯示位置</label><select id='e-photoPosition'><option value='center 20%' ${(!m.photoPosition||m.photoPosition==='center 20%')?'selected':''}>預設（偏上，適合大頭照）</option><option value='top center' ${m.photoPosition==='top center'?'selected':''}>頂部</option><option value='center center' ${m.photoPosition==='center center'?'selected':''}>居中</option><option value='center 10%' ${m.photoPosition==='center 10%'?'selected':''}>極上方</option><option value='center 30%' ${m.photoPosition==='center 30%'?'selected':''}>略下方</option><option value='bottom center' ${m.photoPosition==='bottom center'?'selected':''}>底部</option></select><div class='field-hint'>調整後儲存，前端照片裁切位置即時更新，所有卡片保持同一高度</div></div>`);
 }
 async function deleteBoardMember(i) {
   if (!confirm('確定刪除？')) return;
