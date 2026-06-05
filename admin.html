@@ -1884,6 +1884,7 @@ saveEdit = async function() {
     m.name    = (document.getElementById('e-title')?.value||'').trim();
     m.company = (document.getElementById('e-summary')?.value||'').trim();
     m.address = (document.getElementById('e-result')?.value||'').trim();
+    m.photoPosition = document.getElementById('e-photoPosition')?.value||'center 20%';
     // Upload new photo if selected
     if (_pendingBoardPhoto) {
       try { m.photo = await uploadBoardPhoto(m.name, _pendingBoardPhoto); _pendingBoardPhoto = null; }
