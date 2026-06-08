@@ -277,8 +277,8 @@ function renderNewsPage(){
   members.forEach(function(m){
     var r=m.role||'';
     if(r==='理事長')chairCnt++;
-    else if(r.indexOf('理事')>=0)dirCnt++;
-    else if(r.indexOf('監事')>=0)supCnt++;
+    else if(r==='常務理事'||r==='理事')dirCnt++;
+    else if(r==='常務監事'||r==='監事')supCnt++;
   });
   var sumCards=document.querySelectorAll('.sum-card b');
   if(sumCards.length>=3){sumCards[0].textContent=chairCnt;sumCards[1].textContent=dirCnt;sumCards[2].textContent=supCnt;}
