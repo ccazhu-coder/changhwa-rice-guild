@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-05T07:32:14.618Z */
+/* generatedAt: 2026-06-08T06:44:48.221Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -750,8 +750,9 @@ window.GUILD_STATIC_DATA = {
       {
         "role": "顧問",
         "name": "陳溪泉",
-        "company": "南豐碾米工廠",
-        "address": "彰化縣竹塘鄉中央路一段1501號"
+        "company": "億東企業股份有限公司",
+        "address": "彰化縣竹塘鄉中央路一段1501號",
+        "photoPosition": "center 20%"
       },
       {
         "role": "顧問",
