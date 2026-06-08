@@ -142,7 +142,6 @@ function galleryCard(item){
   var cover=hasCover?'<figure class="activity-cover" onclick="guildLb(\''+esc(item.id)+'\',0)"><img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy"></figure>':'';
   return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 }
-      var allN=sortList(data.news||[]);var dmN=allN.filter(function(n){return n.category==='招生DM';});var otherN=allN.filter(function(n){return n.category!=='招生DM';});var news=dmN.concat(otherN).slice(0,3);
   function homeNewsCard(item){
   var cat=item.category||'消息';
   var isDM=cat==='招生DM';
