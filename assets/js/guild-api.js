@@ -158,10 +158,19 @@ function galleryCard(item){
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
   var imgHtml=hasImg?'<img src="'+esc(item.coverImage)+'" alt="'+esc(item.title)+'" loading="lazy">':'';
   var dateStr=item.rocDate||item.date||'';
-  var linkLabel=isDM?'👆 立即報名 →':'查看詳情 →';
-  var linkHref=item.registerUrl?esc(item.registerUrl):'news.html';
-  var target=item.registerUrl?' target="_blank" rel="noopener"':'';
-  var linkHtml='<a href="'+linkHref+'"'+target+' class="news-link-l">'+linkLabel+'</a>';
+  var linkHtml;
+  if(isDM&&item.registerUrl){
+    linkHtml='<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener"'
+      +' style="display:block;margin-top:16px;padding:14px 20px;'
+      +'background:linear-gradient(135deg,#c0392b,#e74c3c);color:#fff;border-radius:10px;'
+      +'font-size:.98rem;font-weight:900;text-decoration:none;text-align:center;'
+      +'letter-spacing:.04em;box-shadow:0 5px 18px rgba(192,57,43,.38);">'
+      +'✏️ 立即報名 →</a>';
+  }else{
+    var linkHref=item.registerUrl?esc(item.registerUrl):'news.html';
+    var target=item.registerUrl?' target="_blank" rel="noopener"':'';
+    linkHtml='<a href="'+linkHref+'"'+target+' class="news-link-l">查看詳情 →</a>';
+  }
   return '<div class="news-card-l">'
     +'<div class="news-card-l-img" style="background:'+bg+'">'+imgHtml
     +'<span class="news-tag-l">'+esc(cat)+'</span>'
