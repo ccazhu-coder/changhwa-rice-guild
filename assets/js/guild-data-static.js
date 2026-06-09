@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T07:43:59.323Z */
+/* generatedAt: 2026-06-09T09:52:27.026Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
