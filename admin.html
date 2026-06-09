@@ -2032,7 +2032,7 @@ async function addNews() {
 
     category: cat, title, summary, location:'', registerUrl: url, status:'活動結束',
 
-    coverImage, isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length+1),
+    isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length+1),
 
     createdAt: new Date().toISOString().slice(0,10), updatedAt: new Date().toISOString().slice(0,10), note:'' };
 
