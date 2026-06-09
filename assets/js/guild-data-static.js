@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T06:17:55.102Z */
+/* generatedAt: 2026-06-09T06:21:45.864Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -726,7 +726,7 @@ window.GUILD_STATIC_DATA = {
         "photo": "./圖庫/理監事/連吉隆_1780640187127.png"
       },
       {
-        "role": "名譽理事長",
+        "role": "顧問",
         "name": "陳樹林",
         "company": "宏達裕碾米工廠",
         "address": "彰化縣溪州鄉民生路一段136號",
