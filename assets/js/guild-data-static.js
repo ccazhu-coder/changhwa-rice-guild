@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T06:11:59.995Z */
+/* generatedAt: 2026-06-09T06:17:55.102Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -792,6 +792,13 @@ window.GUILD_STATIC_DATA = {
         "address": "彰化縣西勢里彰水路1段53號",
         "photoPosition": "center 20%",
         "photo": "./圖庫/理監事/巫欣霖_1780985477164.png"
+      },
+      {
+        "role": "名譽理事長",
+        "name": "沈踴志",
+        "company": "金墩糧坊股份有限公司",
+        "address": "彰化縣花壇鄉金墩街154巷11號",
+        "photo": "./圖庫/理監事/沈踴志_1780985868037.png"
       }
     ]
   },
