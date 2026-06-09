@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>後台管理 — 彰化縣米穀商業同業公會</title>
-<meta name="robots" content="noindex, nofollow">
 <style>
 :root{
   --green:#183f21;--green-2:#24592f;--gold:#c6a437;--gold-2:#d6b95a;
@@ -176,8 +175,11 @@ a{color:inherit;text-decoration:none}
       <div class="sidebar-item active" onclick="showTab('news')" id="tab-btn-news">
         <span class="icon">📰</span>最新消息
       </div>
-      <div class="sidebar-item" onclick="showTab('announce')" id="tab-btn-announce">
-        <span class="icon">📢</span>會務公告
+      <div class="sidebar-item" onclick="showTab('notif')" id="tab-btn-notif">
+        <span class="icon">📡</span>訊息轉知
+      </div>
+      <div class="sidebar-item" onclick="showTab('policy')" id="tab-btn-policy">
+        <span class="icon">⚖️</span>政策法規
       </div>
       <div class="sidebar-item" onclick="showTab('gallery')" id="tab-btn-gallery">
         <span class="icon">🖼️</span>活動花絮
@@ -224,15 +226,18 @@ a{color:inherit;text-decoration:none}
               <input type="text" id="news-date" placeholder="例：115.05.19">
             </div>
             <div class="field">
-              <label>分類</label>
+              <label>分類 <span style="font-size:.72rem;color:#aaa;font-weight:400">（每個分類會在前台獨立引流）</span></label>
               <select id="news-cat">
-                <option>教育訓練</option>
-                <option>會務公告</option>
-                <option>政策公告</option>
-                <option>公益活動</option>
-                <option>訓練品質</option>
-                <option>活動通知</option>
+                <option value="政策公告">🏛️ 政策公告（農糧署/衛生局公文）</option>
+                <option value="會務公告">📋 會務公告（理監事會議/決議）</option>
+                <option value="教育訓練">📚 教育訓練（TTQS/研習課程）</option>
+                <option value="訓練品質">🏆 訓練品質（TTQS輔導/認證）</option>
+                <option value="公益活動">❤️ 公益活動（賑災/捐贈/社區）</option>
+                <option value="會員大會">👥 會員大會（年度大會/選舉）</option>
+                <option value="活動通知">📣 活動通知（一般公告）</option>
+                <option value="招生DM">📄 招生DM（課程招生/報名）</option>
               </select>
+              <div class="field-hint">分類決定在哪個區塊顯示：政策/會務公告→獨立區塊，其他→精選/近期消息</div>
             </div>
           </div>
           <div class="field">
@@ -249,7 +254,25 @@ a{color:inherit;text-decoration:none}
             <div class="field-hint">若有報名表或外部連結，填入此欄</div>
           </div>
           <div style="display:flex;gap:10px;margin-top:4px">
-            <button class="btn btn-primary" onclick="addNews()">✅ 新增消息</button>
+          <div class="field">
+            <label>封面圖片（選填，精選消息大圖）</label>
+            <div id="news-cover-preview" style="display:none;align-items:center;gap:12px;margin-bottom:8px;padding:10px;background:#f7f1e3;border-radius:10px;border:1px solid #e6ddc9">
+              <img id="news-cover-img" src="" alt="預覽" style="height:72px;border-radius:8px;object-fit:cover;flex-shrink:0">
+              <div style="flex:1;min-width:0">
+                <div id="news-cover-name" style="font-size:.8rem;color:#526055;word-break:break-all"></div>
+                <div style="font-size:.72rem;color:#aaa;margin-top:2px">將於儲存時自動上傳至網站</div>
+              </div>
+              <button type="button" onclick="clearNewsCover()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:4px 8px;cursor:pointer;color:#666;font-size:.78rem">✕ 移除</button>
+            </div>
+            <input type="file" id="news-coverFile" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="previewNewsCover(this)">
+            <button type="button" onclick="document.getElementById('news-coverFile').click()" class="btn btn-outline" style="width:100%;margin-top:4px">📷 從本機選擇封面圖片</button>
+            <div class="field-hint">支援 JPG / PNG / WebP・儲存時自動上傳至 圖庫/news-covers/</div>
+          </div>
+          <div class="field" style="display:flex;align-items:center;gap:10px">
+            <input type="checkbox" id="news-isPinned" style="width:18px;height:18px">
+            <label for="news-isPinned" style="margin:0;cursor:pointer">置頂 / 設為精選消息</label>
+          </div>
+                      <button class="btn btn-primary" onclick="addNews()">✅ 新增消息</button>
             <button class="btn btn-outline" onclick="loadData()">🔄 重新載入</button>
           </div>
         </div>
@@ -259,40 +282,94 @@ a{color:inherit;text-decoration:none}
         </div>
       </div>
 
-      <!-- ── 會務公告 ── -->
-      <div class="tab-panel" id="tab-announce">
-        <div class="panel-title">📢 會務公告管理 <small>顯示於最新消息頁公告列表</small></div>
+      <!-- ── 訊息轉知 ── -->
+      <div class="tab-panel" id="tab-notif">
+        <div class="panel-title">📡 訊息轉知管理 <small>農糧署、衛生局等相關機關轉知事項</small></div>
         <div class="card">
-          <h3>➕ 新增公告（同最新消息，分類選「會務公告」）</h3>
+          <h3>➕ 新增訊息轉知</h3>
           <div class="field-row">
             <div class="field">
-              <label>日期</label>
-              <input type="text" id="ann-date" placeholder="例：115.05.06">
+              <label>日期（民國）</label>
+              <input type="text" id="notif-date" placeholder="例：115.06.05">
             </div>
             <div class="field">
-              <label>分類</label>
-              <select id="ann-cat">
-                <option>會務公告</option>
-                <option>政策公告</option>
-                <option>教育訓練</option>
-                <option>訓練品質</option>
-                <option>公益活動</option>
-              </select>
+              <label>來源機關</label>
+              <input type="text" id="notif-agency" placeholder="例：農糧署、衛生局、產銷履歷">
             </div>
           </div>
           <div class="field">
-            <label>公告標題</label>
-            <input type="text" id="ann-title" placeholder="請輸入公告標題">
+            <label>轉知事項（標題）</label>
+            <input type="text" id="notif-title" placeholder="請輸入轉知事項標題">
           </div>
           <div class="field">
-            <label>說明</label>
-            <textarea id="ann-summary" placeholder="公告說明（選填）"></textarea>
+            <label>說明（選填）</label>
+            <textarea id="notif-summary" placeholder="補充說明文字（選填）"></textarea>
           </div>
-          <button class="btn btn-primary" onclick="addAnnounce()">✅ 新增公告</button>
+          <div class="field">
+            <label>外部連結（選填）</label>
+            <input type="url" id="notif-externalUrl" placeholder="https://...">
+            <div class="field-hint">政府機關公告頁面連結</div>
+          </div>
+          <div class="field">
+            <label>連結按鈕文字（選填）</label>
+            <input type="text" id="notif-fileLabel" placeholder="例：查看公告、下載文件">
+          </div>
+          <div class="field">
+            <label>附件上傳（選填，PDF / Word / 圖片）</label>
+            <div id="notif-file-preview" style="display:none;align-items:center;gap:12px;margin-bottom:8px;padding:10px;background:#f7f1e3;border-radius:10px;border:1px solid #e6ddc9">
+              <span id="notif-file-name" style="font-size:.82rem;color:#526055;flex:1"></span>
+              <button type="button" onclick="clearNotifFile()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:4px 8px;cursor:pointer;color:#666;font-size:.78rem">✕ 移除</button>
+            </div>
+            <input type="file" id="notif-file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display:none" onchange="previewNotifFile(this)">
+            <button type="button" onclick="document.getElementById('notif-file').click()" class="btn btn-outline" style="width:100%">📎 選擇附件檔案</button>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:4px">
+            <button class="btn btn-primary" onclick="addNotif()">✅ 新增訊息轉知</button>
+            <button class="btn btn-outline" onclick="loadData()">🔄 重新載入</button>
+          </div>
         </div>
         <div class="card">
-          <h3>📋 現有消息（含公告）</h3>
-          <div class="item-list" id="ann-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+          <h3>📋 現有訊息轉知列表</h3>
+          <div class="item-list" id="notif-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
+        </div>
+      </div>
+
+      
+      <!-- ── 政策法規 ── -->
+      <div class="tab-panel" id="tab-policy">
+        <div class="panel-title">⚖️ 政策法規管理 <small>糧食產業、食品安全、人民團體法規連結</small></div>
+        <div class="card">
+          <h3>➕ 新增法規</h3>
+          <div class="field-row">
+            <div class="field">
+              <label>分類</label>
+              <select id="pol-cat">
+                <option>糧食產業類</option>
+                <option>糧食儲運類</option>
+                <option>食品安全衛生管理法規</option>
+                <option>人民團體法規</option>
+                <option>其他法規</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>排序</label>
+              <input type="number" id="pol-sort" placeholder="1" min="1" style="width:80px">
+            </div>
+          </div>
+          <div class="field">
+            <label>法規名稱</label>
+            <input type="text" id="pol-name" placeholder="例：糧食管理法">
+          </div>
+          <div class="field">
+            <label>官方連結（選填）</label>
+            <input type="url" id="pol-url" placeholder="https://law.moj.gov.tw/...">
+            <div class="field-hint">農業部、法務部、農糧署等官方網站條文連結</div>
+          </div>
+          <button class="btn btn-primary" onclick="addPolicy()">✅ 新增法規</button>
+        </div>
+        <div class="card">
+          <h3>📋 現有法規列表</h3>
+          <div class="item-list" id="policy-list"><div style="color:var(--muted);font-size:.85rem">載入中...</div></div>
         </div>
       </div>
 
@@ -371,14 +448,27 @@ a{color:inherit;text-decoration:none}
       <div class="tab-panel" id="tab-dm">
         <div class="panel-title">📄 招生 DM 管理 <small>上傳 DM 圖片，自動顯示在最新消息</small></div>
         <div class="card">
-          <h3>⬆️ 上傳新 DM（JPG / PNG 圖片）</h3>
+          <h3>⬆️ 上傳新招生 DM</h3>
           <div class="field">
-            <label>DM 標題（將顯示在最新消息）</label>
-            <input type="text" id="dm-title" placeholder="例：115年度會員招募說明">
+            <label>活動日期（民國）<span style="color:#c0392b">*</span></label>
+            <input type="text" id="dm-date" placeholder="例：115.06.05">
           </div>
           <div class="field">
-            <label>說明文字（選填）</label>
-            <input type="text" id="dm-summary" placeholder="例：歡迎符合資格的米穀業者申請入會">
+            <label>DM 標題 <span style="color:#c0392b">*</span>（顯示在最新消息標題）</label>
+            <input type="text" id="dm-title" placeholder="例：115年度教育訓練招生簡章">
+          </div>
+          <div class="field">
+            <label>課程名稱 <span style="color:#c0392b">*</span></label>
+            <input type="text" id="dm-course" placeholder="例：農產品業稅務實務與相關法規研習班">
+          </div>
+          <div class="field">
+            <label>招生文案說明</label>
+            <textarea id="dm-summary" rows="3" placeholder="例：本課程由農業部農糧署補助辦理，歡迎公會會員及米穀從業人員踴躍報名，名額有限！"></textarea>
+          </div>
+          <div class="field">
+            <label>🔗 線上報名連結（選填）</label>
+            <input type="url" id="dm-register" placeholder="https://forms.gle/... 或 https://...">
+            <div class="field-hint">填入後前台最新消息自動顯示「立即報名」按鈕</div>
           </div>
           <div class="field">
             <label>🖼️ DM 圖片（JPG / PNG）</label>
@@ -411,13 +501,16 @@ a{color:inherit;text-decoration:none}
               <input type="text" id="file-title" placeholder="例：115年度教育訓練報名表">
             </div>
             <div class="field">
-              <label>分類（顯示於下載專區）</label>
+              <label>分類（決定顯示在下載專區的哪個類別）</label>
               <select id="file-category">
-                <option value="政策公告">政策公告</option>
-                <option value="章程">公會章程</option>
-                <option value="申請書表">申請書表</option>
-                <option value="其他">其他文件</option>
+                <option value="申請書表">📝 申請書表</option>
+                <option value="章程">📜 公會章程</option>
+                <option value="政策公告">📋 政策公告</option>
+                <option value="公告文件">📄 公告文件</option>
+                <option value="教育訓練">📚 教育訓練教材</option>
+                <option value="其他文件">📁 其他文件</option>
               </select>
+              <div class="field-hint">上傳後自動出現在「下載專區 → 政策公告與文件下載」對應分類</div>
             </div>
           </div>
           <div class="field">
@@ -448,8 +541,6 @@ a{color:inherit;text-decoration:none}
                 <option>理事長</option><option>副理事長</option><option>常務理事</option>
                 <option>理事</option><option>常務監事</option><option>監事</option>
                 <option>名譽理事長</option><option>顧問</option><option>候補理事</option><option>候補監事</option>
-                <option disabled>── 會務人員 ──</option>
-                <option>總幹事</option><option>專案經理</option>
               </select></div>
             <div class="field"><label>姓名</label><input id="brd-name" placeholder="例：王大明"></div>
           </div>
@@ -701,6 +792,10 @@ async function loadData() {
 
   renderNewsList();
   renderGalleryList();
+  renderNotifList();
+  renderPolicyList();
+  renderDMList();
+  renderDocsList();
   loadFilesList();
 }
 
@@ -708,7 +803,7 @@ async function loadData() {
 async function saveData(msg) {
   const d = { ...staticData };
   delete d._sha;
-  const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString().slice(0,10)} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
+  const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString()} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
   // 正確的分塊 base64 編碼（chunk 必須是 3 的倍數，否則 padding 會導致無效 base64）
   const encBytes = new TextEncoder().encode(newContent);
   let b64 = '';
@@ -736,7 +831,10 @@ async function saveData(msg) {
   }
   const result = await res.json();
   staticData._sha = result.content.sha;
-  showStatus('✅ 已儲存！網站將在 1～2 分鐘內更新。');
+  showStatus('✅ 已儲存！正在更新所有頁面版本...');
+    autoUpdatePageVersions(new Date().toISOString()).then(()=>{
+      showStatus('✅ 已儲存並更新所有頁面！網站將在 1～2 分鐘內生效。');
+    });
 }
 
 // ══ MODAL EDIT ══
@@ -785,7 +883,7 @@ document.querySelector('#editModal .modal-box').addEventListener('click', functi
 function editNews(i) {
   const item = staticData.news[i];
   editMode = { type: 'news', index: i };
-  const cats = ['教育訓練','會務公告','政策公告','公益活動','訓練品質','活動通知'];
+  const cats = ['政策公告','會務公告','教育訓練','訓練品質','公益活動','會員大會','活動通知','招生DM'];
   const opts = cats.map(c => `<option${item.category===c?' selected':''}>${c}</option>`).join('');
   openModal('✏️ 編輯消息', `
     <div class="field-row">
@@ -795,6 +893,8 @@ function editNews(i) {
     <div class="field"><label>標題</label><input id="e-title" value="${(item.title||'').replace(/"/g,'&quot;')}"></div>
     <div class="field"><label>摘要</label><textarea id="e-summary">${item.summary||''}</textarea></div>
     <div class="field"><label>報名／連結（選填）</label><input id="e-url" value="${item.registerUrl||''}"></div>
+    <div class="field"><label>封面圖片（精選消息大圖）</label>${item.coverImage ? '<div style="margin-bottom:8px;padding:8px;background:#f7f1e3;border-radius:8px;display:flex;align-items:center;gap:10px"><img src="https://ccazhu-coder.github.io/changhwa-rice-guild/'+item.coverImage+'" style="height:52px;border-radius:6px;object-fit:cover" onerror="this.style.display=\'none\'"><span style="font-size:.74rem;color:#526055;word-break:break-all">'+item.coverImage+'</span></div>' : ''}<input type="file" id="e-coverFile" accept="image/jpeg,image/png,image/webp" style="display:none" onchange="previewEditCover(this)"><button type="button" onclick="document.getElementById('e-coverFile').click()" class="btn btn-outline" style="width:100%;margin-top:4px">📷 ${item.coverImage ? '更換封面圖片' : '選擇封面圖片'}</button><div id="e-cover-preview" style="display:none;align-items:center;gap:10px;margin-top:8px;padding:8px;background:#f7f1e3;border-radius:8px"><img id="e-cover-img" src="" style="height:52px;border-radius:6px;object-fit:cover"><span id="e-cover-name" style="font-size:.74rem;color:#526055;flex:1"></span><button type="button" onclick="clearEditCover()" style="background:none;border:1px solid #ccc;border-radius:6px;padding:3px 6px;cursor:pointer;font-size:.72rem">✕</button></div></div>
+    <div class="field" style="display:flex;align-items:center;gap:10px"><input type="checkbox" id="e-isPinned" ${item.isPinned?'checked':''}><label for="e-isPinned" style="margin:0;cursor:pointer">置頂 / 精選消息</label></div>
   `);
 }
 
@@ -828,10 +928,46 @@ async function saveEdit() {
     item.rocDate=date; item.date=date.replace(/\./g,'-');
     item.category=cat; item.title=title; item.summary=summary;
     item.registerUrl=(document.getElementById('e-url')?.value||'').trim();
+    const _eCoverFile = document.getElementById('e-coverFile');
+    if (_eCoverFile && _eCoverFile.files[0]) {
+      const _ef = _eCoverFile.files[0];
+      const _ext2 = _ef.name.split('.').pop().toLowerCase() || 'jpg';
+      const _rp2 = `圖庫/news-covers/cover_${Date.now()}.${_ext2}`;
+      await githubUploadFile(_ef, _rp2, `update: news cover - ${title}`);
+      item.coverImage = _rp2;
+    }
+    item.isPinned=!!(document.getElementById('e-isPinned')?.checked);
     item.updatedAt=new Date().toISOString().slice(0,10);
     try { await saveData('update: news - '+title); renderNewsList(); closeModal(); showStatus('✅ 消息已更新！'); }
     catch(e) { showModalError(e.message); }
+    } else if (editMode.type === 'doc') {
+    const doc = staticData.documents[editMode.index];
+    doc.title = (document.getElementById('e-title')?.value||'').trim() || doc.title;
+    doc.category = document.getElementById('e-doc-cat')?.value || doc.category;
+    doc.published = !!(document.getElementById('e-doc-published')?.checked);
+    doc.updatedAt = new Date().toISOString().slice(0,10);
+    try { await saveData('update: doc - '+doc.title); renderDocsList(); closeModal(); showStatus('文件已更新！'); }
+    catch(e) { showModalError(e.message); }
+  } else if (editMode.type === 'notif') {
+    const item = staticData.notifications[editMode.index];
+    item.rocDate = date; item.date = date.replace(/\./g,'-');
+    item.agency  = (document.getElementById('e-agency')?.value||'').trim();
+    item.title   = title; item.summary = summary;
+    item.externalUrl = (document.getElementById('e-url')?.value||'').trim();
+    item.fileLabel   = (document.getElementById('e-fileLabel')?.value||'').trim();
+    const _eNF = document.getElementById('e-notifFile');
+    if (_eNF && _eNF.files[0]) {
+      const _nf = _eNF.files[0];
+      const _ext3 = _nf.name.split('.').pop().toLowerCase();
+      const _rp3 = `files/notifications/${Date.now()}_${_nf.name.replace(/\s+/g,'_')}`;
+      await githubUploadFile(_nf, _rp3, `update: notification file - ${title}`);
+      item.fileUrl = _rp3;
+    }
+    item.updatedAt = new Date().toISOString().slice(0,10);
+    try { await saveData('update: notification - '+title); renderNotifList(); closeModal(); showStatus('訊息轉知已更新！'); }
+    catch(e) { showModalError(e.message); }
   } else if (editMode.type === 'gallery') {
+
     const item = staticData.gallery[editMode.index];
     item.rocDate=date; item.date=date.replace(/\./g,'-');
     item.category=cat; item.title=title; item.summary=summary;
@@ -856,9 +992,21 @@ async function addNews() {
   const url = document.getElementById('news-url').value.trim();
   if (!date || !title) { showStatus('日期與標題為必填', true); return; }
 
+  // Upload cover image file if selected
+  let coverImage = '';
+  if (window._pendingNewsCoverFile) {
+    try {
+      showStatus('封面圖片上傳中...');
+      const _ext = window._pendingNewsCoverFile.name.split('.').pop().toLowerCase() || 'jpg';
+      const _repoPath = '圖庫/news-covers/cover_' + Date.now() + '.' + _ext;
+      await githubUploadFile(window._pendingNewsCoverFile, _repoPath, 'add: news cover - ' + title);
+      coverImage = _repoPath;
+      window._pendingNewsCoverFile = null;
+    } catch(e) { showStatus('封面圖片上傳失敗：' + e.message, true); return; }
+  }
   const item = { id: nextId('NEWS', staticData.news), date: date.replace(/\./g,'-'), rocDate: date,
     category: cat, title, summary, location:'', registerUrl: url, status:'活動結束',
-    isHome: true, isPinned: false, sort: (staticData.news.length+1),
+    coverImage, isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.news.length+1),
     createdAt: new Date().toISOString().slice(0,10), updatedAt: new Date().toISOString().slice(0,10), note:'' };
 
   staticData.news = [item, ...(staticData.news || [])];
@@ -866,28 +1014,51 @@ async function addNews() {
     await saveData('content: add news - ' + title);
     renderNewsList();
     ['news-date','news-title','news-summary','news-url'].forEach(id => document.getElementById(id).value = '');
+    document.getElementById('news-isPinned').checked = false;
+    clearNewsCover();
   } catch(e) { showStatus('儲存失敗：' + e.message, true); }
 }
 
 function renderNewsList() {
   const el = document.getElementById('news-list');
-  const el2 = document.getElementById('ann-list');
   const list = staticData.news || [];
-  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無消息</div>'; el2.innerHTML = el.innerHTML; return; }
-  const html = list.map((item, i) => `
-    <div class="item-card">
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無消息。請使用上方表單新增。</div>'; return; }
+  const CAT_COLORS = {
+    '政策公告':'#1a3060','會務公告':'#183f21','教育訓練':'#1a5c4a',
+    '訓練品質':'#2e5cb8','公益活動':'#6b3a2e','會員大會':'#5c4a00','活動通知':'#526055'
+  };
+  // Group by category for display
+  const cats = {};
+  const catOrder = ['政策公告','會務公告','教育訓練','訓練品質','公益活動','會員大會','活動通知'];
+  list.forEach((item, i) => {
+    const cat = item.category || '活動通知';
+    if (!cats[cat]) cats[cat] = [];
+    cats[cat].push({item, i});
+  });
+  let html = '';
+  // Show all items sorted by date (newest first), with category color
+  const sorted = list.map((item,i) => ({item,i})).sort((a,b) =>
+    (b.item.rocDate||b.item.date||'').localeCompare(a.item.rocDate||a.item.date||'')
+  );
+  html += `<div style="margin-bottom:12px;font-size:.78rem;color:#666">共 ${list.length} 則，依日期排列（最新在前）</div>`;
+  html += sorted.map(({item, i}) => {
+    const color = CAT_COLORS[item.category] || '#526055';
+    return `<div class="item-card">
       <div class="item-card-body">
-        <div class="item-title"><span class="badge gold">${item.category||'公告'}</span>${item.title}</div>
-        <div class="item-meta">${item.rocDate || item.date} ${item.registerUrl?'🔗 有連結':''}</div>
+        <div class="item-title">
+          <span style="background:${color};color:#fff;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:800;margin-right:8px">${item.category||'公告'}</span>
+          ${item.isPinned ? '<span title="精選消息">⭐</span> ' : ''}${item.title}
+        </div>
+        <div class="item-meta">${item.rocDate||item.date||''} ${item.registerUrl?'🔗 有連結':''} ${item.coverImage?'🖼️ 有封面':''}</div>
         ${item.summary ? `<div class="item-desc">${item.summary}</div>` : ''}
       </div>
       <div class="item-card-actions">
         <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editNews(${i})">✏️ 編輯</button>
         <button class="btn btn-red btn-sm" onclick="deleteNews(${i})">刪除</button>
       </div>
-    </div>`).join('');
+    </div>`;
+  }).join('');
   el.innerHTML = html;
-  el2.innerHTML = html;
 }
 
 async function deleteNews(i) {
@@ -897,14 +1068,7 @@ async function deleteNews(i) {
   catch(e) { showStatus('刪除失敗：' + e.message, true); }
 }
 
-async function addAnnounce() {
-  document.getElementById('news-date').value = document.getElementById('ann-date').value;
-  document.getElementById('news-cat').value  = document.getElementById('ann-cat').value;
-  document.getElementById('news-title').value = document.getElementById('ann-title').value;
-  document.getElementById('news-summary').value = document.getElementById('ann-summary').value;
-  await addNews();
-  ['ann-date','ann-title','ann-summary'].forEach(id => document.getElementById(id).value = '');
-}
+/* addAnnounce removed - use addNews with 會務公告 category */
 
 // ══ GALLERY ══
 let pendingGalleryPhotos = [];  // Array of {file, objectUrl}
@@ -1028,7 +1192,7 @@ async function addGallery() {
     participantCount: '',
     coverImage: coverPhoto ? coverPhoto.url : '',
     albumUrl: '', albumFolderId: '', albumFolderName: title, albumFolderUrl: '',
-    isHome: true, isPinned: false, sort: (staticData.gallery.length + 1),
+    coverImage, isHome: true, isPinned: !!(document.getElementById('news-isPinned')?.checked), sort: (staticData.gallery.length + 1),
     createdAt: new Date().toISOString().slice(0,10),
     updatedAt: new Date().toISOString().slice(0,10),
     note: `uploaded to ${repoFolder}`,
@@ -1057,9 +1221,7 @@ function renderGalleryList() {
     // Cover: local repo path or Drive
     const cover = item.coverImage || '';
     const isLocal = cover && !cover.startsWith('http');
-    const coverSrc = isLocal
-      ? `https://ccazhu-coder.github.io/changhwa-rice-guild/${cover}`
-      : (cover.includes('drive.google') ? `https://drive.google.com/thumbnail?id=${(cover.match(/\/d\/([^/?#]+)/)||[])[1]}&sz=w200` : cover);
+    const coverSrc = `https://ccazhu-coder.github.io/changhwa-rice-guild/${cover.replace('./','')}`;
     const photoCount = (item.photos||[]).length;
     return `<div class="item-card">
       ${cover ? `<img src="${coverSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">` : ''}
@@ -1147,8 +1309,10 @@ async function githubUploadFile(localFile, repoPath, commitMsg) {
 
 async function uploadDM() {
   if (!pendingDM) { showStatus('請先選擇 PDF 檔案', true); return; }
-  const title   = document.getElementById('dm-title').value.trim() || pendingDM.name;
-  const summary = document.getElementById('dm-summary')?.value.trim() || '';
+  const title    = document.getElementById('dm-title').value.trim() || pendingDM.name;
+  const course   = document.getElementById('dm-course')?.value.trim() || '';
+  const summary  = (course ? course + '\n' : '') + (document.getElementById('dm-summary')?.value.trim() || '點擊查看招生宣傳單');
+  const registerUrl = document.getElementById('dm-register')?.value.trim() || '';
   try {
     showStatus('上傳中...');
     const safeName = pendingDM.name.replace(/\s+/g, '_');
@@ -1165,10 +1329,14 @@ async function uploadDM() {
       rocDate: roc,
       category: '招生DM',
       title: title,
-      summary: summary || '點擊查看招生宣傳單',
+      summary: summary,
       coverImage: fileUrl,
-      location: '', registerUrl: fileUrl, status: '公告',
-      isHome: true, isPinned: false, sort: (staticData.news.length + 1),
+      location: '',
+      registerUrl: registerUrl || fileUrl,
+      dmFileUrl: fileUrl,
+      status: '公告',
+      isHome: true, isPinned: false,
+      sort: (staticData.news.length + 1),
       createdAt: today.toISOString().slice(0,10),
       updatedAt: today.toISOString().slice(0,10), note: 'dm_upload'
     };
@@ -1177,7 +1345,10 @@ async function uploadDM() {
 
     showStatus(`✅ DM「${title}」上傳成功！已自動加入最新消息。`);
     pendingDM = null;
-    document.getElementById('dm-title').value = '';
+    ['dm-date','dm-title','dm-course','dm-summary','dm-register'].forEach(id => {
+      const el = document.getElementById(id); if(el) el.value = '';
+    });
+    document.getElementById('dm-img-thumb').textContent = '🖼️';
     document.getElementById('dm-preview').style.display = 'none';
     renderNewsList();
     loadFilesList();
@@ -1216,63 +1387,39 @@ async function uploadFile() {
   } catch(e) { showStatus('上傳失敗：' + e.message, true); }
 }
 
-async function loadFilesList() {
-  // Load files/ directory
-  try {
-    const res = await fetch(`https://api.github.com/repos/${REPO}/contents/files`, {
-      headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
-    });
-    if (!res.ok) { document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件</div>'; return; }
-    const files = await res.json();
 
-    // Also check files/dm
-    let dmFiles = [];
-    try {
-      const dmRes = await fetch(`https://api.github.com/repos/${REPO}/contents/files/dm`, {
-        headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
-      });
-      if (dmRes.ok) dmFiles = await dmRes.json();
-    } catch(e) {}
-
-    const allFiles = [...files.filter(f=>f.type==='file'), ...dmFiles.filter(f=>f.type==='file')];
-
-    if (!allFiles.length) { document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件</div>'; return; }
-
-    const BASE_SITE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
-    document.getElementById('files-list').innerHTML = allFiles.map(f => {
-      const siteUrl = BASE_SITE + f.path;
-      return `<div class="item-card" style="flex-wrap:wrap;gap:10px">
-        <div class="item-card-body" style="min-width:0">
-          <div class="item-title">${f.name}</div>
-          <div class="item-meta">${(f.size/1024).toFixed(0)} KB</div>
-          <div style="margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-            <input readonly value="${siteUrl}" id="url-${f.sha?.substring(0,8)||f.name.replace(/[^a-z0-9]/gi,'')}"
-              style="font-size:.72rem;color:var(--muted);background:#f8f8f8;border:1px solid var(--border);border-radius:6px;padding:4px 8px;flex:1;min-width:200px;outline:none">
-            <button class="btn btn-sm" style="background:var(--gold);color:var(--green);flex-shrink:0"
-              onclick="navigator.clipboard.writeText('${siteUrl}').then(()=>{this.textContent='✅ 已複製';setTimeout(()=>this.textContent='📋 複製連結',2000)})">
-              📋 複製連結
-            </button>
-          </div>
-        </div>
-        <div class="item-card-actions" style="flex-shrink:0">
-          <a href="${f.download_url}" target="_blank" class="btn btn-outline btn-sm">預覽</a>
-        </div>
-      </div>`;
-    }).join('');
-
-    // Also render DM list
-    const dms = dmFiles.filter(f=>f.type==='file');
-    document.getElementById('dm-list').innerHTML = dms.length
-      ? dms.map(f => `<div class="item-card"><div class="item-card-body"><div class="item-title">📄 ${f.name}</div><div class="item-meta">${(f.size/1024).toFixed(0)} KB</div></div><div class="item-card-actions"><a href="${f.download_url}" target="_blank" class="btn btn-outline btn-sm">預覽</a></div></div>`).join('')
-      : '<div style="color:var(--muted);font-size:.85rem">尚無 DM 檔案</div>';
-  } catch(e) {
-    document.getElementById('files-list').innerHTML = '<div style="color:var(--muted);font-size:.85rem">載入失敗</div>';
+// ══ 招生DM 列表 ══
+function renderDMList() {
+  const el = document.getElementById('dm-list');
+  if (!el) return;
+  const list = (staticData.news || []).map((item,i)=>({item,i})).filter(({item})=>item.category==='招生DM');
+  if (!list.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無招生 DM。上傳後自動出現在此列表。</div>';
+    return;
   }
+  const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  el.innerHTML = list.map(({item, i}) => {
+    const coverSrc = item.coverImage ? BASE + item.coverImage.replace('./', '') : '';
+    return `<div class="item-card" style="display:flex;align-items:center;gap:12px">
+      ${coverSrc ? `<a href="${coverSrc}" target="_blank"><img src="${coverSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0;cursor:zoom-in" title="點擊查看DM" alt=""></a>` : '<div style="width:80px;height:60px;border-radius:8px;background:#f7f1e3;display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0">📄</div>'}
+      <div class="item-card-body" style="flex:1;min-width:0">
+        <div class="item-title">📄 ${item.title}</div>
+        <div class="item-meta">${item.rocDate||item.date||''} ${item.registerUrl?'🔗 有報名連結':''}</div>
+        ${item.summary ? `<div class="item-desc" style="font-size:.8rem;color:#666;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px">${item.summary.slice(0,50)}${item.summary.length>50?'…':''}</div>` : ''}
+      </div>
+      <div class="item-card-actions" style="flex-shrink:0">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editNews(${i})">✏️ 編輯</button>
+        <button class="btn btn-red btn-sm" onclick="deleteNews(${i})">刪除</button>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-// ══ BOARD MEMBERS ══
-let _pendingBoardPhoto = null;
-
+async function loadFilesList() {
+  // files-list managed by renderDocsList() from staticData.documents
+  // Only refresh DM list
+  renderDMList();
+}
 function previewBoardPhoto(input, thumbId, nameId) {
   if (input.files[0]) {
     _pendingBoardPhoto = input.files[0];
@@ -1326,7 +1473,7 @@ function renderBoardList() {
   if (!el) return;
   const members = (staticData.board?.members || []);
   if (!members.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無資料</div>'; return; }
-  const roleOrder = ['名譽理事長','理事長','副理事長','常務理事','理事','常務監事','監事','顧問','候補理事','候補監事','總幹事','專案經理'];
+  const roleOrder = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
   const sorted = [...members].sort((a,b) => (roleOrder.indexOf(a.role)||99)-(roleOrder.indexOf(b.role)||99));
   const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
   el.innerHTML = sorted.map((m) => {
@@ -1352,7 +1499,7 @@ function editBoardMember(i) {
   const m = staticData.board.members[i];
   editMode = { type:'board', index:i };
   _pendingBoardPhoto = null;
-  const roles = ['名譽理事長','理事長','副理事長','常務理事','理事','常務監事','監事','顧問','候補理事','候補監事','總幹事','專案經理'];
+  const roles = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
   const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
   const currentPhoto = m.photo ? `<img src="${BASE+m.photo.replace('./','')}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--line)">` : '<div style="width:64px;height:64px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:2rem">👤</div>';
   openModal('✏️ 編輯理監事成員', `
@@ -1370,7 +1517,8 @@ function editBoardMember(i) {
           <div id="e-photo-name" style="font-size:.76rem;color:var(--muted);margin-top:4px">${m.photo?'已有照片（選擇新圖片即可替換）':'尚未上傳'}</div>
         </div>
       </div>
-    </div>`);
+    </div>
+    <div class='field'><label>📐 照片顯示位置</label><select id='e-photoPosition'><option value='center 20%' ${(!m.photoPosition||m.photoPosition==='center 20%')?'selected':''}>預設（偏上，適合大頭照）</option><option value='top center' ${m.photoPosition==='top center'?'selected':''}>頂部</option><option value='center center' ${m.photoPosition==='center center'?'selected':''}>居中</option><option value='center 10%' ${m.photoPosition==='center 10%'?'selected':''}>極上方</option><option value='center 30%' ${m.photoPosition==='center 30%'?'selected':''}>略下方</option><option value='bottom center' ${m.photoPosition==='bottom center'?'selected':''}>底部</option></select><div class='field-hint'>調整後儲存，前端照片裁切位置即時更新，所有卡片保持同一高度</div></div>`);
 }
 async function deleteBoardMember(i) {
   if (!confirm('確定刪除？')) return;
@@ -1703,6 +1851,7 @@ saveEdit = async function() {
     m.name    = (document.getElementById('e-title')?.value||'').trim();
     m.company = (document.getElementById('e-summary')?.value||'').trim();
     m.address = (document.getElementById('e-result')?.value||'').trim();
+    m.photoPosition = document.getElementById('e-photoPosition')?.value||'center 20%';
     // Upload new photo if selected
     if (_pendingBoardPhoto) {
       try { m.photo = await uploadBoardPhoto(m.name, _pendingBoardPhoto); _pendingBoardPhoto = null; }
@@ -1828,6 +1977,332 @@ async function deleteHistory(i) {
   staticData.history.splice(i,1);
   try { await saveData('delete: history - '+h.title); renderHistoryList(); showStatus('✅ 已刪除'); }
   catch(e) { showModalError(e.message); }
+}
+
+
+// ══ NEWS COVER IMAGE UPLOAD HELPERS ══
+window._pendingNewsCoverFile = null;
+
+function previewNewsCover(input) {
+  const file = input.files[0];
+  if (!file) return;
+  window._pendingNewsCoverFile = file;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('news-cover-preview');
+    const img     = document.getElementById('news-cover-img');
+    const nm      = document.getElementById('news-cover-name');
+    if (img)     img.src = e.target.result;
+    if (nm)      nm.textContent = file.name + ' (' + Math.round(file.size/1024) + ' KB)';
+    if (preview) preview.style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
+}
+function clearNewsCover() {
+  window._pendingNewsCoverFile = null;
+  const input   = document.getElementById('news-coverFile');
+  const preview = document.getElementById('news-cover-preview');
+  if (input)   input.value = '';
+  if (preview) preview.style.display = 'none';
+}
+function previewEditCover(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const preview = document.getElementById('e-cover-preview');
+    const img     = document.getElementById('e-cover-img');
+    const nm      = document.getElementById('e-cover-name');
+    if (img)     img.src = e.target.result;
+    if (nm)      nm.textContent = file.name;
+    if (preview) preview.style.display = 'flex';
+  };
+  reader.readAsDataURL(file);
+}
+function clearEditCover() {
+  const input   = document.getElementById('e-coverFile');
+  const preview = document.getElementById('e-cover-preview');
+  if (input)   input.value = '';
+  if (preview) preview.style.display = 'none';
+}
+
+
+// ══ 訊息轉知 CRUD ══
+window._pendingNotifFile = null;
+
+function previewNotifFile(input) {
+  const file = input.files[0];
+  if (!file) return;
+  window._pendingNotifFile = file;
+  const preview = document.getElementById('notif-file-preview');
+  const name    = document.getElementById('notif-file-name');
+  if (name)    name.textContent = file.name + ' (' + Math.round(file.size/1024) + ' KB)';
+  if (preview) preview.style.display = 'flex';
+}
+function clearNotifFile() {
+  window._pendingNotifFile = null;
+  const input   = document.getElementById('notif-file');
+  const preview = document.getElementById('notif-file-preview');
+  if (input)   input.value = '';
+  if (preview) preview.style.display = 'none';
+}
+
+async function addNotif() {
+  const date       = document.getElementById('notif-date').value.trim();
+  const agency     = document.getElementById('notif-agency').value.trim();
+  const title      = document.getElementById('notif-title').value.trim();
+  const summary    = document.getElementById('notif-summary').value.trim();
+  const extUrl     = document.getElementById('notif-externalUrl').value.trim();
+  const fileLabel  = document.getElementById('notif-fileLabel').value.trim() || '附件下載';
+  if (!date || !agency || !title) { showStatus('日期、機關與標題為必填', true); return; }
+
+  let fileUrl = '';
+  if (window._pendingNotifFile) {
+    try {
+      showStatus('附件上傳中...');
+      const ext = window._pendingNotifFile.name.split('.').pop().toLowerCase();
+      const safeName = `${Date.now()}_${window._pendingNotifFile.name.replace(/\s+/g,'_')}`;
+      const repoPath = `files/notifications/${safeName}`;
+      await githubUploadFile(window._pendingNotifFile, repoPath, `add: notification file - ${title}`);
+      fileUrl = repoPath;
+      window._pendingNotifFile = null;
+      clearNotifFile();
+    } catch(e) { showStatus('附件上傳失敗：' + e.message, true); return; }
+  }
+
+  const item = {
+    id: nextId('NOTIF', staticData.notifications),
+    date: date.replace(/\./g, '-'), rocDate: date,
+    agency, title, summary,
+    externalUrl: extUrl, fileUrl, fileLabel,
+    sort: (staticData.notifications.length + 1),
+    createdAt: new Date().toISOString().slice(0,10)
+  };
+  staticData.notifications = [item, ...(staticData.notifications || [])];
+  try {
+    await saveData('content: add notification - ' + title);
+    renderNotifList();
+    ['notif-date','notif-agency','notif-title','notif-summary','notif-externalUrl','notif-fileLabel'].forEach(id => document.getElementById(id).value = '');
+    showStatus('✅ 訊息轉知已新增！');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+
+function renderNotifList() {
+  const el = document.getElementById('notif-list');
+  if (!el) return;
+  const list = staticData.notifications || [];
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無訊息轉知</div>'; return; }
+  el.innerHTML = list.map((item, i) => `
+    <div class="item-card">
+      <div class="item-card-body">
+        <div class="item-title"><span class="badge gold">${item.agency||'公告'}</span>${item.title}</div>
+        <div class="item-meta">${item.rocDate||item.date||''} ${item.externalUrl?'🔗 有連結':''} ${item.fileUrl?'📄 有附件':''}</div>
+        ${item.summary?`<div class="item-desc">${item.summary}</div>`:''}
+      </div>
+      <div class="item-card-actions">
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff" onclick="editNotif(${i})">✏️ 編輯</button>
+        <button class="btn btn-red btn-sm" onclick="deleteNotif(${i})">刪除</button>
+      </div>
+    </div>`).join('');
+}
+
+async function deleteNotif(i) {
+  if (!confirm('確定刪除此訊息轉知？')) return;
+  staticData.notifications.splice(i, 1);
+  try { await saveData('delete: notification item'); renderNotifList(); showStatus('已刪除'); }
+  catch(e) { showStatus('刪除失敗：' + e.message, true); }
+}
+
+function editNotif(i) {
+  const item = staticData.notifications[i];
+  editMode = { type: 'notif', index: i };
+  openModal('✏️ 編輯訊息轉知', `
+    <div class="field-row">
+      <div class="field"><label>日期（民國）</label><input id="e-date" value="${item.rocDate||item.date||''}"></div>
+      <div class="field"><label>來源機關</label><input id="e-agency" value="${esc2(item.agency||'')}"></div>
+    </div>
+    <div class="field"><label>轉知事項（標題）</label><input id="e-title" value="${esc2(item.title||'')}"></div>
+    <div class="field"><label>說明</label><textarea id="e-summary">${item.summary||''}</textarea></div>
+    <div class="field"><label>外部連結</label><input id="e-url" value="${item.externalUrl||''}" placeholder="https://..."></div>
+    <div class="field"><label>連結按鈕文字</label><input id="e-fileLabel" value="${item.fileLabel||''}"></div>
+    <div class="field"><label>現有附件</label><div style="font-size:.8rem;color:#666">${item.fileUrl||'（無附件）'}</div></div>
+    <div class="field"><label>更換附件（選填）</label><input type="file" id="e-notifFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></div>
+  `);
+}
+
+function esc2(s){ return String(s||'').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+
+// ══ 政策法規 CRUD ══
+async function addPolicy() {
+  const cat  = document.getElementById('pol-cat').value;
+  const name = document.getElementById('pol-name').value.trim();
+  const url  = document.getElementById('pol-url').value.trim();
+  const sort = parseInt(document.getElementById('pol-sort').value) || ((staticData.policies||[]).length + 1);
+  if (!name) { showStatus('法規名稱為必填', true); return; }
+  const item = {
+    id: nextId('POL', staticData.policies),
+    category: cat, name, url, sort,
+    createdAt: new Date().toISOString().slice(0,10)
+  };
+  staticData.policies = [...(staticData.policies || []), item];
+  staticData.policies.sort((a,b) => {
+    const catOrder = ['糧食產業類','糧食儲運類','食品安全衛生管理法規','人民團體法規'];
+    const ci = catOrder.indexOf(a.category) - catOrder.indexOf(b.category);
+    return ci !== 0 ? ci : (a.sort||99) - (b.sort||99);
+  });
+  try {
+    await saveData('content: add policy - ' + name);
+    renderPolicyList();
+    ['pol-name','pol-url','pol-sort'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+    showStatus('✅ 法規已新增！');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+function renderPolicyList() {
+  const el = document.getElementById('policy-list');
+  if (!el) return;
+  const list = staticData.policies || [];
+  if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無法規資料</div>'; return; }
+  const cats = {};
+  list.forEach(p => { (cats[p.category] = cats[p.category]||[]).push(p); });
+  el.innerHTML = Object.entries(cats).map(([cat, items]) =>
+    `<div style="margin-bottom:16px"><div style="font-weight:800;color:#183f21;margin-bottom:8px;font-size:.85rem">${cat}</div>`
+    + items.map((p,i) => {
+        const globalIdx = list.indexOf(p);
+        return `<div class="item-card">
+          <div class="item-card-body">
+            <div class="item-title">${p.name}</div>
+            ${p.url ? `<div class="item-meta"><a href="${p.url}" target="_blank" style="color:var(--blue);font-size:.78rem">🔗 查看法規原文</a></div>` : ''}
+          </div>
+          <div class="item-card-actions">
+            <button class="btn btn-red btn-sm" onclick="deletePolicy(${globalIdx})">刪除</button>
+          </div>
+        </div>`;
+      }).join('') + '</div>'
+  ).join('');
+}
+async function deletePolicy(i) {
+  if (!confirm('確定刪除此法規？')) return;
+  staticData.policies.splice(i, 1);
+  try { await saveData('delete: policy item'); renderPolicyList(); showStatus('已刪除'); }
+  catch(e) { showStatus('刪除失敗：' + e.message, true); }
+}
+
+// ══ 文件下載清單 ══
+function renderDocsList() {
+  const el = document.getElementById('files-list');
+  if (!el) return;
+  const list = staticData.documents || [];
+  if (!list.length) {
+    el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無文件。上傳後自動出現在此列表。</div>';
+    return;
+  }
+  const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
+  const CAT_COLORS = {'政策公告':'#c0392b','章程':'#183f21','申請書表':'#2980b9','公告文件':'#7f8c8d','教育訓練':'#1a5c4a','其他文件':'#526055'};
+  el.innerHTML = list.map((doc, i) => {
+    const isPublished = doc.published !== false;
+    const color = CAT_COLORS[doc.category] || '#526055';
+    const fileUrl = BASE + (doc.path||'').replace('./', '');
+    return `<div class="item-card" style="align-items:center">
+      <div class="item-card-body" style="flex:1;min-width:0">
+        <div class="item-title" style="display:flex;align-items:center;gap:8px">
+          <span style="background:${color};color:#fff;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:10px;white-space:nowrap">${doc.category||'未分類'}</span>
+          <span style="${isPublished?'':'color:#aaa;text-decoration:line-through'}">${doc.title||doc.fileName||'(無標題)'}</span>
+          ${isPublished ? '<span style="color:#27ae60;font-size:.7rem">● 顯示中</span>' : '<span style="color:#aaa;font-size:.7rem">○ 已隱藏</span>'}
+        </div>
+        <div class="item-meta">${doc.rocDate||doc.uploadedAt||''} <a href="${fileUrl}" target="_blank" style="color:var(--blue);font-size:.75rem">📎 查看檔案</a></div>
+      </div>
+      <div class="item-card-actions" style="flex-shrink:0;gap:6px">
+        <button class="btn btn-sm" style="background:${isPublished?'#e67e22':'#27ae60'};color:#fff"
+          onclick="toggleDocPublish(${i})">${isPublished ? '隱藏' : '顯示'}</button>
+        <button class="btn btn-sm" style="background:var(--blue);color:#fff"
+          onclick="editDoc(${i})">✏️ 編輯</button>
+        <button class="btn btn-red btn-sm" onclick="deleteDoc(${i})">刪除</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function toggleDocPublish(i) {
+  const doc = staticData.documents[i];
+  if (!doc) return;
+  doc.published = doc.published === false ? true : false;
+  doc.updatedAt = new Date().toISOString().slice(0,10);
+  try {
+    await saveData('update: doc publish - ' + doc.title);
+    renderDocsList();
+    showStatus(doc.published ? '✅ 已設為顯示' : '文件已隱藏');
+  } catch(e) { showStatus('儲存失敗：' + e.message, true); }
+}
+
+function editDoc(i) {
+  const doc = staticData.documents[i];
+  if (!doc) return;
+  editMode = { type: 'doc', index: i };
+  const cats = ['申請書表','章程','政策公告','公告文件','教育訓練','其他文件'];
+  const opts = cats.map(c => `<option${doc.category===c?' selected':''}>${c}</option>`).join('');
+  openModal('✏️ 編輯文件設定', `
+    <div class="field"><label>文件名稱</label><input id="e-title" value="${(doc.title||'').replace(/"/g,'&quot;')}"></div>
+    <div class="field">
+      <label>分類（決定顯示在下載專區哪個類別）</label>
+      <select id="e-doc-cat">${opts}</select>
+    </div>
+    <div class="field" style="display:flex;align-items:center;gap:10px">
+      <input type="checkbox" id="e-doc-published" ${doc.published!==false?'checked':''} style="width:18px;height:18px">
+      <label for="e-doc-published" style="margin:0;cursor:pointer">在下載專區顯示此文件</label>
+    </div>
+    <div class="field-hint">隱藏後文件仍保留在後台，可隨時重新開啟顯示。</div>
+  `);
+}
+
+async function deleteDoc(i) {
+  if (!confirm('確定從清單中移除此文件？（檔案仍保留在伺服器，只是從前台移除）')) return;
+  staticData.documents.splice(i, 1);
+  try { await saveData('delete: doc item'); renderDocsList(); showStatus('已從清單移除'); }
+  catch(e) { showStatus('移除失敗：' + e.message, true); }
+}
+
+
+// ══ AUTO-VERSION: 每次儲存後自動更新所有頁面版本號 ══
+async function autoUpdatePageVersions(timestamp) {
+  const pages = ['index','about','board','members','news','services',
+                  'training','brand','downloads','contact'];
+  const newV = timestamp.replace(/[^0-9]/g, '').slice(0, 14);
+
+  for (const page of pages) {
+    try {
+      const fname = page + '.html';
+      const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${fname}`, {
+        headers: { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      const data = await res.json();
+      const bytes = Uint8Array.from(atob(data.content.replace(/\n/g,'')), c=>c.charCodeAt(0));
+      let html = new TextDecoder('utf-8').decode(bytes);
+
+      // Replace guild-data-static.js version
+      html = html.replace(/guild-data-static\.js\?v=[^\s'"]+/g, `guild-data-static.js?v=${newV}`);
+      // Replace guild-api.js version
+      html = html.replace(/guild-api\.js\?v=[^\s'"]+/g, `guild-api.js?v=${newV}`);
+
+      const encoder = new TextEncoder();
+      const encoded = encoder.encode(html);
+      let b64 = '';
+      const CHUNK = 6144;
+      for (let i = 0; i < encoded.length; i += CHUNK) {
+        b64 += btoa(String.fromCharCode(...encoded.subarray(i, i + CHUNK)));
+      }
+
+      await fetch(`https://api.github.com/repos/${REPO}/contents/${fname}`, {
+        method: 'PUT',
+        headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
+        body: JSON.stringify({ message: `auto-version: ${fname} v${newV}`, content: b64, sha: data.sha })
+      });
+    } catch(e) {
+      // Silent - version update is best-effort
+      console.warn('autoUpdatePageVersions failed for', page, e);
+    }
+  }
+  console.log('[AutoVersion] All pages updated to v' + newV);
 }
 
 // Enter key support
