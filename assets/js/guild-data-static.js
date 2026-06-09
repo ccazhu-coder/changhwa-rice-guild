@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T06:09:32.794Z */
+/* generatedAt: 2026-06-09T06:10:08.407Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -754,7 +754,8 @@ window.GUILD_STATIC_DATA = {
         "name": "陳溪泉",
         "company": "億東企業股份有限公司",
         "address": "彰化縣竹塘鄉中央路一段1501號",
-        "photoPosition": "center 20%"
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/陳溪泉_1780985405038.png"
       },
       {
         "role": "顧問",
