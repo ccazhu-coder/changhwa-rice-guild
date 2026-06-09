@@ -2,6 +2,10 @@
 
 
 
+
+
+
+
   'use strict';
 
 
@@ -10,15 +14,39 @@
 
 
 
+
+
+
+
+
+
+
+
   
 
 
 
+
+
+
+
   
 
 
 
+
+
+
+
   
+
+
+
+
+
+
+
+
 
 
 
@@ -30,7 +58,15 @@
 
 
 
+
+
+
+
   function clean(v){return String(v==null?'':v).trim()}
+
+
+
+
 
 
 
@@ -38,7 +74,15 @@
 
 
 
+
+
+
+
   function url(action,params){var q=new URLSearchParams(Object.assign({action:action},params||{}));return API_URL+'?'+q.toString()}
+
+
+
+
 
 
 
@@ -46,7 +90,15 @@
 
 
 
+
+
+
+
   function staticOrFetch(action,params){var d={};var s=window.GUILD_STATIC_DATA||{};if(action==='home')d={news:s.news||[],gallery:s.gallery||[]};else if(action==='news')d={news:s.news||[]};else if(action==='gallery')d={gallery:s.gallery||[]};else if(action==='members')d={members:s.members||[]};else if(action==='board')d={board:s.board||{}};else if(action==='notifications')d={notifications:s.notifications||[]};else if(action==='policies')d={policies:s.policies||[]};else if(action==='documents')d={documents:s.documents||[]};return Promise.resolve(d)}
+
+
+
+
 
 
 
@@ -54,7 +106,15 @@
 
 
 
+
+
+
+
   function injectStyles(){if(document.getElementById('guild-api-photo-style'))return;
+
+
+
+
 
 
 
@@ -62,7 +122,15 @@
 
 
 
+
+
+
+
   s.id='guild-api-photo-style';
+
+
+
+
 
 
 
@@ -70,7 +138,15 @@
 
 
 
+
+
+
+
   document.head.appendChild(s);
+
+
+
+
 
 
 
@@ -78,7 +154,15 @@
 
 
 
+
+
+
+
   lb.id='guild-lightbox';
+
+
+
+
 
 
 
@@ -86,7 +170,15 @@
 
 
 
+
+
+
+
   lb.addEventListener('click',function(e){if(e.target===lb)guildLbClose();});
+
+
+
+
 
 
 
@@ -94,7 +186,15 @@
 
 
 
+
+
+
+
   window._lbPhotos=[];
+
+
+
+
 
 
 
@@ -102,7 +202,15 @@
 
 
 
+
+
+
+
   window._lbAlbums={};
+
+
+
+
 
 
 
@@ -110,7 +218,15 @@
 
 
 
+
+
+
+
     var photos=window._lbAlbums[albumId]||[];
+
+
+
+
 
 
 
@@ -118,7 +234,15 @@
 
 
 
+
+
+
+
     window._lbPhotos=photos;
+
+
+
+
 
 
 
@@ -126,7 +250,15 @@
 
 
 
+
+
+
+
     _guildLbShow();
+
+
+
+
 
 
 
@@ -134,11 +266,23 @@
 
 
 
+
+
+
+
     document.addEventListener('keydown',_guildLbKey);
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -146,7 +290,15 @@
 
 
 
+
+
+
+
     document.getElementById('guild-lightbox').classList.remove('open');
+
+
+
+
 
 
 
@@ -154,7 +306,15 @@
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -162,7 +322,15 @@
 
 
 
+
+
+
+
     var n=window._lbPhotos.length;
+
+
+
+
 
 
 
@@ -170,7 +338,15 @@
 
 
 
+
+
+
+
     window._lbIdx=(window._lbIdx+dir+n)%n;
+
+
+
+
 
 
 
@@ -178,7 +354,15 @@
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -186,7 +370,15 @@
 
 
 
+
+
+
+
     var p=window._lbPhotos[window._lbIdx];
+
+
+
+
 
 
 
@@ -194,7 +386,15 @@
 
 
 
+
+
+
+
     var imgEl=document.getElementById('guild-lb-img');
+
+
+
+
 
 
 
@@ -202,7 +402,15 @@
 
 
 
+
+
+
+
     imgEl.src=p.src;
+
+
+
+
 
 
 
@@ -210,7 +418,15 @@
 
 
 
+
+
+
+
     document.getElementById('guild-lb-caption').textContent=p.alt||'';
+
+
+
+
 
 
 
@@ -218,7 +434,15 @@
 
 
 
+
+
+
+
     document.getElementById('guild-lb-counter').textContent=n>1?(window._lbIdx+1)+' / '+n:'';
+
+
+
+
 
 
 
@@ -226,11 +450,23 @@
 
 
 
+
+
+
+
     document.getElementById('guild-lb-next').style.display=n>1?'flex':'none';
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -238,7 +474,15 @@
 
 
 
+
+
+
+
     if(e.key==='Escape')guildLbClose();
+
+
+
+
 
 
 
@@ -246,7 +490,15 @@
 
 
 
+
+
+
+
     else if(e.key==='ArrowRight')guildLbNav(1);
+
+
+
+
 
 
 
@@ -254,7 +506,15 @@
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -262,7 +522,15 @@
 
 
 
+
+
+
+
   function extractDriveFileId(url){url=clean(url);var m=url.match(/\/file\/d\/([^/?#]+)/);if(m&&m[1])return m[1];m=url.match(/[?&]id=([^&]+)/);return m&&m[1]?m[1]:''}
+
+
+
+
 
 
 
@@ -270,7 +538,15 @@
 
 
 
+
+
+
+
   function driveImageUrl(url){return clean(url)}
+
+
+
+
 
 
 
@@ -278,7 +554,15 @@
 
 
 
+
+
+
+
   function isTrainingItem(item){var t=clean(item.title||item.activityTitle);return t.indexOf('115年度會員教育訓練')>-1||t.indexOf('農產品業稅務')>-1}
+
+
+
+
 
 
 
@@ -286,7 +570,15 @@
 
 
 
+
+
+
+
   function newsCard(item){
+
+
+
+
 
 
 
@@ -294,7 +586,15 @@
 
 
 
+
+
+
+
     var color=newsBadgeColor(item.category||'');
+
+
+
+
 
 
 
@@ -302,7 +602,15 @@
 
 
 
+
+
+
+
     var link=item.registerUrl?'<a href="'+esc(item.registerUrl)+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:4px;margin-top:10px;font-size:.8rem;font-weight:700;color:'+color+'">查看詳情 →</a>':'';
+
+
+
+
 
 
 
@@ -310,7 +618,15 @@
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -318,7 +634,15 @@
 
 
 
+
+
+
+
     var cat=esc(item.category||'公告');
+
+
+
+
 
 
 
@@ -326,11 +650,23 @@
 
 
 
+
+
+
+
     return '<div style="background:#fff;border:1px solid #e6ddc9;border-radius:12px;padding:14px 18px;display:flex;align-items:center;gap:14px;transition:box-shadow .18s"><div style="width:8px;height:8px;border-radius:50%;background:'+color+';flex-shrink:0"></div><div style="font-size:.72rem;color:#aaa;flex-shrink:0;width:80px">'+esc(item.rocDate||item.date)+'</div><div style="font-size:.9rem;font-weight:700;color:#183f21;flex:1">'+esc(item.title)+'</div><span style="background:'+color+';color:#fff;font-size:.62rem;font-weight:800;padding:2px 8px;border-radius:20px;flex-shrink:0;white-space:nowrap">'+cat+'</span></div>';
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -338,7 +674,15 @@
 
 
 
+
+
+
+
   var co=coverOffset||0;
+
+
+
+
 
 
 
@@ -346,7 +690,15 @@
 
 
 
+
+
+
+
   if(photos.length){return '<div class="activity-photo-strip">'+photos.map(function(p,i){var img=p.url||p.rawUrl;return '<figure onclick="guildLb(\''+esc(item.id)+'\','+(i+co)+')"><img src="'+esc(img)+'" alt="'+esc(p.caption||item.title)+'" loading="lazy"><figcaption>'+esc(p.caption||'活動照片')+'</figcaption></figure>';}).join('')+'</div>';}
+
+
+
+
 
 
 
@@ -354,11 +706,23 @@
 
 
 
+
+
+
+
   return '';
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -366,7 +730,15 @@
 
 
 
+
+
+
+
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
+
+
+
+
 
 
 
@@ -374,7 +746,15 @@
 
 
 
+
+
+
+
   var bodyExtras=hasImg?'':'<span class="news-tag" style="margin-bottom:10px;display:inline-block">'+esc(item.category||'消息')+'</span><br>';
+
+
+
+
 
 
 
@@ -382,11 +762,23 @@
 
 
 
+
+
+
+
   return '<div class="news-feat-card">'+imgHtml+'<div class="news-feat-body">'+bodyExtras+'<div class="news-date">'+esc(item.rocDate||item.date)+'</div><h2>'+esc(item.title)+'</h2>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+link+'</div></div>';
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -394,11 +786,23 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
   var isDM=item.category==='招生DM';
 
 
 
+
+
+
+
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
+
+
+
+
 
 
 
@@ -406,7 +810,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
   if(hasImg){
+
+
+
+
 
 
 
@@ -414,7 +826,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
     imgHtml='<a href="'+esc(clickTarget)+'" target="_blank" rel="noopener" style="display:block;position:relative;overflow:hidden">'
+
+
+
+
 
 
 
@@ -422,7 +842,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
       +(isDM?'<div style="position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.55);color:#fff;border-radius:8px;padding:3px 8px;font-size:.68rem">👆 點開查看</div>':'')
+
+
+
+
 
 
 
@@ -430,7 +858,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
   } else {
+
+
+
+
 
 
 
@@ -438,7 +874,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
       +(isDM?'<span style="font-size:1.5rem">📄</span><span>招生DM</span>':'<span style="color:#5a7a5e">'+esc(item.category||'消息')+'</span>')
+
+
+
+
 
 
 
@@ -446,7 +890,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -454,7 +906,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
   if(item.registerUrl){
+
+
+
+
 
 
 
@@ -462,7 +922,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
     var btnLabel=isDM?'👆 立即報名 →':'🔗 詳細資訊 →';
+
+
+
+
 
 
 
@@ -470,7 +938,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
       +' style="display:inline-flex;align-items:center;gap:6px;align-self:flex-start;margin-top:10px;padding:9px 20px;'
+
+
+
+
 
 
 
@@ -478,11 +954,23 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
       +'box-shadow:0 4px 12px rgba(0,0,0,.2)">'+btnLabel+'</a>';
 
 
 
+
+
+
+
   }
+
+
+
+
 
 
 
@@ -490,7 +978,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
   return '<div class="news-list-card">'
+
+
+
+
 
 
 
@@ -498,7 +994,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
     +'<div class="news-list-body">'
+
+
+
+
 
 
 
@@ -506,7 +1010,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
     +'<span style="font-size:.74rem;color:#8c8c8c">'+esc(item.rocDate||item.date)+'</span></div>'
+
+
+
+
 
 
 
@@ -514,7 +1026,15 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
     +summaryHtml
+
+
+
+
 
 
 
@@ -522,11 +1042,23 @@ function recentNewsCard(item){
 
 
 
+
+
+
+
     +'</div></div>';
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -534,7 +1066,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   var hasCover=item.coverImage&&isUsableImageUrl(item.coverImage);
+
+
+
+
 
 
 
@@ -542,7 +1082,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   if(hasCover)lbPhotos.push({src:item.coverImage,alt:item.title});
+
+
+
+
 
 
 
@@ -550,7 +1098,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   if(window._lbAlbums)window._lbAlbums[esc(item.id)]=lbPhotos;
+
+
+
+
 
 
 
@@ -558,7 +1114,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   var photos=photoGrid(item,coverOffset);
+
+
+
+
 
 
 
@@ -566,11 +1130,23 @@ function galleryCard(item){
 
 
 
+
+
+
+
   return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -578,7 +1154,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   var cat=item.category||'消息';
+
+
+
+
 
 
 
@@ -586,7 +1170,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   var COLORS={
+
+
+
+
 
 
 
@@ -594,7 +1186,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     '教育訓練':'linear-gradient(135deg,#1a5c4a,#2d9b78)',
+
+
+
+
 
 
 
@@ -602,7 +1202,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     '會務公告':'linear-gradient(135deg,#183f21,#0d2714)',
+
+
+
+
 
 
 
@@ -610,7 +1218,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     '會員大會':'linear-gradient(135deg,#5c4a00,#8a6800)',
+
+
+
+
 
 
 
@@ -618,7 +1234,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   };
+
+
+
+
 
 
 
@@ -626,7 +1250,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   var hasImg=item.coverImage&&isUsableImageUrl(item.coverImage);
+
+
+
+
 
 
 
@@ -634,7 +1266,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   var dateStr=item.rocDate||item.date||'';
+
+
+
+
 
 
 
@@ -642,7 +1282,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   if(isDM&&item.registerUrl){
+
+
+
+
 
 
 
@@ -650,7 +1298,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
       +' style="display:block;margin-top:16px;padding:14px 20px;'
+
+
+
+
 
 
 
@@ -658,7 +1314,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
       +'font-size:.98rem;font-weight:900;text-decoration:none;text-align:center;'
+
+
+
+
 
 
 
@@ -666,7 +1330,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
       +'✏️ 立即報名 →</a>';
+
+
+
+
 
 
 
@@ -674,7 +1346,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     var linkHref=item.registerUrl?esc(item.registerUrl):'news.html';
+
+
+
+
 
 
 
@@ -682,7 +1362,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     linkHtml='<a href="'+linkHref+'"'+target+' class="news-link-l">查看詳情 →</a>';
+
+
+
+
 
 
 
@@ -690,7 +1378,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
   return '<div class="news-card-l">'
+
+
+
+
 
 
 
@@ -698,11 +1394,23 @@ function galleryCard(item){
 
 
 
+
+
+
+
     +'<span class="news-tag-l">'+esc(cat)+'</span>'
 
 
 
+
+
+
+
     +'</div>'
+
+
+
+
 
 
 
@@ -710,7 +1418,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     +'<div class="news-date-l">'+esc(dateStr)+'</div>'
+
+
+
+
 
 
 
@@ -718,7 +1434,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     +(item.summary?'<p>'+esc(item.summary)+'</p>':'')
+
+
+
+
 
 
 
@@ -726,7 +1450,15 @@ function galleryCard(item){
 
 
 
+
+
+
+
     +'</div>'
+
+
+
+
 
 
 
@@ -734,7 +1466,19 @@ function galleryCard(item){
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -746,7 +1490,15 @@ function renderHome(){
 
 
 
+
+
+
+
   var newsBox=qs('homeNewsList');
+
+
+
+
 
 
 
@@ -754,7 +1506,15 @@ function renderHome(){
 
 
 
+
+
+
+
   if(!newsBox&&!galleryBox)return;
+
+
+
+
 
 
 
@@ -762,7 +1522,15 @@ function renderHome(){
 
 
 
+
+
+
+
     if(newsBox){
+
+
+
+
 
 
 
@@ -770,7 +1538,15 @@ function renderHome(){
 
 
 
+
+
+
+
       var dmN=allN.filter(function(n){return n.category==='招生DM';});
+
+
+
+
 
 
 
@@ -778,7 +1554,15 @@ function renderHome(){
 
 
 
+
+
+
+
       var news=dmN.concat(otherN).slice(0,3);
+
+
+
+
 
 
 
@@ -786,11 +1570,23 @@ function renderHome(){
 
 
 
+
+
+
+
         '<div style="color:#888;padding:20px">近期無最新消息</div>';
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -798,7 +1594,15 @@ function renderHome(){
 
 
 
+
+
+
+
       var gallery=sortList(data.gallery||[]).slice(0,6);
+
+
+
+
 
 
 
@@ -806,11 +1610,23 @@ function renderHome(){
 
 
 
+
+
+
+
         '<article class="service-card"><h3>活動花絮整理中</h3><p>活動結束後將於此呈現。</p></article>';
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -818,7 +1634,15 @@ function renderHome(){
 
 
 
+
+
+
+
     if(newsBox){
+
+
+
+
 
 
 
@@ -826,7 +1650,15 @@ function renderHome(){
 
 
 
+
+
+
+
     }
+
+
+
+
 
 
 
@@ -834,7 +1666,15 @@ function renderHome(){
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -842,7 +1682,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   var featBox    = qs('featuredNewsList');
+
+
+
+
 
 
 
@@ -850,7 +1698,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   var annBox     = qs('announceList');
+
+
+
+
 
 
 
@@ -858,7 +1714,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   var galleryBox = qs('galleryApiList');
+
+
+
+
 
 
 
@@ -870,7 +1734,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
+
+
+
+
   if(featBox||recentBox||annBox){
+
+
+
+
 
 
 
@@ -878,7 +1754,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       var all=sortList(data.news||[]);
+
+
+
+
 
 
 
@@ -886,7 +1770,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       var ann=all.filter(function(n){return n.category==='會務公告';});
+
+
+
+
 
 
 
@@ -894,7 +1786,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         var pinned=nonAnn.filter(function(n){return n.isPinned;}).slice(0,2);
+
+
+
+
 
 
 
@@ -902,11 +1802,23 @@ function renderNewsPage(){
 
 
 
+
+
+
+
           '<div style="color:#888;padding:20px 0">近期無精選消息</div>';
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -914,7 +1826,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         var recent=nonAnn.filter(function(n){return !n.isPinned;}).sort(function(a,b){var da=a.date||(a.rocDate?a.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');var db=b.date||(b.rocDate?b.rocDate.split('.').map(function(x,i){return i===0?String(Number(x)+1911):x.padStart(2,'0')}).join('-'):'');return db.localeCompare(da);}).slice(0,5);
+
+
+
+
 
 
 
@@ -922,11 +1842,23 @@ function renderNewsPage(){
 
 
 
+
+
+
+
           '<div style="color:#888;padding:20px 0">近期無消息</div>';
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -934,7 +1866,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         annBox.innerHTML=ann.length?ann.map(announceCard).join(''):
+
+
+
+
 
 
 
@@ -942,7 +1882,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       }
+
+
+
+
 
 
 
@@ -950,7 +1898,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       if(featBox)featBox.innerHTML='<div style="color:#888">消息載入失敗</div>';
+
+
+
+
 
 
 
@@ -958,7 +1914,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -970,7 +1938,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     staticOrFetch('notifications').then(function(data){
+
+
+
+
 
 
 
@@ -978,7 +1954,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         return (b.rocDate||b.date||'').localeCompare(a.rocDate||a.date||'');
+
+
+
+
 
 
 
@@ -986,7 +1970,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       var sec=document.getElementById('notifSection');
+
+
+
+
 
 
 
@@ -994,7 +1986,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         notifBox.innerHTML='<div class="notif-grid">'+list.map(notifCard).join('')+'</div>';
+
+
+
+
 
 
 
@@ -1002,7 +2002,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       } else {
+
+
+
+
 
 
 
@@ -1010,7 +2018,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         if(sec)sec.style.display='none';
+
+
+
+
 
 
 
@@ -1018,11 +2034,27 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     });
 
 
 
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -1034,7 +2066,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     staticOrFetch('gallery',{limit:100}).then(function(data){
+
+
+
+
 
 
 
@@ -1042,7 +2082,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       galleryBox.innerHTML=list.length?list.map(galleryCard).join(''):
+
+
+
+
 
 
 
@@ -1050,7 +2098,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     }).catch(function(){
+
+
+
+
 
 
 
@@ -1058,7 +2114,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -1066,7 +2130,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -1078,7 +2150,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
+
+
+
+
   function renderBoardPage(){
+
+
+
+
 
 
 
@@ -1086,7 +2170,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   if(!box)return;
+
+
+
+
 
 
 
@@ -1094,7 +2186,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   var bd=s.board||{};
+
+
+
+
 
 
 
@@ -1102,7 +2202,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   if(!members.length){
+
+
+
+
 
 
 
@@ -1110,7 +2218,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     return;
+
+
+
+
 
 
 
@@ -1118,7 +2234,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   var titleEl=qs('boardTermTitle');
+
+
+
+
 
 
 
@@ -1130,7 +2254,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
+
+
+
+
   var dirCnt=0,supCnt=0,chairCnt=0;
+
+
+
+
 
 
 
@@ -1138,7 +2274,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     var r=m.role||'';
+
+
+
+
 
 
 
@@ -1146,7 +2290,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     else if(r==='常務理事'||r==='理事')dirCnt++;
+
+
+
+
 
 
 
@@ -1154,7 +2306,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   });
+
+
+
+
 
 
 
@@ -1162,7 +2322,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   if(sumCards.length>=3){sumCards[0].textContent=chairCnt;sumCards[1].textContent=dirCnt;sumCards[2].textContent=supCnt;}
+
+
+
+
+
+
+
+
 
 
 
@@ -1178,7 +2350,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
+
+
+
+
   function nameCard(m){
+
+
+
+
 
 
 
@@ -1186,7 +2370,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     var photoSrc=hasPhoto?(BASE+m.photo.replace('./','')):' ';
+
+
+
+
 
 
 
@@ -1194,7 +2386,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     var isLongRole=(m.role||'').length>4;
+
+
+
+
 
 
 
@@ -1202,7 +2402,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       ?('<img src="'+esc(photoSrc)+'" alt="'+esc(m.name)+'" loading="lazy" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+
+
+
+
 
 
 
@@ -1210,7 +2418,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       :'<div class="nc-initial">'+surname+'</div>';
+
+
+
+
 
 
 
@@ -1218,7 +2434,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       +'<div class="nc-photo">'+photoHtml+'</div>'
+
+
+
+
 
 
 
@@ -1226,7 +2450,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       +'<div class="nc-role'+(isLongRole?' nc-role-long':'')+'">'+esc(m.role||'')+'</div>'
+
+
+
+
 
 
 
@@ -1234,7 +2466,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       +'<div class="nc-company">'+esc(m.company||'')+'</div>'
+
+
+
+
 
 
 
@@ -1242,11 +2482,27 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       +'</article>';
 
 
 
+
+
+
+
   }
+
+
+
+
+
+
+
+
 
 
 
@@ -1258,7 +2514,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   function renderDirGroup(list){
+
+
+
+
 
 
 
@@ -1266,7 +2530,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     var standing = list.filter(function(m){return m.role==='常務理事';});
+
+
+
+
 
 
 
@@ -1274,7 +2546,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     var h='';
+
+
+
+
 
 
 
@@ -1282,7 +2562,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     if(standing.length) h+='<div class="nc-grid">'+standing.map(nameCard).join('')+'</div>';
+
+
+
+
 
 
 
@@ -1290,7 +2578,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     return h;
+
+
+
+
 
 
 
@@ -1302,7 +2598,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
+
+
+
+
   var GROUPS=[
+
+
+
+
 
 
 
@@ -1310,7 +2618,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
      test:function(r){return r==='理事長'||r==='常務理事'||r==='理事';},
+
+
+
+
 
 
 
@@ -1318,7 +2634,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     {label:'常務監事與監事',
+
+
+
+
 
 
 
@@ -1326,7 +2650,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     {label:'候補理事與候補監事',
+
+
+
+
 
 
 
@@ -1334,7 +2666,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     {label:'名譽理事長與顧問',
+
+
+
+
 
 
 
@@ -1342,13 +2682,27 @@ function renderNewsPage(){
 
 
 
+
+
+
+
      test:function(r){return r==='名譽理事長'||r==='顧問';}},
+
+
+
+
 
 
 
     {label:'會務人員',
 
-     test:function(r){return r==='總幹事'||r==='專案經理';}}
+
+
+     test:function(r){return r==='總幹事'||r==='專案經理'||r==='秘書';}}
+
+
+
+
 
 
 
@@ -1360,7 +2714,19 @@ function renderNewsPage(){
 
 
 
+
+
+
+
+
+
+
+
   var html='';
+
+
+
+
 
 
 
@@ -1368,7 +2734,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     var list=members.filter(function(m){return g.test(m.role||'');});
+
+
+
+
 
 
 
@@ -1376,7 +2750,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     if(!list.length)return;
+
+
+
+
 
 
 
@@ -1384,7 +2766,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       ? renderDirGroup(list)
+
+
+
+
 
 
 
@@ -1392,7 +2782,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     html+='<div class="nc-group">'
+
+
+
+
 
 
 
@@ -1400,7 +2798,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       +gridHtml
+
+
+
+
 
 
 
@@ -1408,7 +2814,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   });
+
+
+
+
 
 
 
@@ -1416,7 +2830,35 @@ function renderNewsPage(){
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1444,7 +2886,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     var box=qs('trainingGalleryList');
+
+
+
+
 
 
 
@@ -1452,7 +2902,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     staticOrFetch('gallery',{limit:50}).then(function(data){
+
+
+
+
 
 
 
@@ -1460,7 +2918,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         return (item.category||'')==='教育訓練';
+
+
+
+
 
 
 
@@ -1468,7 +2934,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       if(!list.length){
+
+
+
+
 
 
 
@@ -1476,7 +2950,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
         return;
+
+
+
+
 
 
 
@@ -1484,7 +2966,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       box.innerHTML=list.map(galleryCard).join('');
+
+
+
+
 
 
 
@@ -1492,11 +2982,23 @@ function renderNewsPage(){
 
 
 
+
+
+
+
       box.innerHTML='<p style="color:#666;padding:20px">載入失敗，請稍後再試。</p>';
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -1504,7 +3006,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
   function notifCard(item){
+
+
+
+
 
 
 
@@ -1512,7 +3022,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     '環保局':'#1a6b5c','農業部':'#3a5a1a','食藥署':'#8b1a1a'}[item.agency||'']||'#183f21';
+
+
+
+
 
 
 
@@ -1520,7 +3038,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     ?'<a href="'+esc(item.externalUrl)+'" target="_blank" rel="noopener"'
+
+
+
+
 
 
 
@@ -1528,7 +3054,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     :'';
+
+
+
+
 
 
 
@@ -1536,7 +3070,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     ?'<a href="'+esc(item.fileUrl)+'" target="_blank" rel="noopener"'
+
+
+
+
 
 
 
@@ -1544,7 +3086,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     :'';
+
+
+
+
 
 
 
@@ -1552,7 +3102,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     +'<div class="notif-card-top">'
+
+
+
+
 
 
 
@@ -1560,7 +3118,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     +'<span class="notif-date-small">'+esc(item.rocDate||item.date||'')+'</span>'
+
+
+
+
 
 
 
@@ -1568,7 +3134,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     +'<h3 class="notif-title">'+esc(item.title||'')+'</h3>'
+
+
+
+
 
 
 
@@ -1576,7 +3150,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
     +(linkBtn||fileBtn?'<div class="notif-btns">'+linkBtn+fileBtn+'</div>':'')
+
+
+
+
 
 
 
@@ -1584,7 +3166,15 @@ function renderNewsPage(){
 
 
 
+
+
+
+
 }
+
+
+
+
 
 
 
@@ -1592,7 +3182,15 @@ function renderDownloadsPage(){
 
 
 
+
+
+
+
   var box=qs('notifListDownloads');
+
+
+
+
 
 
 
@@ -1600,7 +3198,15 @@ function renderDownloadsPage(){
 
 
 
+
+
+
+
   staticOrFetch('notifications').then(function(data){
+
+
+
+
 
 
 
@@ -1608,7 +3214,15 @@ function renderDownloadsPage(){
 
 
 
+
+
+
+
       return (b.rocDate||b.date||'').localeCompare(a.rocDate||a.date||'');
+
+
+
+
 
 
 
@@ -1616,7 +3230,15 @@ function renderDownloadsPage(){
 
 
 
+
+
+
+
     box.innerHTML=list.length?'<div class="notif-grid">'+list.map(notifCard).join('')+'</div>'
+
+
+
+
 
 
 
@@ -1624,7 +3246,15 @@ function renderDownloadsPage(){
 
 
 
+
+
+
+
     var sec=document.getElementById('notifDownloadSection');
+
+
+
+
 
 
 
@@ -1632,11 +3262,27 @@ function renderDownloadsPage(){
 
 
 
+
+
+
+
   });
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -1648,7 +3294,15 @@ function renderDownloadsPage(){
 
 
 
+
+
+
+
 function renderPoliciesPage(){
+
+
+
+
 
 
 
@@ -1656,7 +3310,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
   if(!box)return;
+
+
+
+
 
 
 
@@ -1664,7 +3326,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
     var list=data.policies||[];
+
+
+
+
 
 
 
@@ -1672,7 +3342,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
     var CAT_CONFIG={
+
+
+
+
 
 
 
@@ -1680,7 +3358,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
       '糧食儲運類':    {icon:'📦', color:'#1a5c4a', bg:'#f0faf7', border:'#2d9b78'},
+
+
+
+
 
 
 
@@ -1688,7 +3374,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
       '人民團體法規':  {icon:'📋', color:'#1a3060', bg:'#f0f3fa', border:'#2e5cb8'}
+
+
+
+
 
 
 
@@ -1696,7 +3390,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
     var DEFAULT={icon:'📄', color:'#666', bg:'#f9f9f9', border:'#aaa'};
+
+
+
+
 
 
 
@@ -1704,7 +3406,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
     var catOrder=[];
+
+
+
+
 
 
 
@@ -1712,7 +3422,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
       var c=p.category||'其他';
+
+
+
+
 
 
 
@@ -1720,11 +3438,23 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
       cats[c].push(p);
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -1732,7 +3462,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
     catOrder.forEach(function(cat){
+
+
+
+
 
 
 
@@ -1740,7 +3478,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
       html+='<div class="pol-group pol-custom" style="background:'+cfg.bg+';border:1px solid '+cfg.border+'33;border-left:4px solid '+cfg.border+';border-radius:16px;padding:22px 26px;margin-bottom:26px">'
+
+
+
+
 
 
 
@@ -1748,7 +3494,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
         +'<span style="font-size:1.6rem">'+cfg.icon+'</span>'
+
+
+
+
 
 
 
@@ -1756,7 +3510,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
         +'<span style="margin-left:auto;font-size:.72rem;color:'+cfg.border+';font-weight:700;background:'+cfg.border+'18;padding:3px 10px;border-radius:20px">'+list.filter(function(p){return(p.category||'其他')===cat;}).length+' 條</span>'
+
+
+
+
 
 
 
@@ -1764,7 +3526,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
         +'<div style="display:grid;gap:10px">';
+
+
+
+
 
 
 
@@ -1772,7 +3542,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
         html+='<div style="display:flex;align-items:center;gap:12px;background:#fff;border:1px solid '+cfg.border+'28;border-radius:10px;padding:12px 16px;">'
+
+
+
+
 
 
 
@@ -1780,7 +3558,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
         if(p.url){
+
+
+
+
 
 
 
@@ -1788,7 +3574,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
         } else {
+
+
+
+
 
 
 
@@ -1796,7 +3590,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
         }
+
+
+
+
 
 
 
@@ -1804,7 +3606,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
       });
+
+
+
+
 
 
 
@@ -1812,7 +3622,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
     });
+
+
+
+
 
 
 
@@ -1820,7 +3638,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
     var sec=document.getElementById('policiesSection');
+
+
+
+
 
 
 
@@ -1828,7 +3654,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
   });
+
+
+
+
 
 
 
@@ -1840,7 +3674,19 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
+
+
+
+
   document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderPoliciesPage();renderDownloadsPage()});
+
+
+
+
 
 
 
@@ -1848,7 +3694,15 @@ function renderPoliciesPage(){
 
 
 
+
+
+
+
 })();
+
+
+
+
 
 
 
