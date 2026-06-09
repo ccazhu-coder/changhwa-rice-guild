@@ -799,7 +799,9 @@ window.GUILD_STATIC_DATA = {
         "company": "金墩糧坊股份有限公司",
         "address": "彰化縣花壇鄉金墩街154巷11號",
         "photo": "./圖庫/理監事/沈踴志_1780985868037.png"
-      }
+      },
+      {"role":"總幹事","name":"林碧霞","company":"","address":""},
+      {"role":"專案經理","name":"張鄭珠","company":"","address":""}
     ]
   },
   "brand": {
