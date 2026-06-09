@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T07:43:33.972Z */
+/* generatedAt: 2026-06-09T07:43:59.323Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -848,8 +848,8 @@ window.GUILD_STATIC_DATA = {
       {
         "role": "專案經理",
         "name": "張鄭珠",
-        "company": "",
-        "address": "",
+        "company": "彰化縣米穀商業同業公會",
+        "address": "彰化市興北里長壽街194號",
         "photoPosition": "center 20%",
         "photo": "./圖庫/理監事/張鄭珠_1780988840383.png"
       }
