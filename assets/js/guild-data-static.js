@@ -1,7 +1,25 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T07:07:24.741Z */
+/* generatedAt: 2026-06-09T07:19:57.702Z */
 window.GUILD_STATIC_DATA = {
   "news": [
+    {
+      "id": "NEWS-0006",
+      "date": "115-6-9",
+      "rocDate": "115.6.9",
+      "category": "教育訓練",
+      "title": "第3次TTQS輔導",
+      "summary": "本會於115年6月9日辦理第3次TTQS輔導，持續強化教育訓練品質管理，協助完善課程規劃、執行紀錄與成果佐證資料，提升訓練制度化與後續評核準備成效。",
+      "location": "",
+      "registerUrl": "",
+      "status": "活動結束",
+      "coverImage": "圖庫/news-covers/cover_1780989595444.jpg",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 8,
+      "createdAt": "2026-06-09",
+      "updatedAt": "2026-06-09",
+      "note": ""
+    },
     {
       "id": "NEWS-0005",
       "date": "115-04-27",
