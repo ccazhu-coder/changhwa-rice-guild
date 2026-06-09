@@ -2952,7 +2952,7 @@ function renderBoardList() {
 
   if (!members.length) { el.innerHTML='<div style="color:var(--muted);font-size:.85rem">尚無資料</div>'; return; }
 
-  const roleOrder = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
+  const roleOrder = ['理事長','副理事長','常務理事','理事','常務監事','監事','候補理事','候補監事','名譽理事長','顧問','總幹事','專案經理','秘書'];
 
   const sorted = [...members].sort((a,b) => (roleOrder.indexOf(a.role)||99)-(roleOrder.indexOf(b.role)||99));
 
