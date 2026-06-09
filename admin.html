@@ -2954,7 +2954,7 @@ function renderBoardList() {
 
   const roleOrder = ['理事長','副理事長','常務理事','理事','常務監事','監事','候補理事','候補監事','名譽理事長','顧問','總幹事','專案經理','秘書'];
 
-  const sorted = [...members].sort((a,b) => (roleOrder.indexOf(a.role)||99)-(roleOrder.indexOf(b.role)||99));
+  const sorted = [...members].sort((a,b) => { const ai=roleOrder.indexOf(a.role); const bi=roleOrder.indexOf(b.role); return (ai===-1?99:ai)-(bi===-1?99:bi); });
 
   const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
 
