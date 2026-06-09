@@ -333,7 +333,31 @@
 <script>
 (function(){var t=document.getElementById('navToggle'),n=document.getElementById('mainNav');if(t&&n){t.addEventListener('click',function(){var o=n.classList.toggle('open');t.setAttribute('aria-expanded',String(o));});}})();
 </script>
-<script src="./assets/js/guild-data-static.js?v=20260609073302"></script>
-<script src="./assets/js/guild-api.js?v=20260609073302"></script>
+<script src="./assets/js/guild-data-static.js?v=20260609072510"></script>
+<script src="./assets/js/guild-api.js?v=20260609072510"></script>
+
+<!-- 燈箱 -->
+<div id="homeImgLightbox" onclick="closeHomeImg()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9999;align-items:center;justify-content:center;cursor:zoom-out">
+  <button onclick="event.stopPropagation();closeHomeImg()" style="position:absolute;top:18px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1">✕</button>
+  <img id="homeImgLightboxImg" src="" alt="" onclick="event.stopPropagation()" style="max-width:92vw;max-height:88vh;border-radius:10px;box-shadow:0 8px 40px rgba(0,0,0,.6)">
+</div>
+
+<!-- 彈窗 -->
+<div id="homePopupOverlay" onclick="closeHomePopup()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9998;align-items:center;justify-content:center;padding:16px">
+  <div onclick="event.stopPropagation()" style="background:#fff;border-radius:18px;max-width:560px;width:100%;padding:32px 28px;position:relative;max-height:80vh;overflow-y:auto;box-shadow:0 12px 48px rgba(0,0,0,.25)">
+    <button onclick="closeHomePopup()" style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#666;line-height:1">✕</button>
+    <h3 id="homePopupTitle" style="font-size:1.15rem;font-weight:900;color:#183f21;margin-bottom:14px;line-height:1.4;padding-right:28px"></h3>
+    <p id="homePopupBody" style="font-size:.9rem;color:#444;line-height:1.8;white-space:pre-wrap"></p>
+    <p style="margin-top:16px;font-size:.82rem;color:#888">如有疑問請洽公會秘書處：<strong style="color:#183f21">04-7222528</strong></p>
+  </div>
+</div>
+
+<script>
+function openHomeImg(src,alt){var lb=document.getElementById('homeImgLightbox');document.getElementById('homeImgLightboxImg').src=src;document.getElementById('homeImgLightboxImg').alt=alt||'';lb.style.display='flex';}
+function closeHomeImg(){document.getElementById('homeImgLightbox').style.display='none';}
+function openHomePopup(idx){var item=(window._homeNews||[])[idx];if(!item)return;document.getElementById('homePopupTitle').textContent=item.title||'';document.getElementById('homePopupBody').textContent=item.summary||item.content||'';document.getElementById('homePopupOverlay').style.display='flex';}
+function closeHomePopup(){document.getElementById('homePopupOverlay').style.display='none';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeHomeImg();closeHomePopup();}});
+</script>
 </body>
 </html>
