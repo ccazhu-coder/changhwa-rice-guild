@@ -1616,6 +1616,90 @@ async function saveData(msg) {
 
   const _H   = { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' };
 
+  const latestMeta = await fetch(_API, { headers: _H });
+
+  const latestData = await latestMeta.json();
+
+  const freshSha   = latestData.sha || staticData._sha;
+
+  try {
+
+    const freshBytes = Uint8Array.from(atob(latestData.content.replace(/\n/g,'')), c=>c.charCodeAt(0));
+
+    const freshText  = new TextDecoder('utf-8').decode(freshBytes);
+
+    const jsonStart  = freshText.indexOf('{', freshText.indexOf('window.GUILD_STATIC_DATA'));
+
+    let fdepth=0, jsonEnd=-1;
+
+    for(let fi=jsonStart;fi<freshText.length;fi++){if(freshText[fi]==='{')fdepth++;else if(freshText[fi]==='}'){if(--fdepth===0){jsonEnd=fi;break;}}}
+
+    const freshObj = JSON.parse(freshText.slice(jsonStart, jsonEnd+1));
+
+    Object.keys(freshObj).forEach(k=>{
+
+      if(Array.isArray(freshObj[k])&&Array.isArray(d[k])){if(freshObj[k].length>d[k].length)d[k]=freshObj[k];}
+
+      else if(!(k in d)){d[k]=freshObj[k];}
+
+    });
+
+  } catch(e){ /* merge failed, use in-memory data */ }
+
+  const newContent = `/* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */\n/* generatedAt: ${new Date().toISOString()} */\nwindow.GUILD_STATIC_DATA = ${JSON.stringify(d, null, 2)};\n`;
+
+  const encBytes = new TextEncoder().encode(newContent);
+
+  let b64 = '';
+
+  const CHUNK = 3 * 2048;
+
+  for (let i = 0; i < encBytes.length; i += CHUNK) {
+
+    b64 += btoa(String.fromCharCode(...encBytes.subarray(i, i + CHUNK)));
+
+  }
+
+  const res = await fetch(_API, {
+
+    method: 'PUT', headers: _H,
+
+    body: JSON.stringify({ message: msg, content: b64, sha: freshSha })
+
+  });
+
+  if (!res.ok) {
+
+    const errText = await res.text();
+
+    throw new Error(`儲存失敗 HTTP ${res.status}: ${errText.substring(0,150)}`);
+
+  }
+
+  const result = await res.json();
+
+  staticData._sha = result.content.sha;
+
+  Object.keys(d).forEach(k => { staticData[k] = d[k]; });
+
+  showStatus('✅ 已儲存！正在更新所有頁面版本……');
+
+  autoUpdatePageVersions(new Date().toISOString()).then(()=>{
+
+    showStatus('✅ 已儲存並更新所有頁面！網站將在 1～2 分鐘內生效。');
+
+  });
+
+}
+
+  const d = { ...staticData };
+
+  delete d._sha;
+
+  const _API = `https://api.github.com/repos/${REPO}/contents/${STATIC_JS_PATH}`;
+
+  const _H   = { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' };
+
   // 存檔前先抓 GitHub 最新資料，合併後再存（防止多視窗／多裝置互蓋）
 
   const latestMeta = await fetch(_API, { headers: _H });
