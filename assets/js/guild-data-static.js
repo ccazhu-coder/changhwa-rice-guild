@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T07:06:26.768Z */
+/* generatedAt: 2026-06-09T07:07:24.741Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -812,7 +812,9 @@ window.GUILD_STATIC_DATA = {
         "role": "專案經理",
         "name": "張鄭珠",
         "company": "",
-        "address": ""
+        "address": "",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/張鄭珠_1780988840383.png"
       }
     ]
   },
