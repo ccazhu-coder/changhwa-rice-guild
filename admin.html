@@ -541,6 +541,8 @@ a{color:inherit;text-decoration:none}
                 <option>理事長</option><option>副理事長</option><option>常務理事</option>
                 <option>理事</option><option>常務監事</option><option>監事</option>
                 <option>名譽理事長</option><option>顧問</option><option>候補理事</option><option>候補監事</option>
+                <option disabled>── 會務人員 ──</option>
+                <option>總幹事</option><option>專案經理</option>
               </select></div>
             <div class="field"><label>姓名</label><input id="brd-name" placeholder="例：王大明"></div>
           </div>
@@ -1499,7 +1501,7 @@ function editBoardMember(i) {
   const m = staticData.board.members[i];
   editMode = { type:'board', index:i };
   _pendingBoardPhoto = null;
-  const roles = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事'];
+  const roles = ['理事長','副理事長','常務理事','理事','常務監事','監事','名譽理事長','顧問','候補理事','候補監事','總幹事','專案經理'];
   const BASE = 'https://ccazhu-coder.github.io/changhwa-rice-guild/';
   const currentPhoto = m.photo ? `<img src="${BASE+m.photo.replace('./','')}" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--line)">` : '<div style="width:64px;height:64px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:2rem">👤</div>';
   openModal('✏️ 編輯理監事成員', `
