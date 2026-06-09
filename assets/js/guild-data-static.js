@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-08T06:44:48.221Z */
+/* generatedAt: 2026-06-09T06:09:32.794Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -737,7 +737,9 @@ window.GUILD_STATIC_DATA = {
         "role": "顧問",
         "name": "巫有凱",
         "company": "億興碾米廠",
-        "address": "彰化縣溪湖鎮彰水路一段53號"
+        "address": "彰化縣溪湖鎮彰水路一段53號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/巫有凱_1780985368387.png"
       },
       {
         "role": "顧問",
