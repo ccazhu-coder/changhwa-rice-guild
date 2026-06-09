@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T06:10:08.407Z */
+/* generatedAt: 2026-06-09T06:11:21.345Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -789,7 +789,9 @@ window.GUILD_STATIC_DATA = {
         "role": "候補監事",
         "name": "巫欣霖",
         "company": "億興碾米廠",
-        "address": "彰化縣西勢里彰水路1段53號"
+        "address": "彰化縣西勢里彰水路1段53號",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/巫欣霖_1780985477164.png"
       }
     ]
   },
