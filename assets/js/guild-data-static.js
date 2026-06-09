@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T06:21:45.864Z */
+/* generatedAt: 2026-06-09T07:06:26.768Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -800,8 +800,20 @@ window.GUILD_STATIC_DATA = {
         "address": "彰化縣花壇鄉金墩街154巷11號",
         "photo": "./圖庫/理監事/沈踴志_1780985868037.png"
       },
-      {"role":"總幹事","name":"林碧霞","company":"","address":""},
-      {"role":"專案經理","name":"張鄭珠","company":"","address":""}
+      {
+        "role": "總幹事",
+        "name": "林碧霞",
+        "company": "",
+        "address": "",
+        "photoPosition": "center 20%",
+        "photo": "./圖庫/理監事/林碧霞_1780988782186.png"
+      },
+      {
+        "role": "專案經理",
+        "name": "張鄭珠",
+        "company": "",
+        "address": ""
+      }
     ]
   },
   "brand": {
