@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T07:38:05.053Z */
+/* generatedAt: 2026-06-09T07:43:33.972Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -840,8 +840,8 @@ window.GUILD_STATIC_DATA = {
       {
         "role": "總幹事",
         "name": "林碧霞",
-        "company": "",
-        "address": "",
+        "company": "彰化縣米穀商業同業公會",
+        "address": "彰化市興北里長壽街194號",
         "photoPosition": "center 20%",
         "photo": "./圖庫/理監事/林碧霞_1780988782186.png"
       },
