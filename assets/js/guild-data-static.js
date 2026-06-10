@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T01:33:42.614Z */
+/* generatedAt: 2026-06-10T06:40:24.651Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1372,7 +1372,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "林振銘",
       "area": "埤頭鄉",
       "phone": "04-8897767",
-      "address": "中和村廟前路34號(彰水路一段350號)",
+      "address": "中和村廟前路34號",
       "createdAt": "2026-01-01"
     },
     {
