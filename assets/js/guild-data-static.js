@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:46:23.634Z */
+/* generatedAt: 2026-06-10T06:46:36.929Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4172,7 +4172,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "紀亞翔",
       "area": "大城鄉",
       "phone": "04-8946624 / 0938-988393",
-      "address": "魚寮路631號(二林中西里土地公廟)",
+      "address": "魚寮路631號",
       "createdAt": "2026-01-01"
     },
     {
