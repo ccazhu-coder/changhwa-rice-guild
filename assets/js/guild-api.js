@@ -2273,7 +2273,7 @@ function galleryCard(item){
 
 
 
-  return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag" style="background:'+galleryCatColor(item.category)+'">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
+  return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag" style="background:'+galleryCatColor(item.category)+';color:#fff">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 
 
 
