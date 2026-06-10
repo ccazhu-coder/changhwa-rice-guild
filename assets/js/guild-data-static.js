@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:48:02.715Z */
+/* generatedAt: 2026-06-10T06:48:09.882Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3232,7 +3232,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "李建諺",
       "area": "埔鹽鄉",
       "phone": "04-8656312 / 0933-562795",
-      "address": "西湖村大新路115號(同建億)",
+      "address": "西湖村大新路115號",
       "createdAt": "2026-01-01"
     },
     {
