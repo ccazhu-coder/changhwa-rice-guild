@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:47:41.841Z */
+/* generatedAt: 2026-06-10T06:48:02.715Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3252,7 +3252,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "施義泰",
       "area": "埔鹽鄉",
       "phone": "04-8651923 / 0933-418749",
-      "address": "新水村大新路1巷1橫巷2號(四聖宮)",
+      "address": "新水村大新路1巷1橫巷2號",
       "createdAt": "2026-01-01"
     },
     {
