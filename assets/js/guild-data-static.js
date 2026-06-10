@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T07:58:36.413Z */
+/* generatedAt: 2026-06-10T07:59:17.599Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -448,7 +448,7 @@ window.GUILD_STATIC_DATA = {
       "category": "教育訓練",
       "title": "第1次 TTQS輔導",
       "summary": "本會辦理第1次 TTQS 輔導，針對教育訓練規劃、課程執行流程、文件紀錄與成果追蹤進行檢視，協助本會逐步建立訓練品質管理制度，提升辦理教育訓練與專案執行之專業度與完整性。",
-      "result": "透過本次輔導，初步盤點本會教育訓練相關作業流程與文件架構，釐清後續需補強之重點，作為推動 TTQS 訓練品質管理與提升辦訓成效之基礎。",
+      "result": "",
       "participantCount": "",
       "coverImage": "圖庫/activities/115.03.11_第1次_TTQS輔導/photo_01.jpg",
       "albumUrl": "",
@@ -459,7 +459,7 @@ window.GUILD_STATIC_DATA = {
       "isPinned": false,
       "sort": 4,
       "createdAt": "2026-06-04",
-      "updatedAt": "2026-06-04",
+      "updatedAt": "2026-06-10",
       "note": "uploaded to 圖庫/activities/115.03.11_第1次_TTQS輔導",
       "photos": [
         {
