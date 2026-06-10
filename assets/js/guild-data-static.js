@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:45:20.607Z */
+/* generatedAt: 2026-06-10T06:45:42.937Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3832,7 +3832,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "黃奇茂",
       "area": "永靖鄉",
       "phone": "04-8223213",
-      "address": "東寧村永興路2段173號(員林市新義街200",
+      "address": "東寧村永興路2段173號",
       "createdAt": "2026-01-01"
     },
     {
