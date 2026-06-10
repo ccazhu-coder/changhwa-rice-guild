@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:40:40.932Z */
+/* generatedAt: 2026-06-10T06:41:10.409Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1122,7 +1122,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "梁硯筑",
       "area": "芳苑鄉",
       "phone": "04-8932726",
-      "address": "永興村光復巷18號(復興宮)",
+      "address": "永興村光復巷18號",
       "createdAt": "2026-01-01"
     },
     {
