@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:42:43.766Z */
+/* generatedAt: 2026-06-10T06:43:05.528Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1672,7 +1672,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "林佳祐",
       "area": "北斗鎮",
       "phone": "04-8876868 / 0933-198215",
-      "address": "北斗鎮七星里陶朱路50號(近溪州連豐)",
+      "address": "北斗鎮七星里陶朱路50號",
       "createdAt": "2026-01-01"
     },
     {
