@@ -30,6 +30,8 @@
 .social-info strong{display:block;font-size:.95rem;font-weight:800;color:#183f21;margin-bottom:2px}
 .social-info span{font-size:.78rem;color:#61716b}
 @media(max-width:580px){.social-grid{grid-template-columns:1fr}}
+.connect-grid{grid-template-columns:repeat(3,1fr)}
+@media(max-width:680px){.connect-grid{grid-template-columns:1fr;max-width:420px}}
 </style>
 <meta property="article:publisher" content="https://www.facebook.com/rice.ch.56/">
 <meta name="google-site-verification" content="">
@@ -115,7 +117,7 @@
       <p style="font-size:.95rem;color:var(--muted,#61716b)">透過 Google Maps 導航前往，或追蹤 Facebook 掌握最新消息</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto">
+    <div class="connect-grid" style="display:grid;gap:20px;max-width:1000px;margin:0 auto">
 
       <!-- Google Maps -->
       <a href="https://maps.app.goo.gl/iygnsofn5hhe2jBV6" target="_blank" rel="noopener noreferrer"
