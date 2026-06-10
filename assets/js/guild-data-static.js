@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:57:29.516Z */
+/* generatedAt: 2026-06-10T06:57:46.826Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1197,7 +1197,7 @@ window.GUILD_STATIC_DATA = {
     },
     {
       "id": "J-026",
-      "grade": "甲",
+      "grade": "乙",
       "name": "源益米廠",
       "owner": "鄧梁秀鳳",
       "area": "鹿港鎮",
