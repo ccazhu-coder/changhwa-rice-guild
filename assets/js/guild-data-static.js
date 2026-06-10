@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T08:25:47.668Z */
+/* generatedAt: 2026-06-10T08:26:50.326Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -391,68 +391,55 @@ window.GUILD_STATIC_DATA = {
           "note": "admin_uploaded"
         },
         {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_03.jpg",
-          "activityId": "",
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079998978_0.jpg",
+          "activityId": "ALB-0008",
           "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_03.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_03.jpg",
-          "caption": "照片 3",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079998978_0.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079998978_0.jpg",
+          "caption": "",
           "isCover": false,
           "isFeatured": true,
           "sort": 3,
-          "createdAt": "2026-06-04",
+          "createdAt": "2026-06-10",
           "note": "admin_uploaded"
         },
         {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_04.jpg",
-          "activityId": "",
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080001532_1.jpg",
+          "activityId": "ALB-0008",
           "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_04.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_04.jpg",
-          "caption": "照片 4",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080001532_1.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080001532_1.jpg",
+          "caption": "",
           "isCover": false,
           "isFeatured": true,
           "sort": 4,
-          "createdAt": "2026-06-04",
+          "createdAt": "2026-06-10",
           "note": "admin_uploaded"
         },
         {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_05.jpg",
-          "activityId": "",
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080004414_2.jpg",
+          "activityId": "ALB-0008",
           "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_05.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_05.jpg",
-          "caption": "照片 5",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080004414_2.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080004414_2.jpg",
+          "caption": "",
           "isCover": false,
           "isFeatured": true,
           "sort": 5,
-          "createdAt": "2026-06-04",
+          "createdAt": "2026-06-10",
           "note": "admin_uploaded"
         },
         {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_06.jpg",
-          "activityId": "",
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080006782_3.jpg",
+          "activityId": "ALB-0008",
           "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_06.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_06.jpg",
-          "caption": "照片 6",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080006782_3.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781080006782_3.jpg",
+          "caption": "",
           "isCover": false,
           "isFeatured": true,
           "sort": 6,
-          "createdAt": "2026-06-04",
-          "note": "admin_uploaded"
-        },
-        {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_07.jpg",
-          "activityId": "",
-          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_07.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_07.jpg",
-          "caption": "照片 7",
-          "isCover": false,
-          "isFeatured": true,
-          "sort": 7,
-          "createdAt": "2026-06-04",
+          "createdAt": "2026-06-10",
           "note": "admin_uploaded"
         }
       ]
