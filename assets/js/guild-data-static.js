@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:46:52.475Z */
+/* generatedAt: 2026-06-10T06:47:01.319Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4212,7 +4212,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "陳碧萱",
       "area": "竹塘鄉",
       "phone": "04-8974973 / 0981-622962",
-      "address": "竹塘村竹塘街74號(忠孝街149號收)",
+      "address": "竹塘村竹塘街74號",
       "createdAt": "2026-01-01"
     },
     {
