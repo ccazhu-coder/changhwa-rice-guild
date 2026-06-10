@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:55:39.118Z */
+/* generatedAt: 2026-06-10T06:55:54.898Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -977,7 +977,7 @@ window.GUILD_STATIC_DATA = {
     },
     {
       "id": "J-004",
-      "grade": "甲",
+      "grade": "乙",
       "name": "日美米店",
       "owner": "鄭江銘",
       "area": "彰化市",
