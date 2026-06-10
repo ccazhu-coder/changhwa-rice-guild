@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:45:42.937Z */
+/* generatedAt: 2026-06-10T06:46:05.774Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3902,7 +3902,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "巫豐宇",
       "area": "溪湖鎮",
       "phone": "04-8852245",
-      "address": "太平里員鹿路3段303號(福安宮)",
+      "address": "太平里員鹿路3段303號",
       "createdAt": "2026-01-01"
     },
     {
