@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:46:05.774Z */
+/* generatedAt: 2026-06-10T06:46:23.634Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4182,7 +4182,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "蕭楊彩綢",
       "area": "大城鄉",
       "phone": "04-8941373",
-      "address": "大城村西平路63號(蕭師傅)",
+      "address": "大城村西平路63號",
       "createdAt": "2026-01-01"
     },
     {
