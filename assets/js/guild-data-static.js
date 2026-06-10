@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:56:07.971Z */
+/* generatedAt: 2026-06-10T06:56:40.082Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1087,7 +1087,7 @@ window.GUILD_STATIC_DATA = {
     },
     {
       "id": "J-015",
-      "grade": "甲",
+      "grade": "乙",
       "name": "溢田米行",
       "owner": "江秋月",
       "area": "員林市",
