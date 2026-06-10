@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:43:45.962Z */
+/* generatedAt: 2026-06-10T06:44:06.156Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -2782,7 +2782,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "葉志峯",
       "area": "芬園鄉",
       "phone": "049-2521174 / 0932-688448",
-      "address": "舊社村彰南路5段322號(同益春碾米)",
+      "address": "舊社村彰南路5段322號",
       "createdAt": "2026-01-01"
     },
     {
