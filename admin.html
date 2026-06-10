@@ -352,18 +352,6 @@ a{color:inherit;text-decoration:none}
 
       </div>
 
-      <div class="sidebar-item" onclick="showTab('notif')" id="tab-btn-notif">
-
-        <span class="icon">📡</span>訊息轉知
-
-      </div>
-
-      <div class="sidebar-item" onclick="showTab('policy')" id="tab-btn-policy">
-
-        <span class="icon">⚖️</span>政策法規
-
-      </div>
-
       <div class="sidebar-item" onclick="showTab('gallery')" id="tab-btn-gallery">
 
         <span class="icon">🖼️</span>活動花絮
@@ -373,6 +361,18 @@ a{color:inherit;text-decoration:none}
       <div class="sidebar-item" onclick="showTab('dm')" id="tab-btn-dm">
 
         <span class="icon">📄</span>招生 DM
+
+      </div>
+
+      <div class="sidebar-item" onclick="showTab('notif')" id="tab-btn-notif">
+
+        <span class="icon">📡</span>訊息轉知
+
+      </div>
+
+      <div class="sidebar-item" onclick="showTab('policy')" id="tab-btn-policy">
+
+        <span class="icon">⚖️</span>政策法規
 
       </div>
 
@@ -1608,7 +1608,9 @@ async function loadData() {
 
 // ══ SAVE DATA ══
 
-async function saveData(msg) {
+async function saveData(msg, activeKey) {
+
+  const activeKeys = Array.isArray(activeKey) ? activeKey : (activeKey ? [activeKey] : []);
 
   const d = { ...staticData };
 
@@ -1639,6 +1641,8 @@ async function saveData(msg) {
     const freshObj = JSON.parse(freshText.slice(jsonStart, jsonEnd+1));
 
     Object.keys(freshObj).forEach(k=>{
+
+      if(activeKeys.includes(k)) return; // 此次操作已主動修改過此欄位，以本地資料為準（避免剛刪除的項目被遠端較長的舊陣列還原）
 
       if(Array.isArray(freshObj[k])&&Array.isArray(d[k])){if(freshObj[k].length>d[k].length)d[k]=freshObj[k];}
 
@@ -1828,6 +1832,12 @@ function editGallery(i) {
 
   const opts = cats.map(c => `<option${item.category===c?' selected':''}>${c}</option>`).join('');
 
+  editGalleryNewPhotos.forEach(p=>URL.revokeObjectURL(p.objectUrl));
+
+  editGalleryPhotos = JSON.parse(JSON.stringify(item.photos || []));
+
+  editGalleryNewPhotos = [];
+
   openModal('✏️ 編輯活動相簿', `
 
     <div class="field-row">
@@ -1844,9 +1854,35 @@ function editGallery(i) {
 
     <div class="field"><label>活動成果說明</label><input id="e-result" value="${item.result||''}"></div>
 
-    <p style="font-size:.76rem;color:var(--muted);margin-top:6px">📸 如需更新照片，請刪除後重新上傳</p>
+    <div class="field">
+
+      <label>📸 活動照片（點 ✕ 刪除，第一張為封面）</label>
+
+      <div id="e-gal-photo-thumbs" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px"></div>
+
+      <div id="e-gal-dropzone" style="border:2px dashed var(--border);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:all .2s;background:#fafafa;font-size:.82rem;color:var(--muted)"
+
+        onclick="document.getElementById('e-gal-photos').click()"
+
+        ondragover="event.preventDefault();this.style.borderColor='var(--green)';this.style.background='#f0f7f0'"
+
+        ondragleave="this.style.borderColor='var(--border)';this.style.background='#fafafa'"
+
+        ondrop="handleEditPhotoDrop(event)">
+
+        ➕ 點擊或拖曳以新增照片
+
+      </div>
+
+      <input type="file" id="e-gal-photos" accept="image/*" multiple style="display:none" onchange="addEditGalleryPhotos(this)">
+
+      <div id="e-gal-photo-count" style="font-size:.78rem;color:var(--muted);margin-top:4px"></div>
+
+    </div>
 
   `);
+
+  renderEditGalleryThumbs();
 
 }
 
@@ -1960,17 +1996,58 @@ async function saveEdit() {
 
     const item = staticData.gallery[editMode.index];
 
+    if (editGalleryPhotos.length + editGalleryNewPhotos.length === 0) { showModalError('請至少保留一張照片'); return; }
+
     item.rocDate=date; item.date=date.replace(/\./g,'-');
 
     item.category=cat; item.title=title; item.summary=summary;
 
     item.result=(document.getElementById('e-result')?.value||'').trim();
 
-    item.updatedAt=new Date().toISOString().slice(0,10);
+    try {
 
-    try { await saveData('update: gallery - '+title); renderGalleryList(); closeModal(); showStatus('✅ 活動相簿已更新！'); }
+      // 刪除使用者移除的照片檔案（非本地 repo 檔案，如舊版 Drive 連結，僅從清單移除）
+      const keptIds = new Set(editGalleryPhotos.map(p => p.photoId || p.url));
+      const removed = (item.photos||[]).filter(p => !keptIds.has(p.photoId || p.url));
+      for (const p of removed) {
+        const rp = p.photoId || p.url || p.rawUrl || '';
+        if (!rp || rp.startsWith('http')) continue;
+        await githubDeleteFile(rp, `delete: photo - ${title}`);
+      }
 
-    catch(e) { showModalError(e.message); }
+      // 上傳新增的照片（沿用既有相簿資料夾，若無既有照片則建立新資料夾）
+      const refItem = editGalleryPhotos[0] || removed[0];
+      const refPath = refItem ? (refItem.photoId || refItem.url || refItem.rawUrl || '') : '';
+      const repoFolder = (refPath && !refPath.startsWith('http') && refPath.includes('/'))
+        ? refPath.substring(0, refPath.lastIndexOf('/'))
+        : `圖庫/activities/${sanitizeFolderName(date + '_' + title)}`;
+
+      for (let pi = 0; pi < editGalleryNewPhotos.length; pi++) {
+        const { file } = editGalleryNewPhotos[pi];
+        const ext = file.name.split('.').pop().toLowerCase();
+        const repoPath = `${repoFolder}/photo_${Date.now()}_${pi}.${ext}`;
+        await githubUploadFile(file, repoPath, `add: photo ${repoPath}`);
+        editGalleryPhotos.push({
+          photoId: repoPath, activityId: item.id||'', activityTitle: title,
+          url: repoPath, rawUrl: repoPath, caption: '', isCover: false, isFeatured: true,
+          sort: 0, createdAt: new Date().toISOString().slice(0,10), note: 'admin_uploaded'
+        });
+      }
+
+      // 重新整理排序、封面與精選旗標
+      editGalleryPhotos.forEach((p, idx) => {
+        p.isCover = idx === 0;
+        p.isFeatured = idx < 8;
+        p.sort = idx + 1;
+        if (idx === 0) p.caption = p.caption || '封面';
+      });
+      item.photos = editGalleryPhotos;
+      item.coverImage = editGalleryPhotos[0].url || editGalleryPhotos[0].rawUrl;
+      item.updatedAt=new Date().toISOString().slice(0,10);
+
+      await saveData('update: gallery - '+title, 'gallery');
+      renderGalleryList(); closeModal(); showStatus('✅ 活動相簿已更新！');
+    } catch(e) { showModalError(e.message); }
 
   }
 
@@ -2060,6 +2137,17 @@ async function addNews() {
 
 
 
+// 全站共用：依分類顯示一致的徽章顏色（最新消息／活動相簿皆使用）
+const CAT_COLORS = {
+
+  '政策公告':'#1a3060','會務公告':'#183f21','教育訓練':'#1a5c4a',
+
+  '訓練品質':'#2e5cb8','公益活動':'#6b3a2e','會員大會':'#5c4a00','活動通知':'#526055','活動花絮':'#8a3b6b'
+
+};
+
+
+
 function renderNewsList() {
 
   const el = document.getElementById('news-list');
@@ -2067,14 +2155,6 @@ function renderNewsList() {
   const list = staticData.news || [];
 
   if (!list.length) { el.innerHTML = '<div style="color:var(--muted);font-size:.85rem">尚無消息。請使用上方表單新增。</div>'; return; }
-
-  const CAT_COLORS = {
-
-    '政策公告':'#1a3060','會務公告':'#183f21','教育訓練':'#1a5c4a',
-
-    '訓練品質':'#2e5cb8','公益活動':'#6b3a2e','會員大會':'#5c4a00','活動通知':'#526055'
-
-  };
 
   // Group by category for display
 
@@ -2150,7 +2230,7 @@ async function deleteNews(i) {
 
   staticData.news.splice(i, 1);
 
-  try { await saveData('content: delete news item'); renderNewsList(); }
+  try { await saveData('content: delete news item', 'news'); renderNewsList(); }
 
   catch(e) { showStatus('刪除失敗：' + e.message, true); }
 
@@ -2277,6 +2357,120 @@ function refreshPhotoThumbs() {
 function sanitizeFolderName(name) {
 
   return name.replace(/[\/\\:*?"<>|]/g, '-').replace(/\s+/g, '_').substring(0, 40);
+
+}
+
+
+
+// ── 編輯活動相簿時的照片管理狀態 ──
+
+let editGalleryPhotos = [];     // 既有照片的工作副本（splice 即代表刪除）
+
+let editGalleryNewPhotos = [];  // 待新增的照片 {file, objectUrl}
+
+
+
+function renderEditGalleryThumbs() {
+
+  const wrap = document.getElementById('e-gal-photo-thumbs');
+
+  if (!wrap) return;
+
+  const existing = editGalleryPhotos.map((p, i) => {
+
+    const src = `https://ccazhu-coder.github.io/changhwa-rice-guild/${(p.url||p.rawUrl||'').replace('./','')}`;
+
+    return `<div style="position:relative;width:72px;height:72px;border-radius:8px;overflow:hidden;border:2px solid ${i===0?'var(--green)':'var(--border)'};flex-shrink:0">
+
+      <img src="${src}" style="width:100%;height:100%;object-fit:cover">
+
+      ${i===0?'<div style="position:absolute;bottom:0;left:0;right:0;background:var(--green);color:#fff;font-size:.55rem;text-align:center;padding:1px;font-weight:700">封面</div>':''}
+
+      <button type="button" onclick="removeEditExistingPhoto(${i})" style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;border:none;background:rgba(192,57,43,.85);color:#fff;font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">✕</button>
+
+    </div>`;
+
+  }).join('');
+
+  const fresh = editGalleryNewPhotos.map((p, i) => {
+
+    const isCover = editGalleryPhotos.length===0 && i===0;
+
+    return `<div style="position:relative;width:72px;height:72px;border-radius:8px;overflow:hidden;border:2px solid ${isCover?'var(--green)':'var(--border)'};flex-shrink:0">
+
+      <img src="${p.objectUrl}" style="width:100%;height:100%;object-fit:cover">
+
+      <div style="position:absolute;top:0;left:0;background:var(--blue);color:#fff;font-size:.52rem;padding:1px 4px;border-radius:0 0 6px 0">新增</div>
+
+      ${isCover?'<div style="position:absolute;bottom:0;left:0;right:0;background:var(--green);color:#fff;font-size:.55rem;text-align:center;padding:1px;font-weight:700">封面</div>':''}
+
+      <button type="button" onclick="removeEditNewPhoto(${i})" style="position:absolute;top:2px;right:2px;width:18px;height:18px;border-radius:50%;border:none;background:rgba(192,57,43,.85);color:#fff;font-size:.65rem;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1">✕</button>
+
+    </div>`;
+
+  }).join('');
+
+  wrap.innerHTML = (existing + fresh) || '<div style="color:var(--muted);font-size:.8rem">尚無照片，請至少新增一張</div>';
+
+  const total = editGalleryPhotos.length + editGalleryNewPhotos.length;
+
+  const count = document.getElementById('e-gal-photo-count');
+
+  if (count) count.textContent = `共 ${total} 張（第一張為封面）`;
+
+}
+
+
+
+function removeEditExistingPhoto(i) {
+
+  editGalleryPhotos.splice(i, 1);
+
+  renderEditGalleryThumbs();
+
+}
+
+
+
+function removeEditNewPhoto(i) {
+
+  URL.revokeObjectURL(editGalleryNewPhotos[i].objectUrl);
+
+  editGalleryNewPhotos.splice(i, 1);
+
+  renderEditGalleryThumbs();
+
+}
+
+
+
+function addEditGalleryPhotos(input) {
+
+  Array.from(input.files).forEach(f => editGalleryNewPhotos.push({ file: f, objectUrl: URL.createObjectURL(f) }));
+
+  renderEditGalleryThumbs();
+
+  input.value = '';
+
+}
+
+
+
+function handleEditPhotoDrop(event) {
+
+  event.preventDefault();
+
+  const dz = document.getElementById('e-gal-dropzone');
+
+  if (dz) { dz.style.borderColor = 'var(--border)'; dz.style.background = '#fafafa'; }
+
+  const files = Array.from(event.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+
+  if (!files.length) { showStatus('請拖入圖片檔案（JPG / PNG）', true); return; }
+
+  files.forEach(f => editGalleryNewPhotos.push({ file: f, objectUrl: URL.createObjectURL(f) }));
+
+  renderEditGalleryThumbs();
 
 }
 
@@ -2468,13 +2662,15 @@ function renderGalleryList() {
 
     const photoCount = (item.photos||[]).length;
 
+    const catColor = CAT_COLORS[item.category] || '#526055';
+
     return `<div class="item-card">
 
       ${cover ? `<img src="${coverSrc}" style="width:80px;height:60px;object-fit:cover;border-radius:8px;flex-shrink:0" onerror="this.style.display='none'">` : ''}
 
       <div class="item-card-body">
 
-        <div class="item-title"><span class="badge">${item.category}</span>${item.title}</div>
+        <div class="item-title"><span style="background:${catColor};color:#fff;padding:2px 8px;border-radius:10px;font-size:.68rem;font-weight:800;margin-right:8px">${item.category}</span>${item.title}</div>
 
         <div class="item-meta">${item.rocDate} &nbsp;·&nbsp; ${photoCount > 0 ? `📸 ${photoCount} 張` : ''}${isLocal?'&nbsp;<span style="background:#e8f4e8;color:var(--green);border-radius:4px;padding:1px 5px;font-size:.65rem">本地儲存</span>':''}</div>
 
@@ -2504,7 +2700,7 @@ async function deleteGallery(i) {
 
   staticData.gallery.splice(i, 1);
 
-  try { await saveData('content: delete gallery item'); renderGalleryList(); }
+  try { await saveData('content: delete gallery item', 'gallery'); renderGalleryList(); }
 
   catch(e) { showStatus('刪除失敗：' + e.message, true); }
 
@@ -2627,6 +2823,36 @@ async function githubUploadFile(localFile, repoPath, commitMsg) {
     headers: { Authorization: `token ${GH_TOKEN}`, 'Content-Type': 'application/json', Accept: 'application/vnd.github.v3+json' },
 
     body: JSON.stringify(body)
+
+  });
+
+  if (!res.ok) throw new Error(await res.text());
+
+  return await res.json();
+
+}
+
+
+
+async function githubDeleteFile(repoPath, commitMsg) {
+
+  const _H = { Authorization: `token ${GH_TOKEN}`, Accept: 'application/vnd.github.v3+json' };
+
+  const check = await fetch(`https://api.github.com/repos/${REPO}/contents/${repoPath}`, { headers: _H, cache: 'no-store' });
+
+  if (check.status === 404) return; // 已不存在，視為已刪除
+
+  if (!check.ok) throw new Error(await check.text());
+
+  const meta = await check.json();
+
+  const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${repoPath}`, {
+
+    method: 'DELETE',
+
+    headers: { ..._H, 'Content-Type': 'application/json' },
+
+    body: JSON.stringify({ message: commitMsg, sha: meta.sha })
 
   });
 
@@ -3236,7 +3462,7 @@ async function deleteChairperson(i) {
 
   staticData.chairpersons.splice(i,1);
 
-  try { await saveData('delete: chairperson'); renderChairpersonsList(); showStatus('✅ 已刪除'); }
+  try { await saveData('delete: chairperson', 'chairpersons'); renderChairpersonsList(); showStatus('✅ 已刪除'); }
 
   catch(e) { showModalError(e.message); }
 
@@ -3370,7 +3596,7 @@ async function deleteMember(i) {
 
   staticData.members.splice(i,1);
 
-  try { await saveData('delete: member - ' + m.name + ' (退會)'); renderMemberList(); showStatus(`✅「${m.name}」已退會刪除`); }
+  try { await saveData('delete: member - ' + m.name + ' (退會)', 'members'); renderMemberList(); showStatus(`✅「${m.name}」已退會刪除`); }
 
   catch(e) { showModalError(e.message); }
 
@@ -3978,7 +4204,7 @@ async function deleteHistory(i) {
 
   staticData.history.splice(i,1);
 
-  try { await saveData('delete: history - '+h.title); renderHistoryList(); showStatus('✅ 已刪除'); }
+  try { await saveData('delete: history - '+h.title, 'history'); renderHistoryList(); showStatus('✅ 已刪除'); }
 
   catch(e) { showModalError(e.message); }
 
@@ -4246,7 +4472,7 @@ async function deleteNotif(i) {
 
   staticData.notifications.splice(i, 1);
 
-  try { await saveData('delete: notification item'); renderNotifList(); showStatus('已刪除'); }
+  try { await saveData('delete: notification item', 'notifications'); renderNotifList(); showStatus('已刪除'); }
 
   catch(e) { showStatus('刪除失敗：' + e.message, true); }
 
@@ -4396,7 +4622,7 @@ async function deletePolicy(i) {
 
   staticData.policies.splice(i, 1);
 
-  try { await saveData('delete: policy item'); renderPolicyList(); showStatus('已刪除'); }
+  try { await saveData('delete: policy item', 'policies'); renderPolicyList(); showStatus('已刪除'); }
 
   catch(e) { showStatus('刪除失敗：' + e.message, true); }
 
@@ -4544,7 +4770,7 @@ async function deleteDoc(i) {
 
   staticData.documents.splice(i, 1);
 
-  try { await saveData('delete: doc item'); renderDocsList(); showStatus('已從清單移除'); }
+  try { await saveData('delete: doc item', 'documents'); renderDocsList(); showStatus('已從清單移除'); }
 
   catch(e) { showStatus('移除失敗：' + e.message, true); }
 
