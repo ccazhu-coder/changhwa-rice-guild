@@ -207,6 +207,7 @@
 
 
   function sortList(list){return (list||[]).slice().sort(function(a,b){if(!!a.isPinned!==!!b.isPinned)return a.isPinned?-1:1;if((Number(a.sort)||999)!==(Number(b.sort)||999))return (Number(a.sort)||999)-(Number(b.sort)||999);return String(b.date||'').localeCompare(String(a.date||''))})}
+  function sortGallery(list){return (list||[]).slice().sort(function(a,b){var pa=String(a.date||'').split('-').map(Number);var pb=String(b.date||'').split('-').map(Number);for(var i=0;i<3;i++){var d=(pb[i]||0)-(pa[i]||0);if(d)return d;}return 0;})}
 
 
 
@@ -3166,7 +3167,7 @@ function renderHome(){
 
 
 
-      var gallery=sortList(data.gallery||[]).slice(0,6);
+      var gallery=sortGallery(data.gallery||[]).slice(0,6);
 
 
 
@@ -4126,7 +4127,7 @@ function renderNewsPage(){
 
 
 
-      var list=sortList(data.gallery||[]);
+      var list=sortGallery(data.gallery||[]);
 
 
 
@@ -5798,7 +5799,7 @@ function renderNewsPage(){
 
 
 
-      var list=sortList(data.gallery||[]).filter(function(item){
+      var list=sortGallery(data.gallery||[]).filter(function(item){
 
 
 
