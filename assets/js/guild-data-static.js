@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:41:50.695Z */
+/* generatedAt: 2026-06-10T06:42:07.172Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1432,7 +1432,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "林素玲",
       "area": "芬園鄉",
       "phone": "049-2522163 / 04-7384033",
-      "address": "舊社村彰南路5段992號(同榮昌糧行)",
+      "address": "舊社村彰南路5段992號",
       "createdAt": "2026-01-01"
     },
     {
