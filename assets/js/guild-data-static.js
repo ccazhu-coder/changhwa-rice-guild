@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:44:06.156Z */
+/* generatedAt: 2026-06-10T06:44:21.822Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -2942,7 +2942,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "蘇士文",
       "area": "秀水鄉",
       "phone": "04-7691838 / 0981-975699",
-      "address": "埔崙村民生街952號(同平原碾米)",
+      "address": "埔崙村民生街952號",
       "createdAt": "2026-01-01"
     },
     {
