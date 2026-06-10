@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:44:21.822Z */
+/* generatedAt: 2026-06-10T06:44:31.879Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3002,7 +3002,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "施明吟",
       "area": "鹿港鎮",
       "phone": "04-7772376",
-      "address": "大有里車圍巷83號(公正街154號)",
+      "address": "大有里車圍巷83號",
       "createdAt": "2026-01-01"
     },
     {
