@@ -4,3 +4,7 @@
 .img-section{max-width:1160px;margin:28px auto;padding:0 22px}
 .img-section img{border-radius:16px;box-shadow:0 8px 28px rgba(20,45,24,.1)}
 @media(max-width:660px){.img-section{padding:0 18px;margin:18px auto}}
+/* TRAINING RECORD 標題：字級對齊 FEATURED/精選消息，並補上金色分隔線 */
+.section-head.training-record-head h2{font-size:clamp(1.8rem,3.5vw,2.6rem)}
+.section-head.training-record-head span{font-size:.72rem}
+.sec-divider{width:48px;height:3px;background:var(--gold);border-radius:2px;margin-top:14px}
