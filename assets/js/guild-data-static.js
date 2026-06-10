@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:47:33.335Z */
+/* generatedAt: 2026-06-10T06:47:41.841Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4052,7 +4052,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "潘燿崑",
       "area": "二林鎮",
       "phone": "04-8684339 / 0921-661045",
-      "address": "西庄里泉西巷9號(近溪湖鎮)",
+      "address": "西庄里泉西巷9號",
       "createdAt": "2026-01-01"
     },
     {
