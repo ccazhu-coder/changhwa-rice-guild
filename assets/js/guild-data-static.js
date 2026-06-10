@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T08:13:56.755Z */
+/* generatedAt: 2026-06-10T08:17:16.416Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -200,6 +200,84 @@ window.GUILD_STATIC_DATA = {
           "sort": 1,
           "createdAt": "2026-06-10",
           "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079419187_0.jpg",
+          "activityId": "ALB-0010",
+          "activityTitle": "宜蘭二日遊",
+          "url": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079419187_0.jpg",
+          "rawUrl": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079419187_0.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 2,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079421761_1.jpg",
+          "activityId": "ALB-0010",
+          "activityTitle": "宜蘭二日遊",
+          "url": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079421761_1.jpg",
+          "rawUrl": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079421761_1.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 3,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079424393_2.jpg",
+          "activityId": "ALB-0010",
+          "activityTitle": "宜蘭二日遊",
+          "url": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079424393_2.jpg",
+          "rawUrl": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079424393_2.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 4,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079427368_3.jpg",
+          "activityId": "ALB-0010",
+          "activityTitle": "宜蘭二日遊",
+          "url": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079427368_3.jpg",
+          "rawUrl": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079427368_3.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 5,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079430164_4.jpg",
+          "activityId": "ALB-0010",
+          "activityTitle": "宜蘭二日遊",
+          "url": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079430164_4.jpg",
+          "rawUrl": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079430164_4.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 6,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079432865_5.jpg",
+          "activityId": "ALB-0010",
+          "activityTitle": "宜蘭二日遊",
+          "url": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079432865_5.jpg",
+          "rawUrl": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_1781079432865_5.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 7,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
         }
       ]
     },
@@ -313,6 +391,58 @@ window.GUILD_STATIC_DATA = {
           "note": "admin_uploaded"
         },
         {
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_03.jpg",
+          "activityId": "",
+          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_03.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_03.jpg",
+          "caption": "照片 3",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 3,
+          "createdAt": "2026-06-04",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_04.jpg",
+          "activityId": "",
+          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_04.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_04.jpg",
+          "caption": "照片 4",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 4,
+          "createdAt": "2026-06-04",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_05.jpg",
+          "activityId": "",
+          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_05.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_05.jpg",
+          "caption": "照片 5",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 5,
+          "createdAt": "2026-06-04",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_06.jpg",
+          "activityId": "",
+          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_06.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_06.jpg",
+          "caption": "照片 6",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 6,
+          "createdAt": "2026-06-04",
+          "note": "admin_uploaded"
+        },
+        {
           "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_07.jpg",
           "activityId": "",
           "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
@@ -321,47 +451,8 @@ window.GUILD_STATIC_DATA = {
           "caption": "照片 7",
           "isCover": false,
           "isFeatured": true,
-          "sort": 3,
+          "sort": 7,
           "createdAt": "2026-06-04",
-          "note": "admin_uploaded"
-        },
-        {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079228282_0.jpg",
-          "activityId": "ALB-0008",
-          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079228282_0.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079228282_0.jpg",
-          "caption": "",
-          "isCover": false,
-          "isFeatured": true,
-          "sort": 4,
-          "createdAt": "2026-06-10",
-          "note": "admin_uploaded"
-        },
-        {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079231079_1.jpg",
-          "activityId": "ALB-0008",
-          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079231079_1.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079231079_1.jpg",
-          "caption": "",
-          "isCover": false,
-          "isFeatured": true,
-          "sort": 5,
-          "createdAt": "2026-06-10",
-          "note": "admin_uploaded"
-        },
-        {
-          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079233536_2.jpg",
-          "activityId": "ALB-0008",
-          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
-          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079233536_2.jpg",
-          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079233536_2.jpg",
-          "caption": "",
-          "isCover": false,
-          "isFeatured": true,
-          "sort": 6,
-          "createdAt": "2026-06-10",
           "note": "admin_uploaded"
         }
       ]
@@ -375,7 +466,7 @@ window.GUILD_STATIC_DATA = {
       "summary": "本會辦理第2次 TTQS 輔導，延續前次輔導成果，進一步檢視教育訓練規劃、課程執行紀錄、文件保存、成果評估與改善追蹤等內容，協助本會逐步完善訓練品質管理流程，強化教育訓練制度化與專業化。",
       "result": "",
       "participantCount": "",
-      "coverImage": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_02.jpg",
+      "coverImage": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_01.jpg",
       "albumUrl": "",
       "albumFolderId": "",
       "albumFolderName": "第2次TTQS輔導",
@@ -388,15 +479,28 @@ window.GUILD_STATIC_DATA = {
       "note": "uploaded to 圖庫/activities/115.04.16_第2次TTQS輔導",
       "photos": [
         {
+          "photoId": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_01.jpg",
+          "activityId": "",
+          "activityTitle": "第2次TTQS輔導",
+          "url": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_01.jpg",
+          "rawUrl": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_01.jpg",
+          "caption": "封面",
+          "isCover": true,
+          "isFeatured": true,
+          "sort": 1,
+          "createdAt": "2026-06-04",
+          "note": "admin_uploaded"
+        },
+        {
           "photoId": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_02.jpg",
           "activityId": "",
           "activityTitle": "第2次TTQS輔導",
           "url": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_02.jpg",
           "rawUrl": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_02.jpg",
           "caption": "照片 2",
-          "isCover": true,
+          "isCover": false,
           "isFeatured": true,
-          "sort": 1,
+          "sort": 2,
           "createdAt": "2026-06-04",
           "note": "admin_uploaded"
         },
@@ -409,21 +513,8 @@ window.GUILD_STATIC_DATA = {
           "caption": "照片 3",
           "isCover": false,
           "isFeatured": true,
-          "sort": 2,
-          "createdAt": "2026-06-04",
-          "note": "admin_uploaded"
-        },
-        {
-          "photoId": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_1781078568056_0.jpg",
-          "activityId": "ALB-0007",
-          "activityTitle": "第2次TTQS輔導",
-          "url": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_1781078568056_0.jpg",
-          "rawUrl": "圖庫/activities/115.04.16_第2次TTQS輔導/photo_1781078568056_0.jpg",
-          "caption": "",
-          "isCover": false,
-          "isFeatured": true,
           "sort": 3,
-          "createdAt": "2026-06-10",
+          "createdAt": "2026-06-04",
           "note": "admin_uploaded"
         }
       ]
@@ -487,6 +578,19 @@ window.GUILD_STATIC_DATA = {
           "sort": 3,
           "createdAt": "2026-06-04",
           "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.03.11_第1次_TTQS輔導/photo_04.jpg",
+          "activityId": "",
+          "activityTitle": "第1次 TTQS輔導",
+          "url": "圖庫/activities/115.03.11_第1次_TTQS輔導/photo_04.jpg",
+          "rawUrl": "圖庫/activities/115.03.11_第1次_TTQS輔導/photo_04.jpg",
+          "caption": "照片 4",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 4,
+          "createdAt": "2026-06-04",
+          "note": "admin_uploaded"
         }
       ]
     },
@@ -497,7 +601,7 @@ window.GUILD_STATIC_DATA = {
       "category": "會員大會",
       "title": "第29屆第3次會員大會",
       "summary": "本會辦理第29屆第3次會員大會，邀集會員代表共同參與會務報告、年度工作推動說明與重要議題討論，透過會員交流與意見彙整，凝聚公會共識，促進會務運作更加完善。",
-      "result": "",
+      "result": "本次會員大會順利完成，會員出席參與踴躍，會中完成相關會務報告與議案討論，並彙整會員建議，作為後續推動會員服務、產業交流與會務發展之參考依據。",
       "participantCount": "",
       "coverImage": "圖庫/activities/115.5.6_第29屆第3次會員大會/photo_01.jpg",
       "albumUrl": "",
@@ -508,7 +612,7 @@ window.GUILD_STATIC_DATA = {
       "isPinned": false,
       "sort": 4,
       "createdAt": "2026-06-04",
-      "updatedAt": "2026-06-10",
+      "updatedAt": "2026-06-04",
       "note": "uploaded to 圖庫/activities/115.5.6_第29屆第3次會員大會",
       "photos": [
         {
