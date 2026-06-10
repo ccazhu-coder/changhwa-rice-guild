@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T07:57:29.726Z */
+/* generatedAt: 2026-06-10T07:57:40.592Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -272,7 +272,7 @@ window.GUILD_STATIC_DATA = {
       "category": "教育訓練",
       "title": "115年度會員教育訓練：農產品業稅務實務與相關法規",
       "summary": "本會辦理「115年度會員教育訓練：農產品業稅務實務與相關法規」，協助會員了解農產品業經營常見稅務問題、發票開立、帳務管理、營業稅與所得稅申報注意事項，並說明相關法規與實務案例，提升會員廠商依法經營與財務管理能力。",
-      "result": "透過本次教育訓練，會員對農產品業相關稅務規範與實務操作有更清楚的認識，並能掌握日常營運中應注意之帳務、申報與法規遵循重點，有助於降低經營風險，強化會員企業之管理能力與永續經營基礎。",
+      "result": "",
       "participantCount": "",
       "coverImage": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_01.jpg",
       "albumUrl": "",
@@ -283,7 +283,7 @@ window.GUILD_STATIC_DATA = {
       "isPinned": false,
       "sort": 4,
       "createdAt": "2026-06-04",
-      "updatedAt": "2026-06-04",
+      "updatedAt": "2026-06-10",
       "note": "uploaded to 圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規",
       "photos": [
         {
