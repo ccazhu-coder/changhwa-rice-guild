@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:48:23.933Z */
+/* generatedAt: 2026-06-10T06:55:39.118Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -957,7 +957,7 @@ window.GUILD_STATIC_DATA = {
     },
     {
       "id": "J-002",
-      "grade": "甲",
+      "grade": "乙",
       "name": "德源興米店",
       "owner": "簡志勳",
       "area": "田中鎮",
