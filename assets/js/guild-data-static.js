@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T08:12:10.020Z */
+/* generatedAt: 2026-06-10T08:13:56.755Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -323,6 +323,45 @@ window.GUILD_STATIC_DATA = {
           "isFeatured": true,
           "sort": 3,
           "createdAt": "2026-06-04",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079228282_0.jpg",
+          "activityId": "ALB-0008",
+          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079228282_0.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079228282_0.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 4,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079231079_1.jpg",
+          "activityId": "ALB-0008",
+          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079231079_1.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079231079_1.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 5,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079233536_2.jpg",
+          "activityId": "ALB-0008",
+          "activityTitle": "115年度會員教育訓練：農產品業稅務實務與相關法規",
+          "url": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079233536_2.jpg",
+          "rawUrl": "圖庫/activities/115.5.19_115年度會員教育訓練：農產品業稅務實務與相關法規/photo_1781079233536_2.jpg",
+          "caption": "",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 6,
+          "createdAt": "2026-06-10",
           "note": "admin_uploaded"
         }
       ]
