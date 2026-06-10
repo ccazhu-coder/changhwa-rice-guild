@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:48:09.882Z */
+/* generatedAt: 2026-06-10T06:48:23.933Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3052,7 +3052,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "溫錦文",
       "area": "鹿港鎮",
       "phone": "04-7774078 / 0932-679286",
-      "address": "頂厝里鹿和路一段452巷157號(宅)",
+      "address": "頂厝里鹿和路一段452巷157號",
       "createdAt": "2026-01-01"
     },
     {
