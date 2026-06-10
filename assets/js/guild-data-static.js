@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:44:50.996Z */
+/* generatedAt: 2026-06-10T06:45:20.607Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3692,7 +3692,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "鄭文誠",
       "area": "田中鎮",
       "phone": "04-8760203",
-      "address": "復興路563號(同新豐春碾米廠)",
+      "address": "復興路563號",
       "createdAt": "2026-01-01"
     },
     {
