@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:42:18.896Z */
+/* generatedAt: 2026-06-10T06:42:43.766Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1532,7 +1532,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "施義川",
       "area": "埔鹽鄉",
       "phone": "04-8651432 / 0932-544393",
-      "address": "三省村好金路27號(導航協發碾米工廠)",
+      "address": "三省村好金路27號",
       "createdAt": "2026-01-01"
     },
     {
