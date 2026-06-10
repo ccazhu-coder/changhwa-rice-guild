@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T08:26:50.326Z */
+/* generatedAt: 2026-06-10T08:33:32.184Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -563,19 +563,6 @@ window.GUILD_STATIC_DATA = {
           "isCover": false,
           "isFeatured": true,
           "sort": 3,
-          "createdAt": "2026-06-04",
-          "note": "admin_uploaded"
-        },
-        {
-          "photoId": "圖庫/activities/115.03.11_第1次_TTQS輔導/photo_04.jpg",
-          "activityId": "",
-          "activityTitle": "第1次 TTQS輔導",
-          "url": "圖庫/activities/115.03.11_第1次_TTQS輔導/photo_04.jpg",
-          "rawUrl": "圖庫/activities/115.03.11_第1次_TTQS輔導/photo_04.jpg",
-          "caption": "照片 4",
-          "isCover": false,
-          "isFeatured": true,
-          "sort": 4,
           "createdAt": "2026-06-04",
           "note": "admin_uploaded"
         }
