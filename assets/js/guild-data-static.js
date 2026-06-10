@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-09T09:52:27.026Z */
+/* generatedAt: 2026-06-10T01:10:01.913Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -167,6 +167,68 @@ window.GUILD_STATIC_DATA = {
     }
   ],
   "gallery": [
+    {
+      "id": "ALB-0009",
+      "date": "115-6-9",
+      "rocDate": "115.6.9",
+      "category": "教育訓練",
+      "title": "第3次TTQS輔導",
+      "summary": "本會於115年6月9日辦理第3次TTQS輔導，持續強化教育訓練品質管理，協助完善課程規劃、執行紀錄與成果佐證資料，提升訓練制度化與後續評核準備成效。",
+      "result": "本會持續推動TTQS訓練品質管理制度，透過第3次輔導會議，針對教育訓練計畫、課程執行資料、學員回饋、成果紀錄及相關佐證文件進行檢視與優化。  本次輔導重點包含訓練流程盤點、文件資料完整性確認、課程成果呈現方式與後續改善建議，期望透過系統化整理，提升本會教育訓練品質，並作為未來辦理會員課程與訓練活動的重要基礎。",
+      "participantCount": "",
+      "coverImage": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_01.jpg",
+      "albumUrl": "",
+      "albumFolderId": "",
+      "albumFolderName": "第3次TTQS輔導",
+      "albumFolderUrl": "",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 5,
+      "createdAt": "2026-06-10",
+      "updatedAt": "2026-06-10",
+      "note": "uploaded to 圖庫/activities/115.6.9_第3次TTQS輔導",
+      "photos": [
+        {
+          "photoId": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_01.jpg",
+          "activityId": "",
+          "activityTitle": "第3次TTQS輔導",
+          "url": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_01.jpg",
+          "rawUrl": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_01.jpg",
+          "caption": "封面",
+          "isCover": true,
+          "isFeatured": true,
+          "sort": 1,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_02.jpg",
+          "activityId": "",
+          "activityTitle": "第3次TTQS輔導",
+          "url": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_02.jpg",
+          "rawUrl": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_02.jpg",
+          "caption": "照片 2",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 2,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        },
+        {
+          "photoId": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_03.jpg",
+          "activityId": "",
+          "activityTitle": "第3次TTQS輔導",
+          "url": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_03.jpg",
+          "rawUrl": "圖庫/activities/115.6.9_第3次TTQS輔導/photo_03.jpg",
+          "caption": "照片 3",
+          "isCover": false,
+          "isFeatured": true,
+          "sort": 3,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        }
+      ]
+    },
     {
       "id": "ALB-0008",
       "date": "115-5-19",
