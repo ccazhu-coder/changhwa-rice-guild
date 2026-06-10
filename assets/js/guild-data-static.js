@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:40:24.651Z */
+/* generatedAt: 2026-06-10T06:40:40.932Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1382,7 +1382,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "莊淑惠",
       "area": "二林鎮",
       "phone": "04-8910192 / 0910-498055",
-      "address": "東華里路中巷1-7號(導航東航畜產)",
+      "address": "東華里路中巷1-7號",
       "createdAt": "2026-01-01"
     },
     {
