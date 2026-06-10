@@ -1137,6 +1137,8 @@
 
   function newsBadgeColor(cat){var m={'教育訓練':'#c6a437','會務公告':'#183f21','公益活動':'#2e7d52','訓練品質':'#1565c0','活動通知':'#6a1b9a'};return m[cat]||'#183f21';}
 
+  function galleryCatColor(cat){var m={'政策公告':'#1a3060','會務公告':'#183f21','教育訓練':'#1a5c4a','訓練品質':'#2e5cb8','公益活動':'#6b3a2e','會員大會':'#5c4a00','活動通知':'#526055','活動花絮':'#8a3b6b'};return m[cat]||'#526055';}
+
 
 
 
@@ -2271,7 +2273,7 @@ function galleryCard(item){
 
 
 
-  return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
+  return '<article class="activity-card">'+cover+'<div class="activity-card-body"><span class="tag" style="background:'+galleryCatColor(item.category)+'">'+esc(item.category||'活動花絮')+'</span><h3>'+esc(item.title)+'</h3><time>'+esc(item.rocDate||item.date)+'</time>'+(item.summary?'<p>'+esc(item.summary)+'</p>':'')+(item.result?'<p>'+esc(item.result)+'</p>':'')+'</div>'+photos+'</article>';
 
 
 
