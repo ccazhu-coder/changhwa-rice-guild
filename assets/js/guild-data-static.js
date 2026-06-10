@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:42:07.172Z */
+/* generatedAt: 2026-06-10T06:42:18.896Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1452,7 +1452,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "黃至想",
       "area": "埔心鄉",
       "phone": "04-8297994 / 0933-193438",
-      "address": "二重村五義路99號(宅)(導航玉世宮)",
+      "address": "二重村五義路99號",
       "createdAt": "2026-01-01"
     },
     {
