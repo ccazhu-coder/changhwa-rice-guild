@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:57:09.766Z */
+/* generatedAt: 2026-06-10T06:57:29.516Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -1147,7 +1147,7 @@ window.GUILD_STATIC_DATA = {
     },
     {
       "id": "J-021",
-      "grade": "甲",
+      "grade": "乙",
       "name": "順成飼料行",
       "owner": "林張孟卿",
       "area": "彰化市",
