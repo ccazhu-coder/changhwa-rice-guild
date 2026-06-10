@@ -628,7 +628,8 @@ window.GUILD_STATIC_DATA = {
   "committees": [
     {
       "id": "COM-001",
-      "name": "人才培訓委員",
+      "name": "人才培訓委員會",
+      "focus": "教育訓練與TTQS推動",
       "chair": "陳宗佑",
       "viceChair": "張維允",
       "duties": "負責規劃及辦理教育訓練課程、推動 TTQS 制度、培育講師及提升會員專業能力。"
@@ -636,13 +637,15 @@ window.GUILD_STATIC_DATA = {
     {
       "id": "COM-002",
       "name": "專案計畫委員會",
+      "focus": "政府專案與資源整合",
       "chair": "張維允",
       "viceChair": "沈秉逸",
-      "duties": "負責規劃、撰寫及執行政府與相關專案，並整合資源推動業務發展。"
+      "duties": "負責規劃、撰寫及執行政府相關專案，並整合資源推動業務發展。"
     },
     {
       "id": "COM-003",
       "name": "公共關係委員會",
+      "focus": "品牌形象與對外聯繫",
       "chair": "陳建達",
       "viceChair": "連姿瑄",
       "duties": "負責對外聯繫、品牌形象及行銷宣傳。"
@@ -650,6 +653,7 @@ window.GUILD_STATIC_DATA = {
     {
       "id": "COM-004",
       "name": "會員福利委員會",
+      "focus": "會員關懷與福利服務",
       "chair": "黃哲偉",
       "viceChair": "周明哲",
       "duties": "負責規劃會員福利措施及關懷服務，提升會員滿意度與凝聚力。"
@@ -657,6 +661,7 @@ window.GUILD_STATIC_DATA = {
     {
       "id": "COM-005",
       "name": "會員發展委員會",
+      "focus": "會員招募與組織發展",
       "chair": "蘇建彰",
       "viceChair": "沈昇翰",
       "duties": "負責會員招募、聯繫與經營，強化會員參與及組織發展。"

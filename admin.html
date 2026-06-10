@@ -3090,7 +3090,7 @@ function renderCommitteesList() {
 
     <div class="item-card-body">
 
-      <div class="item-title"><span class="badge gold">${c.name}</span></div>
+      <div class="item-title"><span class="badge gold">${c.name}</span>${c.focus?` ${c.focus}`:''}</div>
 
       <div class="item-meta">主委：${c.chair}　副主委：${c.viceChair}</div>
 
@@ -3115,6 +3115,8 @@ function editCommittee(i) {
   openModal('✏️ 編輯委員會', `
 
     <div class="field"><label>委員會名稱</label><input id="e-title" value="${c.name||''}"></div>
+
+    <div class="field"><label>工作主軸（前台大標題）</label><input id="e-focus" value="${c.focus||''}"></div>
 
     <div class="field-row">
 
@@ -3743,6 +3745,8 @@ saveEdit = async function() {
     const c = staticData.committees[editMode.index];
 
     c.name    = (document.getElementById('e-title')?.value||'').trim();
+
+    c.focus   = (document.getElementById('e-focus')?.value||'').trim();
 
     c.chair   = (document.getElementById('e-date')?.value||'').trim();
 
