@@ -7346,7 +7346,9 @@ function renderPoliciesPage(){
 
   function renderBrand(){var tEl=document.getElementById('brandTagline');var dEl=document.getElementById('brandDesc');if(!tEl&&!dEl)return;staticOrFetch('brand').then(function(d){var b=d.brand||{};if(tEl&&b.tagline)tEl.textContent=b.tagline;if(dEl&&b.description)dEl.textContent=b.description;});}
 
-  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderPoliciesPage();renderDownloadsPage();renderHistory();renderChairpersons();renderCommittees();renderMembers();renderBrand()});
+  function renderMemberStats(){staticOrFetch('members').then(function(d){var list=d.members||[];var total=list.length,a=0,b=0;list.forEach(function(m){if(m.grade==='甲')a++;else if(m.grade==='乙')b++;});function fill(cls,val){document.querySelectorAll('.'+cls).forEach(function(el){el.textContent=val});}fill('mem-stat-total',total);fill('mem-stat-a',a);fill('mem-stat-b',b);});}
+
+  document.addEventListener('DOMContentLoaded',function(){injectStyles();fixTalentLinks();renderHome();renderNewsPage();renderTrainingPage();renderBoardPage();renderPoliciesPage();renderDownloadsPage();renderHistory();renderChairpersons();renderCommittees();renderMembers();renderBrand();renderMemberStats()});
 
 
 
@@ -7362,7 +7364,7 @@ function renderPoliciesPage(){
 
 
 
-  window.GuildApi={renderHome:renderHome,renderNewsPage:renderNewsPage,renderTrainingPage:renderTrainingPage,fixTalentLinks:fixTalentLinks,renderHistory:renderHistory,renderChairpersons:renderChairpersons,renderCommittees:renderCommittees,renderMembers:renderMembers,renderBrand:renderBrand};
+  window.GuildApi={renderHome:renderHome,renderNewsPage:renderNewsPage,renderTrainingPage:renderTrainingPage,fixTalentLinks:fixTalentLinks,renderHistory:renderHistory,renderChairpersons:renderChairpersons,renderCommittees:renderCommittees,renderMembers:renderMembers,renderBrand:renderBrand,renderMemberStats:renderMemberStats};
 
 
 
