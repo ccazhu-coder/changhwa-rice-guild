@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:44:31.879Z */
+/* generatedAt: 2026-06-10T06:44:50.996Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -3082,7 +3082,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "張家堂",
       "area": "鹿港鎮",
       "phone": "04-7713545",
-      "address": "順興里建國路7號(財務課)",
+      "address": "順興里建國路7號",
       "createdAt": "2026-01-01"
     },
     {
