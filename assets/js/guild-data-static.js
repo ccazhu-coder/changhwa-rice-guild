@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:57:46.826Z */
+/* generatedAt: 2026-06-10T06:59:02.596Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -167,6 +167,42 @@ window.GUILD_STATIC_DATA = {
     }
   ],
   "gallery": [
+    {
+      "id": "ALB-0010",
+      "date": "113-5-5~6",
+      "rocDate": "113.5.5~6",
+      "category": "活動花絮",
+      "title": "宜蘭二日遊",
+      "summary": "",
+      "result": "",
+      "participantCount": "",
+      "coverImage": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_01.jpg",
+      "albumUrl": "",
+      "albumFolderId": "",
+      "albumFolderName": "宜蘭二日遊",
+      "albumFolderUrl": "",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 6,
+      "createdAt": "2026-06-10",
+      "updatedAt": "2026-06-10",
+      "note": "uploaded to 圖庫/activities/113.5.5~6_宜蘭二日遊",
+      "photos": [
+        {
+          "photoId": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_01.jpg",
+          "activityId": "",
+          "activityTitle": "宜蘭二日遊",
+          "url": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_01.jpg",
+          "rawUrl": "圖庫/activities/113.5.5~6_宜蘭二日遊/photo_01.jpg",
+          "caption": "封面",
+          "isCover": true,
+          "isFeatured": true,
+          "sort": 1,
+          "createdAt": "2026-06-10",
+          "note": "admin_uploaded"
+        }
+      ]
+    },
     {
       "id": "ALB-0009",
       "date": "115-6-9",
