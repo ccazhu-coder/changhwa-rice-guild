@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T06:43:05.528Z */
+/* generatedAt: 2026-06-10T06:43:45.962Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -2452,7 +2452,7 @@ window.GUILD_STATIC_DATA = {
       "owner": "陳永裕",
       "area": "彰化市",
       "phone": "04-7321194 / 0919-064608",
-      "address": "三村里聖安路820號(福山里山中街11號)",
+      "address": "三村里聖安路820號",
       "createdAt": "2026-01-01"
     },
     {
