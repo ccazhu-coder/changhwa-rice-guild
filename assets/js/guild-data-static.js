@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T08:17:16.416Z */
+/* generatedAt: 2026-06-10T08:23:14.407Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -601,7 +601,7 @@ window.GUILD_STATIC_DATA = {
       "category": "會員大會",
       "title": "第29屆第3次會員大會",
       "summary": "本會辦理第29屆第3次會員大會，邀集會員代表共同參與會務報告、年度工作推動說明與重要議題討論，透過會員交流與意見彙整，凝聚公會共識，促進會務運作更加完善。",
-      "result": "本次會員大會順利完成，會員出席參與踴躍，會中完成相關會務報告與議案討論，並彙整會員建議，作為後續推動會員服務、產業交流與會務發展之參考依據。",
+      "result": "",
       "participantCount": "",
       "coverImage": "圖庫/activities/115.5.6_第29屆第3次會員大會/photo_01.jpg",
       "albumUrl": "",
@@ -612,7 +612,7 @@ window.GUILD_STATIC_DATA = {
       "isPinned": false,
       "sort": 4,
       "createdAt": "2026-06-04",
-      "updatedAt": "2026-06-04",
+      "updatedAt": "2026-06-10",
       "note": "uploaded to 圖庫/activities/115.5.6_第29屆第3次會員大會",
       "photos": [
         {
