@@ -1,7 +1,24 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-06-10T08:33:32.184Z */
+/* generatedAt: 2026-07-21T01:16:18.654Z */
 window.GUILD_STATIC_DATA = {
   "news": [
+    {
+      "id": "NEWS-0008",
+      "date": "115-7-21",
+      "rocDate": "115.7.21",
+      "category": "教育訓練",
+      "title": "賀！本會順利通過 TTQS 評核",
+      "summary": "彰化縣米穀商業同業公會正式通過勞動部勞動力發展署「人才發展品質管理系統 TTQS」訓練機構版評核，並取得評核等級證書，效期至117年7月15日。\n此次評核通過，展現本會在教育訓練制度、課程品質及人才培育上的專業成果。感謝蘇理事長、全體理監事、人才培訓委員會、TTQS專案團隊及所有工作夥伴的共同投入。\n未來，本會將持續提升訓練品質與會員服務，規劃更多符合產業需求的專業課程，攜手推動米穀產業永續發展。",
+      "location": "",
+      "registerUrl": "",
+      "status": "活動結束",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 10,
+      "createdAt": "2026-07-21",
+      "updatedAt": "2026-07-21",
+      "note": ""
+    },
     {
       "id": "NEWS-0007",
       "date": "115-04-27",
