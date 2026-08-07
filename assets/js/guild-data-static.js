@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-07-21T01:21:17.706Z */
+/* generatedAt: 2026-08-07T02:16:33.841Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4628,6 +4628,19 @@ window.GUILD_STATIC_DATA = {
     }
   ],
   "notifications": [
+    {
+      "id": "NOTIF-0002",
+      "date": "115-8-7",
+      "rocDate": "115.8.7",
+      "agency": "農業部農糧署",
+      "title": "轉知農業部農糧署訊息 115年度糧商管理及糧食追蹤追溯作業系統教育訓練",
+      "summary": "115年度糧商管理及糧食追蹤追溯作業系統教育訓練共兩場次\n台北場8/20下午1：30~4：30\n台中場8/27下午1：30~4：30\n請相關業者線上報名參加",
+      "externalUrl": "https://service202-sds.fcu.edu.tw/apply/SeminarFront.aspx?unt_id=SUM2MA==",
+      "fileUrl": "",
+      "fileLabel": "附件下載",
+      "sort": 2,
+      "createdAt": "2026-08-07"
+    },
     {
       "id": "NOTIF-0001",
       "date": "115-6-4",
