@@ -1,15 +1,15 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-09-17T05:53:31.911Z */
+/* generatedAt: 2026-09-17T05:55:24.059Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
       "id": "NEWS-0011",
-      "date": "2026-09-17",
+      "date": "115-09-17",
       "rocDate": "115.09.17",
       "category": "招生DM",
       "title": "勞動法實務強化系列課程",
       "summary": "勞資爭議預防與處理實務\n本課程為公會自辦課程，歡迎本會會員及公司負責人、主管、人事、會計等人參加，免費課程、名額有限，欲報從速!",
-      "coverImage": "./files/dm/勞資課程.jpg",
+      "coverImage": "圖庫/news-covers/cover_1789624520634.jpg",
       "location": "",
       "registerUrl": "https://docs.google.com/forms/d/e/1FAIpQLScMrjwDHCbnVh71v1jbwVnrw-0FGbhe3u8ZCRT4rCOCu_2OwQ/viewform",
       "dmFileUrl": "./files/dm/勞資課程.jpg",
