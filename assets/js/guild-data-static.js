@@ -1,5 +1,5 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-09-17T05:55:24.059Z */
+/* generatedAt: 2026-10-14T07:41:17.890Z */
 window.GUILD_STATIC_DATA = {
   "news": [
     {
@@ -4681,6 +4681,19 @@ window.GUILD_STATIC_DATA = {
     }
   ],
   "notifications": [
+    {
+      "id": "NOTIF-0003",
+      "date": "115-10-05",
+      "rocDate": "115.10.05",
+      "agency": "農糧署",
+      "title": "農業部農糧署辦理115年「國產米特性與專業烹飪應用培力課程」",
+      "summary": "農業部農糧署辦理115年「國產米特性與專業烹飪應用培力課程」，歡迎大家踴躍報名",
+      "externalUrl": "https://www.afa.gov.tw/cht/index.php?code=list&flag=detail&ids=379&article_id=34149",
+      "fileUrl": "",
+      "fileLabel": "附件下載",
+      "sort": 3,
+      "createdAt": "2026-10-14"
+    },
     {
       "id": "NOTIF-0002",
       "date": "115-8-7",
