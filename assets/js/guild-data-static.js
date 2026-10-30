@@ -1,7 +1,26 @@
 /* 靜態快取資料 — 由 guild-api.js 優先讀取，無需每次連線至 Google Apps Script */
-/* generatedAt: 2026-10-14T07:41:17.890Z */
+/* generatedAt: 2026-10-30T14:38:13.924Z */
 window.GUILD_STATIC_DATA = {
   "news": [
+    {
+      "id": "NEWS-0012",
+      "date": "2026-10-30",
+      "rocDate": "115.10.30",
+      "category": "招生DM",
+      "title": "AI Agent 產業應用班",
+      "summary": "AI Agent 產業應用班｜早鳥報名開跑\n2 天實作課，不用寫程式，帶著自己的工作流程來，帶走會讀資料、找異常、出報告、手機一句話交辦的 AI 小幫手。\n📅 115/12/5（六）–12/6（日）09:00–16:00｜建國科技大學\n💰 早鳥 NT$6,800（11/20 止）｜2 人同行 NT$12,800｜公會會員 NT$4,800（每家限補助 1 位，共 10 名）\n名額有限，請把握早鳥優惠！",
+      "coverImage": "./files/dm/IMG_9239.jpeg",
+      "location": "",
+      "registerUrl": "https://claude.ai/artifact/835KkjdASLf9DqUJk4NTKZ",
+      "dmFileUrl": "./files/dm/IMG_9239.jpeg",
+      "status": "公告",
+      "isHome": true,
+      "isPinned": false,
+      "sort": 14,
+      "createdAt": "2026-10-30",
+      "updatedAt": "2026-10-30",
+      "note": "dm_upload"
+    },
     {
       "id": "NEWS-0011",
       "date": "115-09-17",
